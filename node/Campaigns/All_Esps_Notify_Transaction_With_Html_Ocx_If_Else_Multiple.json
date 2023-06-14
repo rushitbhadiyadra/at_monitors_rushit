@@ -1,0 +1,465 @@
+{
+	"info": {
+		"_postman_id": "0e1715f1-0ecf-4a7f-97b1-e1a13bdac152",
+		"name": "All_Esps_Notify_Transaction_With_Html_Ocx_If_Else_Multiple",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"nt_html_ifm_1_{{connectionId}}@hoohem.com\",\n        \"country\": \"India\",\n        \"address\": \"Keshod\"\n    },\n    {\n        \"email\": \"nt_html_ifm_2_{{connectionId}}@hoohem.com\",\n        \"country\": \"UK\",\n        \"address\": \"Junagadh\"\n    },\n    {\n        \"email\": \"nt_html_ifm_3_{{connectionId}}@hoohem.com\",\n        \"country\": \"Russia\",\n        \"address\": \"Goa\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"nt_html_ifm_1_{{connectionId}}@hoohem.com\",\n        \"nt_html_ifm_3_{{connectionId}}@hoohem.com\",\n        \"nt_html_ifm_2_{{connectionId}}@hoohem.com\"\n    ],\n    \"message\": {\n        \"subject\": \"{{ocx_if country = India}}India-{{ocx_connection_id}}{{ocx_elseif country = UK}}UK-{{ocx_connection_id}}{{ocx_else}}Russia-{{ocx_connection_id}}{{ocx_endif}}{{ocx_if address = Keshod}}Keshod-{{ocx_connection_id}}{{ocx_elseif address = Junagadh}}Junagadh-{{ocx_connection_id}}{{ocx_else}}Goa-{{ocx_connection_id}}{{ocx_endif}}\",\n        \"content_html\": \"<html><head><title></title><meta content='text/htmlcharset=utf-8'http-equiv='Content-Type'></head><body><p>{{ocx_if country = India}}~!@#~India-{{ocx_connection_id}}~!@#~{{ocx_elseif country = UK}}~!@#~UK-{{ocx_connection_id}}~!@#~{{ocx_else}}~!@#~Russia-{{ocx_connection_id}}~!@#~{{ocx_endif}}</p><p>{{ocx_if address = Keshod}}~!@#~Keshod-{{ocx_connection_id}}~!@#~{{ocx_elseif address = Junagadh}}~!@#~Junagadh-{{ocx_connection_id}}~!@#~{{ocx_else}}~!@#~Goa-{{ocx_connection_id}}~!@#~{{ocx_endif}}</p></body></html>\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name}}\",\n            \"from_address\": \"{{system_field_from_address}}\",\n            \"reply_address\": \"{{system_field_from_address}}\",\n            \"esp_connection_id\": {{connectionId}}\n        }]\n    },\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"domain\": \"default\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_200",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"NT Html First Else If is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"India-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Html Second Else If is working\", function () {",
+							"        pm.expect(body[3]).to.equal(\"Keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Html Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"India-\" + pm.globals.get(\"connectionId\") + \"Keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"NT Html Else If is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nt_html_ifm_1_{{connectionId}}@hoohem.com\",\n    \"subject\": \"India-{{connectionId}}Keshod-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"NT Html First Else If is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"UK-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Html Second Else If is working\", function () {",
+							"        pm.expect(body[3]).to.equal(\"Junagadh-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Html Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"UK-\" + pm.globals.get(\"connectionId\") + \"Junagadh-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"NT Html Else If is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nt_html_ifm_2_{{connectionId}}@hoohem.com\",\n    \"subject\": \"UK-{{connectionId}}Junagadh-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"NT Html First Else If is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"Russia-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Html Second Else If is working\", function () {",
+							"        pm.expect(body[3]).to.equal(\"Goa-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Html Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Russia-\" + pm.globals.get(\"connectionId\") + \"Goa-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"NT Html Else If is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nt_html_ifm_3_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Russia-{{connectionId}}Goa-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

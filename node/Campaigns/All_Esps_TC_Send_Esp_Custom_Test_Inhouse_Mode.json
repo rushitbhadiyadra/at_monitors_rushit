@@ -1,0 +1,611 @@
+{
+	"info": {
+		"_postman_id": "89ac598c-dea5-4323-a4db-316a768df85b",
+		"name": "All_Esps_TC_Send_Esp_Custom_Test_Inhouse_Mode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"tc_send_inhouse_esp_mode@hoohem.com\",\n        \"country\": \"India\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and send campaign-2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"tc_send_inhouse_esp_mode@hoohem.com\"\n    ],\n    \"message_id\": {{ASP_8552_rc_email_id}},\n    \"sending_connection_id\": {{connectionId1}},\n    \"create_contact\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and send campaign-3",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"tc_send_inhouse_esp_mode@hoohem.com\"\n    ],\n    \"message_id\": {{ASP_8552_rc_email_id}},\n    \"sending_connection_id\": {{connectionId2}},\n    \"create_contact\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and send campaign-4",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"tc_send_inhouse_esp_mode@hoohem.com\"\n    ],\n    \"message_id\": {{ASP_8552_rc_email_id}},\n    \"sending_connection_id\": {{connectionId3}},\n    \"create_contact\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_600",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2-8bit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var count = 0",
+							"    var jsonData = pm.response.json();",
+							"    pm.test(\"Test Transactional/Send Campaign With Esp Inhouse mode\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Regular Campaign With Esp Inhouse mode-\" + pm.globals.get(\"connectionId1\"));",
+							"    });",
+							"    jsonData.headerLines.forEach(function(data, index) {",
+							"        if(data.key.toLowerCase()===\"content-transfer-encoding\"){",
+							"            count = 1",
+							"            pm.test(`Test Transactional/Send Campaign With Esp Inhouse mode content-transfer-encoding 8bit \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"                const header = data.line.split(\":\")",
+							"                pm.expect(header[1].toLowerCase().trim()).to.equal(\"8bit\");",
+							"            });",
+							"        }",
+							"        })",
+							"    pm.test(`Test Transactional/Send Campaign With Esp Inhouse mode content-transfer-encoding 8bit \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(count).to.equal(1);",
+							"        });",
+							"}else{",
+							"    pm.test(\"Test Transactional/Send Campaign With Esp Inhouse mode\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tc_send_inhouse_esp_mode@hoohem.com\",\n    \"subject\": \"Test Regular Campaign With Esp Inhouse mode-{{connectionId1}}\",\n    \"timeout\": 100000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 3-base64",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var count = 0",
+							"    var jsonData = pm.response.json();",
+							"    pm.test(\"Test Transactional/Send Campaign With Esp Inhouse mode\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Regular Campaign With Esp Inhouse mode-\" + pm.globals.get(\"connectionId2\"));",
+							"    });",
+							"    jsonData.headerLines.forEach(function(data, index) {",
+							"        if(data.key.toLowerCase()===\"content-transfer-encoding\"){",
+							"            pm.test(`Test Transactional/Send Campaign With Esp Inhouse mode content-transfer-encoding base64 \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"                count = 1",
+							"                const header = data.line.split(\":\")",
+							"                pm.expect(header[1].toLowerCase().trim()).to.equal(\"base64\");",
+							"            });",
+							"        }",
+							"        })",
+							"    pm.test(`Test Transactional/Send Campaign With Esp Inhouse mode content-transfer-encoding base64 \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(count).to.equal(1);",
+							"        });",
+							"} else {",
+							"    pm.test(\"Test Transactional/Send Campaign With Esp Inhouse mode\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tc_send_inhouse_esp_mode@hoohem.com\",\n    \"subject\": \"Test Regular Campaign With Esp Inhouse mode-{{connectionId2}}\",\n    \"timeout\": 100000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 4-quoted-printable",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var count = 0",
+							"    var jsonData = pm.response.json();",
+							"    pm.test(\"Test Transactional/Send Campaign With Esp Inhouse mode\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Regular Campaign With Esp Inhouse mode-\" + pm.globals.get(\"connectionId3\"));",
+							"    });",
+							"    jsonData.headerLines.forEach(function(data, index) {",
+							"        if(data.key.toLowerCase()===\"content-transfer-encoding\"){",
+							"            pm.test(`Test Transactional/Send Campaign With Esp Inhouse mode content-transfer-encoding quoted-printable \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"                count = 1",
+							"                const header = data.line.split(\":\")",
+							"                pm.expect(header[1].toLowerCase().trim()).to.equal(\"quoted-printable\");",
+							"            });",
+							"        }",
+							"        })",
+							"    pm.test(`Test Transactional/Send Campaign With Esp Inhouse mode content-transfer-encoding quoted-printable \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(count).to.equal(1);",
+							"        });",
+							"} else {",
+							"    pm.test(\"Test Transactional/Send Campaign With Esp Inhouse mode\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tc_send_inhouse_esp_mode@hoohem.com\",\n    \"subject\": \"Test Regular Campaign With Esp Inhouse mode-{{connectionId3}}\",\n    \"timeout\": 100000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,981 @@
+{
+	"info": {
+		"_postman_id": "febbae74-9a7a-4885-8c44-d3f2f96bfca8",
+		"name": "Import_Suppression",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Segmentation~97a2a379-2ebf-4617-8e2a-bda7b4141f63/collection/6765444-febbae74-9a7a-4885-8c44-d3f2f96bfca8?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "List level Suppression",
+			"item": [
+				{
+					"name": "Import suppression",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"import_suppression\",jsonData.payload.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"list_id\": {{suppression_list_id}},\n \"file_url\": \"http://ongageqa.site/import_suppression.csv\",\n \"csv_delimiter\": \",\",\n \"encoding\": \"UTF-8\",\n \"overwrite\": true,\n \"ignore_empty\": true,\n \"send_welcome_message\": false,\n \"import_type\" : \"suppression\",\n \"import_action\":\"add\"\n}\n"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{suppression_list_id}}/api/import",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{suppression_list_id}}",
+								"api",
+								"import"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Mail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"message\": {\n    \"subject\": \"Test Import List Level Suppression-{{connectionId}}\",\n       \"content_html\" :\"<html><body><p>This is my content</p></body></html>\",\n       \"addresses\": {\n            \"from_name\": \"{{from_name}}\",\n            \"from_address\": \"{{from_address}}\",\n            \"reply_address\": \"{{from_address}}\"\n        }\n     },\n  \"recipients\": [ \"import_suppression1@hoohem.com\", \"import_suppression4@hoohem.com\", \"import_suppression6@hoohem.com\", \"include_check@hoohem.com\"],\n  \"sending_connection_id\": {{connectionId}},\n  \"check_global_and_list_suppression\":true\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"transactional",
+								"send_embed_content"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read mail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check not match import Suppresstion List level\", function () {",
+									"    let responseText = pm.response.json();",
+									"    pm.expect(responseText.subject).to.equal(\"Test Import List Level Suppression-\"+pm.globals.get(\"connectionId\"));",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"include_check@hoohem.com\",\n    \"subject\": \"Test Import List Level Suppression-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+						},
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"app",
+								"mail_db",
+								"getLast"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"if(jsonData.payload.length > 0){",
+									"    for (var segment of jsonData.payload) {",
+									"        if (segment.name === \"Imp_list_lvl_suppression-\"+pm.globals.get(\"connectionId\")){",
+									"            pm.globals.set(\"segment_id\", segment.id);",
+									"        }      ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{segment_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{segment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"import_suppression_segment_id\",jsonData.payload.id)",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Imp_list_lvl_suppression-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"email\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"import_suppression1@hoohem.com\",\n                \"import_suppression4@hoohem.com\",\n                \"import_suppression6@hoohem.com\",\n                \"ta_suppression@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 300 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "300"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\"email\": \"import_suppression1@hoohem.com\"},\n\t{\"email\": \"import_suppression4@hoohem.com\"},\n\t{\"email\": \"import_suppression6@hoohem.com\"}\n]"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create and send campaign",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"import_list_campaign_id\",jsonData.payload.id)",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"Segment Export\",\n   \"list_id\": {{list_id}},\n   \"email_message\": {{msg_id_suppression_list}},\n   \"segments\": [{{import_suppression_segment_id}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/mailings/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"mailings",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get campaign details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Import suppression in list level in campaign\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.payload.segments[0].campaign_segment_count).to.equal(\"4\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{import_list_campaign_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"mailings",
+								"{{import_list_campaign_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"import_suppression_contact_id_1\");",
+									"pm.globals.unset(\"import_suppression_contact_id_2\");",
+									"pm.globals.unset(\"import_suppression_contact_id_3\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"remove\",\n    \"emails\": [\n        \"import_suppression1@hoohem.com\",\n        \"import_suppression4@hoohem.com\",\n        \"import_suppression6@hoohem.com\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts",
+								"change_status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"time_30\");",
+									"pm.globals.unset(\"import_list_campaign_id\");",
+									"pm.globals.unset(\"import_suppression_segment_id\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{import_suppression_segment_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{import_suppression_segment_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

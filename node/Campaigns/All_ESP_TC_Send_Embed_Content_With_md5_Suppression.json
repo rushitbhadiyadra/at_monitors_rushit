@@ -1,0 +1,629 @@
+{
+	"info": {
+		"_postman_id": "2aee1ff5-88a3-43c7-a788-08990a4d8425",
+		"name": "All_ESP_TC_Send_Embed_Content_With_md5_Suppression",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"rc_md5_suppression_list1@hoohem.com\",\n        \"rc_md5_suppression_list2@hoohem.com\",\n        \"rc_md5_suppression_list3@hoohem.com\",\n        \"rc_md5_suppression_list4@hoohem.com\",\n        \"rc_md5_suppression_list5@hoohem.com\",\n        \"rc_md5_suppression_list6@hoohem.com\",\n        \"rc_md5_suppression_list7@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Embed Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"   var jsonData = pm.response.json();",
+							"   pm.test(\"Test Transactional Send Embed Content Campaign Level MD5 Suppression List\", function () {",
+							"      pm.expect(jsonData.payload.failed_emails['rc_md5_suppression_list1@hoohem.com']).to.eql(\"Suppressed\");",
+							"      pm.expect(jsonData.payload.failed_emails['rc_md5_suppression_list2@hoohem.com']).to.eql(\"Suppressed\");",
+							"   });",
+							"",
+							"   pm.test(\"Test Transactional Send Embed Content List Level MD5 Suppression List\", function () {",
+							"      pm.expect(jsonData.payload.failed_emails['rc_md5_suppression_list3@hoohem.com']).to.eql(\"Suppressed\");",
+							"      pm.expect(jsonData.payload.failed_emails['rc_md5_suppression_list4@hoohem.com']).to.eql(\"Suppressed\");",
+							"   });",
+							"",
+							"   pm.test(\"Test Transactional Send Embed Content List Level MD5 Suppression List\", function () {",
+							"      pm.expect(jsonData.payload.failed_emails['rc_md5_suppression_list5@hoohem.com']).to.eql(\"Suppressed\");",
+							"      pm.expect(jsonData.payload.failed_emails['rc_md5_suppression_list6@hoohem.com']).to.eql(\"Suppressed\");",
+							"   });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\"rc_md5_suppression_list1@hoohem.com\",\n        \"rc_md5_suppression_list2@hoohem.com\",\n        \"rc_md5_suppression_list3@hoohem.com\",\n        \"rc_md5_suppression_list4@hoohem.com\",\n        \"rc_md5_suppression_list5@hoohem.com\",\n        \"rc_md5_suppression_list6@hoohem.com\",\n        \"rc_md5_suppression_list7@hoohem.com\"],\n    \"sending_connection_id\": {{connectionId}},\n    \"check_global_and_list_suppression\": true,\n    \"campaign_suppression_list_ids\": [{{campaign_level_md5_suppression_list}}],\n    \"message\": {\n        \"subject\": \"All ESP all level MD5 suppression list with Send Embed content -{{connectionId}}\",\n        \"content_html\": \"<html><head><title></title><meta content='text/html; charset=utf-8' http-equiv='Content-Type' /></head><body>\t\t\t\t\t<p><span style='color: rgb(38, 50, 56); font-family: Roboto, sans-serif; font-size: 13px;'>~!@#~Hi, This is test mail~!@#~</span></p></body></html>\",\n        \"addresses\": \n        {\n            \"from_name\": \"{{system_field_from_name}}\",\n            \"from_address\": \"{{system_field_from_address}}\",\n            \"reply_address\": \"{{system_field_reply_address}}\"\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send_embed_content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"        pm.test(`Test Notify Transaction with content HTML using campaign,list and global level is working`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"All ESP all level MD5 suppression list with Send Embed content -\"+ pm.globals.get(\"connectionId\"));",
+							"    }); ",
+							"} else {",
+							"    pm.test(`Test notify_transactional using suppression list \"Is Working\"`, function() {",
+							"        pm.expect(\"\").to.equal(\"All ESP all level MD5 suppression list with Send Embed content -\"+ pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_md5_suppression_list7@hoohem.com\",\n\t\"subject\":\"All ESP all level MD5 suppression list with Send Embed content -{{connectionId}}\",\n\t\"timeout\":400000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Transaction Send Embed Content with campaign level is working`, function() {",
+							"            pm.expect(\"\").to.equal(\"All ESP all level MD5 suppression list with Send Embed content -\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_md5_suppression_list1@hoohem.com\",\n\t\"subject\":\"All ESP all level MD5 suppression list with Send Embed content -{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Transaction Send Embed Content with campaign level is working`, function() {",
+							"            pm.expect(\"\").to.equal(\"All ESP all level MD5 suppression list with Send Embed content -\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_md5_suppression_list2@hoohem.com\",\n\t\"subject\":\"All ESP all level MD5 suppression list with Send Embed content -{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Transaction Send Embed Content with list level is working`, function() {",
+							"            pm.expect(\"\").to.equal(\"All ESP all level MD5 suppression list with Send Embed content -\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_md5_suppression_list3@hoohem.com\",\n\t\"subject\":\"All ESP all level MD5 suppression list with Send Embed content -{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Transaction Send Embed Content with List level is working`, function() {",
+							"            pm.expect(\"\").to.equal(\"All ESP all level MD5 suppression list with Send Embed content -\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_md5_suppression_list4@hoohem.com\",\n\t\"subject\":\"All ESP all level MD5 suppression list with Send Embed content -{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Transaction Send Embed Content with global level is working`, function() {",
+							"            pm.expect(\"\").to.equal(\"All ESP all level MD5 suppression list with Send Embed content -\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_md5_suppression_list5@hoohem.com\",\n\t\"subject\":\"All ESP all level MD5 suppression list with Send Embed content -{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    pm.test(`Test Transaction Send Embed Content with global level is working`, function() {",
+							"        pm.expect(\"\").to.equal(\"All ESP all level MD5 suppression list with Send Embed content -\"+ pm.globals.get(\"connectionId\"));",
+							"    }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_md5_suppression_list6@hoohem.com\",\n\t\"subject\":\"All ESP all level MD5 suppression list with Send Embed content -{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

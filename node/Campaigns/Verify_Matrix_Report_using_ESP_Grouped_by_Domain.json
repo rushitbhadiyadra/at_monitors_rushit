@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "29ab5239-d7d5-4adf-bc68-01297b844d48",
+		"name": "Verify_Matrix_Report_using_ESP_Grouped_by_Domain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Create_matrix_report_using_esp_grouped_by_domain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    if (jsonData.payload.length > 0) {\r",
+							"        for (i = 0; jsonData.payload.length > i; i++) {\r",
+							"            var connection_id = jsonData.payload[i].esp_name_title\r",
+							"            var ispid = jsonData.payload[i].isp_id\r",
+							"            pm.test(\"isp Id\", function () {\r",
+							"                pm.expect(ispid).to.be.oneOf([pm.environment.get(\"isp_id_hoohem_domain\"), pm.environment.get(\"isp_id_gmail_domain\")]);\r",
+							"            });\r",
+							"            pm.test(\"contaction Id\", function () {\r",
+							"                pm.expect(connection_id).to.eql(\"Private SMTP\");\r",
+							"            });\r",
+							"            var domain = jsonData.payload[i].isp_name_or_others\r",
+							"            pm.test(\"Domain\", function () {\r",
+							"                pm.expect(domain).to.be.oneOf([\"hoohem.com\", \"gmail.com\"]);\r",
+							"            });\r",
+							"        }\r",
+							"    } else {\r",
+							"        pm.test(\"isp Id\", function () {\r",
+							"            pm.expect(ispid).to.be.oneOf([pm.environment.get(\"isp_id_hoohem_domain\"), pm.environment.get(\"isp_id_gmail_domain\")]);\r",
+							"        });\r",
+							"        pm.test(\"contaction Id\", function () {\r",
+							"            pm.expect(connection_id).to.eql(\"Private SMTP\");\r",
+							"        });\r",
+							"        pm.test(\"Domain\", function () {\r",
+							"            pm.expect(domain).to.be.oneOf([\"hoohem.com\", \"gmail.com\"]);\r",
+							"        });\r",
+							"    }\r",
+							"} else {\r",
+							"    pm.test(\"isp Id\", function () {\r",
+							"        pm.expect(ispid).to.be.oneOf([pm.environment.get(\"isp_id_hoohem_domain\"), pm.environment.get(\"isp_id_gmail_domain\")]);\r",
+							"    });\r",
+							"    pm.test(\"contaction Id\", function () {\r",
+							"        pm.expect(connection_id).to.eql(\"Private SMTP\");\r",
+							"    });\r",
+							"    pm.test(\"Domain\", function () {\r",
+							"        pm.expect(domain).to.be.oneOf([\"hoohem.com\", \"gmail.com\"]);\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"filter\": [\r\n        [\r\n            \"is_test_campaign\",\r\n            \"=\",\r\n            0\r\n        ],\r\n        [\r\n            \"email_message_type\",\r\n            \"=\",\r\n            \"email_message\"\r\n        ],\r\n        [\r\n            \"esp_connection_id\",\r\n            \"IN\",\r\n            [\r\n                \"{{connectionId}}\"\r\n            ]\r\n        ],\r\n        [\r\n            \"stats_date\",\r\n            \">=\",\r\n            {{pre_date}}\r\n        ],\r\n        [\r\n            \"stats_date\",\r\n            \"<=\",\r\n            {{current_date}}\r\n        ]\r\n    ],\r\n    \"select\": [\r\n        [\r\n            \"MAX(`stats_date`)\",\r\n            \"stats_date\"\r\n        ],\r\n        [\r\n            \"MAX(`delivery_timestamp`)\",\r\n            \"delivery_timestamp\"\r\n        ],\r\n        \"sum(`targeted`)\",\r\n        \"sum(`sent`)\",\r\n        \"sum(`success`)\",\r\n        \"sum(`failed`)\",\r\n        \"sum(`hard_bounces`)\",\r\n        \"sum(`soft_bounces`)\",\r\n        \"sum(`opens`)\",\r\n        \"sum(`unique_opens`)\",\r\n        \"sum(`clicks`)\",\r\n        \"sum(`unique_clicks`)\",\r\n        \"sum(`unsubscribes`)\",\r\n        \"sum(`complaints`)\",\r\n        \"esp_name_title\",\r\n        \"isp_name_or_others\",\r\n        \"sum(`post_back_clicks`)\",\r\n        [\r\n            \"sum(`extra2`)\",\r\n            \"Test23720\"\r\n        ]\r\n    ],\r\n    \"from\": \"mailing\",\r\n    \"order\": [\r\n        [\r\n            \"MAX(`delivery_timestamp`)\",\r\n            \"desc\"\r\n        ]\r\n    ],\r\n    \"group\": [\r\n        \"isp_id\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/reports/query?matrix",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"reports",
+						"query"
+					],
+					"query": [
+						{
+							"key": "matrix",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

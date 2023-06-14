@@ -1,0 +1,1180 @@
+{
+	"info": {
+		"_postman_id": "3e2a564f-3c0b-4490-be26-4ca330923849",
+		"name": "All_Esps_Regular_Campaign_Tracking_Domain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"rc_tracking_{{connectionId}}@hoohem.com\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change contact status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"change_to\":\"resubscribe\",\n \"emails\": [\n  \"rc_tracking_{{connectionId}}@hoohem.com\"\n ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get old segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"Regular Campaign Tracking Domain-\" + pm.globals.get(\"connectionId\")){",
+							"            count = 1",
+							"            pm.globals.set(\"segment_id_rc_tracking_domain\", segment.id);      ",
+							"        }      ",
+							"    }",
+							"}",
+							"",
+							"if(count===1){",
+							"    postman.setNextRequest(\"create and send campaign\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"segment_id_rc_tracking_domain\", function() {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"segment_id_rc_tracking_domain\", jsonData.payload.id);",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Regular Campaign Tracking Domain-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"rc_tracking_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time\", Math.round(new Date().getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"time\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Campaign RC Tracking Domain-{{connectionId}}\",\n    \"email_message\": {{rctd_email_id}},\n    \"campaign_override_tracking_domain_active\":true,\n    \"tracking_domain\": \"{{tracking_url}}\",\n    \"segments\": [\n        {{segment_id_rc_tracking_domain}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and send image campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time\", Math.round(new Date().getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"time\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Campaign RC Tracking Domain-{{connectionId}}\",\n    \"email_message\": {{rc_image_td_email_id}},\n    \"campaign_override_image_domain_active\": true,\n    \"image_domain\": \"{{image_trcking_campaign_url}}\",\n    \"segments\": [\n        {{segment_id_rc_tracking_domain}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Campaign With Email Message Custom Activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (30*24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"custom_agriget_with_campaign_report_id\" , jsonData.payload.id);",
+							"pm.globals.unset(\"pre_date\")",
+							"pm.globals.unset(\"current_date\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"All Contacts: Email equals \\\"rc_tracking_{{connectionId}}@hoohem.com\\\"\",\n    \"include_behavior\": false,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"type\": \"email\",\n                \"operator\": \"=\",\n                \"operand\": [\n                    \"rc_tracking_{{connectionId}}@hoohem.com\"\n                ],\n                \"case_sensitive\": 0,\n                \"condition\": \"and\",\n                \"field_id\": \"{{list_field_email_id}}\"\n            }\n        ],\n        \"user_type\": \"all\",\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"hard_bounces\",\n        \"soft_bounces\",\n        \"unique_openers\",\n        \"unique_clickers\",\n        \"complaints\",\n        \"unsubscribes\",\n        \"clicks\",\n        \"opens\",\n        \"sent\"\n    ],\n    \"group_fields\": [\n        \"ocx_campaign_id\",\n        \"ocx_email_message_id\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/aggregate_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"aggregate_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Message id Connectionid With Custom Activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (30*24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"custom_agriget_with_message_report_id\" , jsonData.payload.id);",
+							"pm.globals.unset(\"pre_date\")",
+							"pm.globals.unset(\"current_date\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"All Contacts: Email equals \\\"rc_tracking_{{connectionId}}@hoohem.com\\\"\",\n    \"include_behavior\": false,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"type\": \"email\",\n                \"operator\": \"=\",\n                \"operand\": [\n                    \"rc_tracking_{{connectionId}}@hoohem.com\"\n                ],\n                \"case_sensitive\": 0,\n                \"condition\": \"and\",\n                \"field_id\": \"{{list_field_email_id}}\"\n            }\n        ],\n        \"user_type\": \"all\",\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"hard_bounces\",\n        \"soft_bounces\",\n        \"unique_openers\",\n        \"unique_clickers\",\n        \"complaints\",\n        \"unsubscribes\",\n        \"clicks\",\n        \"opens\",\n        \"sent\"\n    ],\n    \"group_fields\": [\n        \"ocx_email_message_id\",\n        \"ocx_connection_id\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/aggregate_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"aggregate_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Connection CampaignId With Custom Activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (30*24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"custom_agriget_with_connection_report_id\" , jsonData.payload.id);",
+							"pm.globals.unset(\"pre_date\")",
+							"pm.globals.unset(\"current_date\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"All Contacts: Email equals \\\"rc_tracking_{{connectionId}}@hoohem.com\\\"\",\n    \"include_behavior\": false,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"type\": \"email\",\n                \"operator\": \"=\",\n                \"operand\": [\n                    \"rc_tracking_{{connectionId}}@hoohem.com\"\n                ],\n                \"case_sensitive\": 0,\n                \"condition\": \"and\",\n                \"field_id\": \"{{list_field_email_id}}\"\n            }\n        ],\n        \"user_type\": \"all\",\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"hard_bounces\",\n        \"soft_bounces\",\n        \"unique_openers\",\n        \"unique_clickers\",\n        \"complaints\",\n        \"unsubscribes\",\n        \"clicks\",\n        \"opens\",\n        \"sent\"\n    ],\n    \"group_fields\": [\n        \"ocx_connection_id\",\n        \"ocx_campaign_id\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/aggregate_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"aggregate_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay 300",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Campaign With Email Message Custom Activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"var count = 0",
+							"var count1 = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var report of jsonData.payload) {",
+							"        if (report.ocx_campaign_id != null){",
+							"            count = 1",
+							"        }",
+							"        if (report.ocx_email_message_id != null){",
+							"            count1 = 1",
+							"        }      ",
+							"    }",
+							"}",
+							"if(count == 1 && count1 == 1){",
+							"   pm.test(\"Campaign With Custom Activity report\", function() {",
+							"        pm.expect(\"Campaign With Custom Activity report\").to.equal(\"Campaign With Custom Activity report\");",
+							"    });",
+							"}else{",
+							"    pm.test(\"Campaign With Custom Activity report\", function() {",
+							"        pm.expect(\"\").to.equal(\"Campaign With Custom Activity report\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"custom_agriget_with_campaign_report_id\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{custom_agriget_with_campaign_report_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity",
+						"{{custom_agriget_with_campaign_report_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Message id Connectionid With Custom Activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"var count = 0",
+							"var count1 = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var report of jsonData.payload) {",
+							"        if (report.ocx_email_message_id != null){",
+							"            count = 1",
+							"        }  ",
+							"        if (report.ocx_connection_id != null){",
+							"            count1 = 1",
+							"        }    ",
+							"    }",
+							"}",
+							"if(count == 1 && count1 == 1){",
+							"   pm.test(\"Message With Custom Activity report\", function() {",
+							"        pm.expect(\"Message With Custom Activity report\").to.equal(\"Message With Custom Activity report\");",
+							"    });",
+							"}else{",
+							"     pm.test(\"Message With Custom Activity report Working\", function() {",
+							"        pm.expect(\"\").to.equal(\"Message With Custom Activity report\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"custom_agriget_with_message_report_id\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{custom_agriget_with_message_report_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity",
+						"{{custom_agriget_with_message_report_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Connection CampaignId With Custom Activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"var count = 0",
+							"var count1 = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var report of jsonData.payload) {",
+							"        if (report.ocx_connection_id != null){",
+							"            count = 1",
+							"        } ",
+							"        if (report.ocx_campaign_id != null){",
+							"            count1 = 1",
+							"        }     ",
+							"    }",
+							"}",
+							"if(count == 1 && count1 == 1){",
+							"   pm.test(\"Connection With Custom Activity report\", function() {",
+							"        pm.expect(\"Connection With Custom Activity report\").to.equal(\"Connection With Custom Activity report\");",
+							"    });",
+							"}else{",
+							"     pm.test(\"Connection With Custom Activity report Working\", function() {",
+							"        pm.expect(\"\").to.equal(\"Connection With Custom Activity report\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"custom_agriget_with_connection_report_id\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{custom_agriget_with_connection_report_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity",
+						"{{custom_agriget_with_connection_report_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read track mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var link = jsonData.HTMLTextLinks.toString()",
+							"var domain = link.split(\"/?\")",
+							"if(pm.response.code==200){",
+							"    pm.test(\"RC tracking domain is working\", function() {",
+							"        pm.expect(domain[0]).to.equal(\"http://\"+pm.environment.get(\"tracking_url\"));",
+							"});",
+							"}",
+							"pm.globals.unset(\"segment_id_rc_tracking_domain\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_tracking_{{connectionId}}@hoohem.com\",\n    \"subject\": \"RC Tracking Domain-{{connectionId}}\",\n    \"timeout\": 600000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read image mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var link = jsonData.html.toString()",
+							"var data = link.split(\"~!@#~\")",
+							"var domain = data[1].split(\"src=\")",
+							"var domain1 = domain[1].split(\"/\")",
+							"console.log(domain1)",
+							"if(pm.response.code==200){",
+							"    pm.test(\"RC tracking domain is working\", function() {",
+							"        pm.expect(domain1[2]).to.equal(pm.environment.get(\"image_trcking_campaign_url\"));",
+							"});",
+							"}",
+							"pm.globals.unset(\"segment_id_rc_tracking_domain\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_tracking_{{connectionId}}@hoohem.com\",\n    \"subject\": \"RC Image Tracking Domain-{{connectionId}}\",\n    \"timeout\": 600000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

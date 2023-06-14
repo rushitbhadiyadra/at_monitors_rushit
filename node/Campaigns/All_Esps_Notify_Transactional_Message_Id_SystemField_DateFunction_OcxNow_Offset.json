@@ -1,0 +1,4041 @@
+{
+	"info": {
+		"_postman_id": "f4d11bd0-948c-4601-a489-5d477082e966",
+		"name": "All_Esps_Notify_Transactional_Message_Id_SystemField_DateFunction_OcxNow_Offset",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "delete mail by id and subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Message Id Systemfield Date-Hash Function and Operator Ocxnow-{{connectionId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/deleteMailBySubjectAndId",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"deleteMailBySubjectAndId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com\",\n        \"address\": \"ahmedabad\",\n        \"country\": \"India\",\n        \"first_name\": \"Si\",\n        \"last_name\": \"Dev2\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"dob\": \"03/10/2020\",\n        \"city\": \"bhavnagar\",\n        \"street_name\": \"Radha and Krishana\",\n        \"society_name\": \"Radha & Krishana\",\n        \"middle_name\": \"ongage's\",\n        \"state\": \"Gujarat\",\n        \"query\": \"sales\",\n        \"location\": \"78759\",\n        \"industry\": \"sales\",\n        \"keyword\": \"marketing\",\n        \"zip\": \"63090\",\n        \"search\": \"sales\",\n        \"userip\": \"108.200.249.191\",\n        \"s1\": \"ong166\",\n        \"useragent\": \"useragent\",\n        \"zip1\": \"95050\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"recipients\": [\"ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com\"],\n  \"email_message_id\": {{msg_id_nt_system_dfun_and_opt_ocx_now}},\n  \"campaign_id\": \"{{transactional_content_html_system_field}}\",\n  \"distribution\": [\n   {\n    \"esp_connection_id\": {{connectionId}},\n    \"domain\": \"default\"\n   }\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_system_field_contact_id\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_system_field_creaed_date\", str.substring(0,8));",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_list_field_address\", jsonData.payload.address);",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_list_field_gender\", jsonData.payload.gender);",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_list_field_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_list_field_dob\", jsonData.payload.dob);",
+							" ",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_list_field_email\", jsonData.payload.email);",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_list_field_id\", jsonData.payload.id);",
+							"pm.globals.set(\"notify_transactional_campaign_message_id_list_field_ocx_created_date\", jsonData.payload.ocx_created_date);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Cases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"",
+							"const after_1_month_before_3_day = () => {",
+							"    var date = new Date();",
+							"    date.setMonth(date.getMonth() + 1);",
+							"    date.setDate(date.getDate() - 3);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const after_1_day = () => {",
+							"    var date = new Date();",
+							"    date.setDate(date.getDate() + 1);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const before_week = () => {",
+							"    var date = new Date();",
+							"    date.setDate(date.getDate() - 7);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"const next_sunday = () => {",
+							"    var date = new Date()//mm-dd-yyyy",
+							"    var day = date.getDay()",
+							"    var diff = (day == 0) ? (7 + day ) : (7 - day)",
+							"    date.setDate(date.getDate() + diff);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const today_date = () => {",
+							"    var dayOfWeek = 0;",
+							"    var date = new Date();",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const last_tuesday = () => {",
+							"    var date = new Date()",
+							"    var day = date.getDay()",
+							"    var diff = (day <= 2) ? (7 - 2 + day ) : (day - 2)",
+							"    date.setDate(date.getDate() - diff);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"var afterOneday = after_1_day()",
+							"var nextSunday = next_sunday()",
+							"var beforeWeek = before_week()",
+							"var lastTuesday = last_tuesday()",
+							"var after1MonthBefore3Day = after_1_month_before_3_day()",
+							"var todayDate = today_date()",
+							"",
+							"var today = new Date();",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"",
+							"const timestamp_to_date = (timeStamp_value) => {",
+							"    var date = new Date(timeStamp_value * 1000);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth() + 1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"",
+							"if (pm.response.code === 200) {",
+							"    var htmlText = jsonData.html;",
+							"    htmlText = htmlText.replace(/&#x2F;/g, \"/\")",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    var jsonOcxFeedWithOperator = xml2Json(fieldValue[131]);",
+							"    ",
+							"    const content = JSON.parse(fieldValue[4]);",
+							"    pm.test(`Test Notify Transactinal Message Id in ocx_loop is working Time : ${jsonData.date}`, function() {",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[1].td[0]).to.equal(\"Delux\");",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[2].td[0]).to.equal(\"premium\")",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[3].td[0]).to.equal(\"Simpel\");",
+							"    });",
+							"    pm.test(`Test Notify Transactinal Message Id in ocx_if is working Time : ${jsonData.date}`, function() {",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[1].td[0]).to.equal(\"Delux\");",
+							"    });",
+							"    pm.test(`Test Notify Transactinal Message Id in ocx_elseif is working Time : ${jsonData.date}`, function() {",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[2].td[0]).to.equal(\"premium\");",
+							"    });",
+							"    pm.test(`Test Notify Transactinal Message Id in ocx_else is working Time : ${jsonData.date}`, function() {",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[3].td[0]).to.equal(\"Simpel\");",
+							"    });",
+							"",
+							"     // TODO : Header Test",
+							"    pm.test(`Test Transactional Campaign Message Id in \\\"Header Test\\\"Time : ${jsonData.date}`, function () {",
+							"         pm.expect(fieldValue[1]).to.equal(\"Header\");",
+							"    });",
+							"    // TODO : Footer Test",
+							"    pm.test(`Test Transactional Campaign Message Id in \\\"Footer Test\\\"Time : ${jsonData.date}`, function () {",
+							"         pm.expect(fieldValue[134]).to.equal(\"Footer\");",
+							"    });",
+							"    // TODO : System Field",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_contact_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_contact_id).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_system_field_contact_id\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_created_date Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        var str = Math.round(content.system_fields.ocx_created_date).toString();",
+							"        pm.expect(str.substring(0, 8)).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_system_field_creaed_date\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_from_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_from_address_domain Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_address_domain).to.equal(pm.globals.get(\"system_field_from_address_domain\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_from_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_name).to.equal(pm.globals.get(\"system_field_from_name\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_list_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.system_fields.ocx_list_id)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_mailing_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.system_fields.ocx_mailing_id)).to.equal(parseInt(pm.environment.get(\"transactional_content_html_system_field\")));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_campaign_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_campaign_name).to.equal(\"Transactional content html Campaign\");",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_reply_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_reply_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_subject Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_subject).to.equal(\"Test Transactional Send Message Id Systemfield Date-Hash Function and Operator Ocxnow-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_esp_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_esp_id).to.equal(espId);",
+							"    });",
+							"",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_connection_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_connection_id).to.equal(connectionId);",
+							"    });",
+							"",
+							"    // TODO : Verify Date Function",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_day Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_day).to.equal(day);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_month Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month).to.equal(month);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_year Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_year).to.equal(year);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_dow_long Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_dow_long).to.equal(dowLong);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_dow Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_dow).to.equal(dow);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_month_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month_name).to.equal(monthName);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_month_short Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month_short).to.equal(monthShort);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_yy Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_yy).to.equal(yy);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_now Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_now).to.equal(month + \"/\" + day + \"/\" + year);",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_timestamp Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_timestamp.split(\" \")[0]).to.equal(year + \"-\" + month + \"-\" + day);",
+							"    });",
+							"",
+							"    //TODO : List Dynamic Value",
+							"",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"email Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.email).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_email\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.address).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_address\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"gender Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.gender).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_gender\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.dynamic_fields.product_id)).to.equal(parseInt(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_product_id\")));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"dob Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.dob).to.equal(timestamp_to_date(parseInt(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_dob\"))));",
+							"    });",
+							"",
+							"    pm.test(\"Test Transactional Campaign Message Id ocx_generate_hash sha1 is working\", function () {",
+							"        pm.expect(fieldValue[7]).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\");",
+							"    });",
+							"",
+							"    pm.test(\"Test Transactional Campaign Message Id ocx_generate_hash sha256 is working\", function () {",
+							"        pm.expect(fieldValue[10]).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"    });",
+							"",
+							"    pm.test(\"Test Transactional Campaign Message Id ocx_generate_hash md5 is working\", function () {",
+							"        pm.expect(fieldValue[13]).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"    });",
+							"",
+							" // TODO : date Format = m/d/Y and different offset",
+							"",
+							"      pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.plus_one_day).to.equal(afterOneday.mm+'/'+afterOneday.dd+'/'+afterOneday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.next_sunday).to.equal(nextSunday.mm+'/'+nextSunday.dd+'/'+nextSunday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.before_one_week).to.equal(beforeWeek.mm+'/'+beforeWeek.dd+'/'+beforeWeek.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.last_tuesday).to.equal(lastTuesday.mm+'/'+lastTuesday.dd+'/'+lastTuesday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.yy);",
+							"    });",
+							"     // TODO : date Format = m/Y/d and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.plus_one_day).to.equal(afterOneday.mm+'/'+afterOneday.yy+'/'+afterOneday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.next_sunday).to.equal(nextSunday.mm+'/'+nextSunday.yy+'/'+nextSunday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.before_one_week).to.equal(beforeWeek.mm+'/'+beforeWeek.yy+'/'+beforeWeek.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.last_tuesday).to.equal(lastTuesday.mm+'/'+lastTuesday.yy+'/'+lastTuesday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.dd);",
+							"    });",
+							"    // TODO : date Format = d/m/Y and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.plus_one_day).to.equal(afterOneday.dd+'/'+afterOneday.mm+'/'+afterOneday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.next_sunday).to.equal(nextSunday.dd+'/'+nextSunday.mm+'/'+nextSunday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.before_one_week).to.equal(beforeWeek.dd+'/'+beforeWeek.mm+'/'+beforeWeek.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.last_tuesday).to.equal(lastTuesday.dd+'/'+lastTuesday.mm+'/'+lastTuesday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.yy);",
+							"    });",
+							"   // TODO : date Format = d/Y/m and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.plus_one_day).to.equal(afterOneday.dd+'/'+afterOneday.yy+'/'+afterOneday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.next_sunday).to.equal(nextSunday.dd+'/'+nextSunday.yy+'/'+nextSunday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.before_one_week).to.equal(beforeWeek.dd+'/'+beforeWeek.yy+'/'+beforeWeek.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.last_tuesday).to.equal(lastTuesday.dd+'/'+lastTuesday.yy+'/'+lastTuesday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.mm);",
+							"    });",
+							"   // TODO : date Format = Y/m/d and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.plus_one_day).to.equal(afterOneday.yy+'/'+afterOneday.mm+'/'+afterOneday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.next_sunday).to.equal(nextSunday.yy+'/'+nextSunday.mm+'/'+nextSunday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.before_one_week).to.equal(beforeWeek.yy+'/'+beforeWeek.mm+'/'+beforeWeek.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.last_tuesday).to.equal(lastTuesday.yy+'/'+lastTuesday.mm+'/'+lastTuesday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.dd);",
+							"    });",
+							"    // TODO : date Format = Y/d/m and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.plus_one_day).to.equal(afterOneday.yy+'/'+afterOneday.dd+'/'+afterOneday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.next_sunday).to.equal(nextSunday.yy+'/'+nextSunday.dd+'/'+nextSunday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.before_one_week).to.equal(beforeWeek.yy+'/'+beforeWeek.dd+'/'+beforeWeek.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.last_tuesday).to.equal(lastTuesday.yy+'/'+lastTuesday.dd+'/'+lastTuesday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.mm);",
+							"    });",
+							"    // TODO : no date Format and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.plus_one_day))).to.equal(afterOneday.mm+'/'+afterOneday.dd+'/'+ afterOneday.yy);",
+							"    });",
+							"   ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.next_sunday))).to.equal(nextSunday.mm+'/'+nextSunday.dd+'/'+ nextSunday.yy);",
+							"    });",
+							"   ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.before_one_week))).to.equal(beforeWeek.mm+'/'+beforeWeek.dd+'/'+beforeWeek.yy);",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.last_tuesday))).to.equal(lastTuesday.mm+'/'+lastTuesday.dd+'/'+lastTuesday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.after_one_month_subtract_three_day))).to.equal(after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.yy);",
+							"    });",
+							"     // TODO : different date Format and no offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.ydm).to.equal(todayDate.yy+'/'+todayDate.dd+'/'+todayDate.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.ymd).to.equal(todayDate.yy+'/'+todayDate.mm+'/'+todayDate.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.dmy).to.equal(todayDate.dd+'/'+todayDate.mm+'/'+todayDate.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.dym).to.equal(todayDate.dd+'/'+todayDate.yy +'/'+todayDate.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.mdy).to.equal(todayDate.mm+'/'+todayDate.dd+'/'+todayDate.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.myd).to.equal(todayDate.mm+'/'+todayDate.yy+'/'+todayDate.dd);",
+							"    });",
+							"    ",
+							"    // TODO : no date Format and no offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).no_offset_no_format.ocx_now))).to.equal(todayDate.mm+'/'+todayDate.dd+'/'+todayDate.yy);",
+							"    });",
+							"    pm.globals.set(\"sha1_link\", jsonData.HTMLTextLinks[0]);",
+							"    pm.globals.set(\"sha256_link\", jsonData.HTMLTextLinks[1]);",
+							"    pm.globals.set(\"md5_link\", jsonData.HTMLTextLinks[2]);",
+							"",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield\" + connectionId, jsonData.HTMLTextLinks[3]);",
+							"",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id\" + connectionId, jsonData.HTMLTextLinks[4]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name\" + connectionId, jsonData.HTMLTextLinks[5]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject\" + connectionId, jsonData.HTMLTextLinks[6]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id\" + connectionId, jsonData.HTMLTextLinks[7]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id\" + connectionId, jsonData.HTMLTextLinks[8]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id\" + connectionId, jsonData.HTMLTextLinks[9]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id\" + connectionId, jsonData.HTMLTextLinks[10]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id\" + connectionId, jsonData.HTMLTextLinks[11]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name\" + connectionId, jsonData.HTMLTextLinks[12]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha1\" + connectionId, jsonData.HTMLTextLinks[13]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha256\" + connectionId, jsonData.HTMLTextLinks[14]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd5\" + connectionId, jsonData.HTMLTextLinks[15]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now\" + connectionId, jsonData.HTMLTextLinks[16]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp\" + connectionId, jsonData.HTMLTextLinks[17]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day\" + connectionId, jsonData.HTMLTextLinks[18]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow\" + connectionId, jsonData.HTMLTextLinks[19]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long\" + connectionId, jsonData.HTMLTextLinks[20]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month\" + connectionId, jsonData.HTMLTextLinks[21]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name\" + connectionId, jsonData.HTMLTextLinks[22]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short\" + connectionId, jsonData.HTMLTextLinks[23]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy\" + connectionId, jsonData.HTMLTextLinks[24]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year\" + connectionId, jsonData.HTMLTextLinks[25]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue\" + connectionId, jsonData.HTMLTextLinks[26]);",
+							"",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_31\" + connectionId, jsonData.HTMLTextLinks[31]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_32\" + connectionId, jsonData.HTMLTextLinks[32]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_34\" + connectionId, jsonData.HTMLTextLinks[34]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_35\" + connectionId, jsonData.HTMLTextLinks[35]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_36\" + connectionId, jsonData.HTMLTextLinks[36]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_37\" + connectionId, jsonData.HTMLTextLinks[37]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_38\" + connectionId, jsonData.HTMLTextLinks[38]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_39\" + connectionId, jsonData.HTMLTextLinks[39]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_40\" + connectionId, jsonData.HTMLTextLinks[40]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_41\" + connectionId, jsonData.HTMLTextLinks[41]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_42\" + connectionId, jsonData.HTMLTextLinks[42]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_43\" + connectionId, jsonData.HTMLTextLinks[43]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_44\" + connectionId, jsonData.HTMLTextLinks[44]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_45\" + connectionId, jsonData.HTMLTextLinks[45]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_46\" + connectionId, jsonData.HTMLTextLinks[46]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_47\" + connectionId, jsonData.HTMLTextLinks[47]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_48\" + connectionId, jsonData.HTMLTextLinks[48]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_49\" + connectionId, jsonData.HTMLTextLinks[49]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_50\" + connectionId, jsonData.HTMLTextLinks[50]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_51\" + connectionId, jsonData.HTMLTextLinks[51]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_52\" + connectionId, jsonData.HTMLTextLinks[52]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_53\" + connectionId, jsonData.HTMLTextLinks[53]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_54\" + connectionId, jsonData.HTMLTextLinks[54]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_55\" + connectionId, jsonData.HTMLTextLinks[55]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_58\" + connectionId, jsonData.HTMLTextLinks[58]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_59\" + connectionId, jsonData.HTMLTextLinks[59]);",
+							"    ",
+							"    postman.setNextRequest(\"Test-ocx_generate_hash-SHA1\")",
+							"}",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Message Id Systemfield Date-Hash Function and Operator Ocxnow-{{connectionId}}\",\n    \"timeout\": 1800000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Cases1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"",
+							"const after_1_month_before_3_day = () => {",
+							"    var date = new Date();",
+							"    date.setMonth(date.getMonth() + 1);",
+							"    date.setDate(date.getDate() - 3);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const after_1_day = () => {",
+							"    var date = new Date();",
+							"    date.setDate(date.getDate() + 1);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const before_week = () => {",
+							"    var date = new Date();",
+							"    date.setDate(date.getDate() - 7);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"const next_sunday = () => {",
+							"    var date = new Date()//mm-dd-yyyy",
+							"    var day = date.getDay()",
+							"    var diff = (day == 0) ? (7 + day ) : (7 - day)",
+							"    date.setDate(date.getDate() + diff);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const today_date = () => {",
+							"    var dayOfWeek = 0;",
+							"    var date = new Date();",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const last_tuesday = () => {",
+							"    var date = new Date()",
+							"    var day = date.getDay()",
+							"    var diff = (day <= 2) ? (7 - 2 + day ) : (day - 2)",
+							"    date.setDate(date.getDate() - diff);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"var afterOneday = after_1_day()",
+							"var nextSunday = next_sunday()",
+							"var beforeWeek = before_week()",
+							"var lastTuesday = last_tuesday()",
+							"var after1MonthBefore3Day = after_1_month_before_3_day()",
+							"var todayDate = today_date()",
+							"",
+							"var today = new Date();",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"",
+							"const timestamp_to_date = (timeStamp_value) => {",
+							"    var date = new Date(timeStamp_value * 1000);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth() + 1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"",
+							"if (pm.response.code === 200) {",
+							"    var htmlText = jsonData.html;",
+							"    htmlText = htmlText.replace(/&#x2F;/g, \"/\")",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    var jsonOcxFeedWithOperator = xml2Json(fieldValue[131]);",
+							"    ",
+							"    const content = JSON.parse(fieldValue[4]);",
+							"    pm.test(`Test Notify Transactinal Message Id in ocx_loop is working Time : ${jsonData.date}`, function() {",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[1].td[0]).to.equal(\"Delux\");",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[2].td[0]).to.equal(\"premium\")",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[3].td[0]).to.equal(\"Simpel\");",
+							"    });",
+							"    pm.test(`Test Notify Transactinal Message Id in ocx_if is working Time : ${jsonData.date}`, function() {",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[1].td[0]).to.equal(\"Delux\");",
+							"    });",
+							"    pm.test(`Test Notify Transactinal Message Id in ocx_elseif is working Time : ${jsonData.date}`, function() {",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[2].td[0]).to.equal(\"premium\");",
+							"    });",
+							"    pm.test(`Test Notify Transactinal Message Id in ocx_else is working Time : ${jsonData.date}`, function() {",
+							"    pm.expect(jsonOcxFeedWithOperator.table.tbody.tr[1].td[2].table.tbody.tr[3].td[0]).to.equal(\"Simpel\");",
+							"    });",
+							"",
+							"     // TODO : Header Test",
+							"    pm.test(`Test Transactional Campaign Message Id in \\\"Header Test\\\"Time : ${jsonData.date}`, function () {",
+							"         pm.expect(fieldValue[1]).to.equal(\"Header\");",
+							"    });",
+							"    // TODO : Footer Test",
+							"    pm.test(`Test Transactional Campaign Message Id in \\\"Footer Test\\\"Time : ${jsonData.date}`, function () {",
+							"         pm.expect(fieldValue[134]).to.equal(\"Footer\");",
+							"    });",
+							"    // TODO : System Field",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_contact_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_contact_id).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_system_field_contact_id\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_created_date Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        var str = Math.round(content.system_fields.ocx_created_date).toString();",
+							"        pm.expect(str.substring(0, 8)).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_system_field_creaed_date\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_from_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_from_address_domain Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_address_domain).to.equal(pm.globals.get(\"system_field_from_address_domain\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_from_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_name).to.equal(pm.globals.get(\"system_field_from_name\"));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_list_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.system_fields.ocx_list_id)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_mailing_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.system_fields.ocx_mailing_id)).to.equal(parseInt(pm.environment.get(\"transactional_content_html_system_field\")));",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_campaign_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_campaign_name).to.equal(\"Transactional content html Campaign\");",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_reply_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_reply_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_subject Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_subject).to.equal(\"Test Transactional Send Message Id Systemfield Date-Hash Function and Operator Ocxnow-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_esp_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_esp_id).to.equal(espId);",
+							"    });",
+							"",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in system fields \\\"ocx_connection_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_connection_id).to.equal(connectionId);",
+							"    });",
+							"",
+							"    // TODO : Verify Date Function",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_day Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_day).to.equal(day);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_month Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month).to.equal(month);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_year Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_year).to.equal(year);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_dow_long Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_dow_long).to.equal(dowLong);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_dow Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_dow).to.equal(dow);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_month_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month_name).to.equal(monthName);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_month_short Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month_short).to.equal(monthShort);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_yy Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_yy).to.equal(yy);",
+							"    });",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_now Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_now).to.equal(month + \"/\" + day + \"/\" + year);",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in date function \\\"ocx_timestamp Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_timestamp.split(\" \")[0]).to.equal(year + \"-\" + month + \"-\" + day);",
+							"    });",
+							"",
+							"    //TODO : List Dynamic Value",
+							"",
+							"",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"email Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.email).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_email\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.address).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_address\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"gender Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.gender).to.equal(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_gender\"));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.dynamic_fields.product_id)).to.equal(parseInt(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_product_id\")));",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id in List Dynamic Field \\\"dob Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.dob).to.equal(timestamp_to_date(parseInt(pm.globals.get(\"notify_transactional_campaign_message_id_list_field_dob\"))));",
+							"    });",
+							"",
+							"    pm.test(\"Test Transactional Campaign Message Id ocx_generate_hash sha1 is working\", function () {",
+							"        pm.expect(fieldValue[7]).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\");",
+							"    });",
+							"",
+							"    pm.test(\"Test Transactional Campaign Message Id ocx_generate_hash sha256 is working\", function () {",
+							"        pm.expect(fieldValue[10]).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"    });",
+							"",
+							"    pm.test(\"Test Transactional Campaign Message Id ocx_generate_hash md5 is working\", function () {",
+							"        pm.expect(fieldValue[13]).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"    });",
+							"",
+							" // TODO : date Format = m/d/Y and different offset",
+							"",
+							"      pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.plus_one_day).to.equal(afterOneday.mm+'/'+afterOneday.dd+'/'+afterOneday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.next_sunday).to.equal(nextSunday.mm+'/'+nextSunday.dd+'/'+nextSunday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.before_one_week).to.equal(beforeWeek.mm+'/'+beforeWeek.dd+'/'+beforeWeek.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.last_tuesday).to.equal(lastTuesday.mm+'/'+lastTuesday.dd+'/'+lastTuesday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_mdy.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.yy);",
+							"    });",
+							"     // TODO : date Format = m/Y/d and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.plus_one_day).to.equal(afterOneday.mm+'/'+afterOneday.yy+'/'+afterOneday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.next_sunday).to.equal(nextSunday.mm+'/'+nextSunday.yy+'/'+nextSunday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.before_one_week).to.equal(beforeWeek.mm+'/'+beforeWeek.yy+'/'+beforeWeek.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.last_tuesday).to.equal(lastTuesday.mm+'/'+lastTuesday.yy+'/'+lastTuesday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_myd.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.dd);",
+							"    });",
+							"    // TODO : date Format = d/m/Y and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.plus_one_day).to.equal(afterOneday.dd+'/'+afterOneday.mm+'/'+afterOneday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.next_sunday).to.equal(nextSunday.dd+'/'+nextSunday.mm+'/'+nextSunday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.before_one_week).to.equal(beforeWeek.dd+'/'+beforeWeek.mm+'/'+beforeWeek.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.last_tuesday).to.equal(lastTuesday.dd+'/'+lastTuesday.mm+'/'+lastTuesday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dmy.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.yy);",
+							"    });",
+							"   // TODO : date Format = d/Y/m and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.plus_one_day).to.equal(afterOneday.dd+'/'+afterOneday.yy+'/'+afterOneday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.next_sunday).to.equal(nextSunday.dd+'/'+nextSunday.yy+'/'+nextSunday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.before_one_week).to.equal(beforeWeek.dd+'/'+beforeWeek.yy+'/'+beforeWeek.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.last_tuesday).to.equal(lastTuesday.dd+'/'+lastTuesday.yy+'/'+lastTuesday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_dym.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.mm);",
+							"    });",
+							"   // TODO : date Format = Y/m/d and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.plus_one_day).to.equal(afterOneday.yy+'/'+afterOneday.mm+'/'+afterOneday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.next_sunday).to.equal(nextSunday.yy+'/'+nextSunday.mm+'/'+nextSunday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.before_one_week).to.equal(beforeWeek.yy+'/'+beforeWeek.mm+'/'+beforeWeek.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.last_tuesday).to.equal(lastTuesday.yy+'/'+lastTuesday.mm+'/'+lastTuesday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ymd.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.dd);",
+							"    });",
+							"    // TODO : date Format = Y/d/m and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.plus_one_day).to.equal(afterOneday.yy+'/'+afterOneday.dd+'/'+afterOneday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.next_sunday).to.equal(nextSunday.yy+'/'+nextSunday.dd+'/'+nextSunday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.before_one_week).to.equal(beforeWeek.yy+'/'+beforeWeek.dd+'/'+beforeWeek.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.last_tuesday).to.equal(lastTuesday.yy+'/'+lastTuesday.dd+'/'+lastTuesday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and format Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).offset_format_ydm.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.mm);",
+							"    });",
+							"    // TODO : no date Format and different offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 day and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.plus_one_day))).to.equal(afterOneday.mm+'/'+afterOneday.dd+'/'+ afterOneday.yy);",
+							"    });",
+							"   ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= next sunday and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.next_sunday))).to.equal(nextSunday.mm+'/'+nextSunday.dd+'/'+ nextSunday.yy);",
+							"    });",
+							"   ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= -1 week and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.before_one_week))).to.equal(beforeWeek.mm+'/'+beforeWeek.dd+'/'+beforeWeek.yy);",
+							"    });",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= last tuesday and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.last_tuesday))).to.equal(lastTuesday.mm+'/'+lastTuesday.dd+'/'+lastTuesday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset= +1 month -3 days and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).offset_no_format.after_one_month_subtract_three_day))).to.equal(after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.yy);",
+							"    });",
+							"     // TODO : different date Format and no offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = Y/d/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.ydm).to.equal(todayDate.yy+'/'+todayDate.dd+'/'+todayDate.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = Y/m/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.ymd).to.equal(todayDate.yy+'/'+todayDate.mm+'/'+todayDate.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = d/m/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.dmy).to.equal(todayDate.dd+'/'+todayDate.mm+'/'+todayDate.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = d/Y/m Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.dym).to.equal(todayDate.dd+'/'+todayDate.yy +'/'+todayDate.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = m/d/Y Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.mdy).to.equal(todayDate.mm+'/'+todayDate.dd+'/'+todayDate.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and date format = m/Y/d Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(fieldValue[132]).no_offset_different_format.myd).to.equal(todayDate.mm+'/'+todayDate.yy+'/'+todayDate.dd);",
+							"    });",
+							"    ",
+							"    // TODO : no date Format and no offset",
+							"    ",
+							"    pm.test(`Test Transactional Campaign Message Id Systemfield date_function ocx_now with offset and no date format Time : ${jsonData.date}`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(JSON.parse(fieldValue[132]).no_offset_no_format.ocx_now))).to.equal(todayDate.mm+'/'+todayDate.dd+'/'+todayDate.yy);",
+							"    });",
+							"    pm.globals.set(\"sha1_link\", jsonData.HTMLTextLinks[0]);",
+							"    pm.globals.set(\"sha256_link\", jsonData.HTMLTextLinks[1]);",
+							"    pm.globals.set(\"md5_link\", jsonData.HTMLTextLinks[2]);",
+							"",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield\" + connectionId, jsonData.HTMLTextLinks[3]);",
+							"",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id\" + connectionId, jsonData.HTMLTextLinks[4]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name\" + connectionId, jsonData.HTMLTextLinks[5]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject\" + connectionId, jsonData.HTMLTextLinks[6]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id\" + connectionId, jsonData.HTMLTextLinks[7]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id\" + connectionId, jsonData.HTMLTextLinks[8]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id\" + connectionId, jsonData.HTMLTextLinks[9]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id\" + connectionId, jsonData.HTMLTextLinks[10]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id\" + connectionId, jsonData.HTMLTextLinks[11]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name\" + connectionId, jsonData.HTMLTextLinks[12]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha1\" + connectionId, jsonData.HTMLTextLinks[13]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha256\" + connectionId, jsonData.HTMLTextLinks[14]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd5\" + connectionId, jsonData.HTMLTextLinks[15]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now\" + connectionId, jsonData.HTMLTextLinks[16]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp\" + connectionId, jsonData.HTMLTextLinks[17]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day\" + connectionId, jsonData.HTMLTextLinks[18]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow\" + connectionId, jsonData.HTMLTextLinks[19]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long\" + connectionId, jsonData.HTMLTextLinks[20]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month\" + connectionId, jsonData.HTMLTextLinks[21]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name\" + connectionId, jsonData.HTMLTextLinks[22]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short\" + connectionId, jsonData.HTMLTextLinks[23]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy\" + connectionId, jsonData.HTMLTextLinks[24]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year\" + connectionId, jsonData.HTMLTextLinks[25]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue\" + connectionId, jsonData.HTMLTextLinks[26]);",
+							"",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_31\" + connectionId, jsonData.HTMLTextLinks[31]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_32\" + connectionId, jsonData.HTMLTextLinks[32]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_34\" + connectionId, jsonData.HTMLTextLinks[34]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_35\" + connectionId, jsonData.HTMLTextLinks[35]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_36\" + connectionId, jsonData.HTMLTextLinks[36]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_37\" + connectionId, jsonData.HTMLTextLinks[37]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_38\" + connectionId, jsonData.HTMLTextLinks[38]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_39\" + connectionId, jsonData.HTMLTextLinks[39]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_40\" + connectionId, jsonData.HTMLTextLinks[40]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_41\" + connectionId, jsonData.HTMLTextLinks[41]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_42\" + connectionId, jsonData.HTMLTextLinks[42]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_43\" + connectionId, jsonData.HTMLTextLinks[43]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_44\" + connectionId, jsonData.HTMLTextLinks[44]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_45\" + connectionId, jsonData.HTMLTextLinks[45]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_46\" + connectionId, jsonData.HTMLTextLinks[46]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_47\" + connectionId, jsonData.HTMLTextLinks[47]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_48\" + connectionId, jsonData.HTMLTextLinks[48]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_49\" + connectionId, jsonData.HTMLTextLinks[49]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_50\" + connectionId, jsonData.HTMLTextLinks[50]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_51\" + connectionId, jsonData.HTMLTextLinks[51]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_52\" + connectionId, jsonData.HTMLTextLinks[52]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_53\" + connectionId, jsonData.HTMLTextLinks[53]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_54\" + connectionId, jsonData.HTMLTextLinks[54]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_55\" + connectionId, jsonData.HTMLTextLinks[55]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_58\" + connectionId, jsonData.HTMLTextLinks[58]);",
+							"    pm.globals.set(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_59\" + connectionId, jsonData.HTMLTextLinks[59]);",
+							"    ",
+							"    // pm.globals.set(\"behaviour_stats_click\"+connectionId, fieldValue[49].match(reg)[0].split(\"\\\"\")[0]);",
+							"    // pm.globals.set(\"behaviour_mail_open_link_\"+connectionId, jsonData.match(reg)[0].split(\"\\\"\")[0]);",
+							"    // pm.globals.set(\"behaviour_mail_unsub_link_\"+connectionId, jsonData.match(reg)[0].split(\"\\\"\")[0]);",
+							"} else {",
+							"    pm.test(\"Mail not received\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"    postman.setNextRequest(null)",
+							"}",
+							"",
+							"",
+							"",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_system_field_contact_id\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_system_field_creaed_date\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_address\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_gender\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_product_id\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_dob\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_email\");",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Message Id Systemfield Date-Hash Function and Operator Ocxnow-{{connectionId}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test-ocx_generate_hash-SHA1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test Regular Campaign Message Id ocx_generate_hash sha1 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\"); ",
+							"});",
+							"pm.globals.unset(\"sha1_link\");",
+							"",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_system_field_contact_id\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_system_field_creaed_date\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_address\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_gender\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_product_id\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_dob\");",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_email\");",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{sha1_link}}",
+					"host": [
+						"{{sha1_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash SHA256",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test Regular Campaign Message Id ocx_generate_hash sha256 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"});",
+							"pm.globals.unset(\"sha256_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{sha256_link}}",
+					"host": [
+						"{{sha256_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash MD5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test Regular Campaign Message Id ocx_generate_hash md5 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"});",
+							"pm.globals.unset(\"md5_link\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{md5_link}}",
+					"host": [
+						"{{md5_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link ListField",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx List Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Campaign Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx mailing Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Msg Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Segment Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx espId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Connection Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx From Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link hash-SHA1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha1\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha1{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha1{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link hash-SHA256",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha256\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha256{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha256{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link hash-MD5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd5\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd5{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd5{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Now",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Timestamp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Day",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx DOW",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx DOW long",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Month",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Month Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Month Short",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx YY",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Ocx Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link Static List Field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var connectionId = pm.globals.get(\"connectionId\"); ",
+							"var espId = pm.globals.get(\"espId\"); ",
+							"",
+							"var today = new Date();",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  in list field dynamic value\", function() {",
+							"    pm.expect(jsonData.payload.first_name).to.equal(jsonData.payload.address);",
+							"});",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  in static list field value\", function() {",
+							"    pm.expect(jsonData.payload.sr_no).to.equal(5);",
+							"});",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  in ocx list id\", function() {",
+							"    pm.expect(parseInt(jsonData.payload.useragent)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  system field in ocx campaign name\", function() {",
+							"    pm.expect(jsonData.payload.last_name).to.equal(\"Transactional content html Campaign\");",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  system field in ocx subject\", function() {",
+							"    pm.expect(jsonData.payload.subject).to.equal(\"Test Transactional Send Message Id Systemfield Date-Hash Function and Operator Ocxnow-\"+pm.globals.get(\"connectionId\"));",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  system field in ocx mailing Id\", function() {",
+							"    pm.expect(parseInt(jsonData.payload.ip)).to.equal(parseInt(pm.environment.get(\"transactional_content_html_system_field\")));",
+							"});",
+							"",
+							"// pm.test(\"Test Transacional Campaign Content Html Update on click  system field in ocx msg id\", function() {",
+							"//     pm.expect(parseInt(jsonData.payload.language)).to.equal(parseInt(pm.environment.get(\"msg_id_transactional_send_email_message_date_hash_function_and_list_system_field3\")));",
+							"// });",
+							"",
+							"// pm.test(\"Test Transacional Campaign Content Html Update on click  system field in ocx segment id\", function() {",
+							"//     pm.expect(parseInt(jsonData.payload.phone)).to.equal(parseInt(pm.environment.get(\"segment_id_rc_behaviour_update_on_click\")));",
+							"// });",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  system field in ocx esp id\", function() {",
+							"    pm.expect(jsonData.payload.os).to.equal(espId);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  system field in ocx connection id\", function() {",
+							"    pm.expect(jsonData.payload.city).to.equal(connectionId);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  system field in ocx from name\", function() {",
+							"    pm.expect(jsonData.payload.street_name).to.equal(pm.globals.get(\"system_field_from_name\"));",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  function in hash sha1\", function() {",
+							"    pm.expect(jsonData.payload.country).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\");",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  function in hash sha256\", function() {",
+							"    pm.expect(jsonData.payload.society_name).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  function in hash md5\", function() {",
+							"    pm.expect(jsonData.payload.zip).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx now\", function() {",
+							"    pm.expect(jsonData.payload.middle_name).to.equal(month + \"/\" + day + \"/\" + year);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx timestamp\", function() {",
+							"    var ipformat = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/;",
+							"    pm.expect(jsonData.payload.query).match(ipformat);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx day\", function() {",
+							"    pm.expect(jsonData.payload.location).to.equal(day);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx DOW\", function() {",
+							"    pm.expect(jsonData.payload.industry).to.equal(dow);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx DOW long\", function() {",
+							"    pm.expect(jsonData.payload.state).to.equal(dowLong);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx month\", function() {",
+							"    pm.expect(jsonData.payload.keyword).to.equal(month);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx month name\", function() {",
+							"    pm.expect(jsonData.payload.news).to.equal(monthName);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx month short\", function() {",
+							"    pm.expect(jsonData.payload.userip).to.equal(monthShort);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx yy\", function() {",
+							"    pm.expect(jsonData.payload.job_title).to.equal(yy);",
+							"});",
+							"",
+							"pm.test(\"Test Transacional Campaign Content Html Update on click  date function in ocx year\", function() {",
+							"    pm.expect(jsonData.payload.s1).to.equal(year);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 31",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With List Dynamic String Value  is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"India\");",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_31\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_31{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_31{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 32",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With List Dynamic Number Value  is Working\", function () { ",
+							"    pm.expect(parseInt(jsonData)).to.equal(123);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_32\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_32{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_32{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 34",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With List Dynamic Email Value  is Working\", function() {",
+							"    pm.expect(jsonData).to.equal(\"ae_nt_msg_d_sfnc_ocxnow\"+pm.globals.get(\"connectionId\")+\"@hoohem.com\");",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_34\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_34{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_34{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 35",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0');",
+							"var year = String(today.getFullYear());",
+							"",
+							"pm.test(\"Test All Esps Link With System Field OCX NOW  is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(month + \"/\" + day + \"/\" + year);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_35\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_35{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_35{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 36",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0');",
+							"var year = String(today.getFullYear());",
+							"pm.test(\"Test All Esps Link With System Field OCX TIMESTAMP is Working\", function () { ",
+							"    const date = jsonData.split(\" \")",
+							"    pm.expect(date[0]).to.equal(year + \"-\" + month + \"-\" + day);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_36\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_36{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_36{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 37",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0');",
+							"var year = String(today.getFullYear());",
+							"",
+							"pm.test(\"Test All Esps Link With System Field OCX DAY  is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(day);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_37\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_37{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_37{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 38",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"",
+							"pm.test(\"Test All Esps Link With System Field OCX DOW  is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(dow);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_38\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_38{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_38{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 39",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"",
+							"pm.test(\"Test All Esps Link With System Field OCX DOW LONG is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(dowLong);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_39\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_39{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_39{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 40",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var month = String(today.getMonth() + 1).padStart(2, '0');",
+							"pm.test(\"Test All Esps Link With System Field OCX MONTH is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(month);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_40\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_40{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_40{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 41",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"pm.test(\"Test All Esps Link With System Field OCX MONTH NAME is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(monthName);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_41\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_41{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_41{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 42",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"pm.test(\"Test All Esps Link With System Field OCX MONTH SHORT is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(monthShort);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_42\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_42{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_42{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 43",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"pm.test(\"Test All Esps Link With System Field OCX YY is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(yy);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_43\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_43{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_43{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 44",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"var today = new Date();",
+							"var year = String(today.getFullYear());",
+							"pm.test(\"Test All Esps Link With System Field OCX YEAR is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(year);",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_44\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_44{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_44{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 45",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field OCX LIST ID is Working\", function () { ",
+							"    pm.expect(parseInt(jsonData)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_45\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_45{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_45{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 46",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field Campaign Name is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"Transactional content html Campaign\");",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_46\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_46{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_46{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 47",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field OCX SUBJECT is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"Test Transactional Send Message Id Systemfield Date-Hash Function and Operator Ocxnow-\"+pm.globals.get(\"connectionId\"));",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_47\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_47{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_47{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 48",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field OCX Campaign ID is Working\", function () { ",
+							"    pm.expect(parseInt(jsonData)).to.equal(parseInt(pm.environment.get(\"transactional_content_html_system_field\")));",
+							"",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_48\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_48{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_48{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 49",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_49\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_49{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_49{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 51",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field OCX ESP ID is Working\", function () { ",
+							"    pm.expect(parseInt(jsonData)).to.equal(parseInt(pm.globals.get(\"espId\")))",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_50\"+pm.globals.get(\"connectionId\"));",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_51\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_51{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_51{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 52",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field OCX ESP ID is Working\", function () { ",
+							"    pm.expect(parseInt(jsonData)).to.equal(parseInt(pm.globals.get(\"connectionId\")))",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_52\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_52{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_52{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 53",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field OCX FROM NAME is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(pm.globals.get(\"system_field_from_name\"))",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_53\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_53{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_53{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 54",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With Contact ID is Working\", function () { ",
+							"    pm.expect((jsonData)).to.equal((pm.globals.get(\"notify_transactional_campaign_message_id_list_field_id\")));",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_54\"+pm.globals.get(\"connectionId\"));",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_54{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_54{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 55",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With Contact Created date is Working\", function () { ",
+							"    pm.expect(parseInt(jsonData)).to.equal((pm.globals.get(\"notify_transactional_campaign_message_id_list_field_ocx_created_date\")));",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_55\"+pm.globals.get(\"connectionId\"));",
+							"pm.globals.unset(\"notify_transactional_campaign_message_id_list_field_ocx_created_date\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_55{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_55{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 58",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field OCX FROM ADDRESS DOMAIN is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(pm.globals.get(\"system_field_from_address_domain\"))",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_58\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_58{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_58{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link 59",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All Esps Link With System Field OCX Replay ADDRESS is Working\", function () { ",
+							"    pm.expect(jsonData).to.equal(pm.globals.get(\"system_field_from_address\"))",
+							"});",
+							"pm.globals.unset(\"ae_nt_sd_msgid_d_fnc_bh_up_cl_59\"+pm.globals.get(\"connectionId\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_nt_sd_msgid_d_fnc_bh_up_cl_59{{connectionId}}}}",
+					"host": [
+						"{{ae_nt_sd_msgid_d_fnc_bh_up_cl_59{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"change_to\":\"remove\",\n \"emails\": [\n  \"ae_nt_msg_d_sfnc_ocxnow{{connectionId}}@hoohem.com\"\n  \n ]\n} "
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

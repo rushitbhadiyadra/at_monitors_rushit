@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "545abe3b-9715-420f-82ea-4722b520a8e6",
+		"name": "Verify_Transactional_embed_content_Send_dynamic_from_address",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-545abe3b-9715-420f-82ea-4722b520a8e6?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create_contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"dynamic_from_address_tec_{{connection_id_dynamic_from_address}}@hoohem.com\",\n  \"fromname\": \"SiDev1\",\n  \"fromaddress\": \"sidev1@stepin-solutions.com\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_Mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"dynamic_from_address_tec_{{connection_id_dynamic_from_address}}@hoohem.com\"\n    ],\n    \"message\": {\n    \"subject\": \"verify Transactional Send Content HTML dynamic from address-{{connection_id_dynamic_from_address}}\",\n    \"content_html\": \"<html><head><title></title><meta content='text/html; charset=utf-8' http-equiv='Content-Type' /></head><body><p>Analytics Transactional Send Content HTML Campaign V4 Inhouse</p></body></html>\",\n    \"unsubscribe_default_link\": true,\n    \"unsubscribe_confirmation_html_active\": true,\n    \"unsubscribe_confirmation_html\": \"~!@#~To confirm you want to unsubscribe, please click the button below~!@#~ \",\n    \"unsubscribe_confirmation_button\": \"Unsubscribe\",\n    \"frequency_active\": false,\n    \"frequency_field_id\": \"\",\n    \"unsubscribe_success_html_active\": true,\n    \"unsubscribe_success_page\": \"text\",\n    \"unsubscribe_success_html\": \"~!@#~You have been successfully unsubscribed~!@#~\",\n    \"addresses\":{\n      \"from_name\": \"{{fromname}}\",\n      \"from_address\": \"{{fromaddress}}\",\n      \"reply_address\": \"{{fromaddress}}\"\n    }\n    },\n    \"sending_connection_id\": {{connection_id_dynamic_from_address}},\n    \"create_contact\": false\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send_embed_content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=400",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "400"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"var address = jsonData.from.value[0].address\r",
+							"var name = jsonData.from.value[0].name\r",
+							"pm.test(\"Verify Dynamic from address is working\", function () {\r",
+							"    pm.expect(address).to.equal(\"sidev1@stepin-solutions.com\");\r",
+							"    pm.expect(name).to.equal(\"SiDev1\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"dynamic_from_address_tec_{{connection_id_dynamic_from_address}}@hoohem.com\",\r\n    \"subject\": \"verify Transactional Send Content HTML dynamic from address-{{connection_id_dynamic_from_address}}\",\r\n    \"timeout\": 1800000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

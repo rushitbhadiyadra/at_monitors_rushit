@@ -1,0 +1,64 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Dev Sparkpost Monitor
+
+on:
+  workflow_dispatch:
+
+jobs:
+  devsparkpost:
+
+    runs-on: ubuntu-latest
+      
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x]
+        # collection: [ All_Esps_Welcome_Mail_SystemField_DateFunction_OcxNow_Offset_1, All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function_1, All_ESPs_AB_Split_Feed_Operator_OcxNow_1, All_Esps_AB_Winner_Dynamic_Ocx_feed, All_Esps_AB_Winner_Using_Message_Open_System_field-List_Field_Date_Function, All_ESPs_Event, All_Esps_Notify_Transactional_Content_HTML_Dynamic_HTML_Feeds, ALL_Esps_Notify_Transactional_Content_HTML_Behaviour_Stats_13230, ALL_Esps_Notify_Transactional_Message_Id_Behaviour_Stats_13230, ALL_Esps_Transactional_Send_Content_HTML_Behaviour_Stats_13230, ALL_Esps_Regular_Campaign_Behaviour_Stats_13230, ALL_Esps_Transactional_Send_Message_Id_Behaviour_Stats_13230, All_Esps_Notify_Transactional_Message_Id_SystemField_DateFunction_OcxNow_Offset, All_Esps_Notify_Transactional_Content_HTML_SystemField_DateFunction_OcxNow_Offset, All_Esps_Transactional_Send_Content_HTML_SystemField_DateFunction_OcxNow_Offset, All_Esps_Transactional_Send_Message_Id_SystemField_DateFunction_OcxNow_Offset, All_Esps_Notify_Transactional_Message_Id_Dynamic_HTML_Feeds, All_Esps_Regular_Campaign_Message_Id_Dynamic_HTML_Feeds, All_Esps_Regular_Campaign_Message_Id_SystemField_And_Ocx_Now, All_Esps_Transactional-Send_Content_HTML_Dynamic_HTML_Feeds, All_Esps_Transactional-Send_Message_Id_Dynamic_HTML_Feeds, All-Esps-AR-Test-Cases, All_Esps_Campaign_Test_Mail_1, All_Esp_Event_Based_On_List, All_Esps_AB_Split_Campaign_With_Subject_1, All_Esps_Campaign_Mirror_Test_2, All_Esps_AB_Split_With_Multiple_esp_1, All_ESP_Regular_Campaign_Multiple_esp_1, All_Esp_Event_Campaign_Open_Click, All_Esps_AB_Winner_Using_Esps_Number_Open_1, All_Esp_And_Segment_Level_Distribution_1, All_Esps_Esp_Domin_Test_1, All_Esps_AB_Split_One_Minute_Throttling_1, All_Esps_AB_Split_Throttling_1, All_Esps_AB_Split_Throttling_Date_Field_1, All_Esps_Event_Based_Throttling_1, All_Esps_Event_Based_Throttling_Date_Field_1, All_Esps_Event_Based_Throttling_One_Minute_1, All_Esps_Regular_Campaign_Date_Field_Throttling_1, All_Esps_Regular_Campaign_One_Minute_Throttling_1, All_Esps_Regular_Campaign_Throttling_1, All_Esps_RC_Test_Bounce_Sparkpost, All_ESP_Test_List_Unsubscribe_Sparkpost ]
+        collection: [ All_Esps_Campaign_Mirror_Test_2,All_Esps_Esp_Domin_Test_1,All_Esps_AB_Split_Campaign_With_Subject_1, All_Esps_AB_Winner_Using_Message_Open_System_field-List_Field_Date_Function,All_Esps_AB_Split_With_Multiple_esp_1 ]
+
+
+    steps:
+    - uses: actions/checkout@v3.3.0
+    - name: Dev Sparkpost Monitor collections
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    # Install the newman command-line utility, also install the html extra reporter
+    - name: Install newman and newman-reporter-htmlextra
+      run: |
+        npm install -g newman
+        npm install -g newman-reporter-htmlextra
+        npm install install-artifact-from-github
+
+    - name: Run ${{ matrix.collection }}
+      id: first_run
+      run: newman run ./node/Campaigns/${{ matrix.collection }}.json -e ./node/Campaigns/Env/all-esps-dev-env-28299.json -g ./node/Campaigns/Env/dev-sparkpost-monitor-globals-env.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/dev-sparkpost-"${{ matrix.collection }}"-report.html      
+      continue-on-error: true
+    
+    - name: Retry Collection set ${{ steps.first_run.outcome }} - ${{ matrix.collection }}
+      id: set_exit_code
+      run: |    
+        if [ '${{ steps.first_run.outcome }}' == 'failure' ]; then
+          exit_code=1
+        else
+          exit_code=0
+        fi
+        echo "Job Status: ${{ steps.first_run.outcome }}"
+        echo "Exit code: $exit_code"
+        echo "exit_code=$exit_code" >> $GITHUB_ENV
+    
+    - name: Retry ${{ matrix.collection }}
+      if: env.exit_code != 0
+      run: newman run ./node/Campaigns/${{ matrix.collection }}.json -e ./node/Campaigns/Env/all-esps-dev-env-28299.json -g ./node/Campaigns/Env/dev-sparkpost-monitor-globals-env.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/dev-sparkpost-"${{ matrix.collection }}"-retrying-report.html
+
+      continue-on-error: true
+      
+    # Upload the contents of test results directory to workspace
+    - name: Output the run details
+      uses: actions/upload-artifact@v3
+      with:
+          name: dev-sparkpost-monitor-report
+          path: newman

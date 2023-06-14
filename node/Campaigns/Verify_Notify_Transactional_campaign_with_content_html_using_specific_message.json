@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "1458708d-36ed-496f-9c3d-f6b832e6b231",
+		"name": "Verify_Notify_Transactional_campaign_with_content_html_using_specific_message",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"nt_html_specific_msg_{{connectionId}}@hoohem.com\"\n    }\n    \n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create transactional campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.globals.set(\"nt_content_html_specific_msg_campaign_id\", jsonData.payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All Esps Notify Transactional with Content HTML specific message\",\n    \"description\": \"Test Notify Transactional Content HTML specific message\",\n    \"list_id\":{{list_id}},\n    \"message_type\":\"email\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/transactional",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"transactional"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Embed mail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"nt_html_specific_msg_{{connectionId}}@hoohem.com\"\n    ],\n    \"campaign_id\": {{nt_content_html_specific_msg_campaign_id}},\n    \"email_message\": {\n        \"subject\": \"Test notify_transactioanl content html with specific message-{{connectionId}}-{{env}}\",\n        \"content_html\": \"<html><head><title></title><meta content='text/html; charset=utf-8' http-equiv='Content-Type'/>head><body>MessageGUID&quot;:&quot;DC86113ED45C4638AE6FA64D95934936&quot;, &quot;AllCustomerId&quot;:&quot;117218&quot;, &quot;FirstName&quot;:&quot;Pamela&quot;, &quot;LastName&quot;:&quot;Beveridge&quot;, &quot;Salutation&quot;:&quot;Ms.&quot;, &quot;WebFolioId&quot;:&quot;30174&quot;, &quot;SubTotal&quot;:&quot;139.00&quot;, &quot;Deposit&quot;:&quot;139.00&quot;, &quot;Total&quot;:&quot;&quot;, &quot;TotalGross&quot;:&quot;&quot;, &quot;TotalNet&quot;:&quot;&quot;, &quot;WebCompanyName&quot;:&quot;Beveridges&quot;, &quot;WebCompanyURL&quot;:&quot;www.resortallseasons.com&quot;, &quot;VIPLevel&quot;:&quot;Trail Pass&quot;, &quot;MarketSource&quot;:&quot;Newspaper&quot;, &quot;PropertyId&quot;:&quot;&quot;, &quot;PropertyName&quot;:&quot;&quot;, &quot;PaymentReceipt&quot;:&quot;[pre][/pre]&quot;, &quot;HasPMS&quot;:&quot;Y&quot;, &quot;HasSPA&quot;:&quot;Y&quot;, &quot;HasGLF&quot;:&quot;Y&quot;, &quot;HasRET&quot;:&quot;N&quot;, &quot;HasSKI&quot;:&quot;N&quot;, &quot;HasDine&quot;:&quot;N&quot;, &quot;CurrencySymbol&quot;:&quot;&pound;&quot;, &quot;SpaCategories&quot;:&quot;Massage Therapy&quot;, &quot;SpaItems&quot;:&quot;1503&quot;, &quot;SkiCategories&quot;:&quot;&quot;, &quot;SkiItems&quot;:&quot;&quot;, &quot;ClubAccount&quot;:&quot;&quot;, &quot;RSMessageGUID&quot;:&quot;DC86113ED45C4638AE6FA64D95934936&quot;, &quot;PMSVenues&quot;:&quot;Hotel&quot;, &quot;SPALocations&quot;:&quot;999&quot;, &quot;SPAWaitLocations&quot;:&quot;&quot;, &quot;GLFLocations&quot;:&quot;999&quot;, &quot;SKILocations&quot;:&quot;&quot;, &quot;ActivitiesLocations&quot;:&quot;999&quot;, &quot;DiningVenues&quot;:&quot;&quot;, &quot;email&quot;:&quot;krunal.19stepin+5@gmail.com&quot;, &quot;dynamic_feed&quot;:&quot;[feed][mailing][blocks][block name=\\\\&quot;PMSFolios\\\\&quot;][items][item][variables][variable][key]loop_PMSFolioId[/key][value]59269[/value][/variable][variable][key]loop_WebFolioId[/key][value]30174[/value][/variable][variable][key]loop_Category[/key][value]Hotel[/value][/variable][variable][key]loop_RoomType[/key][value]DRES[/value][/variable][variable][key]loop_Venue[/key][value]Hotel[/value][/variable][variable][key]loop_RoomTypeDesc[/key][value]Deluxe Resort Room[/value][/variable][variable][key]loop_RateType[/key][value]AAA[/value][/variable][variable][key]loop_RateTypeDesc[/key][value]Duetto AAA Rate[/value][/variable][variable][key]loop_RateNote[/key][value /][/variable][variable][key]loop_RateCustDesc[/key][value /][/variable][variable][key]loop_ArrivalDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_DepartureDate[/key][value]Wednesday, April 26, 2023[/value][/variable][variable][key]loop_NumAdults[/key][value]1[/value][/variable][variable][key]loop_NumYouth[/key][value]0[/value][/variable][variable][key]loop_NumChildren[/key][value]0[/value][/variable][variable][key]loop_NumInfants[/key][value]0[/value][/variable][variable][key]loop_NumNights[/key][value]1[/value][/variable][variable][key]loop_TotalGuests[/key][value]1[/value][/variable][variable][key]loop_RoomNumber[/key][value /][/variable][variable][key]loop_TotalGuestsString[/key][value]1 Adult[/value][/variable][variable][key]loop_GrossAmount[/key][value] 100.00[/value][/variable][variable][key]loop_PMSAmount[/key][value] 100.00[/value][/variable][variable][key]loop_CustomerId[/key][value]117218[/value][/variable][variable][key]loop_FirstName[/key][value]Pamela[/value][/variable][variable][key]loop_LastName[/key][value]Beveridge[/value][/variable][variable][key]loop_Salutation[/key][value]Ms.[/value][/variable][variable][key]loop_EmailAddress[/key][value]pam.beveridge@agilysys.com[/value][/variable][variable][key]loop_VenueName[/key][value]Hotel[/value][/variable][variable][key]loop_VenueEmail[/key][value]resortsuite@outlook.com[/value][/variable][variable][key]loop_WebAddress[/key][value]www.altmanestates.com[/value][/variable][variable][key]loop_InvoiceNote[/key][value /][/variable][variable][key]loop_PMSMarketCode[/key][value]OTA[/value][/variable][variable][key]loop_VIPLevel[/key][value]Trail Pass[/value][/variable][variable][key]loop_BookingAgentId[/key][value /][/variable][variable][key]loop_HideRate[/key][value]N[/value][/variable][variable][key]loop_GroupFolioId[/key][value /][/variable][/variables][block name=\\\\&quot;PMSSpecServs\\\\&quot;][items /][/block][/item][/items][/block][block name=\\\\&quot;SPAFolios\\\\&quot;][items][item][variables][variable][key]loop_SpaFolioId[/key][value]71001[/value][/variable][variable][key]loop_Category[/key][value]Spa[/value][/variable][variable][key]loop_Details[/key][value]Deep Tissue Massage &pound;60 (60 Min)[/value][/variable][variable][key]loop_StartDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_StartTime[/key][value]11:30 AM[/value][/variable][variable][key]loop_FinishDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_FinishTime[/key][value]12:30 PM[/value][/variable][variable][key]loop_Room[/key][value]07 FAC/MAS[/value][/variable][variable][key]loop_Staff[/key][value]Sandra H[/value][/variable][variable][key]loop_SPAAmount[/key][value] 107.00[/value][/variable][variable][key]loop_Location[/key][value]The Spa at Altman Estates[/value][/variable][variable][key]loop_LocationId[/key][value]999[/value][/variable][variable][key]loop_ActivatesPromo[/key][value]N[/value][/variable][variable][key]loop_Salutation[/key][value]Ms.[/value][/variable][variable][key]loop_FirstName[/key][value]Pamela[/value][/variable][variable][key]loop_LastName[/key][value]Beveridge[/value][/variable][variable][key]loop_ClientInstructions[/key][value]Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.[/value][/variable][variable][key]loop_ItemCategory[/key][value]Massage Therapy[/value][/variable][variable][key]loop_ItemSubCategory[/key][value]Body Massage[/value][/variable][variable][key]loop_ItemPackageType[/key][value]I[/value][/variable][/variables][/item][/items][/block][block name=\\\\&quot;SPAWaitLists\\\\&quot;][items /][/block][block name=\\\\&quot;GLFFolios\\\\&quot;][items][item][variables][variable][key]loop_GolfFolioId[/key][value]57069[/value][/variable][variable][key]loop_Category[/key][value]Golf[/value][/variable][variable][key]loop_Details[/key][value]Green Fee - Weekday Standard VAT[/value][/variable][variable][key]loop_StartDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_StartTime[/key][value]07:26 AM[/value][/variable][variable][key]loop_FinishDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_FinishTime[/key][value]07:26 AM[/value][/variable][variable][key]loop_Room[/key][value /][/variable][variable][key]loop_Staff[/key][value /][/variable][variable][key]loop_GLFAmount[/key][value] 44.00[/value][/variable][variable][key]loop_Location[/key][value]Resort All Seasons[/value][/variable][variable][key]loop_LocationId[/key][value]999[/value][/variable][variable][key]loop_ActivatesPromo[/key][value]N[/value][/variable][variable][key]loop_Salutation[/key][value]Ms.[/value][/variable][variable][key]loop_FirstName[/key][value]Pamela[/value][/variable][variable][key]loop_LastName[/key][value]Beveridge[/value][/variable][variable][key]loop_CourseId[/key][value]EST[/value][/variable][variable][key]loop_CourseName[/key][value]Course No. 2[/value][/variable][variable][key]loop_CourseDesc[/key][value]Resort All Seasons is the destination of choice for avid golfers, as well as vacationers who enjoy the game. From the first tee until the final approach on the 18th hole, these meticulously designed courses entice and challenge golfers of all levels.[/value][/variable][variable][key]loop_CourseImage[/key][value]https://test.resortsuitemobile.com:4445/7.7.00/img/custom/Pinehurst-no2.jpg[/value][/variable][/variables][/item][item][variables][variable][key]loop_GolfFolioId[/key][value]57069[/value][/variable][variable][key]loop_Category[/key][value]Golf[/value][/variable][variable][key]loop_Details[/key][value]Green Fee - Weekday Standard VAT[/value][/variable][variable][key]loop_StartDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_StartTime[/key][value]07:26 AM[/value][/variable][variable][key]loop_FinishDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_FinishTime[/key][value]07:26 AM[/value][/variable][variable][key]loop_Room[/key][value /][/variable][variable][key]loop_Staff[/key][value /][/variable][variable][key]loop_GLFAmount[/key][value] 44.00[/value][/variable][variable][key]loop_Location[/key][value]Resort All Seasons[/value][/variable][variable][key]loop_LocationId[/key][value]999[/value][/variable][variable][key]loop_ActivatesPromo[/key][value]N[/value][/variable][variable][key]loop_Salutation[/key][value]Ms.[/value][/variable][variable][key]loop_FirstName[/key][value]Pamela[/value][/variable][variable][key]loop_LastName[/key][value]Beveridge[/value][/variable][variable][key]loop_CourseId[/key][value]EST[/value][/variable][variable][key]loop_CourseName[/key][value]Course No. 2[/value][/variable][variable][key]loop_CourseDesc[/key][value]Resort All Seasons is the destination of choice for avid golfers, as well as vacationers who enjoy the game. From the first tee until the final approach on the 18th hole, these meticulously designed courses entice and challenge golfers of all levels.[/value][/variable][variable][key]loop_CourseImage[/key][value]https://test.resortsuitemobile.com:4445/7.7.00/img/custom/Pinehurst-no2.jpg[/value][/variable][/variables][/item][/items][/block][block name=\\\\&quot;RETFolios\\\\&quot;][items /][/block][block name=\\\\&quot;SKIFolios\\\\&quot;][items /][/block][block name=\\\\&quot;Activities\\\\&quot;][items][item][variables][variable][key]loop_Category[/key][value]Golf[/value][/variable][variable][key]loop_Details[/key][value]Green Fee - Weekday Standard VAT[/value][/variable][variable][key]loop_StartDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_StartTime[/key][value]07:26 AM[/value][/variable][variable][key]loop_FinishDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_FinishTime[/key][value]07:26 AM[/value][/variable][variable][key]loop_Room[/key][value]EST[/value][/variable][variable][key]loop_Staff[/key][value]2[/value][/variable][variable][key]loop_ACTAmount[/key][value] 44.00[/value][/variable][variable][key]loop_Location[/key][value]Resort All Seasons[/value][/variable][variable][key]loop_LocationId[/key][value]999[/value][/variable][/variables][/item][item][variables][variable][key]loop_Category[/key][value]Golf[/value][/variable][variable][key]loop_Details[/key][value]Green Fee - Weekday Standard VAT[/value][/variable][variable][key]loop_StartDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_StartTime[/key][value]07:26 AM[/value][/variable][variable][key]loop_FinishDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_FinishTime[/key][value]07:26 AM[/value][/variable][variable][key]loop_Room[/key][value]EST[/value][/variable][variable][key]loop_Staff[/key][value]2[/value][/variable][variable][key]loop_ACTAmount[/key][value] 44.00[/value][/variable][variable][key]loop_Location[/key][value]Resort All Seasons[/value][/variable][variable][key]loop_LocationId[/key][value]999[/value][/variable][/variables][/item][item][variables][variable][key]loop_Category[/key][value]Spa[/value][/variable][variable][key]loop_Details[/key][value]Deep Tissue Massage &pound;60 (60 Min)[/value][/variable][variable][key]loop_StartDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_StartTime[/key][value]11:30 AM[/value][/variable][variable][key]loop_FinishDate[/key][value]Tuesday, April 25, 2023[/value][/variable][variable][key]loop_FinishTime[/key][value]12:30 PM[/value][/variable][variable][key]loop_Room[/key][value]07 FAC/MAS[/value][/variable][variable][key]loop_Staff[/key][value]Sandra H[/value][/variable][variable][key]loop_ACTAmount[/key][value] 107.00[/value][/variable][variable][key]loop_Location[/key][value]The Spa at Altman Estates[/value][/variable][variable][key]loop_LocationId[/key][value]999[/value][/variable][/variables][/item][/items][/block][block name=\\\\&quot;DiningReservations\\\\&quot;][items /][/block][/blocks][/mailing][/feed]&quot;</body></html>\",\n        \"unsubscribe_default_link\": true,\n        \"unsubscribe_confirmation_html_active\": true,\n        \"unsubscribe_confirmation_html\": \"~!@#~To confirm you want to unsubscribe, please click the button below~!@#~ \",\n        \"unsubscribe_confirmation_button\": \"Unsubscribe\",\n        \"frequency_active\": false,\n        \"frequency_field_id\": \"\",\n        \"unsubscribe_success_html_active\": true,\n        \"unsubscribe_success_page\": \"text\",\n        \"unsubscribe_success_html\": \"~!@#~You have been successfully unsubscribed~!@#~\",\n        \"addresses\": [\n            {\n                \"from_name\": \"{{system_field_from_name}}\",\n                \"from_address\": \"{{system_field_from_address}}\",\n                \"reply_address\": \"{{system_field_from_address}}\",\n                \"esp_connection_id\": {{connectionId}}\n            }\n        ]\n    },\n    \"distribution\": [\n        {\n            \"esp_connection_id\": \"{{connectionId}}\",\n            \"domain\": \"default\",\n            \"percent\": 100\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    let responseText = pm.response.json();",
+							"    pm.test(`Test Notify Transaction Content html specific message is working`, function () {",
+							"        pm.expect(pm.response.code).to.equal(200);",
+							"        ",
+							"    })",
+							"} else {",
+							"    pm.test(`Test Notify Transaction Content html specific message`, function () {",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"        ",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nt_html_specific_msg_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test notify_transactioanl content html with specific message-{{connectionId}}-{{env}}\",\n    \"timeout\": 1200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"remove\",\n    \"emails\": [\n        \"nt_html_specific_msg_{{connectionId}}@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,3985 @@
+{
+	"id": "36824b5c-3558-4047-8b89-22046b063964",
+	"values": [
+		{
+			"key": "connectionId",
+			"value": "15557",
+			"enabled": true
+		},
+		{
+			"key": "espId",
+			"value": "59",
+			"enabled": true
+		},
+		{
+			"key": "connectionId1",
+			"value": "15557",
+			"enabled": true
+		},
+		{
+			"key": "system_field_from_name",
+			"value": "SiDev1",
+			"enabled": true
+		},
+		{
+			"key": "system_field_from_address_domain",
+			"value": "stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "system_field_from_address",
+			"value": "sidev1@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "connectionId2",
+			"value": "16220",
+			"enabled": true
+		},
+		{
+			"key": "connectionId3",
+			"value": "15897",
+			"enabled": true
+		},
+		{
+			"key": "connectionId4",
+			"value": "16239",
+			"enabled": true
+		},
+		{
+			"key": "connectionId5",
+			"value": "16370",
+			"enabled": true
+		},
+		{
+			"key": "monitor_date_tag",
+			"value": "24-12-2021_11",
+			"enabled": true
+		},
+		{
+			"key": "analytics_transactional_cid_v4_inhouse",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_system_field_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_system_field_creaed_date",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_list_field_address",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_list_field_gender",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_list_field_product_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_list_field_dob",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_list_field_email",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_behaviour_campaign_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_mail_systemfield_and_operator_ocxnow_offset-15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_msg_id_welcome_mail_systemfield_dfun_and_operator_ocxnow_offset15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_dynamic_ocx_feeds_all_esp-15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_dynamic_ocx_feed_html_all_esp-15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_dynamic_ocx_feed_html15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_all_esp-15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_html_all_esp-15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed_html15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_rss_all_esp-15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed_rss15557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3215557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3415557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3515557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3615557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3715557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3815557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3915557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4015557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4115557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4215557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4315557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4415557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4515557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4615557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4715557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4815557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4915557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5015557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5115557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5215557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5315557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5415557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5515557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5815557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5915557",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "behaviour_mail_click_link_45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "behaviour_mail_open_link_45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "behaviour_mail_unsub_link_45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_message_id_system_field_creaed_date",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_message_id_list_field_address",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_message_id_list_field_gender",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_message_id_list_field_product_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_message_id_list_field_dob",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_message_id_list_field_email",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_message_id_list_field_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rc_behaviours_stats_unsubscribe_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_event_trriger_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_list_hours1",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_list_minutes1",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_list_hours2",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_list_minutes2",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4345210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_mail_systemfield_and_operator_ocxnow_offset-45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_msg_id_welcome_mail_systemfield_dfun_and_operator_ocxnow_offset45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_dynamic_ocx_feeds_all_esp-45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_dynamic_ocx_feed_html_all_esp-45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_dynamic_ocx_feed_html45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_all_esp-45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_html_all_esp-45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed_html45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_rss_all_esp-45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed_rss45210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4645210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4845210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5045210",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_feed_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rc_mail_time",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_html_content_system_field_creaed_date",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_html_content_list_field_address",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_html_content_list_field_gender",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_html_content_list_field_product_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_html_content_list_field_dob",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_html_content_list_field_email",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_all_esps_campaign_mirror_test ",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "maling_id_campaign_test_mail",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "html_code",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_id_event_post_back_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_post_back_link_event_it",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "nt_html_id_maling_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_ab_split_system_field",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_based_on_campaign_ab_split_campaign_quota_id_41640",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_id_based_on_campaign_click_ab_split_open_d",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "nt_msg_id_maling_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_sto_mvp",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "largest_value",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verify_dynamic_from_address_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rc_schedule_minutes",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3145821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3245821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3445821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3545821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3645821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3745821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3845821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3945821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4045821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4145821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4245821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4345821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4445821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4545821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4645821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4745821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4845821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4945821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5045821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5145821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5245821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5345821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5445821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5545821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5845821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5945821",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_ab_split_multiple_esp ",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_ab_split_multiple_esp",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ocx_mailing_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "throttling_with_timezone_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "time_32",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_schedule_minutes",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_schedule_minutes_2",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3145058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3245058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3445058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3545058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3645058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3745058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3845058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3945058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4045058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4145058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4245058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4345058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4445058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4545058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4645058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4745058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4845058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4945058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5045058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5145058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5245058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5345058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5445058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5545058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5845058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5945058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "Post_Back_Link_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "post_back_link_event_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "mail_time_befor_winner_email_decided",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_link_unsub_header",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "nt_msg_link_unsub_header",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "Ab_winner_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_all_esps_campaign_mirror_test",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_ab_split",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "behaviour_mail_open_link_115900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_regular_campaign_with_quota_value_segment",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "contact_activity_with_deleted_campaign_segment",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "tc_send_behaviour_report_id_15897",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_system_field_content_delivery_campaign_id_18364",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_system_field_content_delivery_campaign_name_18364",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ar_ocxbe_maling_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_system_date_field_18364",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "contact_activity_report_with_deleted_campaign_segment",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "contact_activity_report_with_deleted_campaign",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_ab_split_esp_subject_number ",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_id_based_on_date_field_content_delivery_o",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_internal_db_error_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_id_event_internal_db_error",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha115900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha25615900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd515900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3115900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3215900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3415900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3515900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3615900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3715900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3815900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3915900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4015900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4115900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4215900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4315900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4415900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4515900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4615900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4715900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4815900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4915900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5015900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5115900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5215900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5315900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5415900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5515900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5815900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5915900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_with _throttling_segment",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verify_search_emtpy_result_report_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_one_minute_throttle_cid",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_regular_campaign_one_minute_throttle_cid",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "count_A",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verifying_agg_rep_&_cont_activity_rep_segment",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verifying_agg_rep_&_cont_activity_rep_campaign",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "link_for_open_email",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verify_agg_rep_&_cont_activity_rep_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "sent",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "success",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "failed",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "opens",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "unique_opens",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "unsubscribes",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "complaints",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "clicks",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "unique_clicks",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "soft_bounces",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "hard_bounces",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "post_back_clicks",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verify_agg_rep_&_cont_activity_rep_id_for_send_stats",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verify_agg_rep_&_cont_activity_rep_id_for_open_stats",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verify_agg_rep_&_cont_activity_rep_id_for_bounce_stats",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_41640",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_with_throttling_segment",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "Ab_winner_split_campaign_segment",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_absnif",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_tracking_domain",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_event_if_else_nested",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_if_else_nested",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "post_back_link_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "Sha512_suppression_campaign_lvl_export_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_return_path_header",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_hardbounce_sparkpost",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "hardbounce_sparkpost_campaign_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_bounce_contact_status",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_list_unsubscribe",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rc_test_list_unsubscribe_header",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "contact_search_with_limit_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "contact_search_with_limit_report_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "search_contact_without_defining_limit_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_field_with_dash_update_on_click_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "unsub_txt_&_double_link_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "nt_content_html_unsub_txt_&_double_link_campaign_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "nt_message_id_unsub_txt_&_double_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5016370",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5116370",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_field_update_on_clicked_multiple_link_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_abwnif",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_ocx_feed_content_delivery_campaign_id_15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_ocx_feed_content_delivery_campaign_name_15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_ocx_feed15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_id_system_field",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_name_system_field",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_list_field_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_list_field_ocx_created_date",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "mail_count",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_system_field_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_system_field_creaed_date",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_list_field_address",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_list_field_gender",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_list_field_product_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_list_field_dob",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_message_id_list_field_email",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha141630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha25641630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd541630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue41630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3141630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3241630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3441630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3541630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3641630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3741630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3841630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3941630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4041630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4141630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4241630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4341630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4441630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4541630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4641630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4741630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4841630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4941630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5041630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5141630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5241630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5341630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5441630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5541630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5841630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5941630",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha143217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha25643217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd543217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3143217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3243217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3443217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3543217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3643217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3743217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3843217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3943217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4043217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4143217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4243217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4343217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4443217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4543217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4643217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4743217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4843217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4943217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5043217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5143217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5243217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5343217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5443217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5543217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5843217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5943217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_list_field_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_html_content_list_field_ocx_created_date",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha145058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha25645058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd545058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_if_nested_campaign_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_if_nested_event_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_mltpl_if_blocks",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_html_content_system_field_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "transactional_campaign_html_content_list_field_ocx_created_date",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rc_using_whitelist_with_quota_value",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "verify_ocx_dynamic_feed_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_mail_systemfield_and_operator_ocxnow_offset-43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_msg_id_welcome_mail_systemfield_dfun_and_operator_ocxnow_offset43217",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "welcome_msg_list_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_listfield18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_list_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_subject18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_message_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_from_name18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_hashsha118800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_hashsha25618800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_hashmd518800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_now18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_day18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_dow18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_month18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_month_name18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_month_short18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_yy18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_ocx_year18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3118800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3218800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3418800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3518800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3618800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3718800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3818800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_3918800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4018800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4118800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4518800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4618800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4718800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4818800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_4918800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5018800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5118800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5218800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5318800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5418800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5518800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5818800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_sd_msgid_d_fnc_bh_up_cl_5918800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "true_email",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "esp_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_content_delivery_campaign_name_18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_system_field_content_delivery_campaign_name_18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "nt_ch_dh_feed_send_schedule_date_mail_sending_time",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha118800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha25618800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd518800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_yy18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3118800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3218800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3418800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3518800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3618800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3718800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3818800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3918800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4018800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4118800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4218800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4318800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4418800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4518800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4618800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4718800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4818800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4918800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5018800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5118800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5218800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5318800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5418800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5518800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5818800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5918800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_esp_domin_test ",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_esp_domin_test",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_segment_level_distribution",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_count",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_event_campaign_click_18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_open_18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_click_18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_mail_systemfield_and_operator_ocxnow_offset-18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_msg_id_welcome_mail_systemfield_dfun_and_operator_ocxnow_offset18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_dynamic_ocx_feeds_all_esp-18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_dynamic_ocx_feed_html_all_esp-18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_dynamic_ocx_feed_html18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_all_esp-18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_html_all_esp-18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed_html18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "list_id_welcome_message_ocx_feed_rss_all_esp-18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_welcome_mail_ocx_feed_rss18800",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_welcome_mail_message_id_system_field_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_welcome_mail_message_id_system_field_creaed_date",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "welcome_mail_list_field_first_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "welcome_mail_list_field_address",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_dynamic_ocx_feed_html_content_delivery_campaign_id_45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_dynamic_ocx_feed_html_content_delivery_campaign_name_45058",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_ocx_feed_html_content_delivery_campaign_id_16220",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_ocx_feed_html_content_delivery_campaign_name_16220",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactional_delay_html_sending_time",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_ocx_feed_html_content_delivery_campaign_id_15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_ocx_feed_html_content_delivery_campaign_name_15900",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rc_suppresion_global_level_scope_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sha256_suppresion_list_level_functionality_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sha256_suppression_list_level_functionality_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "behaviour_mail_click_link_18359",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "behaviour_mail_open_link_18359",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "behaviour_mail_unsub_link_18359",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rc_whitelabel_conn_smtp_segement_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "split_camp_whitelabel_conn_smtp_segement_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_transactionsl_send_message_id_whitelabel_conn",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sha256_suppression_list_level_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "sha512_suppresion_global_level_functionality_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "sha_512_supression_global_list_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_link_smtp_v4",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_all_esps_event_v4_smtp_mode_stat",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_v4_smtp_mode_event_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_v4_smtp_mode_mail_click_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_v4_smtp_mode_mail_open_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_event_v4_smtp_mode_aggregate_report_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "contact_seg_array",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_md5_supression_campaign_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_employment_alert_tag",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "supression_list_sha256_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "contact_array",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_id_event_bsed_on_throttling",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "multiple_esps_transactionsl_send_content_html_behaviour_stats_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "Harsh(Default)",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_list_id15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_campaign_name15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_subject15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_mailing_id15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_message_id15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_segment_id15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_esp_id15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_connection_id15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_from_name15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha115897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashsha25615897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_hashmd515897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_now15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_timestamp15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_day15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_dow_long15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_name15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_month_short15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_ocx_year15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_listfield_staticvalue15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3215897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3415897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3515897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3615897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3815897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_3915897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4015897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4115897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4215897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4315897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4415897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4515897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4615897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4715897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4815897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4915897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5015897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5115897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5215897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5315897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5415897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5515897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5815897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_5915897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "rc_whitelabel_conn_smtp_nop_account_segement_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "split_whitelabel_conn_smtp_nop_account_segement_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_whitelabel_conn_smtp_nop_account_segement_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_whitlelabel_connectionid",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_open_mail_for_sha512_suppression_using_global_scope",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_md5_suppresion_global_level_functionality_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_md5_suppression_global_level_functionality_segment_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_md5_suppression_global_level_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_md5_supression_global_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "multiple_trigger_event_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nt_content_html_specific_msg_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_transactionsl_send_message_id_behaviour_stats_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_transactional_send_message_id_behaviour_report_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_sha256_suppression_campaign_level_functionality_segment_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_transactional_send_content_html_behaviour_report_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_suppression_regular_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_event_based_on_open_click_campaign_id_16239",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_suppression_domain_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "Domain_suppression_list_lvl_export_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "Domain_suppression_global_lvl_export_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "Domain_suppression_campaign_lvl_export_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_id_event_bsed_on_dayparting_throttling",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_multiple_esp_with_limit",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "tc_specific_msg_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_sha256_supression_global_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_sha256_suppresion_campaign_level_functionality_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sha_512_suppresion_list_level_functionality_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sha_512_suppression_list_level_functionality_segment_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_transactionsl_send_content_html_behaviour_stats_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_bounce_reason",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "throttling_without_timezone_segment_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "start_time",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "end_time",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "throttling_time",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_regular_suppresion_global_level_functionality_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_regular_suppression_global_level_functionality_segment_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_regular_suppression_global_level_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "open_mail_for_regular_suppression_using_global_scope",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_regular_supression_global_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vf_rc_with_empty_content_segment_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "rc_empty_content_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "v4_smtp_mode_mail_open_link_18536",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "v4_smtp_mode_mail_click_link_18536",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "v4_smtp_mode_mail_unsub_link_18536",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_event_based_on_open_click_campaign_id_15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_open_15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_click_15897",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "regular_list_remove_contact_csv_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "system_field_from_name-mailgun",
+			"value": "SiDev1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "system_field_from_address-mailgun",
+			"value": "sidev1@stepin-solutions.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "connectionId-mailgun",
+			"value": "15900",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_ab_split_custom_split_esp_ratio ",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_all_esps_event_campaign_one_link_included",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_event_campaign_one_link_included_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_open_16239",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_click_16239",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_open_43766",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_campaign_click_43766",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "rc_one_link_included_contact_activity_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "verify_event_campaign_link_in_email_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "tc_ct_dh_feed_send_schedule_date_mail_sending_time",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vr_ec_one_incl_link_segment_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "import_contact_report_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "suppression_import_contact_report_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_ab_split_multiple_esp_msg ",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "campaign_id_multiple_esp",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "verify_send_error_content_for_dynamic_content_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vr_rc_send_error_content_for_dynamic_content",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vr_rc_send_error_content_message",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vr_tc_dynamic_content_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "TC_id_for_send_error_content_flag_false",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_ocx_dynamic_xml_led5",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "send_error_content_flag_false_with_tc_content_html_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "send_error_content_flag_false_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "send_error_content_flag_false_with_nt_content_html_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vr_send_error_content_for_dynamic_content_with_event",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_id_vr_send_error_content_for_dynamic_content",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vr_send_error_content_for_dynamic_content_with_ab_split",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_send_error_content_flag_true",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "send_error_content_flag_true_with_nt_content_html_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_dynamic_ocx_feed15900",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "regular_campaign_list_field_first_name",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_rc_send_empty_content_flag_false",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "regular_list_field_import_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "minimum_decimal_value_report_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vr_rc_lead5_integration_with_lead5_tag_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "maximum_decimal_value_report_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_win_empty_content_true_open_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_winner_md5_suppression_campaign_level_functionality_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "campign_id_all_esp_ab_split_sub",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_split_sub_a",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_split_sub_b",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "timecur",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_regular_campaign_throttle_cid",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_regular_campaign_date_field_throttle_cid",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_split_throttle_date_field_cid",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nt_message_id_proxy_smtp_click_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nt_message_id_proxy_smtp_open_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nt_message_id_proxy_smtp_unsub_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_content_delivery_campaign_name_43217",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_system_field_content_delivery_campaign_name_43217",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4518074",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_nt_sd_msgid_d_fnc_bh_up_cl_4718074",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "notify_transactionsl_message_id_behaviour_stats_for_proxy_smtp_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "current_date",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "pre_date",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "vr_tc_send_message_id_lead5_integration_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "dynamic_xml_lead5_event_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "time_30",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "dynamic_xml_lead5_event_segment_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ex_seg_contact_count_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nt_send_schedule_date_mail_sending_time",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_notify_transactionsl_message_id_behaviour_stats_campaign_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_mirror_page_link_body",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_mirror_page_link",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2023-05-31T07:19:11.260Z",
+	"_postman_exported_using": "Postman/10.14.6-230530-1547"
+}

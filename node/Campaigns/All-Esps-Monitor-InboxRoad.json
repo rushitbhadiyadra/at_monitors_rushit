@@ -1,0 +1,4741 @@
+{
+	"info": {
+		"_postman_id": "1d961229-f2f1-4b19-9a86-9e37bbd5904b",
+		"name": "All-Esps-Monitor-InboxRoad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-1d961229-f2f1-4b19-9a86-9e37bbd5904b?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "All_Esps_Welcome_Mail_SystemField_DateFunction_OcxNow_Offset_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Welcome_Mail_SystemField_DateFunction_OcxNow_Offset_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Welcome_Mail_SystemField_DateFunction_OcxNow_Offset_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_ESPs_AB_Split_Feed_Operator_OcxNow_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_ESPs_AB_Split_Feed_Operator_OcxNow_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_ESPs_AB_Split_Feed_Operator_OcxNow_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n         \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_AB_Winner_Dynamic_Ocx_feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_AB_Winner_Dynamic_Ocx_feed\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_AB_Winner_Dynamic_Ocx_feed-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_AB_Winner_Using_Message_Open_System_field-List_Field_Date_Function",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_AB_Winner_Using_Message_Open_System_field-List_Field_Date_Function\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_AB_Winner_Using_Message_Open_System_field-List_Field_Date_Function-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_ESPs_Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_ESPs_Event\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_ESPs_Event-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Notify_Transactional_Content_HTML_Dynamic_HTML_Feeds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Notify_Transactional_Content_HTML_Dynamic_HTML_Feeds\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Notify_Transactional_Content_HTML_Dynamic_HTML_Feeds-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Notify_Transactional_Content_HTML_SystemField_DateFunction_OcxNow_Offset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Notify_Transactional_Content_HTML_SystemField_DateFunction_OcxNow_Offset\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Notify_Transactional_Content_HTML_SystemField_DateFunction_OcxNow_Offset-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALL_Esps_Notify_Transactional_Message_Id_Behaviour_Stats_13230",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"ALL_Esps_Notify_Transactional_Message_Id_Behaviour_Stats_13230\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"ALL_Esps_Notify_Transactional_Message_Id_Behaviour_Stats_13230-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALL_Esps_Notify_Transactional_Content_HTML_Behaviour_Stats_13230",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"ALL_Esps_Notify_Transactional_Content_HTML_Behaviour_Stats_13230\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"ALL_Esps_Notify_Transactional_Content_HTML_Behaviour_Stats_13230-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Notify_Transactional_Message_Id_Dynamic_HTML_Feeds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Notify_Transactional_Message_Id_Dynamic_HTML_Feeds\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Notify_Transactional_Message_Id_Dynamic_HTML_Feeds-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Notify_Transactional_Message_Id_SystemField_DateFunction_OcxNow_Offset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Notify_Transactional_Message_Id_SystemField_DateFunction_OcxNow_Offset\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Notify_Transactional_Message_Id_SystemField_DateFunction_OcxNow_Offset-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALL_Esps_Regular_Campaign_Behaviour_Stats_13230",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"ALL_Esps_Regular_Campaign_Behaviour_Stats_13230\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"ALL_Esps_Regular_Campaign_Behaviour_Stats_13230-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Regular_Campaign_Message_Id_Dynamic_HTML_Feeds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Regular_Campaign_Message_Id_Dynamic_HTML_Feeds\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Regular_Campaign_Message_Id_Dynamic_HTML_Feeds-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Regular_Campaign_Message_Id_SystemField_And_Ocx_Now",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Regular_Campaign_Message_Id_SystemField_And_Ocx_Now\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Regular_Campaign_Message_Id_SystemField_And_Ocx_Now-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Transactional-Send_Content_HTML_Dynamic_HTML_Feeds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Transactional-Send_Content_HTML_Dynamic_HTML_Feeds\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Transactional-Send_Content_HTML_Dynamic_HTML_Feeds-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Transactional_Send_Content_HTML_SystemField_DateFunction_OcxNow_Offset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Transactional_Send_Content_HTML_SystemField_DateFunction_OcxNow_Offset\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Transactional_Send_Content_HTML_SystemField_DateFunction_OcxNow_Offset-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Transactional-Send_Message_Id_Dynamic_HTML_Feeds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Transactional-Send_Message_Id_Dynamic_HTML_Feeds\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Transactional-Send_Message_Id_Dynamic_HTML_Feeds-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Transactional_Send_Message_Id_SystemField_DateFunction_OcxNow_Offset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Transactional_Send_Message_Id_SystemField_DateFunction_OcxNow_Offset\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Transactional_Send_Message_Id_SystemField_DateFunction_OcxNow_Offset-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALL_Esps_Transactional_Send_Content_HTML_Behaviour_Stats_13230",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"ALL_Esps_Transactional_Send_Content_HTML_Behaviour_Stats_13230\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"ALL_Esps_Transactional_Send_Content_HTML_Behaviour_Stats_13230-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALL_Esps_Transactional_Send_Message_Id_Behaviour_Stats_13230",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"ALL_Esps_Transactional_Send_Message_Id_Behaviour_Stats_13230\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"ALL_Esps_Transactional_Send_Message_Id_Behaviour_Stats_13230-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All-Esps-AR-Test-Cases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All-Esps-AR-Test-Cases\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All-Esps-AR-Test-Cases-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Campaign_Test_Mail_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Campaign_Test_Mail_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Campaign_Test_Mail_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esp_Event_Based_On_List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esp_Event_Based_On_List\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esp_Event_Based_On_List-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Campaign_Mirror_Test_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Campaign_Mirror_Test_2\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Campaign_Mirror_Test_2-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_AB_Split_Campaign_With_Subject_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_AB_Split_Campaign_With_Subject_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_AB_Split_Campaign_With_Subject_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_AB_Split_With_Multiple_esp_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_AB_Split_With_Multiple_esp_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_AB_Split_With_Multiple_esp_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"connectionId1\": \"{{{{env}}-connectionid-privatesmtp}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esp_Event_Campaign_Open_Click",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esp_Event_Campaign_Open_Click\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esp_Event_Campaign_Open_Click-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_ESP_Regular_Campaign_Multiple_esp_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_ESP_Regular_Campaign_Multiple_esp_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_ESP_Regular_Campaign_Multiple_esp_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\",\n        \"connectionId1\": \"{{{{env}}-connectionid-privatesmtp}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_AB_Winner_Using_Esps_Number_Open_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_AB_Winner_Using_Esps_Number_Open_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_AB_Winner_Using_Esps_Number_Open_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"connectionId1\": \"{{{{env}}-connectionid-privatesmtp}}\",\n         \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esp_And_Segment_Level_Distribution_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esp_And_Segment_Level_Distribution_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esp_And_Segment_Level_Distribution_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"connectionId1\": \"{{{{env}}-connectionid-privatesmtp}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Esp_Domin_Test_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"workspace\": \"Campaigns\",\n\t\"collection\": \"All_Esps_Esp_Domin_Test_1\",\n\t\"env\": \"{{env}}\",\n\t\"tag\": \"All_Esps_Esp_Domin_Test_1-InboxRoad-{{env}}\",\n\t\"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n\t\"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"connectionId1\": \"{{{{env}}-connectionid-privatesmtp}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_AB_Split_One_Minute_Throttling_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_AB_Split_One_Minute_Throttling_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_AB_Split_One_Minute_Throttling_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_AB_Split_Throttling_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_AB_Split_Throttling_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_AB_Split_Throttling_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_AB_Split_Throttling_Date_Field_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_AB_Split_Throttling_Date_Field_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_AB_Split_Throttling_Date_Field_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Event_Based_Throttling_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_Event_Based_Throttling_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_Event_Based_Throttling_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Event_Based_Throttling_Date_Field_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_Event_Based_Throttling_Date_Field_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_Event_Based_Throttling_Date_Field_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Event_Based_Throttling_One_Minute_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_Event_Based_Throttling_One_Minute_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_Event_Based_Throttling_One_Minute_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Regular_Campaign_Date_Field_Throttling_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_Regular_Campaign_Date_Field_Throttling_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_Regular_Campaign_Date_Field_Throttling_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Regular_Campaign_One_Minute_Throttling_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_Regular_Campaign_One_Minute_Throttling_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_Regular_Campaign_One_Minute_Throttling_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_Regular_Campaign_Throttling_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_Regular_Campaign_Throttling_1\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_Regular_Campaign_Throttling_1-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_ESP_Test_List_Unsubscribe_TA_863",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_ESP_Test_List_Unsubscribe_TA_863\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_ESP_Test_List_Unsubscribe_TA_863-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Esps_RC_Bounce_Reasons",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.text() === \"Old result not found, Collection queued!\") {",
+							"    return true",
+							"}",
+							"var jsonData = pm.response.json();",
+							"",
+							"if(Array.isArray(jsonData.result)){",
+							"    var status =  true;",
+							"    jsonData.result.forEach(result=>{",
+							"        if(result.error === false){",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status).to.be.true;",
+							"          });",
+							"        }else{",
+							"          pm.test(result.assertion, function() {",
+							"            pm.expect(status,result.error).to.be.false;",
+							"          });",
+							"        }",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"var hh = ('0' + date.getHours()).slice(-2)",
+							"pm.globals.set(\"monitor_date_tag\", dd + \"-\" + mm + \"-\" + yy + \"_\" + hh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "0",
+							"value": {
+								"key": "password",
+								"type": "string",
+								"value": "ongageqa86"
+							},
+							"type": "any"
+						},
+						{
+							"key": "1",
+							"value": {
+								"key": "username",
+								"type": "string",
+								"value": "proxy"
+							},
+							"type": "any"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workspace\": \"Campaigns\",\n    \"collection\": \"All_Esps_RC_Bounce_Reasons\",\n    \"env\": \"{{env}}\",\n    \"tag\": \"All_Esps_RC_Bounce_Reasons-InboxRoad-{{env}}\",\n    \"monitor\": \"campaign-inboxroad-production-{{monitor_date_tag}}\",\n    \"globals\": {\n        \"espId\": \"{{{{env}}-espid-inboxroad}}\",\n        \"connectionId\": \"{{{{env}}-connectionid-inboxroad_bounce_reason}}\",\n        \"system_field_from_address\": \"{{{{env}}-fromaddress_inboxroad}}\",\n        \"system_field_from_address_domain\": \"{{{{env}}-fromaddressdomain_inboxroad}}\",\n        \"system_field_from_name\": \"{{{{env}}-fromname_inboxroad}}\",\n        \"system_field_from_name-mailgun\": \"{{{{env}}-fromname_mailgun}}\",\n        \"system_field_from_address-mailgun\": \"{{{{env}}-fromaddress_mailgun}}\",\n        \"connectionId-mailgun\": \"{{{{env}}-connectionid-mailgun}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/newmanService/newman/queue",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"newmanService",
+						"newman",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

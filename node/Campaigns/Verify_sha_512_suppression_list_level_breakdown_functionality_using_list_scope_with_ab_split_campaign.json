@@ -1,0 +1,1437 @@
+{
+	"info": {
+		"_postman_id": "9b0a7e24-cd2f-4574-b9b5-db35579fc22e",
+		"name": "Verify_sha_512_suppression_list_level_breakdown_functionality_using_list_scope_with_ab_split_campaign",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Create_contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 412) {\r",
+							"    postman.setNextRequest(\"Get_Suppression_Lists_Level\")\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"ab_split_sha_512_suppression_list_level{{connectionId}}@hoohem.com\"\n    },\n    {\n        \"email\": \"ab_split_sha_512_suppression_list_level_contact{{connectionId}}@hoohem.com\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Suppression_Lists_Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var list of jsonData.payload) {",
+							"        if (list.name === \"AB split sha_512 Suppression list level functionality-\" + pm.environment.get(\"env\")){",
+							"            count = 1",
+							"            pm.globals.set(\"ab_split_sha_512_suppresion_list_level_functionality_id\", list.id);",
+							"        }      ",
+							"    }",
+							"}",
+							"if(count === 1){",
+							"    postman.setNextRequest('Add_contact_suppression_list_level');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_suppression_lists_level",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"ab_split_sha_512_suppresion_list_level_functionality_id\", jsonData.payload.id);",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"AB split sha_512 Suppression list level functionality-{{env}}\",\n    \"description\": \"\",\n    \"type\": \"suppression\",\n    \"hash_type\": \"sha512\",\n    \"scope\": \"list\",\n    \"suppress_in_lists\": [\n        \"{{list_id}}\"\n    ],\n    \"expiration_date\": \"\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_contact_suppression_list_level",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": \"{{ab_split_sha_512_suppresion_list_level_functionality_id}}\",\n    \"action\": \"add\",\n    \"emails\": [\n        \"ab_split_sha_512_suppression_list_level_contact{{connectionId}}@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/suppression",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"suppression"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_old_segmet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if (jsonData.payload.length > 0) {",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"Segment for ab split sha_512 Suppression list level functionality-\" + pm.globals.get(\"connectionId\")) {",
+							"            pm.globals.set(\"ab_split_sha_512_suppression_list_level_functionality_segment_id\", segment.id);",
+							"        }",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{ab_split_sha_512_suppression_list_level_functionality_segment_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{ab_split_sha_512_suppression_list_level_functionality_segment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json() \r",
+							"pm.globals.set(\"ab_split_sha_512_suppression_list_level_functionality_segment_id\",jsonData.payload.id) "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"Segment for ab split sha_512 Suppression list level functionality-{{connectionId}}\" ,\r\n   \"type\":\"regular\",\r\n   \"description\":\"Segment for ab split sha_512 Suppression list level functionality\",\r\n   \"criteria\":[\r\n      {\r\n         \"field_id\":{{list_field_email_id}},\r\n         \"type\":\"email\",\r\n         \"position\":0,\r\n         \"operator\":\"=\",\r\n         \"operand\":[\r\n            \"ab_split_sha_512_suppression_list_level{{connectionId}}@hoohem.com\",\r\n            \"ab_split_sha_512_suppression_list_level_contact{{connectionId}}@hoohem.com\"\r\n         ],\r\n         \"condition\":\"and\"\r\n      }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json()",
+							"    pm.globals.set(\"ab_split_sha_512_suppression_list_level_campaign_id\",jsonData.payload.id)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"AB split campaign sha_512 Suppression list level functionality-{{connectionId}}\",\n\t\"type\": \"split\",\n\t\"list_id\": {{list_id}}, \n    \"split_type\": \"email\",\n    \"email_message\": [ \"{{suppression_list_breakdown_functionality_mail_id}}\",\"{{all_esp_ab_winner_common_message}}\" ],\n    \"segments\": [ \"{{ab_split_sha_512_suppression_list_level_functionality_segment_id}}\" ],\n    \"distribution\": [\n    \t{\n            \"esp_connection_id\":{{connectionId}},\n            \"percent\":\"100\"\n    \t}\n    ],\n    \"schedule_date\": {{time_30}},\n    \"notify_onlaunch\": \"0\",\n    \"notify_onfaile d\": \"0\",\n    \"notify_oncomplete\": \"0\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0\r",
+							"if(pm.response.code === 200){\r",
+							"     count = +1\r",
+							"     pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Delay_100sec\")\r",
+							"}else{\r",
+							"    pm.globals.set(\"count\",count)\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "chirag@stepin-solutions.com",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "Chirag@123",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "si3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_split_sha_512_suppression_list_level{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Email message for suppression list breakdown functionality-{{connectionId}}\",\r\n    \"timeout\": 60000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code === 200) {\r",
+							"    count = +1\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "chirag@stepin-solutions.com",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "Chirag@123",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "si3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_split_sha_512_suppression_list_level{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Test AB Winner all esp Common Message-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 60000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay_100sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate_suppression_breakdown_list",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mailing_id\" : {{ab_split_sha_512_suppression_list_level_campaign_id}}\r\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailing_suppression_breakdown",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailing_suppression_breakdown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "suppression_breakdown_list",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json()",
+							"    pm.globals.set(\"ab_split_sha_512_supression_list_link\", jsonData.payload.csv_url)",
+							"    pm.test(\"Link for suppression list breakdown functionality\", function () {",
+							"        pm.expect(jsonData.payload.csv_url).to.not.be.null;",
+							"    });",
+							"} else {",
+							"    pm.test(\"Link for suppression list breakdown functionality\", function () {",
+							"        pm.expect(jsonData.payload.csv_url).to.not.be.null;",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailing_suppression_breakdown/{{ab_split_sha_512_suppression_list_level_campaign_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailing_suppression_breakdown",
+						"{{ab_split_sha_512_suppression_list_level_campaign_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click_link_suppression_breakdown_list",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.text()\r",
+							"    var spli = jsonData.split(\",\")\r",
+							"    var suppression_contact = spli[4].split(\"list type\").join(\"  \").trim()\r",
+							"    if(pm.environment.get(\"env\") === \"All-Esps-Dev-28299\"){\r",
+							"    pm.test(\"AB split sha_512 suppression list level breakdown functionality\", function () {\r",
+							"        pm.expect(suppression_contact).to.eql(\"a93eb1adbca8e71e51b55cb53469a506f8ccabfb32ba3a865fef4b81fff9614c166cb3f4b5ad3a8004e7e883bf2c87470c98e414c6e238447ee903fcf3ba5126\");\r",
+							"    });\r",
+							"    }else{\r",
+							"      pm.test(\"AB split sha_512 suppression list level breakdown functionality\", function () {\r",
+							"        pm.expect(suppression_contact).to.eql(\"796f1704d7a3dedb235369d4012ff7a16b61c517363c32b62e851b790ba4bfb1f811dad33aeb003e991785cbb410a02af5038a362506b7650f8b67ecb2ae3b2a\");\r",
+							"    });  \r",
+							"    }\r",
+							"} else {\r",
+							"    pm.test(\"AB split sha_512 suppression list level breakdown functionality\", function () {\r",
+							"        pm.expect(suppression_contact).to.eql(\"a93eb1adbca8e71e51b55cb53469a506f8ccabfb32ba3a865fef4b81fff9614c166cb3f4b5ad3a8004e7e883bf2c87470c98e414c6e238447ee903fcf3ba5126\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ab_split_sha_512_supression_list_link}}",
+					"host": [
+						"{{ab_split_sha_512_supression_list_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_supperssion_list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{ab_split_sha_512_suppresion_list_level_functionality_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{ab_split_sha_512_suppresion_list_level_functionality_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{ab_split_sha_512_suppression_list_level_functionality_segment_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{ab_split_sha_512_suppression_list_level_functionality_segment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change_contact_status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ab_split_sha_512_suppresion_list_level_functionality_id\")\r",
+							"pm.globals.unset(\"ab_split_sha_512_suppression_list_level_functionality_segment_id\")\r",
+							"pm.globals.unset(\"ab_split_sha_512_suppression_list_level_campaign_id\")\r",
+							"pm.globals.unset(\"ab_split_sha_512_supression_list_link\")\r",
+							"pm.globals.unset(\"time_30\")\r",
+							"pm.globals.unset(\"count\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"remove\",\n    \"emails\": [\n        \"ab_split_sha_512_suppression_list_level{{connectionId}}@hoohem.com\",\n        \"ab_split_sha_512_suppression_list_level_contact{{connectionId}}@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

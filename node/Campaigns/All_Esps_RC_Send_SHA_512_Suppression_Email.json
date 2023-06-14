@@ -1,0 +1,1198 @@
+{
+	"info": {
+		"_postman_id": "6d33433e-2d86-4992-a0ba-3dfd42140bfc",
+		"name": "All_Esps_RC_Send_SHA_512_Suppression_Email",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"rc_sha512_suppression_list1@hoohem.com\",\n        \"rc_sha512_suppression_list2@hoohem.com\",\n        \"rc_sha512_suppression_list3@hoohem.com\",\n        \"rc_sha512_suppression_list4@hoohem.com\",\n        \"rc_sha512_suppression_list5@hoohem.com\",\n        \"rc_sha512_suppression_list6@hoohem.com\",\n        \"rc_sha512_suppression_list7@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esps_suppression_sha512_campaign_id\", jsonData.payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"RC SHA512 Suppression\",\n    \"list_id\": {{list_id}},\n    \"email_message\": {{msg_id_rc_suppression}},\n    \"segments\": [\n        {{segment_id_suppression_sha512}}\n    ],\n    \"check_global_and_list_suppression\": true,\n    \"suppression_list_excluded\": [\n        \"{{campaign_level_sha512_suppression_list}}\"\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time_30}}\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test Regular Send Campaign,List,Global Level With SHA512 Suppression List`, function() {",
+							"            pm.expect(jsonData.subject).to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}else{",
+							"        pm.test(`Test Regular Send Campaign,List,Global Level With SHA512 Suppression List`, function() {",
+							"            pm.expect(\" \").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list7@hoohem.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":400000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"        pm.test(`Test Regular Send Campaign,List,Global Level With SHA512 Suppression List`, function() {",
+							"            pm.expect(parseInt(jsonData.payload.excluded_suppression_count)).to.equal(6);",
+							"        }); "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{all_esps_suppression_sha512_campaign_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{all_esps_suppression_sha512_campaign_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail List level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test Regular Send List Level With SHA512 Suppression List`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list1@hoohem.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail list level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test Regular Send List Level With SHA512 Suppression List`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list2@hoohem.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail Campaign Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test Regular Send Campaign Level With SHA512 Suppression List`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list3@hoohem.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail Campaign Level1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test All Esps SHA512 Suppression message : ${jsonData.date}`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list4@hoohem.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail Global Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test All Esps SHA512 Suppression message : ${jsonData.date}`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list5@hoohem.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail Global Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test All Esps SHA512 Suppression message : ${jsonData.date}`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list6@hoohem.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create  Export Campaign Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"Sha512_suppression_campaign_lvl_export_id\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"My Export Sha512 Suppression Campaign Level\",\r\n    \"date_format\": \"mm/dd/yyyy\",\r\n    \"file_format\": \"csv\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{campaign_level_sha512_suppression_list}}/api/export",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{campaign_level_sha512_suppression_list}}",
+						"api",
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create  Export Global Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"Sha512_suppression_global_lvl_export_id\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"My Export Sha512 Suppression Global Level\",\r\n    \"date_format\": \"mm/dd/yyyy\",\r\n    \"file_format\": \"csv\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{global_level_sha512_suppression_list}}/api/export",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{global_level_sha512_suppression_list}}",
+						"api",
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create  Export List Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"Sha512_suppression_list_lvl_export_id\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"My Export Sha512 Suppression List Level\",\r\n    \"date_format\": \"mm/dd/yyyy\",\r\n    \"file_format\": \"csv\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_level_sha512_suppression_list}}/api/export",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_level_sha512_suppression_list}}",
+						"api",
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Export Result Campaign Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = Object.entries(jsonData)",
+							"    if (pm.environment.get(\"env\") == \"All-Esps-production-10998\") {",
+							"        var email = data[1][1]",
+							"    } else {",
+							"        var email = data[0][1]",
+							"    }",
+							"    pm.test(`Test Export Sha512 Suppression Campaign Level Working`, function () {",
+							"        pm.expect(email.Email).to.equal(\"10cdb9373f4a0e3134f654fc0fed6d9c32e7152c0175772638f6a5a5259fa98ab09c08443c6d1c3a58b5f8054bbed2cd4d69410fa0573da98e40b4148df58f74\");",
+							"    });",
+							"    pm.test(`Test Export Sha512 Suppression Campaign Level Working`, function () {",
+							"        pm.expect(email.Time).to.not.equal(\"\");",
+							"    });",
+							"} else {",
+							"    pm.test(`Test Export Sha512 Suppression Campaign Level Working`, function () {",
+							"        pm.expect(\" \").to.equal(\"Report result not found\");",
+							"    });",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listId\": {{campaign_level_sha512_suppression_list}},\n    \"reportId\": {{Sha512_suppression_campaign_lvl_export_id}},\n    \"userName\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"accountCode\": \"{{account_code}}\",\n    \"apiDomain\": \"{{api_domain}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/export_report",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"export_report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Export Result Global Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = Object.entries(jsonData)",
+							"    var email = data[0][1]",
+							"    pm.test(`Test Export Sha512 Suppression Global Level Working`, function () {",
+							"        pm.expect(email.Email).to.equal(\"b66d60682832d764dc1b3056b100d87a839905e9931eab27b61ef99422446d6bea5fdf36597cf0dc7051244fe2019b61a5519e1fcb5ff67fbba7d0ed66340b6a\");",
+							"    });",
+							"    pm.test(`Test Export Sha512 Suppression Global Level Working`, function () {",
+							"        pm.expect(email.Time).to.not.equal(\"\");",
+							"    });",
+							"}else{",
+							"    pm.test(`Test Export Sha512 Suppression Global Level Working`, function () {",
+							"        pm.expect(\" \").to.equal(\"Report result not found\");",
+							"    });",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listId\": {{global_level_sha512_suppression_list}},\n    \"reportId\": {{Sha512_suppression_global_lvl_export_id}},\n    \"userName\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"accountCode\": \"{{account_code}}\",\n    \"apiDomain\": \"{{api_domain}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/export_report",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"export_report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Export Result List Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = Object.entries(jsonData)",
+							"    if (pm.environment.get(\"env\") == \"All-Esps-production-10998\") {",
+							"        var email = data[1][1]",
+							"    } else {",
+							"        var email = data[0][1]",
+							"    }",
+							"    pm.test(`Test Export Sha512 Suppression List Level Working`, function () {",
+							"        pm.expect(email.Email).to.equal(\"0f59de0327f5297c9f4bc6bc1be9a8664fe4ac9afd2fd44635e1578bf2a1b69f074cc2045f17e93d8a29dc3cbdee07716c48d7c7e87c2936a60e409ef2d428c8\");",
+							"    });",
+							"    pm.test(`Test Export Sha512 Suppression List Level Working`, function () {",
+							"        pm.expect(email.Time).to.not.equal(\"\");",
+							"    });",
+							"} else {",
+							"    pm.test(`Test Export Sha512 Suppression List Level Working`, function () {",
+							"        pm.expect(\" \").to.equal(\"Report result not found\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"Sha512_suppression_campaign_lvl_export_id\")",
+							"pm.globals.unset(\"Sha512_suppression_list_lvl_export_id\")",
+							"pm.globals.unset(\"Sha512_suppression_global_lvl_export_id\")  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listId\": {{global_level_sha512_suppression_list}},\n    \"reportId\": {{Sha512_suppression_list_lvl_export_id}},\n    \"userName\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"accountCode\": \"{{account_code}}\",\n    \"apiDomain\": \"{{api_domain}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/export_report",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"export_report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

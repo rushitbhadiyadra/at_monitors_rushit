@@ -1,0 +1,43 @@
+name: Failed Test small Monitor
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mailgundev:
+    runs-on: ubuntu-latest
+      
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x]
+        collection: [ create-contact-success, create-contact-failed, create-contact-success-2 ]
+
+    steps:
+    - uses: actions/checkout@v3.3.0
+
+    - name: Dev Mailgun Monitor collections
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install newman and newman-reporter-htmlextra
+      run: |
+        npm install -g newman
+        npm install -g newman-reporter-htmlextra
+        npm install install-artifact-from-github
+    
+    - name: Run mailgun collection ${{ matrix.collection }}
+      id: first_run
+      run: newman run ./node/Test/${{ matrix.collection }}.json -e ./node/Test/env/local_env.json -g ./node/Test/env/postman_globals.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/dev-mailgun-"${{ matrix.collection }}"-report.html
+
+    - name: Retry mailgun collection ${{ matrix.collection }}
+      if: ${{ failure() }}
+      run: newman run ./node/Test/${{ matrix.collection }}.json -e ./node/Test/env/local_env.json -g ./node/Test/env/postman_globals.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/dev-mailgun-"${{ matrix.collection }}"-retrying-report.html
+      continue-on-error: true
+
+    - name: Output the run details
+      uses: actions/upload-artifact@v3
+      with:
+        name: dev-mailgun-monitor-report
+        path: newman

@@ -1,0 +1,430 @@
+{
+	"info": {
+		"_postman_id": "46d41a3b-8ba9-4369-a3c8-44039361658a",
+		"name": "All_Esps_Regular_Campaign_Timezone_Phoenix_Timestamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Get variable from webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_all_esps_campaign_phoenix_timestamp\", jsonData.campaign_id_all_esps_campaign_phoenix_timestamp);",
+							"if(parseInt(jsonData.mail_count) ===1 )",
+							"{",
+							"    postman.setNextRequest('Clear_webhook');",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-All_Esps_Campaign_Phoenix_timestamp-{{phoenix_connection_id}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-All_Esps_Campaign_Phoenix_timestamp-{{phoenix_connection_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.text();",
+							"",
+							"if(jsonData !==null && jsonData !== '{}'){",
+							"    var fieldValue = jsonData.split(\"~!@#~\");",
+							"    pm.test(\"Test All ESP Ragular Campaign With Phoenix Timestampe is working\", function () {",
+							"        pm.expect(fieldValue[1]).to.eql(pm.environment.get(\"phoenix_connection_id\"));",
+							"    });",
+							" }",
+							" else{",
+							"    pm.test(\"Test All ESP Ragular Campaign With Phoenix Timestampe is not working\", function() {",
+							"        pm.expect(\"\").to.eql(pm.environment.get(\"phoenix_connection_id\"));",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_phoenix_timestamp1@hoohem.com\",\n    \"subject\": \"Test Ragular Campaign With Phoenix Timestampe-{{phoenix_connection_id}}-{{campaign_id_all_esps_campaign_phoenix_timestamp}}\",\n    \"timeout\": 1000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"campaign_id_all_esps_campaign_phoenix_timestamp\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-All_Esps_Campaign_Phoenix_timestamp-{{phoenix_connection_id}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-All_Esps_Campaign_Phoenix_timestamp-{{phoenix_connection_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{phoenix_list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"rc_phoenix_timestamp1@hoohem.com\",\n        \"rc_phoenix_timestamp2@hoohem.com\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{phoenix_list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{phoenix_list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and run campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_all_esps_campaign_phoenix_timestamp\", jsonData.payload.id);",
+							"pm.globals.unset(\"time\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time\", Math.round((new Date()).getTime() / 1000) + 30);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All Ragular Campaign With Timestampe-{{phoenix_connection_id}}\",\n    \"list_id\": {{phoenix_list_id}},\n    \"email_message\": {{msg_id_campaign_phoenix_timesamp}},\n    \"segments\": [\n        {{rc_timestamp_phoenix_segment_id}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{phoenix_connection_id}},\n            \"percent\": 100\n        }\n    ],\n    \"time_to_send_config\": {\n        \"send_by_timezone\": {\n            \"timezone_source\": \"timezone\",\n            \"contact_field_id\": \"{{list_field_timestamp_id_phoenix}}\",\n            \"start_timezone\": \"America/Mexico_City\"\n        },\n        \"delivery_timing_type\":\"schedule_date\"\n    },\n    \"enable-timezone\": true,\n    \"pre_process\": true,\n    \"schedule_date\": {{time}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.text();",
+							"",
+							"if(jsonData !==null && jsonData !== '{}'){",
+							"    var fieldValue = jsonData.split(\"~!@#~\");",
+							"    pm.test(\"Test All ESP Ragular Campaign With Phoenix Timestampe is working\", function () {",
+							"        pm.expect(fieldValue[1]).to.eql(pm.environment.get(\"phoenix_connection_id\"));",
+							"    });",
+							" }",
+							" else{",
+							"    pm.test(\"Test All ESP Ragular Campaign With Phoenix Timestampe is not working\", function() {",
+							"        pm.expect(\"\").to.eql(pm.environment.get(\"phoenix_connection_id\"));",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_phoenix_timestamp2@hoohem.com\",\n    \"subject\": \"Test Ragular Campaign With Phoenix Timestampe-{{phoenix_connection_id}}-{{campaign_id_all_esps_campaign_phoenix_timestamp}}\",\n    \"timeout\": 1000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set_variable_in_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"campaign_id_all_esps_campaign_phoenix_timestamp\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"campaign_id_all_esps_campaign_phoenix_timestamp\": \"{{campaign_id_all_esps_campaign_phoenix_timestamp}}\",\n    \"mail_count\": \"{{mail_count}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-All_Esps_Campaign_Phoenix_timestamp-{{phoenix_connection_id}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"{{env}}-All_Esps_Campaign_Phoenix_timestamp-{{phoenix_connection_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

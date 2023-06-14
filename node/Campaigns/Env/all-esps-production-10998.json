@@ -1,0 +1,2067 @@
+{
+	"id": "b06fd81a-7011-4e28-b8ca-7c4a4ab5568b",
+	"name": "All-Esps-production-10998",
+	"values": [
+		{
+			"key": "username",
+			"value": "bhushan.stepin@gmail.com",
+			"enabled": true
+		},
+		{
+			"key": "env",
+			"value": "All-Esps-production-10998",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "Bhushan@123",
+			"enabled": true
+		},
+		{
+			"key": "account_code",
+			"value": "stepin76",
+			"enabled": true
+		},
+		{
+			"key": "api_domain",
+			"value": "https://api.ongage.net",
+			"enabled": true
+		},
+		{
+			"key": "api_proxy_url",
+			"value": "https://automated_tests-l2.ongage.net",
+			"enabled": true
+		},
+		{
+			"key": "tracking_url",
+			"value": "auto-tracking.on-gage.org",
+			"enabled": true
+		},
+		{
+			"key": "ocx_generate_hase_md5",
+			"value": "7d31e0da1ab99fe8b08a22118e2f402b",
+			"enabled": true
+		},
+		{
+			"key": "ocx_generate_hase_sha1",
+			"value": "967ce367d89dccc133d71049f1197d29561b3726",
+			"enabled": true
+		},
+		{
+			"key": "ocx_generate_hase_sha256",
+			"value": "abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348",
+			"enabled": true
+		},
+		{
+			"key": "ocx_rss_desc",
+			"value": "The UK is the worst of seven high-income countries for key cancers including lung, colon and pancreas.",
+			"enabled": true
+		},
+		{
+			"key": "ocx_rss_link",
+			"value": "https://www.bbc.co.uk/news/health-49661516",
+			"enabled": true
+		},
+		{
+			"key": "ocx_rss_title",
+			"value": "Cancer survival in the UK improving, but lagging behind - study",
+			"enabled": true
+		},
+		{
+			"key": "campaign_list_name",
+			"value": "All ESPs QA Automation List-All-Esps-production-10998",
+			"enabled": true
+		},
+		{
+			"key": "list_id",
+			"value": "88674",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email_id",
+			"value": 1001701908,
+			"enabled": true
+		},
+		{
+			"key": "transactional_content_html_system_field",
+			"value": "1091507448",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_behavioural_stat",
+			"value": "1020416001",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_event_system_field_campaign_name",
+			"value": "All ESPs Event System Field, List Field, Date and Hash Function",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-amazon_ses",
+			"value": "4",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-amazon_ses",
+			"value": "43766",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-sendgrid",
+			"value": "19",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-sendgrid",
+			"value": "51150",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-inboxroad",
+			"value": "92",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_amazon_ses",
+			"value": "Sidev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_amazon_ses",
+			"value": "at1@at.hoohem.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_amazon_ses",
+			"value": "at.hoohem.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_inboxroad",
+			"value": "SiDev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_inboxroad",
+			"value": "at.hoohem.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_sparkpost",
+			"value": "SiDev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_sparkpost",
+			"value": "at@sp.hoohem.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_sparkpost",
+			"value": "sp.hoohem.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-sparkpost",
+			"value": "86",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_mailgun",
+			"value": "SiDev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_mailgun",
+			"value": "sidev1@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_mailgun",
+			"value": "stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-mailgun",
+			"value": "43202",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-mailgun",
+			"value": "58",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_sendgrid",
+			"value": "SiDev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_sendgrid",
+			"value": "sidev1@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_sendgrid",
+			"value": "stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_socketlabs",
+			"value": "stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_socketlabs",
+			"value": "sidev2@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_socketlabs",
+			"value": "sidev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-socketlabs",
+			"value": "43",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-socketlabs",
+			"value": "43602",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-dyn",
+			"value": "43217",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-dyn",
+			"value": "10",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_dyn",
+			"value": "sidev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_dyn",
+			"value": "sidev1@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_dyn",
+			"value": "stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ar_campaign_id",
+			"value": "1094764653",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ar_campaign_name",
+			"value": "Transactional Campaign",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-privatesmtp",
+			"value": "41630",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-privatesmtp",
+			"value": "59",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_privatesmtp",
+			"value": "SiDev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_privatesmtp",
+			"value": "sidev1@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_privatesmtp",
+			"value": "stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "at_site",
+			"value": "http://ongageqa.site",
+			"enabled": true
+		},
+		{
+			"key": "at_site_ascii",
+			"value": "http%3A%2F%2Fongageqa.site",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_segment_id_system_field",
+			"value": "1023307226",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_segment_id_ocx_feed_html",
+			"value": "1023307227",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_segment_id_operator_ocxnow",
+			"value": "1023307228",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_ab_split_segment_id_function_feed_field",
+			"value": "1023307229",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_winner_list_system_date",
+			"value": "1023307231",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_winner_dynamic_block_operator",
+			"value": "1023307232",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_winner_dynamic_ocx_feed",
+			"value": "1023307233",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_winner_dynamic_ocx_feed_html",
+			"value": "1023307234",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_winner_ocx_feed_html",
+			"value": "1023307236",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_winner_ocx_feed",
+			"value": "1023307237",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_winner_ocx_feed_rss",
+			"value": "1023307238",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_common_message",
+			"value": "7596256",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_behavioural_stats",
+			"value": "7596258",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ar_behavioural_stats",
+			"value": "7596260",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_email_message_date_hash_function_and_list_system_field1",
+			"value": "7750654",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_segment_id_operator_ocxnow_quota",
+			"value": "1027692378",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-sparkpost",
+			"value": "45210",
+			"enabled": true
+		},
+		{
+			"key": "email_msg_all_esp_event_based_on_campaign_open_static_content",
+			"value": "7809253",
+			"enabled": true
+		},
+		{
+			"key": "email_msg_all_esp_event_based_on_campaign_click_static_content",
+			"value": "7809255",
+			"enabled": true
+		},
+		{
+			"key": "email_msg_all_esp_event_based_on_campaign_open_click",
+			"value": "7809256",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_ab_split_subject",
+			"value": "7814204",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_subject",
+			"value": "1028731534",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_mirror_message_id_ta_626",
+			"value": "7814389",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_segment_id_mirror",
+			"value": "1073711625",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_inboxroad",
+			"value": "at@at.hoohem.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-inboxroad",
+			"value": "45058",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_invalid_contact",
+			"value": "1029041959",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_all_esp_invalid_contact",
+			"value": "7820488",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_multi_message_id",
+			"value": "7821405",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_segment_id_multiple_esp",
+			"value": "1029058173",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_ab_split_campaign_segment_id_multiple_esp",
+			"value": "1029142077",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_multi_esp",
+			"value": "7824661",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_segment_id_level_distribution_1",
+			"value": "1029389835",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_regular_campaign_segment_id_level_distribution_2",
+			"value": "1029389836",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_ab_winner_multi_esp",
+			"value": "1029400097",
+			"enabled": true
+		},
+		{
+			"key": "header_id",
+			"value": "7839552",
+			"enabled": true
+		},
+		{
+			"key": "footer_id",
+			"value": "7839553",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-smtp_com",
+			"value": "45821",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromname_smtp_com",
+			"value": "SiDev1",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddressdomain_smtp_com",
+			"value": "gmail.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-fromaddress_smtp_com",
+			"value": "bhushan.stepin@gmail.com",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-espid-smtp_com",
+			"value": "9",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_segment_id_esp_domin_test",
+			"value": "1030605579",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_segment_id_throttal_one_hour",
+			"value": "1036207822",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_throttling",
+			"value": "8205554",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_email_message_date_hash_function_and_list_system_field",
+			"value": "7884027",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_email_message_date_hash_function_and_list_system_field3",
+			"value": "7884028",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_operator_and_ocx_now_with_offset",
+			"value": "7884029",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_regular_campaign_operator_and_ocx_now_with_offset",
+			"value": "7884030",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_dynamic_ocx_feed",
+			"value": "7884032",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_campaign_test_mail",
+			"value": "7884035",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_dynamic_ocx_feed_html",
+			"value": "7884037",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_ocx_feed",
+			"value": "7884038",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_ocx_feed_html",
+			"value": "7884039",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_ocx_feed_rss",
+			"value": "7884040",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_msg_operator",
+			"value": "7884042",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ar_test",
+			"value": "7884043",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_a",
+			"value": "8205552",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_b",
+			"value": "8205553",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_event_throttling",
+			"value": "8205550",
+			"enabled": true
+		},
+		{
+			"key": "ae_conversion_link",
+			"value": "http://tracking.on-gage.org/?xx=YE0lrPQiAFw4rPs4Zvo0XJVxoSjtK2GfnzHfLJVbKk0jYPMjAFCjYlKjw&",
+			"enabled": true
+		},
+		{
+			"key": "ae_conversion_pixel_link_campaign_id_",
+			"value": "1131604383",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_dayparting_throttling",
+			"value": "8205551",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_event_4_hour_throttling",
+			"value": "8062331",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_email_message_with_all_action",
+			"value": "8069403",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_event_dayparting_throttling",
+			"value": "8230892",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_rc_one_min_throttling",
+			"value": "8205547",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_event_one_min_throttling",
+			"value": "8205548",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_onemin_a",
+			"value": "8205555",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_onemin_b",
+			"value": "8205556",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_df_a",
+			"value": "8205557",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_df_b",
+			"value": "8205558",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_rc_email_message_date_hash_function_and_list_system_field",
+			"value": "8123783",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_winner_system_field_mearg_operator",
+			"value": "8214365",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_nt_system_dfun_and_opt_ocx_now",
+			"value": "8137816",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_ab_split_segment_id_feed_operator_ocxnow",
+			"value": "1035776962",
+			"enabled": true
+		},
+		{
+			"key": "campaign_throttling_list_name",
+			"value": "All ESPs QA Automation Throttling List-All-Esps-production-10998",
+			"enabled": true
+		},
+		{
+			"key": "throttling_list_id",
+			"value": "116036",
+			"enabled": true
+		},
+		{
+			"key": "throttling_list_field_email_id",
+			"value": "1002158658",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_system_field_mearg_operator",
+			"value": "8214345",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_win_send_dynamic_ocx_feed",
+			"value": "8214851",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_win_send_dynamic_ocx_feed_html",
+			"value": "8214852",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_win_send_ocx_feed_html",
+			"value": "8214853",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_win_send_ocx_feed",
+			"value": "8218915",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_win_send_ocx_feed_rss",
+			"value": "8218916",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_ocx_feed_rss",
+			"value": "8218917",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_dynamic_ocx_feed",
+			"value": "8218918",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_send_dynamic_ocx_feed_html",
+			"value": "8220060",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_send_ocx_feed_html",
+			"value": "8220062",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_send_ocx_feed",
+			"value": "8220064",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_event_system_field_mearg_operator",
+			"value": "8225320",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_ocx_feed_rss1",
+			"value": "11075539",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_transactional_send_ocx_feed1",
+			"value": "8293081",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_behavioural_stats1",
+			"value": "8389994",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_rc_stats",
+			"value": "8390012",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_segment_id_day_part_throttling",
+			"value": "1038476608",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_rc_day_field",
+			"value": "8421695",
+			"enabled": true
+		},
+		{
+			"key": "disable-username",
+			"value": "sidev1@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "disable-password",
+			"value": "Stepin@123",
+			"enabled": true
+		},
+		{
+			"key": "disable-accountcode",
+			"value": "stepin_qa30",
+			"enabled": true
+		},
+		{
+			"key": "disable_implied_open_list_name",
+			"value": "Disable Implied Opens-All-Esps-production-10998",
+			"enabled": true
+		},
+		{
+			"key": "disable_implied_opens_list_id",
+			"value": "125915",
+			"enabled": true
+		},
+		{
+			"key": "disable_implied_open_list_field_email_id",
+			"value": "1002303570",
+			"enabled": true
+		},
+		{
+			"key": "disable_implied_open_msg_id",
+			"value": "8521382",
+			"enabled": true
+		},
+		{
+			"key": "disable_implied_open_segment_id",
+			"value": "1039574307",
+			"enabled": true
+		},
+		{
+			"key": "enable_implied_open_msg_id",
+			"value": "8521383",
+			"enabled": true
+		},
+		{
+			"key": "enable_implied_open_segment_id",
+			"value": "1039574338",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_day_field",
+			"value": "8569961",
+			"enabled": true
+		},
+		{
+			"key": "ae_seg_id_day_part_throttling",
+			"value": "1040171001",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_thro_ab_split_day_field_a",
+			"value": "8588955",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_thro_ab_split_day_field_b",
+			"value": "8588956",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_event_day_field",
+			"value": "8599915",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae24_hour",
+			"value": "8644354",
+			"enabled": true
+		},
+		{
+			"key": "campaign_error_recipients",
+			"value": "\"nrupesh.stepin@gmail.com\",\"chiragthummar.stepin@gmail.com\",\"devendra.stepin@gmail.com\"",
+			"enabled": true
+		},
+		{
+			"key": "ongage_env",
+			"value": "production",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_suppression",
+			"value": "1043286341",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_rc_suppression",
+			"value": 8820587,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_nt_email_rc_suppression",
+			"value": 8820588,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_tranaction_send_rc_suppression",
+			"value": 8820589,
+			"enabled": true
+		},
+		{
+			"key": "rc_suppresion_list_level_id",
+			"value": 129072,
+			"enabled": true
+		},
+		{
+			"key": "rc_suppresion_global_level_id",
+			"value": 129073,
+			"enabled": true
+		},
+		{
+			"key": "rc_suppresion_campaign_level_id",
+			"value": 129074,
+			"enabled": true
+		},
+		{
+			"key": "campaign_level_sha256_suppression_list",
+			"value": 129207,
+			"enabled": true
+		},
+		{
+			"key": "list_level_sha256_suppression_list",
+			"value": 129208,
+			"enabled": true
+		},
+		{
+			"key": "global_level_sha256_suppression_list",
+			"value": 129209,
+			"enabled": true
+		},
+		{
+			"key": "segment_id_suppression_sha256",
+			"value": "1043455476",
+			"enabled": true
+		},
+		{
+			"key": "campaign_level_domain_suppression_list",
+			"value": 129213,
+			"enabled": true
+		},
+		{
+			"key": "list_level_domain_suppression_list",
+			"value": 129214,
+			"enabled": true
+		},
+		{
+			"key": "global_level_global_suppression_list",
+			"value": 129215,
+			"enabled": true
+		},
+		{
+			"key": "segment_id_suppression_domain",
+			"value": "1043457166",
+			"enabled": true
+		},
+		{
+			"key": "campaign_level_sha512_suppression_list",
+			"value": 129216,
+			"enabled": true
+		},
+		{
+			"key": "list_level_sha512_suppression_list",
+			"value": 129217,
+			"enabled": true
+		},
+		{
+			"key": "global_level_sha512_suppression_list",
+			"value": 129218,
+			"enabled": true
+		},
+		{
+			"key": "segment_id_suppression_sha512",
+			"value": "1043457170",
+			"enabled": true
+		},
+		{
+			"key": "campaign_level_md5_suppression_list",
+			"value": 129225,
+			"enabled": true
+		},
+		{
+			"key": "list_level_md5_suppression_list",
+			"value": 129226,
+			"enabled": true
+		},
+		{
+			"key": "global_level_md5_suppression_list",
+			"value": 129227,
+			"enabled": true
+		},
+		{
+			"key": "segment_id_suppression_md5",
+			"value": "1043458869",
+			"enabled": true
+		},
+		{
+			"key": "ae_segment_id_custom_ratio",
+			"value": "1044503606",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_event_with_multiple_trigger_segment_id",
+			"value": "1044503609",
+			"enabled": true
+		},
+		{
+			"key": "ae_segment_id_msg_mirror_link",
+			"value": "1044503610",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_segment_id_msg_quota",
+			"value": "1044503611",
+			"enabled": true
+		},
+		{
+			"key": "all_esps_segment_id_multiple_esp_msg",
+			"value": "1044503612",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_multi_esp_msg_a",
+			"value": 8916551,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_ab_split_multi_esp_msg_b",
+			"value": 8916552,
+			"enabled": true
+		},
+		{
+			"key": "ab_msg_quota_campaign_msg_id_1",
+			"value": 8916555,
+			"enabled": true
+		},
+		{
+			"key": "ab_msg_quota_campaign_msg_id_2",
+			"value": 8916556,
+			"enabled": true
+		},
+		{
+			"key": "event_msg_multi_trigger_1",
+			"value": 8916557,
+			"enabled": true
+		},
+		{
+			"key": "event_msg_multi_trigger_2",
+			"value": 8916558,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_ratio_1",
+			"value": 8916559,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_ratio_2",
+			"value": 8916560,
+			"enabled": true
+		},
+		{
+			"key": "event_msg_multi_esp",
+			"value": 8916561,
+			"enabled": true
+		},
+		{
+			"key": "ae_a_split_mirror_message_id",
+			"value": 8916571,
+			"enabled": true
+		},
+		{
+			"key": "ab_split_msg_multi_esp_ratio",
+			"value": 8916813,
+			"enabled": true
+		},
+		{
+			"key": "ab_split_msg_multi_esp_msg_a_number",
+			"value": 9658315,
+			"enabled": true
+		},
+		{
+			"key": "ab_split_msg_multi_esp_msg_b_number",
+			"value": 9658317,
+			"enabled": true
+		},
+		{
+			"key": "event_msg_id_campaign_quota",
+			"value": 8954476,
+			"enabled": true
+		},
+		{
+			"key": "all_esps_event_with_multi_esp_segment_id",
+			"value": "1044858842",
+			"enabled": true
+		},
+		{
+			"key": "event_msg_id_multi_esp",
+			"value": 8954481,
+			"enabled": true
+		},
+		{
+			"key": "segment_id_regular_campaign_with_invalid_contact",
+			"value": "1046150107",
+			"enabled": true
+		},
+		{
+			"key": "rc_invalid_contact_msg_id",
+			"value": "9041267",
+			"enabled": true
+		},
+		{
+			"key": "event_msg_trigger_with_trigger_1",
+			"value": 9019550,
+			"enabled": true
+		},
+		{
+			"key": "event_msg_trigger_with_trigger_2",
+			"value": 9019553,
+			"enabled": true
+		},
+		{
+			"key": "event_msg_trigger_with_trigger_3",
+			"value": 9019554,
+			"enabled": true
+		},
+		{
+			"key": "list_field_ip_id",
+			"value": 1001701914,
+			"enabled": true
+		},
+		{
+			"key": "list_field_zip_id",
+			"value": 1001701930,
+			"enabled": true
+		},
+		{
+			"key": "all_esps_msg_id_regular_campaign_delete_segment",
+			"value": 9036276,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_campaign_timesamp",
+			"value": 9041778,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_campaign_timesamp_ip",
+			"value": 9041780,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_campaign_timesamp_zipcode",
+			"value": 9041781,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_campaign_timesamp_airport_code",
+			"value": 9041782,
+			"enabled": true
+		},
+		{
+			"key": "ae_segment_id_campaign_timesamp",
+			"value": "1046154154",
+			"enabled": true
+		},
+		{
+			"key": "list_field_airport_code_id",
+			"value": 1002380408,
+			"enabled": true
+		},
+		{
+			"key": "list_field_timestmp1_id",
+			"value": 1002380434,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_event_timesamp",
+			"value": 9046320,
+			"enabled": true
+		},
+		{
+			"key": "all_esps_msg_id_list_unsubscribe",
+			"value": 9081992,
+			"enabled": true
+		},
+		{
+			"key": "fake_esp_username",
+			"value": "moti.stepin+108@gmail.com",
+			"enabled": true
+		},
+		{
+			"key": "fake_esp_password",
+			"value": "Moti@123",
+			"enabled": true
+		},
+		{
+			"key": "fake_esp_account_code",
+			"value": "f_check_qa_test",
+			"enabled": true
+		},
+		{
+			"key": "fake-esp-privatesmtp",
+			"value": "56417",
+			"enabled": true
+		},
+		{
+			"key": "fake_esp_list_id",
+			"value": "131540",
+			"enabled": true
+		},
+		{
+			"key": "fake_esp_list_field_email",
+			"value": "1002393241",
+			"enabled": true
+		},
+		{
+			"key": "fake_esp_email_msg",
+			"value": 9173474,
+			"enabled": true
+		},
+		{
+			"key": "demo_esp_username",
+			"value": "krunal.19stepin+0054@gmail.com",
+			"enabled": true
+		},
+		{
+			"key": "demo_esp_password",
+			"value": "Krunal@1234",
+			"enabled": true
+		},
+		{
+			"key": "demo_esp_account_code",
+			"value": "stepin_solution_54",
+			"enabled": true
+		},
+		{
+			"key": "demo_esp_connectionid",
+			"value": "58044",
+			"enabled": true
+		},
+		{
+			"key": "demo_esp_list_id",
+			"value": "132636",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_demo_esp",
+			"value": "1050063428",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_demo_esp_asp_7997",
+			"value": 9319177,
+			"enabled": true
+		},
+		{
+			"key": "demo_esp_list_field_email_id",
+			"value": "1002403816",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_seg_quota_limit",
+			"value": "1050138910",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_seg_quota_limit",
+			"value": 9326117,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_seg_esp_quota_limit",
+			"value": 9326119,
+			"enabled": true
+		},
+		{
+			"key": "rctd_email_id",
+			"value": 9337809,
+			"enabled": true
+		},
+		{
+			"key": "tracking_image_msg_url",
+			"value": "bbb.domain.com",
+			"enabled": true
+		},
+		{
+			"key": "image_trcking_campaign_url",
+			"value": "bbb.domain.com",
+			"enabled": true
+		},
+		{
+			"key": "rc_image_td_email_id",
+			"value": 9341089,
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-sparkpost1",
+			"value": "59115",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-sparkpost2",
+			"value": "59163",
+			"enabled": true
+		},
+		{
+			"key": "tc_msg_id_link_eih",
+			"value": "22lofxy1aprodi10bb1bql49ymqhw7lm1nvogvj5i1bzl19v",
+			"enabled": true
+		},
+		{
+			"key": "tc_html_link_eih",
+			"value": "3abd4fpjds0enrwvxpiwdu8nrp0uorgkw6pmv",
+			"enabled": true
+		},
+		{
+			"key": "rc_link_eih",
+			"value": "3ypcc0qg1yt4cluv7vr8gp1uhk5ix2yeac655",
+			"enabled": true
+		},
+		{
+			"key": "nt_msg_id_link_eih",
+			"value": "1hsib8a2pxs8kqtrh0i0q0y8n8ekdbcug1v1hf4q45ajeiqc",
+			"enabled": true
+		},
+		{
+			"key": "nt_html_link_eih",
+			"value": "1n899wyiu06nu4xcqmczwraqkladgiuddoc57bbq4w71s",
+			"enabled": true
+		},
+		{
+			"key": "nt_msg_id_feed_link_email_id",
+			"value": 9491828,
+			"enabled": true
+		},
+		{
+			"key": "rcdfl_email_id",
+			"value": 9491830,
+			"enabled": true
+		},
+		{
+			"key": "tc_msg_id_feed_link_email_id",
+			"value": 9491831,
+			"enabled": true
+		},
+		{
+			"key": "rculh_email_id",
+			"value": "9508138",
+			"enabled": true
+		},
+		{
+			"key": "nt_ulh_email_id",
+			"value": "9508140",
+			"enabled": true
+		},
+		{
+			"key": "tc_ulh_email_id",
+			"value": "9508141",
+			"enabled": true
+		},
+		{
+			"key": "nt_msg_if_multiple_email_id",
+			"value": "9623369",
+			"enabled": true
+		},
+		{
+			"key": "rcif_multiple_email_id",
+			"value": "9623371",
+			"enabled": true
+		},
+		{
+			"key": "tc_msg_if_mltple_email_id",
+			"value": "9623374",
+			"enabled": true
+		},
+		{
+			"key": "nt_msg_if_email_id",
+			"value": "9623375",
+			"enabled": true
+		},
+		{
+			"key": "rcif_email_id",
+			"value": "9623376",
+			"enabled": true
+		},
+		{
+			"key": "tc_msg_if_email_id",
+			"value": "9623378",
+			"enabled": true
+		},
+		{
+			"key": "rc_return_path_segment_id",
+			"value": "1054475553",
+			"enabled": true
+		},
+		{
+			"key": "rc_msg_retun_path_email_id",
+			"value": "10122214",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_rc_multi_esp_with_limit_percentage",
+			"value": 9658320,
+			"enabled": true
+		},
+		{
+			"key": "msg_id_rc_multi_esp_with_limit",
+			"value": "9663087",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_segment_id_multiple_esp_with_limit",
+			"value": "1054925383",
+			"enabled": true
+		},
+		{
+			"key": "ae_segment_id_rc_dynamic_ocx_feed_inside_loop",
+			"value": "1055702538",
+			"enabled": true
+		},
+		{
+			"key": "rc_send_msg_id_dof_inside_loop_email_id",
+			"value": "9714816",
+			"enabled": true
+		},
+		{
+			"key": "nt_msg_if_nested_email_id",
+			"value": "9916689",
+			"enabled": true
+		},
+		{
+			"key": "rcif_nested_email_id",
+			"value": "9916690",
+			"enabled": true
+		},
+		{
+			"key": "tc_msg_if_nested_email_id",
+			"value": "9916691",
+			"enabled": true
+		},
+		{
+			"key": "tc_send_msg_id_distinct_case",
+			"value": "9953884",
+			"enabled": true
+		},
+		{
+			"key": "notify_send_msg_id_distinct_case",
+			"value": "9953885",
+			"enabled": true
+		},
+		{
+			"key": "rc_mltpl_if_blocks_msg_id",
+			"value": "9996095",
+			"enabled": true
+		},
+		{
+			"key": "absnif_email_id",
+			"value": "9996091",
+			"enabled": true
+		},
+		{
+			"key": "abwnif_email_id",
+			"value": "9996092",
+			"enabled": true
+		},
+		{
+			"key": "event_if_nested_email_id",
+			"value": "9996093",
+			"enabled": true
+		},
+		{
+			"key": "ASP_8720_email_id",
+			"value": "10062639",
+			"enabled": true
+		},
+		{
+			"key": "connectionId_return_path",
+			"value": "62165",
+			"enabled": true
+		},
+		{
+			"key": "nt_msg_id_retun_path_email_id",
+			"value": "10122215",
+			"enabled": true
+		},
+		{
+			"key": "tc_send_msg_id_retun_path_email_id",
+			"value": "10122216",
+			"enabled": true
+		},
+		{
+			"key": "phoenix_list_id",
+			"value": "138599",
+			"enabled": true
+		},
+		{
+			"key": "list_field_timestamp_id_phoenix",
+			"value": "1002456420",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email_id_phoenix",
+			"value": "1002456409",
+			"enabled": true
+		},
+		{
+			"key": "username_phoenix",
+			"value": "harshpatel.stepin@gmail.com",
+			"enabled": true
+		},
+		{
+			"key": "password_phoenix",
+			"value": "Stepin@123",
+			"enabled": true
+		},
+		{
+			"key": "account_code_phoenix",
+			"value": "stepin_test2",
+			"enabled": true
+		},
+		{
+			"key": "phoenix_connection_id",
+			"value": "62864",
+			"enabled": true
+		},
+		{
+			"key": "rc_timestamp_phoenix_segment_id",
+			"value": "1064423097",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_campaign_phoenix_timesamp",
+			"value": "10383805",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_event_phoenix_timestamp",
+			"value": "10383806",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_campaign_phoenix_timesamp_A",
+			"value": "10383807",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ab_split_campaign_phoenix_timesamp_B",
+			"value": "10383808",
+			"enabled": true
+		},
+		{
+			"key": "list_id_bounce_reason",
+			"value": "73406",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email_id_bounce_reason",
+			"value": "1001601720",
+			"enabled": true
+		},
+		{
+			"key": "username_bounce_reason",
+			"value": "kinjal@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "password_bounce_reason",
+			"value": "Kinjal@stepin",
+			"enabled": true
+		},
+		{
+			"key": "account_code_bounce_reason",
+			"value": "stepin_solutions17",
+			"enabled": true
+		},
+		{
+			"key": "connection_id_bounce_reason",
+			"value": "62653",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_email_bounce_reason",
+			"value": "10393779",
+			"enabled": true
+		},
+		{
+			"key": "global_level_domain_suppression_list",
+			"value": "138976",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_regular_campaign_ocx_url_encode",
+			"value": "10464235",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_rc_ocx_url_encode_inbuilt_fuction_with_combination_special_character",
+			"value": "10556291",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_regular_campaign_url_params_in_encode_function",
+			"value": "10555736",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_regular_campaign_dynamic_field_not_in_encode_function",
+			"value": "10555739",
+			"enabled": true
+		},
+		{
+			"key": "rc_supp_exp_date_list_id",
+			"value": "140274",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_from_name_test",
+			"value": "10577129",
+			"enabled": true
+		},
+		{
+			"key": "All-Esps-production-10998-connectionid-inboxroad_bounce_reason",
+			"value": "62653",
+			"enabled": true
+		},
+		{
+			"key": "ae_seg_id_day_part_throttling_one_day",
+			"value": "1074152998",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_thro_ab_split_day_field_one_day_a",
+			"value": "10958420",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_thro_ab_split_day_field_one_day_b",
+			"value": "10958423",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_event_day_field_one_day",
+			"value": "10958426",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ae_day_field_one_day",
+			"value": "10958429",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_rc_v4_inhouse_stats",
+			"value": "11022333",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_rc_v4_smtp_mode_stats",
+			"value": "11022334",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_v4_inhouse_stats",
+			"value": "11022335",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_v4_smtp_mode_stats",
+			"value": "11022336",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_smtp_com_connection_id_inhouse_mode",
+			"value": "65484",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_smtp_com_connection_id_smtp_mode",
+			"value": "65487",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_post_back_link_message_id",
+			"value": "11128713",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_trnsl_post_back_link_message_id",
+			"value": "11128715",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "content_html_for_postback_link",
+			"value": "<html><head><title></title><meta content='text/html; charset=utf-8' http-equiv='Content-Type'/></head>body><p>~!@#~Prod~!@#~</p><a href=http://tracking.on-gage.org/?xp=Yk04mSwfYJpyZu1fZi%3D%3D5&eih={{ocx_email_hash}}>http://tracking.on-gage.org/?xp=Yk04mSwfYJpyZu1fZi%3D%3D5&eih={{ocx_email_hash}}</a></body></html>",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "username_sto_mvp",
+			"value": "aniketgolambade.stepin@gmail.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "password_sto_mvp",
+			"value": "Aniket@123",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "account_code_sto_mvp",
+			"value": "stepin_solutions33",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "list_id_sto_mvp",
+			"value": "145944",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "connection_id_sto_mvp",
+			"value": "66033",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email_id_sto_mvp",
+			"value": "1002506581",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "email_id_sto_mvp",
+			"value": "11198878",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "connection_id_dynamic_from_address",
+			"value": "66077",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "verify_dynamic_from_address_not_working_mail_id",
+			"value": "11226023",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "username_super",
+			"value": "sis_chetan",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "password_super",
+			"value": "Stepin123!@#",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "account_code_super",
+			"value": "ongagesup",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "account_id",
+			"value": "10998",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "throttling_without_timezone_mail_id",
+			"value": "11424927",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_ab_winner_message",
+			"value": "11425062",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_with_throttling_a",
+			"value": "11425077",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_with_throttling_b",
+			"value": "11425086",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_using_quota_with_throttling_a",
+			"value": "11425100",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_using_quota_with_throttling_b",
+			"value": "11425108",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_using_custom_ratio_with_throttling_b",
+			"value": "11425113",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_using_custom_ratio_with_throttling_a",
+			"value": "11425116",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_rc_test_json_payload",
+			"value": "11573029",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "connection_id_inhouse_private_smtp",
+			"value": "67006",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "isp_id_gmail_domain",
+			"value": "52483",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "isp_id_hoohem_domain",
+			"value": "53630",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "list_id_ab_split",
+			"value": "149629",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email_id_ab_split",
+			"value": "1002532885",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_with_real_time_ab_mail_id",
+			"value": "11573996",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_common_mail_id",
+			"value": "11574001",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "list_field_update_on_click_mail_id",
+			"value": "11662958",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "list_field_update_with(-)_on_click_mail_id",
+			"value": "11843670",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "unsubscribe_text_dynamic_ocx_feed_mail_id",
+			"value": "11843677",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "list_field_update_clicked_multiple_link_mail_id",
+			"value": "11843678",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "whitelist_with_quota_value_mail_id",
+			"value": "12249182",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ocx_dynamic_feed_is_working_mgs_id",
+			"value": "12249184",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "suppression_list_breakdown_functionality_mail_id",
+			"value": "13104683",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "last_modified_date_mgs_id",
+			"value": "12249188",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "update_on_click_modified_email_msg_id",
+			"value": "12249189",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ASP_8552_rc_email_id",
+			"value": "12355061",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ae_segment_id_rc_asp_8552",
+			"value": "1094811181",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "list_field_firstname_id",
+			"value": "1001701911",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "account_level_unsubscribe_link_mail_id",
+			"value": "12554150",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "unsubscribe_account_level_list_id",
+			"value": "158970",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "account_level_unsubscribe_list_field_email_id",
+			"value": "1002594587",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "username_sto_ab",
+			"value": "harshpatel.stepin@gmail.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "password_sto_ab",
+			"value": "Stepin@123",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "account_code_sto_ab",
+			"value": "stepin_test2",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "sto_ab_list_id",
+			"value": "159085",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "sto_ab_test_functionality_1_mgs_id",
+			"value": "12568483",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "sto_ab_test_functionality_2_mgs_id",
+			"value": "12568485",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "suppression_list_breakdown_global_level_functionality_mail_id",
+			"value": "12580370",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "list_level_unsubscribe_list_id",
+			"value": "159258",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "list_level_unsubscribe_link_mail_id",
+			"value": "12580969",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "list_level_unsubscribe_list_field_email_id",
+			"value": "1002595931",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "tc_send_campaign_msg_email_id",
+			"value": "12985925",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nt_message_is_with_specific_message",
+			"value": "12986271",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "list_field_account_no_id",
+			"value": "1002647934",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "rc_link_contact_activity_message_id",
+			"value": "13104429",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "all_esp_segment_id_rc_link_activity",
+			"value": "1108968994",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-05-04T07:35:11.133Z",
+	"_postman_exported_using": "Postman/10.13.6-230427-1303"
+}

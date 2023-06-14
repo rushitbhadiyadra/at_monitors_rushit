@@ -1,0 +1,2389 @@
+{
+	"info": {
+		"_postman_id": "5d52e6bc-4331-4c5c-94fb-2e271959e849",
+		"name": "All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function_1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Get variable from webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esps_ab_split_system_field\", jsonData.all_esps_ab_split_system_field);",
+							"if(parseInt(jsonData.mail_count) ===1 )",
+							"{",
+							"    postman.setNextRequest('Clear_webhook');",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    if((jsonData.payload) instanceof Array)",
+							"    {",
+							"        postman.setNextRequest('Clear_webhook');",
+							"    }",
+							"    else",
+							"    {",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"",
+							"        }",
+							"        var connectionName='';",
+							"        for(var i=0;i<jsonData.payload.distribution.length;i++)",
+							"        {",
+							"            if(jsonData.payload.distribution[i]['esp_id'] !== undefined && jsonData.payload.distribution[i]['esp_id'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_id']+\"</td></tr>\"",
+							"            }",
+							"            if(jsonData.payload.distribution[i]['name'] !== undefined && jsonData.payload.distribution[i]['name'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Name \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['name']+\"</td></tr>\"",
+							"            }",
+							"            connectionName += jsonData.payload.distribution[i]['name']+\",\";",
+							"            if(jsonData.payload.distribution[i]['esp_connection_id'] !== undefined && jsonData.payload.distribution[i]['esp_connection_id'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_connection_id']+\"</td></tr>\"",
+							"            }",
+							"        }",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"",
+							"        }",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"",
+							"        // }",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"",
+							"        pm.globals.set(\"html_code\", tableHtml);",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')",
+							"        {",
+							"            pm.globals.set(\"html_code\", tableHtml);",
+							"            connectionName =connectionName.slice(0, -1);",
+							"            pm.globals.set(\"esp_name\", connectionName);",
+							"        }",
+							"        else",
+							"        {",
+							"            postman.setNextRequest('Clear_webhook');",
+							"        }",
+							"    }",
+							"}else{",
+							"    postman.setNextRequest('Clear_webhook');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{all_esps_ab_split_system_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{all_esps_ab_split_system_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error-Campaign Test Cases Detail with {{esp_name}} on {{ongage_env}}\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"list_id\": {{list_id}},\n \"change_to\":\"resubscribe\",\n \"emails\": [\"all_esp_ab_split1@hoohem.com\",\"all_esp_ab_split2@hoohem.com\",\"all_esp_ab_split3@hoohem.com\"]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esps_ab_split_system_field\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"AB-Split FIeld, Function, Feed\",\n\t\"type\": \"split\",\n\t\"list_id\": {{list_id}}, \n    \"split_type\": \"email\",\n    \"email_message\": [ \n    \t{{msg_id_ab_split_system_field_mearg_operator}},\n    \t{{msg_id_ab_split_ocx_feed_rss}},\n    \t{{msg_id_ab_split_dynamic_ocx_feed}} ],\n    \"segments\": [ \"{{all_esps_ab_split_segment_id_function_feed_field}}\" ],\n    \"distribution\": [\n    \t{ \n            \"esp_connection_id\":{{connectionId}},\n            \"percent\":\"100\"\n    \t}\n    ],\n    \"schedule_date\": {{time_30}},\n    \"notify_onlaunch\": \"0\",\n    \"notify_onfaile d\": \"0\",\n    \"notify_oncomplete\": \"0\"\n} "
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"ab_split_system_field_contact_id_1\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"ab_split_system_field_creaed_date_1\", str.substring(0,7));",
+							"pm.globals.set(\"ab_split_list_field_address\", jsonData.payload.address);",
+							"pm.globals.set(\"ab_split_list_field_gender\", jsonData.payload.gender);",
+							"pm.globals.set(\"ab_split_list_field_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"ab_split_list_field_dob\", jsonData.payload.dob);",
+							" ",
+							"pm.globals.set(\"ab_split_list_field_email_1\", jsonData.payload.email);",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/all_esp_ab_split1@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"all_esp_ab_split1@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"ab_split_system_field_contact_id_2\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"ab_split_system_field_creaed_date_2\", str.substring(0,7));",
+							"pm.globals.set(\"ab_split_list_field_address\", jsonData.payload.address);",
+							"pm.globals.set(\"ab_split_list_field_gender\", jsonData.payload.gender);",
+							"pm.globals.set(\"ab_split_list_field_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"ab_split_list_field_dob\", jsonData.payload.dob);",
+							" ",
+							"pm.globals.set(\"ab_split_list_field_email_2\", jsonData.payload.email);",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/all_esp_ab_split2@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"all_esp_ab_split2@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"ab_split_system_field_contact_id_3\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"ab_split_system_field_creaed_date_3\", str.substring(0,7));",
+							"pm.globals.set(\"ab_split_list_field_address\", jsonData.payload.address);",
+							"pm.globals.set(\"ab_split_list_field_gender\", jsonData.payload.gender);",
+							"pm.globals.set(\"ab_split_list_field_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"ab_split_list_field_dob\", jsonData.payload.dob);",
+							" ",
+							"pm.globals.set(\"ab_split_list_field_email_3\", jsonData.payload.email);",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/all_esp_ab_split3@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"all_esp_ab_split3@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Cases system and list field, Date and Hash function",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"var today = new Date(pm.globals.get(\"time_30\") * 1000);",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', {",
+							"    timeZone: 'Asia/Kolkata'",
+							"})];",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"",
+							"const timestamp_to_date = (timeStamp_value) => {",
+							"    var date = new Date(timeStamp_value * 1000);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth() + 1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"var count = 0",
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    htmlText = htmlText.replace(/&#x2F;/g, \"/\")",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const content = JSON.parse(fieldValue[2]);",
+							"    count += 1",
+							"",
+							"    const ocxIf = fieldValue[13]",
+							"    const ocxElseIf = fieldValue[15]",
+							"    const ocxElse = fieldValue[17]",
+							"",
+							"    if (jsonData.to.value[0].address === \"all_esp_ab_split1@hoohem.com\") {",
+							"        ab_split_system_field_contact_id = pm.globals.get(\"ab_split_system_field_contact_id_1\")",
+							"        ab_split_system_field_creaed_date = pm.globals.get(\"ab_split_system_field_creaed_date_1\")",
+							"        ab_split_list_field_email = pm.globals.get(\"ab_split_list_field_email_1\")",
+							"        ab_split_list_field_address = pm.globals.get(\"ab_split_list_field_address\")",
+							"        ab_split_list_field_gender = pm.globals.get(\"ab_split_list_field_gender\")",
+							"        ab_split_list_field_product_id = pm.globals.get(\"ab_split_list_field_product_id\")",
+							"        ab_split_list_field_dob = pm.globals.get(\"ab_split_list_field_dob\")",
+							"    }",
+							"    if (jsonData.to.value[0].address === \"all_esp_ab_split2@hoohem.com\") {",
+							"        ab_split_system_field_contact_id = pm.globals.get(\"ab_split_system_field_contact_id_2\")",
+							"        ab_split_system_field_creaed_date = pm.globals.get(\"ab_split_system_field_creaed_date_2\")",
+							"        ab_split_list_field_email = pm.globals.get(\"ab_split_list_field_email_2\")",
+							"        ab_split_list_field_address = pm.globals.get(\"ab_split_list_field_address\")",
+							"        ab_split_list_field_gender = pm.globals.get(\"ab_split_list_field_gender\")",
+							"        ab_split_list_field_product_id = pm.globals.get(\"ab_split_list_field_product_id\")",
+							"        ab_split_list_field_dob = pm.globals.get(\"ab_split_list_field_dob\")",
+							"    }",
+							"    if (jsonData.to.value[0].address === \"all_esp_ab_split3@hoohem.com\") {",
+							"        ab_split_system_field_contact_id = pm.globals.get(\"ab_split_system_field_contact_id_3\")",
+							"        ab_split_system_field_creaed_date = pm.globals.get(\"ab_split_system_field_creaed_date_3\")",
+							"        ab_split_list_field_email = pm.globals.get(\"ab_split_list_field_email_3\")",
+							"        ab_split_list_field_address = pm.globals.get(\"ab_split_list_field_address\")",
+							"        ab_split_list_field_gender = pm.globals.get(\"ab_split_list_field_gender\")",
+							"        ab_split_list_field_product_id = pm.globals.get(\"ab_split_list_field_product_id\")",
+							"        ab_split_list_field_dob = pm.globals.get(\"ab_split_list_field_dob\")",
+							"    }",
+							"    // TODO : System Field",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_contact_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.system_fields.ocx_contact_id).to.equal(ab_split_system_field_contact_id);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_created_date Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        var str = Math.round(content.system_fields.ocx_created_date).toString();",
+							"        pm.expect(str.substring(0, 7)).to.equal(ab_split_system_field_creaed_date);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_from_address Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.system_fields.ocx_from_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_from_address_domain Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.system_fields.ocx_from_address_domain).to.equal(pm.globals.get(\"system_field_from_address_domain\"));",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_from_name Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.system_fields.ocx_from_name).to.equal(pm.globals.get(\"system_field_from_name\"));",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_list_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(parseInt(content.system_fields.ocx_list_id)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_mailing_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(parseInt(content.system_fields.ocx_mailing_id)).to.equal(parseInt(pm.globals.get(\"all_esps_ab_split_system_field\")));",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_campaign_name Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.system_fields.ocx_campaign_name).to.equal(\"AB-Split FIeld, Function, Feed\");",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_reply_address Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.system_fields.ocx_reply_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_subject Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.system_fields.ocx_subject).to.equal(\"Test AB-Split Send Message Id Date-Hash Function and List-System Field Ocx Operator-\" + pm.globals.get(\"connectionId\") + \"-\" + pm.environment.get(\"env\"));",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_esp_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.system_fields.ocx_esp_id).to.equal(espId);",
+							"    });",
+							"",
+							"",
+							"    pm.test(`Test AB Split in system fields \\\"ocx_connection_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(parseInt(content.system_fields.ocx_connection_id)).to.equal(parseInt(connectionId));",
+							"    });",
+							"",
+							"    // TODO : Verify Date Function",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_day Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_day).to.equal(day);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_month Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_month).to.equal(month);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_year Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_year).to.equal(year);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_dow_long Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_dow_long).to.equal(dowLong);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_dow Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_dow).to.equal(dow);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_month_name Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_month_name).to.equal(monthName);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_month_short Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_month_short).to.equal(monthShort);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_yy Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_yy).to.equal(yy);",
+							"    });",
+							"",
+							"    pm.test(`Test AB Split in date function \\\"ocx_now Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_now).to.equal(month + \"/\" + day + \"/\" + year);",
+							"    });",
+							"    pm.test(`Test AB Split in date function \\\"ocx_timestamp Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.date_function.ocx_timestamp.split(\" \")[0]).to.equal(year + \"-\" + month + \"-\" + day);",
+							"    });",
+							"",
+							"    //TODO : List Dynamic Value",
+							"",
+							"",
+							"    pm.test(`Test AB Split in List Dynamic Field \\\"email Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.dynamic_fields.email).to.equal(ab_split_list_field_email);",
+							"    });",
+							"    pm.test(`Test AB Split in List Dynamic Field \\\"address Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.dynamic_fields.address).to.equal(ab_split_list_field_address);",
+							"    });",
+							"    pm.test(`Test AB Split in List Dynamic Field \\\"gender Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.dynamic_fields.gender).to.equal(ab_split_list_field_gender);",
+							"    });",
+							"    pm.test(`Test AB Split in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(parseInt(content.dynamic_fields.product_id)).to.equal(parseInt(ab_split_list_field_product_id));",
+							"    });",
+							"    pm.test(`Test AB Split in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(content.dynamic_fields.dob).to.equal(timestamp_to_date(parseInt(ab_split_list_field_dob)));",
+							"    });",
+							"",
+							"    pm.test(\"Test AB Split ocx_generate_hash sha1 is working\", function() {",
+							"        pm.expect(fieldValue[5]).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\");",
+							"    });",
+							"",
+							"    pm.test(\"Test AB Split ocx_generate_hash sha256 is working\", function() {",
+							"        pm.expect(fieldValue[8]).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"    });",
+							"",
+							"    pm.test(\"Test AB Split ocx_generate_hash md5 is working\", function() {",
+							"        pm.expect(fieldValue[11]).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"    });",
+							"",
+							"    pm.globals.set(\"sha1_link\", jsonData.HTMLTextLinks[0]);",
+							"    pm.globals.set(\"sha256_link\", jsonData.HTMLTextLinks[1]);",
+							"    pm.globals.set(\"md5_link\", jsonData.HTMLTextLinks[2]);",
+							"",
+							"    pm.test(`Test Ab-Split All Esps Dynamic Content Block Operator Field Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(ocxIf).first_name).to.equal(\"Ongage\");",
+							"    });",
+							"    pm.test(`Test Ab-Split All Esps Dynamic Content Block Operator Field Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(ocxElseIf).first_name).to.equal(\"Stepin\");",
+							"    });",
+							"    pm.test(`Test Ab-Split All Esps Dynamic Content Block Operator Field Time : ${jsonData.date}`, function() {",
+							"        pm.expect(JSON.parse(ocxElse).first_name).to.equal(\"Devang\");",
+							"    });",
+							"    pm.globals.unset(\"ab_spli_count\");",
+							"    pm.globals.unset(\"ab_split_system_field_contact_id_1\");",
+							"    pm.globals.unset(\"ab_split_system_field_contact_id_2\");",
+							"    pm.globals.unset(\"ab_split_system_field_contact_id_3\");",
+							"    pm.globals.unset(\"ab_split_system_field_creaed_date_3\");",
+							"    pm.globals.unset(\"ab_split_system_field_creaed_date_2\");",
+							"    pm.globals.unset(\"ab_split_system_field_creaed_date_1\");",
+							"    pm.globals.unset(\"ab_split_list_field_address\");",
+							"    pm.globals.unset(\"ab_split_list_field_gender\");",
+							"    pm.globals.unset(\"ab_split_list_field_product_id\");",
+							"    pm.globals.unset(\"ab_split_list_field_dob\");",
+							"    pm.globals.unset(\"ab_split_list_field_email_1\");",
+							"    pm.globals.unset(\"ab_split_list_field_email_2\");",
+							"    pm.globals.unset(\"ab_split_list_field_email_3\");",
+							"    postman.setNextRequest(\"Test_ocx_generate_hash_SHA1\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Date-Hash Function and List-System Field Ocx Operator-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Cases system and list field, Date and Hash function1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"var today = new Date(pm.globals.get(\"time_30\") * 1000);",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', {",
+							"    timeZone: 'Asia/Kolkata'",
+							"})];",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"",
+							"const timestamp_to_date = (timeStamp_value) => {",
+							"    var date = new Date(timeStamp_value * 1000);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth() + 1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"var count = pm.globals.get(\"ab_spli_count\");",
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    htmlText = htmlText.replace(/&#x2F;/g, \"/\")",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const content = JSON.parse(fieldValue[2]);",
+							"    count += 1",
+							"",
+							"    const ocxIf = fieldValue[13]",
+							"    const ocxElseIf = fieldValue[15]",
+							"    const ocxElse = fieldValue[17]",
+							"",
+							"    if (jsonData.to.value[0].address === \"all_esp_ab_split1@hoohem.com\") {",
+							"        ab_split_system_field_contact_id = pm.globals.get(\"ab_split_system_field_contact_id_1\")",
+							"        ab_split_system_field_creaed_date = pm.globals.get(\"ab_split_system_field_creaed_date_1\")",
+							"        ab_split_list_field_email = pm.globals.get(\"ab_split_list_field_email_1\")",
+							"        ab_split_list_field_address = pm.globals.get(\"ab_split_list_field_address\")",
+							"        ab_split_list_field_gender = pm.globals.get(\"ab_split_list_field_gender\")",
+							"        ab_split_list_field_product_id = pm.globals.get(\"ab_split_list_field_product_id\")",
+							"        ab_split_list_field_dob = pm.globals.get(\"ab_split_list_field_dob\")",
+							"    }",
+							"    if (jsonData.to.value[0].address === \"all_esp_ab_split2@hoohem.com\") {",
+							"        ab_split_system_field_contact_id = pm.globals.get(\"ab_split_system_field_contact_id_2\")",
+							"        ab_split_system_field_creaed_date = pm.globals.get(\"ab_split_system_field_creaed_date_2\")",
+							"        ab_split_list_field_email = pm.globals.get(\"ab_split_list_field_email_2\")",
+							"        ab_split_list_field_address = pm.globals.get(\"ab_split_list_field_address\")",
+							"        ab_split_list_field_gender = pm.globals.get(\"ab_split_list_field_gender\")",
+							"        ab_split_list_field_product_id = pm.globals.get(\"ab_split_list_field_product_id\")",
+							"        ab_split_list_field_dob = pm.globals.get(\"ab_split_list_field_dob\")",
+							"    }",
+							"    if (jsonData.to.value[0].address === \"all_esp_ab_split3@hoohem.com\") {",
+							"        ab_split_system_field_contact_id = pm.globals.get(\"ab_split_system_field_contact_id_3\")",
+							"        ab_split_system_field_creaed_date = pm.globals.get(\"ab_split_system_field_creaed_date_3\")",
+							"        ab_split_list_field_email = pm.globals.get(\"ab_split_list_field_email_3\")",
+							"        ab_split_list_field_address = pm.globals.get(\"ab_split_list_field_address\")",
+							"        ab_split_list_field_gender = pm.globals.get(\"ab_split_list_field_gender\")",
+							"        ab_split_list_field_product_id = pm.globals.get(\"ab_split_list_field_product_id\")",
+							"        ab_split_list_field_dob = pm.globals.get(\"ab_split_list_field_dob\")",
+							"        // TODO : System Field",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_contact_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_contact_id).to.equal(ab_split_system_field_contact_id);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_created_date Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            var str = Math.round(content.system_fields.ocx_created_date).toString();",
+							"            pm.expect(str.substring(0, 7)).to.equal(ab_split_system_field_creaed_date);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_from_address Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_from_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_from_address_domain Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_from_address_domain).to.equal(pm.globals.get(\"system_field_from_address_domain\"));",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_from_name Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_from_name).to.equal(pm.globals.get(\"system_field_from_name\"));",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_list_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(parseInt(content.system_fields.ocx_list_id)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_mailing_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(parseInt(content.system_fields.ocx_mailing_id)).to.equal(parseInt(pm.globals.get(\"all_esps_ab_split_system_field\")));",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_campaign_name Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_campaign_name).to.equal(\"AB-Split FIeld, Function, Feed\");",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_reply_address Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_reply_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_subject Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_subject).to.equal(\"Test AB-Split Send Message Id Date-Hash Function and List-System Field Ocx Operator-\" + pm.globals.get(\"connectionId\") + \"-\" + pm.environment.get(\"env\"));",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_esp_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_esp_id).to.equal(espId);",
+							"        });",
+							"",
+							"",
+							"        pm.test(`Test AB Split in system fields \\\"ocx_connection_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.system_fields.ocx_connection_id).to.equal(connectionId);",
+							"        });",
+							"",
+							"        // TODO : Verify Date Function",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_day Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_day).to.equal(day);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_month Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_month).to.equal(month);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_year Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_year).to.equal(year);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_dow_long Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_dow_long).to.equal(dowLong);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_dow Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_dow).to.equal(dow);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_month_name Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_month_name).to.equal(monthName);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_month_short Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_month_short).to.equal(monthShort);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_yy Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_yy).to.equal(yy);",
+							"        });",
+							"",
+							"        pm.test(`Test AB Split in date function \\\"ocx_now Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_now).to.equal(month + \"/\" + day + \"/\" + year);",
+							"        });",
+							"        pm.test(`Test AB Split in date function \\\"ocx_timestamp Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.date_function.ocx_timestamp.split(\" \")[0]).to.equal(year + \"-\" + month + \"-\" + day);",
+							"        });",
+							"",
+							"        //TODO : List Dynamic Value",
+							"",
+							"",
+							"        pm.test(`Test AB Split in List Dynamic Field \\\"email Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.dynamic_fields.email).to.equal(ab_split_list_field_email);",
+							"        });",
+							"        pm.test(`Test AB Split in List Dynamic Field \\\"address Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.dynamic_fields.address).to.equal(ab_split_list_field_address);",
+							"        });",
+							"        pm.test(`Test AB Split in List Dynamic Field \\\"gender Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.dynamic_fields.gender).to.equal(ab_split_list_field_gender);",
+							"        });",
+							"        pm.test(`Test AB Split in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(parseInt(content.dynamic_fields.product_id)).to.equal(parseInt(ab_split_list_field_product_id));",
+							"        });",
+							"        pm.test(`Test AB Split in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function() {",
+							"            pm.expect(content.dynamic_fields.dob).to.equal(timestamp_to_date(parseInt(ab_split_list_field_dob)));",
+							"        });",
+							"",
+							"        pm.test(\"Test AB Split ocx_generate_hash sha1 is working\", function() {",
+							"            pm.expect(fieldValue[5]).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\");",
+							"        });",
+							"",
+							"        pm.test(\"Test AB Split ocx_generate_hash sha256 is working\", function() {",
+							"            pm.expect(fieldValue[8]).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"        });",
+							"",
+							"        pm.test(\"Test AB Split ocx_generate_hash md5 is working\", function() {",
+							"            pm.expect(fieldValue[11]).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"        });",
+							"",
+							"        pm.globals.set(\"sha1_link\", jsonData.HTMLTextLinks[0]);",
+							"        pm.globals.set(\"sha256_link\", jsonData.HTMLTextLinks[1]);",
+							"        pm.globals.set(\"md5_link\", jsonData.HTMLTextLinks[2]);",
+							"",
+							"        pm.test(`Test Ab-Split All Esps Dynamic Content Block Operator Field Time : ${jsonData.date}`, function() {",
+							"            pm.expect(JSON.parse(ocxIf).first_name).to.equal(\"Ongage\");",
+							"        });",
+							"        pm.test(`Test Ab-Split All Esps Dynamic Content Block Operator Field Time : ${jsonData.date}`, function() {",
+							"            pm.expect(JSON.parse(ocxElseIf).first_name).to.equal(\"Stepin\");",
+							"        });",
+							"        pm.test(`Test Ab-Split All Esps Dynamic Content Block Operator Field Time : ${jsonData.date}`, function() {",
+							"            pm.expect(JSON.parse(ocxElse).first_name).to.equal(\"Devang\");",
+							"        });",
+							"    }",
+							"    if (count === 0) {",
+							"        pm.test(\"System field, List Field, Date and Hash Function mail not received \", function() {",
+							"            pm.expect('').to.equal(\"Mail not received\");",
+							"        });",
+							"    }",
+							"}",
+							"",
+							"pm.globals.unset(\"ab_spli_count\");",
+							"pm.globals.unset(\"ab_split_system_field_contact_id_1\");",
+							"pm.globals.unset(\"ab_split_system_field_contact_id_2\");",
+							"pm.globals.unset(\"ab_split_system_field_contact_id_3\");",
+							"pm.globals.unset(\"ab_split_system_field_creaed_date_3\");",
+							"pm.globals.unset(\"ab_split_system_field_creaed_date_2\");",
+							"pm.globals.unset(\"ab_split_system_field_creaed_date_1\");",
+							"pm.globals.unset(\"ab_split_list_field_address\");",
+							"pm.globals.unset(\"ab_split_list_field_gender\");",
+							"pm.globals.unset(\"ab_split_list_field_product_id\");",
+							"pm.globals.unset(\"ab_split_list_field_dob\");",
+							"pm.globals.unset(\"ab_split_list_field_email_1\");",
+							"pm.globals.unset(\"ab_split_list_field_email_2\");",
+							"pm.globals.unset(\"ab_split_list_field_email_3\");",
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Date-Hash Function and List-System Field Ocx Operator-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test_ocx_generate_hash_SHA1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test Notify Transactional content HTML ocx_generate_hash sha1 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\"); ",
+							"});",
+							"pm.globals.unset(\"sha1_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{sha1_link}}",
+					"host": [
+						"{{sha1_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash SHA256",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test Notify Transactional content HTML ocx_generate_hash sha256 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"});",
+							"pm.globals.unset(\"sha256_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{sha256_link}}",
+					"host": [
+						"{{sha256_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash MD5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test Notify Transactional content HTML ocx_generate_hash md5 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"});",
+							"pm.globals.unset(\"md5_link\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{md5_link}}",
+					"host": [
+						"{{md5_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Dynamic Ocx Feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"var count = 0",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedDynamic = xml2Json(fieldValue[1])",
+							"    count += 1",
+							"    pm.test(`Test AB Split in ocx_feed_dynamic with nested loop is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[0]).to.equal(\"Hotel Name\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[1]).to.equal(\"Location\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[2]).to.equal(\"Rooms\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[0]).to.equal(\"Hilton\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[1]).to.equal(\"NYC\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[0].td[0]).to.equal(\"Room Type\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[0].td[1]).to.equal(\"Count\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[1].td[0]).to.equal(\"Regular\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[1].td[1]).to.equal(\"111\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[2].td[0]).to.equal(\"suit\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[2].td[1]).to.equal(\"222\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[3].td[0]).to.equal(\"Gorgeous\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[3].td[1]).to.equal(\"555\");",
+							"    });",
+							"    postman.setNextRequest(\"Test_NT_Ocx_Feed_Rss\")",
+							"}",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB Split Send Message Id Dynamic Ocx Feed-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Dynamic Ocx Feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"var count = pm.globals.get(\"ab_split_count_1\");",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedDynamic = xml2Json(fieldValue[1])",
+							"    count += 1",
+							"    pm.test(`Test AB Split in ocx_feed_dynamic with nested loop is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[0]).to.equal(\"Hotel Name\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[1]).to.equal(\"Location\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[2]).to.equal(\"Rooms\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[0]).to.equal(\"Hilton\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[1]).to.equal(\"NYC\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[0].td[0]).to.equal(\"Room Type\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[0].td[1]).to.equal(\"Count\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[1].td[0]).to.equal(\"Regular\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[1].td[1]).to.equal(\"111\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[2].td[0]).to.equal(\"suit\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[2].td[1]).to.equal(\"222\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[3].td[0]).to.equal(\"Gorgeous\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[3].td[1]).to.equal(\"555\");",
+							"    });",
+							"}",
+							"if(count === 0){",
+							"    pm.test(\"Dynamic Ocx Feed mail not received \", function () { ",
+							"        pm.expect('').to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"ab_split_count_1\");",
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB Split Send Message Id Dynamic Ocx Feed-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test_NT_Ocx_Feed_Rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var count = 0",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxRSSTitle = fieldValue[1]",
+							"    const ocxRSSLink = fieldValue[2]",
+							"    const ocxRSSDesc = fieldValue[3]",
+							"    count+=1",
+							"    pm.test(`Test AB Split in ocx_rss with title \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSTitle).to.equal(pm.environment.get(\"ocx_rss_title\"));",
+							"    });",
+							"    ",
+							"    pm.test(`Test AB Split in ocx_rss with link \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSLink).to.equal(pm.environment.get(\"ocx_rss_link\"));",
+							"    });",
+							"    ",
+							"    pm.test(`Test AB Split in ocx_rss with description \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSDesc).to.equal(pm.environment.get(\"ocx_rss_desc\"));",
+							"    });",
+							"    jsonData.headerLines.forEach(function(data, index) {",
+							"    if(data.key.toLowerCase()===\"customheader\"){",
+							"        pm.test(`Test customheader \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"            const header = data.line.split(\":\")",
+							"            pm.expect(header[0].toLowerCase()).to.equal(\"customheader\")",
+							"            pm.expect(header[1].toLowerCase().trim()).to.equal(\"test\");",
+							"        });",
+							"    }",
+							"})",
+							"    postman.setNextRequest('Get_Campaign_Information_1')",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB Split Send Message Id Ocx Feed Rss-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test NT Ocx Feed Rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var count =pm.globals.get(\"ab_split_count_2\"); ",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxRSSTitle = fieldValue[1]",
+							"    const ocxRSSLink = fieldValue[2]",
+							"    const ocxRSSDesc = fieldValue[3]",
+							"    count+=1",
+							"    pm.test(`Test AB Split in ocx_rss with title \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSTitle).to.equal(pm.environment.get(\"ocx_rss_title\"));",
+							"    });",
+							"    ",
+							"    pm.test(`Test AB Split in ocx_rss with link \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSLink).to.equal(pm.environment.get(\"ocx_rss_link\"));",
+							"    });",
+							"    ",
+							"    pm.test(`Test AB Split in ocx_rss with description \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSDesc).to.equal(pm.environment.get(\"ocx_rss_desc\"));",
+							"    });",
+							"    jsonData.headerLines.forEach(function(data, index) {",
+							"    if(data.key.toLowerCase()===\"customheader\"){",
+							"        pm.test(`Test customheader \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"            const header = data.line.split(\":\")",
+							"            pm.expect(header[0].toLowerCase()).to.equal(\"customheader\")",
+							"            pm.expect(header[1].toLowerCase().trim()).to.equal(\"test\");",
+							"        });",
+							"    }",
+							"})",
+							"}",
+							"",
+							"if(count === 0){",
+							"    pm.test(\"Ocx Feed RSS mail not received \", function () { ",
+							"        pm.expect('').to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"ab_split_count_2\");",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB Split Send Message Id Ocx Feed Rss-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Campaign_Information_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"if(pm.response.code === 200)\r",
+							"{\r",
+							"    if((jsonData.payload) instanceof Array)\r",
+							"    {\r",
+							"        pm.globals.set(\"mail_count\", 0);\r",
+							"        postman.setNextRequest('Set_variable_in_webhook');\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"\r",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){\r",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"\r",
+							"        }\r",
+							"        var connectionName='';\r",
+							"        for(var i=0;i<jsonData.payload.distribution.length;i++)\r",
+							"        {\r",
+							"            if(jsonData.payload.distribution[i]['esp_id'] !== undefined && jsonData.payload.distribution[i]['esp_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"            if(jsonData.payload.distribution[i]['name'] !== undefined && jsonData.payload.distribution[i]['name'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Name \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['name']+\"</td></tr>\"\r",
+							"            }\r",
+							"            connectionName += jsonData.payload.distribution[i]['name']+\",\";\r",
+							"            if(jsonData.payload.distribution[i]['esp_connection_id'] !== undefined && jsonData.payload.distribution[i]['esp_connection_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_connection_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"        }\r",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"\r",
+							"        }\r",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){\r",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"\r",
+							"        // }\r",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"\r",
+							"        pm.globals.set(\"html_code\", tableHtml);\r",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')\r",
+							"        {\r",
+							"            pm.globals.set(\"html_code\", tableHtml);\r",
+							"            pm.globals.set(\"mail_count\", 1);\r",
+							"        }\r",
+							"        else\r",
+							"        {\r",
+							"            pm.globals.set(\"mail_count\", 0);\r",
+							"            postman.setNextRequest('Set_variable_in_webhook');\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"else\r",
+							"{\r",
+							"    pm.globals.set(\"mail_count\", 0);\r",
+							"    postman.setNextRequest('Set_variable_in_webhook');\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{all_esps_ab_split_system_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{all_esps_ab_split_system_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error - Campaign Test Cases Detail\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set_variable_in_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"all_esps_ab_split_system_field\": \"{{all_esps_ab_split_system_field}}\",\n    \"mail_count\": \"{{mail_count}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"{{env}}-All_ESPs_AB_Split_FeedRSS_Dynamic_Feed_All_Field_Function-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

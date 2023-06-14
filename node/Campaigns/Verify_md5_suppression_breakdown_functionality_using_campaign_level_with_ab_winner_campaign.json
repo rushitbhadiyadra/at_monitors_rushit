@@ -1,0 +1,1803 @@
+{
+	"info": {
+		"_postman_id": "71034c59-f714-4ae8-b719-3e885454554c",
+		"name": "Verify_md5_suppression_breakdown_functionality_using_campaign_level_with_ab_winner_campaign",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0\r",
+							"if (pm.response.code === 200) {\r",
+							"    count = +1\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Create_contact\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "chirag@stepin-solutions.com",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "Chirag@123",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "si3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"abw_md5_suppression_campaign_level_1{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Email message for suppression list breakdown functionality-{{connectionId}}\",\r\n    \"timeout\": 60000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code === 200) {\r",
+							"    count = +1\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Create_contact\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "chirag@stepin-solutions.com",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "Chirag@123",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "si3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"abw_md5_suppression_campaign_level_2{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Email message for suppression list breakdown functionality-{{connectionId}}\",\r\n    \"timeout\": 60000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code === 200) {\r",
+							"    count = +1\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "chirag@stepin-solutions.com",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "Chirag@123",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "si3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"abw_md5_suppression_campaign_level_3{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Email message for suppression list breakdown functionality-{{connectionId}}\",\r\n    \"timeout\": 60000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 412) {\r",
+							"    postman.setNextRequest(\"Get_Suppression_Campaign_Level\")\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"email\": \"abw_md5_suppression_campaign_level_1{{connectionId}}@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"abw_md5_suppression_campaign_level_2{{connectionId}}@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"abw_md5_suppression_campaign_level_3{{connectionId}}@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"abw_md5_suppression_campaign_level_4{{connectionId}}@hoohem.com\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Suppression_Campaign_Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var list of jsonData.payload) {",
+							"        if (list.name === \"AB winner md5 Suppression campaign level functionality-\" + pm.environment.get(\"env\")){",
+							"            count = 1",
+							"            pm.globals.set(\"old_ab_winner_md5_suppression_campaign_level_functionality_id\", list.id);",
+							"        }      ",
+							"    }",
+							"}",
+							"if(count === 1){",
+							"    postman.setNextRequest('Add_contact_suppression_campaign_level');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_old_supperssion_list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{old_ab_winner_md5_suppression_campaign_level_functionality_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{old_ab_winner_md5_suppression_campaign_level_functionality_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_suppression_lists_level",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"ab_winner_md5_suppression_campaign_level_functionality_id\", jsonData.payload.id);",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"AB winner md5 Suppression campaign level functionality-{{env}}\",\n    \"description\": \"\",\n    \"type\": \"suppression\",\n    \"hash_type\": \"md5\",\n    \"scope\": \"campaign\",\n    \"expiration_date\": \"\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_contact_suppression_list_level",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": \"{{ab_winner_md5_suppression_campaign_level_functionality_id}}\",\n    \"action\": \"add\",\n    \"emails\": [\n        \"abw_md5_suppression_campaign_level_4{{connectionId}}@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/suppression",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"suppression"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_old_segmet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if (jsonData.payload.length > 0) {",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"Segment for ab winner md5 Suppression global level functionality-\" + pm.globals.get(\"connectionId\")) {",
+							"            pm.globals.set(\"ab_winner_md5_suppression_camp_level_functionality_segment_id\", segment.id);",
+							"        }",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{ab_winner_md5_suppression_camp_level_functionality_segment_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{ab_winner_md5_suppression_camp_level_functionality_segment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json() \r",
+							"pm.globals.set(\"ab_winner_md5_suppression_camp_level_functionality_segment_id\",jsonData.payload.id) "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"Segment for ab winner md5 Suppression global level functionality-{{connectionId}}\" ,\r\n   \"type\":\"regular\",\r\n   \"description\":\"Segment for ab winner md5 Suppression campaign level functionality\",\r\n   \"criteria\":[\r\n      {\r\n         \"field_id\":{{list_field_email_id}},\r\n         \"type\":\"email\",\r\n         \"position\":0,\r\n         \"operator\":\"=\",\r\n         \"operand\":[\r\n            \"abw_md5_suppression_campaign_level_1{{connectionId}}@hoohem.com\",\r\n            \"abw_md5_suppression_campaign_level_2{{connectionId}}@hoohem.com\",\r\n            \"abw_md5_suppression_campaign_level_3{{connectionId}}@hoohem.com\",\r\n            \"abw_md5_suppression_campaign_level_4{{connectionId}}@hoohem.com\"\r\n         ],\r\n         \"condition\":\"and\"\r\n      }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json()",
+							"    pm.globals.set(\"ab_winner_md5_suppression_campaign_level_campaign_id\",jsonData.payload.id)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"AB winner campaign md5 Suppression campaign level functionality-{{connectionId}}\",\n\t\"type\": \"split\",\n\t\"list_id\": {{list_id}}, \n    \"split_type\": \"email\",\n    \"email_message\": [ \"{{suppression_list_breakdown_functionality_mail_id}}\",\"{{all_esp_ab_winner_common_message}}\" ],\n    \"segments\": [ \"{{ab_winner_md5_suppression_camp_level_functionality_segment_id}}\" ],\n    \"suppression_list_excluded\": [{{ab_winner_md5_suppression_campaign_level_functionality_id}}],\n    \"distribution\": [\n    \t{\n            \"esp_connection_id\":{{connectionId}},\n            \"percent\":\"100\"\n    \t}\n    ],\n    \"schedule_date\": {{time_30}},\n    \"winner_quota_value\":\"1\",\n\t\"winner_conversion_field\":\"unique_clicks\",\n\t\"winner_send_after_hours\":\"1\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0\r",
+							"if (pm.response.code === 200) {\r",
+							"    count = +1\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.globals.set(\"open_mail_for_md5_abw_suppression_using_campaign_scope\", jsonData.HTMLOpenLinks[0]);\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Open_Mail\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "chirag@stepin-solutions.com",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "Chirag@123",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "si3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"abw_md5_suppression_campaign_level_1{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Email message for suppression list breakdown functionality-{{connectionId}}\",\r\n    \"timeout\": 60000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code === 200) {\r",
+							"    count = +1\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.globals.set(\"open_mail_for_md5_abw_suppression_using_campaign_scope\", jsonData.HTMLOpenLinks[0]);\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Open_Mail\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "chirag@stepin-solutions.com",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "Chirag@123",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "si3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"abw_md5_suppression_campaign_level_2{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Email message for suppression list breakdown functionality-{{connectionId}}\",\r\n    \"timeout\": 60000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code === 200) {\r",
+							"    count = +1\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(count).to.eql(1);\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "chirag@stepin-solutions.com",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "Chirag@123",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "si3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"abw_md5_suppression_campaign_level_3{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Email message for suppression list breakdown functionality-{{connectionId}}\",\r\n    \"timeout\": 60000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open_Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{open_mail_for_md5_abw_suppression_using_campaign_scope}}",
+					"host": [
+						"{{open_mail_for_md5_abw_suppression_using_campaign_scope}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate_suppression_breakdown_list",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mailing_id\" : {{ab_winner_md5_suppression_campaign_level_campaign_id}}\r\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailing_suppression_breakdown",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailing_suppression_breakdown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "suppression_breakdown_list",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json()",
+							"    pm.globals.set(\"ab_winner_md5_supression_campaign_link\", jsonData.payload.csv_url)",
+							"    pm.test(\"Link for md5 suppression campaign breakdown functionality\", function () {",
+							"        pm.expect(jsonData.payload.csv_url).to.not.be.null;",
+							"    });",
+							"} else {",
+							"    pm.test(\"Link for md5 suppression campaign breakdown functionality\", function () {",
+							"        pm.expect(jsonData.payload.csv_url).to.not.be.null;",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailing_suppression_breakdown/{{ab_winner_md5_suppression_campaign_level_campaign_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailing_suppression_breakdown",
+						"{{ab_winner_md5_suppression_campaign_level_campaign_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click_link_suppression_breakdown_list",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.text()\r",
+							"    var spli = jsonData.split(\",\")\r",
+							"    var suppression_contact = spli[4].split(\"list type\").join(\"  \").trim()\r",
+							"    if (pm.environment.get(\"env\") === \"All-Esps-Dev-28299\") {\r",
+							"        pm.test(\"AB winner md5 suppression campaign level breakdown functionality\", function () {\r",
+							"            pm.expect(suppression_contact).to.eql(\"505bf5012472bbcb311786729ff7c9f9\");\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.test(\"AB winner md5 suppression campaign level breakdown functionality\", function () {\r",
+							"            pm.expect(suppression_contact).to.eql(\"687e75013879a1a7867933e60d7a83df\");\r",
+							"        });\r",
+							"    }\r",
+							"} else {\r",
+							"    pm.test(\"AB winner md5 suppression campaign level breakdown functionality\", function () {\r",
+							"        pm.expect(suppression_contact).to.eql(\"505bf5012472bbcb311786729ff7c9f9\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ab_winner_md5_supression_campaign_link}}",
+					"host": [
+						"{{ab_winner_md5_supression_campaign_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{ab_winner_md5_suppression_camp_level_functionality_segment_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{ab_winner_md5_suppression_camp_level_functionality_segment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_supperssion_list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{ab_winner_md5_suppression_campaign_level_functionality_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{ab_winner_md5_suppression_campaign_level_functionality_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change_contact_status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ab_winner_md5_suppression_campaign_level_functionality_id\")\r",
+							"pm.globals.unset(\"ab_winner_md5_suppression_camp_level_functionality_segment_id\")\r",
+							"pm.globals.unset(\"ab_winner_md5_suppression_campaign_level_campaign_id\")\r",
+							"pm.globals.unset(\"open_mail_for_md5_abw_suppression_using_campaign_scope\")\r",
+							"pm.globals.unset(\"time_30\")\r",
+							"pm.globals.unset(\"count\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"remove\",\n    \"emails\": [\n        \"abw_md5_suppression_campaign_level_1{{connectionId}}@hoohem.com\",\n        \"abw_md5_suppression_campaign_level_2{{connectionId}}@hoohem.com\",\n        \"abw_md5_suppression_campaign_level_3{{connectionId}}@hoohem.com\",\n        \"abw_md5_suppression_campaign_level_4{{connectionId}}@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,1058 @@
+{
+	"info": {
+		"_postman_id": "19243a58-65e8-43b3-8ac9-f949d7290232",
+		"name": "TC_send_verify_segmentation_by_email_tag",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Segmentation~97a2a379-2ebf-4617-8e2a-bda7b4141f63/collection/6765444-19243a58-65e8-43b3-8ac9-f949d7290232?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create_contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"email_tag{{connectionId}}@hoohem.com\"\n    },\n    {\n        \"email\": \"email_tag_1{{connectionId}}@hoohem.com\"\n    },\n    {\n        \"email\": \"email_tag_2{{connectionId}}@hoohem.com\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 100sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create And Send Campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"email_tag{{connectionId}}@hoohem.com\",\n        \"email_tag_1{{connectionId}}@hoohem.com\",\n        \"email_tag_2{{connectionId}}@hoohem.com\"\n    ],\n    \"message_id\": {{email_tag_mgs_id}},\n    \"sending_connection_id\": {{connectionId}}\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 100sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read_mail_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    \r",
+							"    if(pm.environment.get('env') === 'all_esp_prod_segmantation') {\r",
+							"        var spli = jsonData.headerLines[0].line\r",
+							"    }else{\r",
+							"        var spli = jsonData.headerLines[2].line\r",
+							"    }\r",
+							"    \r",
+							"    var contact = spli.split(\":\")\r",
+							"    console.log(contact[1])\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(contact[1].split(' ').join('')).to.eql(\"email_tag\"+pm.globals.get('connectionId')+\"@hoohem.com\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(contact[1].split(' ').join('')).to.eql(\"email_tag\"+pm.globals.get('connectionId')+\"@hoohem.com\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"email_tag{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test TC send email tag from segment-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read_mai_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"\r",
+							"    if(pm.environment.get('env') === 'all_esp_prod_segmantation') {\r",
+							"        var spli = jsonData.headerLines[0].line\r",
+							"    }else{\r",
+							"        var spli = jsonData.headerLines[2].line\r",
+							"    }\r",
+							"\r",
+							"    var contact = spli.split(\":\")\r",
+							"    console.log(contact[1])\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(contact[1].split(' ').join('')).to.eql(\"email_tag_1\"+pm.globals.get('connectionId')+\"@hoohem.com\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(contact[1].split(' ').join('')).to.eql(\"email_tag_1\"+pm.globals.get('connectionId')+\"@hoohem.com\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"email_tag_1{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test TC send email tag from segment-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read_mail_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    \r",
+							"    if(pm.environment.get('env') === 'all_esp_prod_segmantation') {\r",
+							"        var spli = jsonData.headerLines[0].line\r",
+							"    }else{\r",
+							"        var spli = jsonData.headerLines[2].line\r",
+							"    }\r",
+							"\r",
+							"    var contact = spli.split(\":\")\r",
+							"    console.log(contact[1])\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(contact[1].split(' ').join('')).to.eql(\"email_tag_2\"+pm.globals.get('connectionId')+\"@hoohem.com\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Successfully mail received\", function () {\r",
+							"        pm.expect(contact[1].split(' ').join('')).to.eql(\"email_tag_2\"+pm.globals.get('connectionId')+\"@hoohem.com\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"email_tag_2{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test TC send email tag from segment-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"email_tag_segment_id\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Email Message With Tag Sent{{connectionId}}\",\r\n    \"type\": \"regular\",\r\n    \"description\": \"\",\r\n    \"included_segment_cache\": null,\r\n    \"excluded_segment_cache\": null,\r\n    \"criteria\": [\r\n        {\r\n            \"condition\": \"and\",\r\n            \"operator\": \"=\",\r\n            \"group\": \"\",\r\n            \"field_name\": \"sent\",\r\n            \"type\": \"behavioral\",\r\n            \"position\": 0,\r\n            \"operand\": {\r\n                \"email_tag_ids\": [\r\n                    {{email_tag_id}}\r\n                ],\r\n                \"time_range\": {\r\n                    \"operator\": \"in_the_last\",\r\n                    \"in_last\": \"30\",\r\n                    \"in_last_unit\": \"day\"\r\n                }\r\n            },\r\n            \"is_time_frame_hidden\": \"\",\r\n            \"left_parenthesis\": 0,\r\n            \"right_parenthesis\": 0\r\n        }\r\n    ],\r\n    \"default_whitelist_segment\": false,\r\n    \"segment_quota\": false,\r\n    \"default_exclude_segment\": 0,\r\n    \"default_include_segment\": 0\r\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Email_tag_segment_count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"email_tag_segment_count\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"segment_id\": \"{{email_tag_segment_id}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_counts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_counts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_email_tag_segment_count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if (pm.response.code === 200) {",
+							"    pm.test(\"Verify Segmentation by email tag is working in TC/Send campaign\", function () {",
+							"        pm.expect(jsonData.metadata.total).to.equal(\"3\");",
+							"    });",
+							"} else {",
+							"    pm.test(\"Verify Segmentation by email tag is working in TC/Send campaign\", function () {",
+							"        pm.expect('').to.equal('Segment count not found')",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_counts/{{email_tag_segment_count}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_counts",
+						"{{email_tag_segment_count}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate_contact_activity_report_on_segment",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"email_tag_report_id\", jsonData.payload.id);\r",
+							"pm.globals.unset(\"pre_date\")\r",
+							"pm.globals.unset(\"current_date\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Not clicked gmail contacts\",\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_created_date\",\n        \"ocx_status\",\n        \"sent\",\n        \"opens\",\n        \"clicks\",\n        \"ocx_unsubscribe_date\",\n        \"ocx_resubscribe_date\",\n        \"ocx_bounce_date\",\n        \"ocx_complaint_date\",\n        \"last_sent_date\",\n        \"last_open_date\"\n    ],\n    \"filters\": {\n        \"criteria\": [\n            {\n                \"field_name\": \"segment\",\n                \"type\": \"segment\",\n                \"operator\": \"=\",\n                \"operand\": [\n                    \"{{email_tag_segment_id}}\"\n                ],\n                \"case_sensitive\": 0,\n                \"condition\": \"and\"\n            }\n        ],\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    }\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate_contact_activity_report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"Verify Segmentation by email tag is working in transactional / Send campaign\", function () {\r",
+							"        pm.expect(jsonData.payload[0].email).to.be.oneOf([\"email_tag_2\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag_1\"+pm.globals.get('connectionId')+\"@hoohem.com\"]);\r",
+							"        pm.expect(jsonData.payload[1].email).to.be.oneOf([\"email_tag_2\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag_1\"+pm.globals.get('connectionId')+\"@hoohem.com\"]);\r",
+							"        pm.expect(jsonData.payload[2].email).to.be.oneOf([\"email_tag_2\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag_1\"+pm.globals.get('connectionId')+\"@hoohem.com\"]);\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Verify Segmentation by email tag is working in transactional / Send campaign\", function () {\r",
+							"        pm.expect(jsonData.payload[0].email).to.be.oneOf([\"email_tag_2\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag_1\"+pm.globals.get('connectionId')+\"@hoohem.com\"]);\r",
+							"        pm.expect(jsonData.payload[1].email).to.be.oneOf([\"email_tag_2\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag_1\"+pm.globals.get('connectionId')+\"@hoohem.com\"]);\r",
+							"        pm.expect(jsonData.payload[2].email).to.be.oneOf([\"email_tag_2\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag\"+pm.globals.get('connectionId')+\"@hoohem.com\", \"email_tag_1\"+pm.globals.get('connectionId')+\"@hoohem.com\"]);\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{email_tag_report_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity",
+						"{{email_tag_report_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete segment",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"email_tag_segment_id\")\r",
+							"pm.globals.unset(\"email_tag_segment_count\")\r",
+							"pm.globals.unset(\"email_tag_report_id\")\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{email_tag_segment_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{email_tag_segment_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

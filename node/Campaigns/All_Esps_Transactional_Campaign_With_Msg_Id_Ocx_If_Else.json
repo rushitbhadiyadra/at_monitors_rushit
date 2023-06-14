@@ -1,0 +1,472 @@
+{
+	"info": {
+		"_postman_id": "62694f0b-7386-4608-94e3-c2246ef8062c",
+		"name": "All_Esps_Transactional_Campaign_With_Msg_Id_Ocx_If_Else",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"tc_msgid_if_1_{{connectionId}}@hoohem.com\",\n        \"country\": \"India\"\n    },\n    {\n        \"email\": \"tc_msgid_if_2_{{connectionId}}@hoohem.com\",\n        \"country\": \"UK\"\n    },\n    {\n        \"email\": \"tc_msgid_if_3_{{connectionId}}@hoohem.com\",\n        \"country\": \"Russia\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"tc_msgid_if_1_{{connectionId}}@hoohem.com\",\n        \"tc_msgid_if_3_{{connectionId}}@hoohem.com\",\n        \"tc_msgid_if_2_{{connectionId}}@hoohem.com\"\n    ],\n    \"message_id\": {{tc_msg_if_email_id}},\n    \"sending_connection_id\": {{connectionId}},\n    \"create_contact\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_200",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var preaheder = data.split('>')",
+							"    var preaheder_2 = preaheder[9].split(\"<\")",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"Tc Msg Id If Preaheder is working\", function () {",
+							"        pm.expect(preaheder_2[0]).to.equal(\"Tc Msg Id Country is India-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Tc Msg Id If Body is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"Tc Msg Id Country is India-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Tc Msg Id If Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Tc Msg Id Country is India-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Tc Msg Id If is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tc_msgid_if_1_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Tc Msg Id Country is India-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var preaheder = data.split('>')",
+							"    var preaheder_2 = preaheder[9].split(\"<\")",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"Tc Msg Id Else If Preaheder is working\", function () {",
+							"        pm.expect(preaheder_2[0]).to.equal(\"Tc Msg Id Country is UK-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Tc Msg Id Else If Body is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"Tc Msg Id Country is UK-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Tc Msg Id Else If Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Tc Msg Id Country is UK-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Tc Msg Id Else If is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tc_msgid_if_2_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Tc Msg Id Country is UK-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var preaheder = data.split('>')",
+							"    var preaheder_2 = preaheder[9].split(\"<\")",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"Tc Msg Id Else Preaheder is working\", function () {",
+							"        pm.expect(preaheder_2[0]).to.equal(\"Tc Msg Id Country is Russia-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Tc Msg Id Else Body is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"Tc Msg Id Country is Russia-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Tc Msg Id Else Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Tc Msg Id Country is Russia-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Tc Msg Id Else is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tc_msgid_if_3_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Tc Msg Id Country is Russia-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

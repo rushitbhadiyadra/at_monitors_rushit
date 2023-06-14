@@ -1,0 +1,33 @@
+{
+	"id": "e9e63874-b79e-4d69-a03b-fdbdd1ebfad1",
+	"name": "local_env",
+	"values": [
+		{
+			"key": "api_domain",
+			"value": "https://developintg.ongage.net",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "username",
+			"value": "chirag@stepin-solutions.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "$tepinDev@28299",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "account_code",
+			"value": "si3",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-06-02T18:16:23.198Z",
+	"_postman_exported_using": "Postman/10.14.6-230530-1547"
+}

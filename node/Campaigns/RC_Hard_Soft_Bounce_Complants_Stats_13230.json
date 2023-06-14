@@ -1,0 +1,1654 @@
+{
+	"info": {
+		"_postman_id": "623b2123-fc01-436d-864b-1f2b1b63ed08",
+		"name": "RC_Hard_Soft_Bounce_Complants_Stats_13230",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-623b2123-fc01-436d-864b-1f2b1b63ed08?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Resubscribe Contact - 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_array_1\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\tvar arr = []",
+							"\tfor(let i=0;i<500;i++)",
+							"\t{",
+							"        test = `\"`+\"fake_esp\"+i+\"@hoohem.com\"+`\"`",
+							"\t\tarr.push(test)",
+							"\t}",
+							"pm.globals.set(\"contact_array_1\", arr)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        {{contact_array_1}}\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resubscribe Contact - 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_array_2\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\tvar arr = []",
+							"\tfor(let i=500;i<1000;i++)",
+							"\t{",
+							"        test = `\"`+\"fake_esp\"+i+\"@hoohem.com\"+`\"`",
+							"\t\tarr.push(test)",
+							"\t}",
+							"pm.globals.set(\"contact_array_2\", arr)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        {{contact_array_2}}\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact -1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_array_1\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var arr = []",
+							"\tfor(let i=0;i<500;i++)",
+							"\t{",
+							"        test = `{`+`\"email\"`+\":\"+`\"`+\"fake_esp\"+i+\"@hoohem.com\"+`\"`+`}`",
+							"\t\tarr.push(test);",
+							"\t}",
+							"pm.globals.set(\"contact_array_1\", arr)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {{contact_array_1}}\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact -2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_array_2\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var arr = []",
+							"\tfor(let i=500;i<1000;i++)",
+							"\t{",
+							"        test = `{`+`\"email\"`+\":\"+`\"`+\"fake_esp\"+i+\"@hoohem.com\"+`\"`+`}`",
+							"\t\tarr.push(test);",
+							"\t}",
+							"pm.globals.set(\"contact_array_2\", arr)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {{contact_array_2}}\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segmet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"    for (var segment of jsonData.payload) {",
+							"        if(segment.name === \"RC Hard Bounce Copmlants Stats\"){",
+							"            pm.globals.set(\"segment_id_fake_esp\", segment.id);",
+							"            postman.setNextRequest(\"Send_Mail\")",
+							"        }",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create segment for campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"pm.globals.set(\"segment_id_fake_esp\", jsonData.payload.id);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\tvar arr = []",
+							"\tfor(let i=0;i<1000;i++)",
+							"\t{",
+							"        test = `\"`+\"fake_esp\"+i+\"@hoohem.com\"+`\"`",
+							"\t\tarr.push(test)",
+							"\t}",
+							"pm.globals.set(\"contact_seg_array\", arr)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"RC Hard Bounce Copmlants Stats\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{fake_esp_list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                {{contact_seg_array}}\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=400",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "400"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_Mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"fake_esp_campaign_id\" , jsonData.payload.id);",
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"RC Hard Soft Bounce Complants Stats\",\n    \"email_message\": {{fake_esp_email_msg}},\n    \"segments\": [\n        {{segment_id_fake_esp}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{fake-esp-privatesmtp}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time_30}},\n    \"emails_limit_active\": true,\n    \"emails_limit_global_active\": true\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 600",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 600",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 600",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate aggregate report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Test Fake Esps Open stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].unique_opens)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test Fake Esps Sent stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].sent)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test Fake Esps Click stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].clicks)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test Fake Esps Unsubscribes stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].unsubscribes)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test Fake Esps SoftBounce stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].soft_bounces)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test Fake Esps HardBounce stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].hard_bounces)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test Fake Esps complaints stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].complaints)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test Fake Esps Success stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].success)).to.be.above(0);",
+							"});",
+							"// pm.globals.unset(\"fake_esp_campaign_id\");",
+							"pm.globals.unset(\"segment_id_fake_esp\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"select\": [\n        \"mailing_name\",\n        \"mailing_type\",\n        \"split_type\",\n        \"mailing_name_id\",\n        [\n            \"MAX(`stats_date`)\",\n            \"stats_date\"\n        ],\n        [\n            \"MAX(`delivery_timestamp`)\",\n            \"delivery_timestamp\"\n        ],\n        [\n            \"schedule_date\",\n            \"schedule_date\"\n        ],\n        \"sum(`targeted`)\",\n        \"sum(`sent`)\",\n        \"sum(`success`)\",\n        \"sum(`failed`)\",\n        \"sum(`opens`)\",\n        \"sum(`unique_opens`)\",\n        \"sum(`unsubscribes`)\",\n        \"sum(`complaints`)\",\n        \"sum(`clicks`)\",\n        \"sum(`unique_clicks`)\",\n        \"sum(`soft_bounces`)\",\n        \"sum(`hard_bounces`)\",\n        \"mailing_id\",\n        \"sum(`post_back_clicks`)\"\n    ],\n    \"from\": \"mailing\",\n    \"group\": [\n        \"mailing_id\"\n    ],\n    \"order\": [\n        [\n            \"delivery_timestamp\",\n            \"desc\"\n        ]\n    ],\n    \"filter\": [\n        [\n            \"mailing_id\",\n            \"IN\",\n            [\n                {{fake_esp_campaign_id}}\n            ]\n        ]\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/reports/query",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"reports",
+						"query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Unsub contact activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date) "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"fake_esp_unsubscribedcontact_activity_id\" , jsonData.payload.id);",
+							"pm.globals.unset(\"pre_date\")",
+							"pm.globals.unset(\"current_date\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"RC unsubscribed Contact activity\",\n    \"include_behavior\": true,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"field_name\": \"sent\",\n                \"type\": \"behavioral\",\n                \"operator\": \"=\",\n                \"operand\": {\n                    \"mailing_ids\": [\n                        {{fake_esp_campaign_id}}\n                    ]\n                },\n                \"condition\": \"and\"\n            }\n        ],\n        \"user_type\": \"unsubscribed\",\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_unsubscribe_date\",\n        \"ocx_resubscribe_date\",\n        \"ocx_bounce_date\",\n        \"ocx_complaint_date\",\n        \"last_sent_date\",\n        \"last_open_date\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contact_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contact_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Hard Bounce contact activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date) "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"fake_esp_hardbounced_contact_activity_id\" , jsonData.payload.id);",
+							"pm.globals.unset(\"pre_date\")",
+							"pm.globals.unset(\"current_date\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"RC Hard Bounce Contact activity\",\n    \"include_behavior\": true,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"field_name\": \"sent\",\n                \"type\": \"behavioral\",\n                \"operator\": \"=\",\n                \"operand\": {\n                    \"mailing_ids\": [\n                        {{fake_esp_campaign_id}}\n                    ]\n                },\n                \"condition\": \"and\"\n            }\n        ],\n        \"user_type\": \"bounced\",\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_unsubscribe_date\",\n        \"ocx_resubscribe_date\",\n        \"ocx_bounce_date\",\n        \"ocx_complaint_date\",\n        \"last_sent_date\",\n        \"last_open_date\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contact_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contact_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate complaint contact activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date) "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"fake_esp_complaint_contact_activity_id\" , jsonData.payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"RC Complaint Contact activity\",\n    \"include_behavior\": true,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"field_name\": \"sent\",\n                \"type\": \"behavioral\",\n                \"operator\": \"=\",\n                \"operand\": {\n                    \"mailing_ids\": [\n                        {{fake_esp_campaign_id}}\n                    ]\n                },\n                \"condition\": \"and\"\n            }\n        ],\n        \"user_type\": \"complaint\",\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_unsubscribe_date\",\n        \"ocx_resubscribe_date\",\n        \"ocx_bounce_date\",\n        \"ocx_complaint_date\",\n        \"last_sent_date\",\n        \"last_open_date\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contact_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contact_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Unsub Contact activity result",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"var unsub_count = 0",
+							"pm.globals.set(\"unsub_contact\", jsonData.payload[0].email);",
+							"    for (var unsubemail of jsonData.payload) {",
+							"        if(unsubemail.status !== \"Unsubscribed\"){",
+							"            unsub_count += 1",
+							"        pm.test(\"Test Unsubscribes stats\", function() {",
+							"    pm.expect(\"\").eql(\"Unsubscribed status not Found\")});",
+							"        }",
+							"    }",
+							"pm.test(\"Test Unsubscribes stats\", function() {",
+							"    pm.expect(unsub_count).to.be.eql(0)});",
+							"",
+							"pm.globals.unset(\"fake_esp_unsubscribedcontact_activity_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contact_activity/{{fake_esp_unsubscribedcontact_activity_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contact_activity",
+						"{{fake_esp_unsubscribedcontact_activity_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Complaint  Contact activity result",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"var complaint_count = 0",
+							"pm.globals.set(\"complaint_contact\", jsonData.payload[0].email);",
+							"    for (var complaintemail of jsonData.payload) {",
+							"        if(complaintemail.status !== \"Complained\"){",
+							"            complaint_count += 1",
+							"        pm.test(\"Test Complained stats\", function() {",
+							"    pm.expect(\"\").eql(\"Complained status not Found\")});",
+							"        }",
+							"    }",
+							"pm.test(\"Test Complained stats\", function() {",
+							"    pm.expect(complaint_count).to.be.eql(0)});",
+							"pm.globals.unset(\"fake_esp_complaint_contact_activity_id\");",
+							"pm.globals.unset(\"fake_esp_campaign_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contact_activity/{{fake_esp_complaint_contact_activity_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contact_activity",
+						"{{fake_esp_complaint_contact_activity_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get hardbouce Contact activity result",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"var hrdbounce_count = 0",
+							"pm.globals.set(\"hardbounce_contact\", jsonData.payload[0].email);",
+							"    for (var hrdbounceemail of jsonData.payload) {",
+							"        if(hrdbounceemail.status !== \"Hard Bounce\"){",
+							"            hrdbounce_count += 1",
+							"        pm.test(\"Test Hard Bounce stats\", function() {",
+							"    pm.expect(\"\").eql(\"Hard Bounce status not Found\")});",
+							"        }",
+							"    }",
+							"pm.test(\"Test Hard Bounce stats\", function() {",
+							"    pm.expect(hrdbounce_count).to.be.eql(0)});",
+							"pm.globals.unset(\"fake_esp_hardbounced_contact_activity_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contact_activity/{{fake_esp_hardbounced_contact_activity_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contact_activity",
+						"{{fake_esp_hardbounced_contact_activity_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Unsub Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Test Unsubscribes stats\", function() {",
+							"    pm.expect(jsonData.payload.ocx_status).eql(\"Unsubscribed\")});",
+							"pm.globals.unset(\"unsub_contact\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contacts/by_email/{{unsub_contact}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"{{unsub_contact}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Hardbounce Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Test Hard Bounce stats\", function() {",
+							"    pm.expect(jsonData.payload.ocx_status).eql(\"Hard Bounce\")});",
+							"pm.globals.unset(\"hardbounce_contact\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contacts/by_email/{{hardbounce_contact}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"{{hardbounce_contact}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Complaint Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Test Complained stats\", function() {",
+							"    pm.expect(jsonData.payload.ocx_status).eql(\"Complained\")});",
+							"pm.globals.unset(\"complaint_contact\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/contacts/by_email/{{complaint_contact}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"{{complaint_contact}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resubscribe Contact - 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_array_1\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\tvar arr = []",
+							"\tfor(let i=0;i<500;i++)",
+							"\t{",
+							"        test = `\"`+\"fake_esp\"+i+\"@hoohem.com\"+`\"`",
+							"\t\tarr.push(test)",
+							"\t}",
+							"pm.globals.set(\"contact_array_1\", arr)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{fake_esp_username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{fake_esp_password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{fake_esp_account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        {{contact_array_1}}\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resubscribe Contact - 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_array_2\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\tvar arr = []",
+							"\tfor(let i=500;i<1000;i++)",
+							"\t{",
+							"        test = `\"`+\"fake_esp\"+i+\"@hoohem.com\"+`\"`",
+							"\t\tarr.push(test)",
+							"\t}",
+							"pm.globals.set(\"contact_array_2\", arr)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{fake_esp_username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{fake_esp_password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{fake_esp_account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        {{contact_array_2}}\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{fake_esp_list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{fake_esp_list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,668 @@
+{
+	"info": {
+		"_postman_id": "11a6a250-73f8-4f88-95aa-20c527a1cce3",
+		"name": "Import_invalid_file_url_&_with_basic_authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Segmentation~97a2a379-2ebf-4617-8e2a-bda7b4141f63/collection/6765444-11a6a250-73f8-4f88-95aa-20c527a1cce3?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Import invalid csv file url",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text()\r",
+							"if (pm.response.code == 412) {\r",
+							"    var data = jsonData.split(\":\")\r",
+							"    var invalid = data[8].split(\"-\")\r",
+							"    console.log(invalid[0])\r",
+							"    pm.test(\"Import invalid csv file\", function () {\r",
+							"        pm.expect(invalid[0]).to.eql(\" file_url is invalid \");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Import invalid csv file\", function () {\r",
+							"        pm.expect(invalid[0]).to.eql(\" file_url is invalid \");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"list_id\": {{list_id}},\r\n\"file_url\": \"http://ongageqa.site/import suppression.csv\",\r\n\"csv_delimiter\": \",\",\r\n\"import_action\" : \"add\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/import",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import invalid csv file without header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"if(pm.response.code === 200){\r",
+							"    pm.globals.set(\"invalid_csv_file_without_header\",jsonData.payload.id)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"list_id\": {{list_id}},\r\n\"file_url\": \"http://ongageqa.site/csv_file_without_header.csv\",\r\n\"csv_delimiter\": \",\",\r\n\"import_action\" : \"add\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/import",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get invalid csv file without header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"if (pm.response.code === 200) {\r",
+							"    pm.test(\"Import invalid csv file without header\", function () {\r",
+							"        pm.expect(jsonData.payload.status_desc).to.eql(\"Invalid\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Import invalid csv file without header\", function () {\r",
+							"        pm.expect(jsonData.payload.status_desc).to.eql(\"Invalid\");\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.unset(\"invalid_csv_file_without_header\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/import/{{invalid_csv_file_without_header}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"import",
+						"{{invalid_csv_file_without_header}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import valid excel file",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text()\r",
+							"if (pm.response.code == 412) {\r",
+							"    var data = jsonData.split(\":\")\r",
+							"    var invalid = data[8].split(\"-\")\r",
+							"    console.log(invalid[0])\r",
+							"    pm.test(\"Import Excel file\", function () {\r",
+							"        pm.expect(invalid[0]).to.eql(\" file_url is invalid \");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Import Excel file\", function () {\r",
+							"        pm.expect(invalid[0]).to.eql(\" file_url is invalid \");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"list_id\": {{list_id}},\r\n\"file_url\": \"http://ongageqa.site/Excel_file.xls \",\r\n\"csv_delimiter\": \",\",\r\n\"import_action\" : \"add\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/import",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import valid csv file url with basic authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"list_id\": {{list_id}},\r\n\"file_url\": \"https://fp_204:IrkHFGPeffB{@demo.projects.stepinsolutions.in/fp_204/FP_204.csv\",\r\n\"csv_delimiter\": \",\",\r\n\"import_action\" : \"add\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/import",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get valid csv file url with basic authentication info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"if (pm.response.code == 200) {\r",
+							"    pm.test(\"Valid csv file successfully import\", function () {\r",
+							"        pm.expect(jsonData.payload.email).to.eql(\"dhaval.stepin@gmail.com\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Status code is 200\", function () {\r",
+							"        pm.expect(jsonData.payload.email).to.eql(\"dhaval.stepin@gmail.com\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/dhaval.stepin@gmail.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"dhaval.stepin@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove valid csv file url with basic authentication info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"list_id\": {{list_id}},\r\n\"file_url\": \"https://fp_204:IrkHFGPeffB{@demo.projects.stepinsolutions.in/fp_204/FP_204.csv\",\r\n\"csv_delimiter\": \",\",\r\n\"import_action\" : \"remove\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/import",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import csv file url with basic authentication with wrong password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text()\r",
+							"if (pm.response.code == 412) {\r",
+							"    var data = jsonData.split(\":\")\r",
+							"    var invalid = data[9].split(\"-\")\r",
+							"    var auth = invalid[1].split(\"}\")\r",
+							"    var authentication = auth[0].replace('\"', '')\r",
+							"    pm.test(\"Import csv file with basic authentication with wrong password\", function () {\r",
+							"        pm.expect(authentication).to.eql(\" basic auth failed\");\r",
+							"    })\r",
+							"} else {\r",
+							"    pm.test(\"Import csv file with basic authentication with wrong password\", function () {\r",
+							"        pm.expect(authentication).to.eql(\" basic auth failed\");\r",
+							"    })\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"list_id\": {{list_id}},\r\n\"file_url\": \"https://fp_204:hdgsrse{@demo.projects.stepinsolutions.in/fp_204/FP_204.csv\",\r\n\"csv_delimiter\": \",\",\r\n\"import_action\" : \"add\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/import",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import csv file url with basic authentication without username & password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text()\r",
+							"if (pm.response.code == 412) {\r",
+							"    var data = jsonData.split(\":\")\r",
+							"    var invalid = data[8].split(\"-\")\r",
+							"    console.log(invalid[0])\r",
+							"    pm.test(\"Import csv file with basic authentication without username & password\", function () {\r",
+							"        pm.expect(invalid[0]).to.eql(\" file_url is invalid \");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Import csv file with basic authentication without username & password\", function () {\r",
+							"        pm.expect(invalid[0]).to.eql(\" file_url is invalid \");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"list_id\": {{list_id}},\r\n\"file_url\": \"https://demo.projects.stepinsolutions.in/fp_204/FP_204.csv\",\r\n\"csv_delimiter\": \",\",\r\n\"import_action\" : \"add\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/import",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"import"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

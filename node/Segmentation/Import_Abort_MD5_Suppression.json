@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "407514a1-bf43-4334-b258-f01f7eccdd58",
+		"name": "Import_Abort_MD5_Suppression",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Segmentation~97a2a379-2ebf-4617-8e2a-bda7b4141f63/collection/6765444-407514a1-bf43-4334-b258-f01f7eccdd58?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create Import",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.globals.set(\"import_abort_id_md5_suppression\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{import_abort_list_id_md5}},\n    \"file_url\": \"http://demo.projects.stepinsolutions.in/automation_qa/2k_valid.csv\",\n    \"csv_delimiter\": \",\",\n    \"encoding\": \"UTF-8\",\n    \"overwrite\": true,\n    \"ignore_empty\": true,\n    \"send_welcome_message\": false\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{import_abort_list_id_md5}}/api/import",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{import_abort_list_id_md5}}",
+						"api",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Abort Import",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {\r",
+							"    pm.test(\"Check Import Aborted properly\", function () {\r",
+							"        pm.expect(pm.response.code).to.equal(200);\r",
+							"    });\r",
+							"}else{\r",
+							"    pm.test(\"Check Import Aborted properly\", function () {\r",
+							"        pm.expect(pm.response.code).to.equal(200);\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{import_abort_list_id_md5}}/api/import/{{import_abort_id_md5_suppression}}/abort",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{import_abort_list_id_md5}}",
+						"api",
+						"import",
+						"{{import_abort_id_md5_suppression}}",
+						"abort"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Import Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"Check Import Aborted properly\", function () {\r",
+							"        pm.expect(jsonData.payload.status_desc).to.equal(\"Aborted\");\r",
+							"        pm.expect(jsonData.payload.success).to.equal('0');\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.unset(\"import_abort_id_md5_suppression\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{import_abort_list_id_md5}}/api/import/{{import_abort_id_md5_suppression}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{import_abort_list_id_md5}}",
+						"api",
+						"import",
+						"{{import_abort_id_md5_suppression}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

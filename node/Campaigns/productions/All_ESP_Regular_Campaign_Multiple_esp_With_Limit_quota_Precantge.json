@@ -1,0 +1,1763 @@
+{
+	"info": {
+		"_postman_id": "86f6a8a1-0e2d-4b65-b679-65c8eb937678",
+		"name": "All_ESP_Regular_Campaign_Multiple_esp_With_Limit_quota_Precantge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-86f6a8a1-0e2d-4b65-b679-65c8eb937678?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\tvar arr = []\r",
+							"\tfor(let i=0;i<59;i++)\r",
+							"\t{\r",
+							"        test = `\"`+\"rc_multi_esp_percentage\"+i+\"@hoohem.com\"+`\"`\r",
+							"\t\tarr.push(test)\r",
+							"\t}\r",
+							"pm.globals.set(\"contact_array\", arr)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_array\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        {{contact_array}}\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var arr = []\r",
+							"\tfor(let i=0;i<59;i++)\r",
+							"\t{\r",
+							"        test = `{`+`\"email\"`+\":\"+`\"`+\"rc_multi_esp_percentage\"+i+\"@hoohem.com\"+`\"`+`}`\r",
+							"\t\tarr.push(test);\r",
+							"\t}\r",
+							"pm.globals.set(\"contact_array\", arr)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_array\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {{contact_array}}\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"var count = 0",
+							"if(jsonData.payload.length > 0){",
+							"        for (var segment of jsonData.payload) {",
+							"            if(segment.name === \"All ESP Multipal Esp With Limit Quota Percentage-\" + pm.globals.get(\"connectionId\")){",
+							"                count += 1",
+							"                pm.globals.set(\"all_esps_multipal_essp_percentage_segment_id\", segment.id);",
+							"                ",
+							"        }",
+							"    }",
+							"}",
+							"if(count === 1){",
+							"    postman.setNextRequest('Create_campaign_and_run');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esps_multipal_essp_percentage_segment_id\", jsonData.payload.id);",
+							"pm.globals.get(\"contact_array\")"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\tvar arr = []\r",
+							"\tfor(let i=0;i<59;i++)\r",
+							"\t{\r",
+							"        test = `\"`+\"rc_multi_esp_percentage\"+i+\"@hoohem.com\"+`\"`\r",
+							"\t\tarr.push(test)\r",
+							"\t}\r",
+							"pm.globals.set(\"contact_array\", arr)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESP Multipal Esp With Limit Quota Percentage-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                {{contact_array}}\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_campaign_and_run",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_multiple_esp_with_limit_precantge\", jsonData.payload.id);",
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESP Multipal Esp With Limit Quota Percentage\",\n    \"list_id\": {{list_id}},\n    \"email_message\": {{msg_id_rc_multi_esp_with_limit_percentage}},\n    \"segments\": [\n        {{all_esps_multipal_essp_percentage_segment_id}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": \"17\"\n        },\n        {\n            \"esp_connection_id\": {{connectionId1}},\n            \"percent\": \"17\"\n        },\n        {\n            \"esp_connection_id\": {{connectionId2}},\n            \"percent\": \"17\"\n        },\n        {\n            \"esp_connection_id\": {{connectionId3}},\n            \"percent\": \"17\"\n        },\n        {\n            \"esp_connection_id\": {{connectionId4}},\n            \"percent\": \"16\"\n        },\n        {\n            \"esp_connection_id\": {{connectionId5}},\n            \"percent\": \"16\"\n        }\n    ],\n    \"schedule_date\": {{time_30}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 100 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"// console.log(jsonData[0].subject)",
+							"if(jsonData.length > 0){",
+							"     pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData[0].subject).to.eql(\"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData.length).to.above(1);",
+							"    });",
+							"}",
+							"else{",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(\" \").to.eql(pm.globals.get(\"connectionId\")+\" - ConnectionId Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"// console.log(jsonData[0].subject)",
+							"if(jsonData.length > 0){",
+							"     pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData[0].subject).to.eql(\"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-\"+pm.globals.get(\"connectionId1\"));",
+							"    });",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData.length).to.above(1);",
+							"    });",
+							"}",
+							"else{",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(\" \").to.eql(pm.globals.get(\"connectionId1\")+\" - ConnectionId Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId1}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId1}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"// console.log(jsonData[0].subject)",
+							"if(jsonData.length > 0){",
+							"     pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData[0].subject).to.eql(\"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-\"+pm.globals.get(\"connectionId2\"));",
+							"    });",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData.length).to.above(1);",
+							"    });",
+							"}",
+							"else{",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(\" \").to.eql(pm.globals.get(\"connectionId2\")+\" - ConnectionId Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId2}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mail 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId2}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"// console.log(jsonData[0].subject)",
+							"if(jsonData.length > 0){",
+							"     pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData[0].subject).to.eql(\"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-\"+pm.globals.get(\"connectionId3\"));",
+							"    });",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData.length).to.above(1);",
+							"    });",
+							"}",
+							"else{",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(\" \").to.eql(pm.globals.get(\"connectionId3\")+\" - ConnectionId Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId3}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mail 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId3}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"// console.log(jsonData[0].subject)",
+							"if(jsonData.length > 0){",
+							"     pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData[0].subject).to.eql(\"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-\"+pm.globals.get(\"connectionId4\"));",
+							"    });",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData.length).to.above(1);",
+							"    });",
+							"}",
+							"else{",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(\" \").to.eql(pm.globals.get(\"connectionId4\")+\" - ConnectionId Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId4}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId4}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mail 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId4}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId4}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"// console.log(jsonData[0].subject)",
+							"if(jsonData.length > 0){",
+							"     pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData[0].subject).to.eql(\"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-\"+pm.globals.get(\"connectionId5\"));",
+							"    });",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(jsonData.length).to.above(1);",
+							"    });",
+							"}",
+							"else{",
+							"    pm.test(\"Test All ESP multiple esp is working\", function() {",
+							"        pm.expect(\" \").to.eql(pm.globals.get(\"connectionId5\")+\" - ConnectionId Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId5}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId5}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mail 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId5}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Test Regular Campaign With Multipal Esp With Limit Quota Percentage-{{connectionId5}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"if(pm.response.code === 200)\r",
+							"{\r",
+							"    if((jsonData.payload) instanceof Array)\r",
+							"    {\r",
+							"        pm.globals.set(\"mail_count\", 0);\r",
+							"        postman.setNextRequest('Set_variable_in_webhook');\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"\r",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){\r",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"\r",
+							"        }\r",
+							"        var connectionName='';\r",
+							"        for(var i=0;i<jsonData.payload.distribution.length;i++)\r",
+							"        {\r",
+							"            if(jsonData.payload.distribution[i]['esp_id'] !== undefined && jsonData.payload.distribution[i]['esp_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"            if(jsonData.payload.distribution[i]['name'] !== undefined && jsonData.payload.distribution[i]['name'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Name \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['name']+\"</td></tr>\"\r",
+							"            }\r",
+							"            connectionName += jsonData.payload.distribution[i]['name']+\",\";\r",
+							"            if(jsonData.payload.distribution[i]['esp_connection_id'] !== undefined && jsonData.payload.distribution[i]['esp_connection_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_connection_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"        }\r",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"\r",
+							"        }\r",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){\r",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"\r",
+							"        // }\r",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"\r",
+							"        pm.globals.set(\"html_code\", tableHtml);\r",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')\r",
+							"        {\r",
+							"            pm.globals.set(\"html_code\", tableHtml);\r",
+							"            pm.globals.set(\"mail_count\", 1);\r",
+							"        }\r",
+							"        else\r",
+							"        {\r",
+							"            pm.globals.set(\"mail_count\", 0);\r",
+							"            postman.setNextRequest('Set_variable_in_webhook');\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"else\r",
+							"{\r",
+							"    pm.globals.set(\"mail_count\", 0);\r",
+							"    postman.setNextRequest('Set_variable_in_webhook');\r",
+							"}\r",
+							"pm.globals.unset(\"all_esps_multipal_essp_percentage_segment_id\")"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{campaign_id_multiple_esp_with_limit_precantge}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{campaign_id_multiple_esp_with_limit_precantge}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error-Campaign Test Cases Detail with {{esp_name}} on {{ongage_env}}\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

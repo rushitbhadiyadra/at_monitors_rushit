@@ -1,0 +1,803 @@
+{
+	"info": {
+		"_postman_id": "bf31e745-a1fb-41a5-b94a-4658bc3bb33d",
+		"name": "vr_ab_winner_error_content_flag_True_for_dynamic_content",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-bf31e745-a1fb-41a5-b94a-4658bc3bb33d?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "read mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.test(\"AB Winner For Send Empty Content Flag True\", function () {\r",
+							"        pm.expect(jsonData.html).to.include(\"<p></p>\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"AB Winner For Send Empty Content Flag True\", function () {\r",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received For Error Content Flag True\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_winner_flag_true_2@hoohem.com\",\r\n    \"subject\": \"Verify AB Winner send_error_content flag True for dynamic content-{{connectionId}}\",\r\n    \"timeout\": 80000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"email\": \"ab_winner_flag_true_1@hoohem.com\",\r\n        \"address\": \"ahmedabad\",\r\n        \"country\": \"India\",\r\n        \"first_name\": \"Si\",\r\n        \"last_name\": \"Dev2\",\r\n        \"gender\": \"Male\",\r\n        \"ip\": \"50.18.254.253\",\r\n        \"job_title\": \"LPN\",\r\n        \"language\": \"English\",\r\n        \"phone\": \"1234567890\",\r\n        \"os\": \"Linux\",\r\n        \"product_id\": 123,\r\n        \"dob\": \"03/10/2020\",\r\n        \"city\": \"bhavnagar\",\r\n        \"street_name\": \"Radha and Krishana\",\r\n        \"society_name\": \"Radha & Krishana\",\r\n        \"middle_name\": \"ongage's\",\r\n        \"state\": \"Gujarat\",\r\n        \"query\": \"sales\",\r\n        \"location\": \"78759\",\r\n        \"industry\": \"sales\",\r\n        \"keyword\": \"marketing\",\r\n        \"zip\": \"63090\",\r\n        \"search\": \"sales\",\r\n        \"userip\": \"108.200.249.191\",\r\n        \"s1\": \"ong166\",\r\n        \"useragent\": \"useragent\",\r\n        \"zip1\": \"95050\"\r\n    },\r\n    {\r\n        \"email\": \"ab_winner_flag_true_2@hoohem.com\",\r\n        \"address\": \"ahmedabad\",\r\n        \"country\": \"India\",\r\n        \"first_name\": \"Si\",\r\n        \"last_name\": \"Dev2\",\r\n        \"gender\": \"Male\",\r\n        \"ip\": \"50.18.254.253\",\r\n        \"job_title\": \"LPN\",\r\n        \"language\": \"English\",\r\n        \"phone\": \"1234567890\",\r\n        \"os\": \"Linux\",\r\n        \"product_id\": 123,\r\n        \"dob\": \"03/10/2020\",\r\n        \"city\": \"bhavnagar\",\r\n        \"street_name\": \"Radha and Krishana\",\r\n        \"society_name\": \"Radha & Krishana\",\r\n        \"middle_name\": \"ongage's\",\r\n        \"state\": \"Gujarat\",\r\n        \"query\": \"sales\",\r\n        \"location\": \"78759\",\r\n        \"industry\": \"sales\",\r\n        \"keyword\": \"marketing\",\r\n        \"zip\": \"63090\",\r\n        \"search\": \"sales\",\r\n        \"userip\": \"108.200.249.191\",\r\n        \"s1\": \"ong166\",\r\n        \"useragent\": \"useragent\",\r\n        \"zip1\": \"95050\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay 200sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get old segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"var count = 0\r",
+							"if (jsonData.payload.length > 0) {\r",
+							"    for (var segment of jsonData.payload) {\r",
+							"        if (segment.name === \"Verify AB-Winner Segment For Error Content Flag True\") {\r",
+							"            count += 1\r",
+							"            pm.globals.set(\"old_segment_ab_winner_campaign\", segment.id);\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"if (count === 0) {\r",
+							"    postman.setNextRequest('create segment');\r",
+							"}   "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete old segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_segment_ab_winner_campaign\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_ab_winner_campaign}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_segment_ab_winner_campaign}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"ab_winner_campaign_segment_id\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Verify AB-Winner Segment For Error Content Flag True\",\r\n    \"type\": \"Active\",\r\n    \"description\": \"\",\r\n    \"included_segment_cache\": null,\r\n    \"excluded_segment_cache\": null,\r\n    \"is_whitelist\": false,\r\n    \"criteria\": [\r\n        {\r\n            \"condition\": \"and\",\r\n            \"group\": \"\",\r\n            \"field_id\": \"{{list_field_email_id}}\",\r\n            \"field_name\": \"\",\r\n            \"type\": \"email\",\r\n            \"position\": 0,\r\n            \"is_external_operand\": false,\r\n            \"operator\": \"=\",\r\n            \"operand\": [\r\n                \"ab_winner_flag_true_1@hoohem.com\",\r\n                \"ab_winner_flag_true_2@hoohem.com\"\r\n            ],\r\n            \"is_external_operand_exists\": \"0\",\r\n            \"left_parenthesis\": 0,\r\n            \"right_parenthesis\": 0\r\n        }\r\n    ],\r\n    \"default_whitelist_segment\": false,\r\n    \"default_exclude_segment\": 0,\r\n    \"default_include_segment\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay 200sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"ab_winner_campaign_mailling_id\" , jsonData.payload.id);\r",
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"All Esp AB Winner Dynamic Ocx Feed\",\r\n    \"type\": \"split\",\r\n    \"list_id\": {{list_id}},\r\n    \"split_type\": \"email\",\r\n    \"email_message\": [\r\n        {{ab_winner_error_content_flag_true_msg_id}},\r\n        {{all_esp_ab_winner_common_message}}\r\n    ],\r\n    \"segments\": [\r\n        \"{{ab_winner_campaign_segment_id}}\"\r\n    ],\r\n    \"distribution\": [\r\n        {\r\n            \"esp_connection_id\": {{connectionId}},\r\n            \"percent\": \"100\"\r\n        }\r\n    ],\r\n    \"schedule_date\": {{time_30}},\r\n    \"notify_onlaunch\": \"0\",\r\n    \"notify_onfaile d\": \"0\",\r\n    \"notify_oncomplete\": \"0\",\r\n    \"has_winner_settings\": true,\r\n    \"winner_is_quota_percent\": \"0\",\r\n    \"winner_quota_value\": \"1\",\r\n    \"winner_conversion_field\": \"unique_opens\",\r\n    \"winner_send_after_hours\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay 200sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.globals.set(\"vr_ab_win_flag_true_open_link\", jsonData.HTMLOpenLinks[0]);\r",
+							"    pm.test(\"AB Winner For Send Empty Content Flag True\", function () {\r",
+							"        pm.expect(jsonData.html).to.include(\"<p></p>\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"AB Winner For Send Empty Content Flag True\", function () {\r",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received For Error Content Flag True\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_winner_flag_true_1@hoohem.com\",\r\n    \"subject\": \"Verify AB Winner send_error_content flag True for dynamic content-{{connectionId}}\",\r\n    \"timeout\": 80000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "open mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"vr_ab_win_flag_true_open_link\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{vr_ab_win_flag_true_open_link}}",
+					"host": [
+						"{{vr_ab_win_flag_true_open_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove contacts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"list_id\": {{list_id}},\r\n    \"change_to\": \"remove\",\r\n    \"emails\": [\r\n        \"ab_winner_flag_true_1@hoohem.com\",\r\n        \"ab_winner_flag_true_2@hoohem.com\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ab_winner_campaign_segment_id\");\r",
+							"pm.globals.unset(\"ab_winner_campaign_mailling_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{ab_winner_campaign_segment_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{ab_winner_campaign_segment_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

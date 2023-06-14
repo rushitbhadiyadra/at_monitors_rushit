@@ -1,0 +1,562 @@
+{
+	"info": {
+		"_postman_id": "4f1b479c-9a71-49e6-a746-43502c415201",
+		"name": "All_Esp_Event_With_Phoenix_Timestamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Readmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"     pm.test(\"Test Event Campaign With Timestampe\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"Test Event Campaign With Phoenix Timestampe-\"+pm.environment.get(\"phoenix_connection_id\"));",
+							"",
+							"    });",
+							"}else{",
+							"    pm.test(\"mail not received\", function() {",
+							"        pm.expect(\"\").to.equal(\"Test Event Campaign With Phoenix Timestampe-\"+pm.environment.get(\"phoenix_connection_id\"));",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_phoenix_timestamp1@hoohem.com\",\n    \"subject\": \"Test Event Campaign With Phoenix Timestampe-{{phoenix_connection_id}}\",\n    \"timeout\": 100000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{phoenix_list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"rc_phoenix_timestamp1@hoohem.com\",\n        \"rc_phoenix_timestamp2@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{phoenix_list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{phoenix_list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if (jsonData.payload.length > 0) {",
+							"    for (var event of jsonData.payload) {",
+							"        if (event.name === \"All ESP Event With Phoenix Timestamp-\" + pm.environment.get(\"phoenix_connection_id\")) {",
+							"            pm.globals.set(\"old_event_id_event_phoenix_timestamp\", event.id);",
+							"        }",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{phoenix_list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{phoenix_list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Event",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_event_id_event_phoenix_timestamp\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{phoenix_list_id}}/api/events/{{old_event_id_event_phoenix_timestamp}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{phoenix_list_id}}",
+						"api",
+						"events",
+						"{{old_event_id_event_phoenix_timestamp}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay_1_sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create event",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const dates = Date.now() + 600000",
+							"var date = new Date(dates);",
+							"var hours = date.getUTCHours() - 5",
+							"pm.globals.set(\"event_list_hours\", hours);",
+							"pm.globals.set(\"event_list_minutes\", date.getUTCMinutes());"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"event_list_hours\");",
+							"pm.globals.unset(\"event_list_minutes\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESP Event With Phoenix Timestamp-{{phoenix_connection_id}}\",\n    \"description\": \"\",\n    \"event_type\": \"event_list\",\n    \"based_on\": \"recurring\",\n    \"ongoing_event\": true,\n    \"status\": true,\n    \"segments\": [\n        \"{{rc_timestamp_phoenix_segment_id}}\"\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{phoenix_connection_id}},\n            \"domain\": \"default\",\n            \"percent\": \"100\"\n        }\n    ],\n    \"time_to_send_config\": {\n        \"delivery_timing_type\": \"schedule_date\",\n        \"send_by_timezone\": {\n            \"timezone_source\": \"timezone\",\n            \"contact_field_id\": \"{{list_field_timestamp_id_phoenix}}\",\n            \"start_timezone\": \"America/Chicago\"\n        }\n    },\n    \"triggers\": [\n        {\n            \"based_on\": \"list\",\n            \"email_messages\": [\n                \"{{msg_id_event_phoenix_timestamp}}\"\n            ],\n            \"recurrence\": {\n                \"pattern\": \"daily\"\n            },\n            \"operator\": \"after\",\n            \"schedule_hour\": {{event_list_hours}},\n            \"schedule_minute\": {{event_list_minutes}}\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{phoenix_list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{phoenix_list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 600 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 600 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Readmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"     pm.test(\"Test Event Campaign With Phoenix Timestampe\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"Test Event Campaign With Phoenix Timestampe-\"+pm.environment.get(\"phoenix_connection_id\"));",
+							"    });",
+							"}else{",
+							"    pm.test(\"mail not received\", function() {",
+							"        pm.expect(\"\").to.equal(\"Test Event Campaign With Phoenix Timestampe-\"+pm.environment.get(\"phoenix_connection_id\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_phoenix_timestamp2@hoohem.com\",\n    \"subject\": \"Test Event Campaign With Phoenix Timestampe-{{phoenix_connection_id}}\",\n    \"timeout\": 100000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

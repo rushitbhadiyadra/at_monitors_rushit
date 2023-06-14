@@ -1,0 +1,666 @@
+{
+	"info": {
+		"_postman_id": "364aeb1b-c855-4f7e-aa0c-89e723a04971",
+		"name": "All_Esps_Regular_Campaign_With_Segment_Quota_Limit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"ae_rc_mirror@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and run campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_seg_quota_limit\", jsonData.payload.id);",
+							"pm.globals.unset(\"time\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESP Campaign Quota Limit - {{connectionId}}\",\n    \"email_message\": {{msg_id_seg_quota_limit}},\n    \"keep_segment_sort\": true,\n    \"segments\": [\n        {{segment_id_seg_quota_limit}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"emails_limit_active\": true,\n    \"emails_limit_global_active\": true,\n    \"emails_limit\": \"2\",\n    \"schedule_date\": {{time}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail-1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var count_0 = 0;",
+							"if(pm.response.code === 200){",
+							"    count_0 = count_0 + 1;",
+							"     pm.test(\"Test All ESP Campaign Quota Limit Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"All ESP Campaign Quota Limit -\"+pm.globals.get(\"campaign_id_seg_quota_limit\"));",
+							"    });",
+							"}",
+							"pm.globals.set(\"count_0\", count_0);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"seg_quota_limit_1@hoohem.com\",\n    \"subject\": \"All ESP Campaign Quota Limit -{{campaign_id_seg_quota_limit}}\",\n    \"timeout\": 100000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var count_0 = pm.globals.get(\"count_0\")",
+							"if(pm.response.code === 200){",
+							"    count_0 = count_0 + 1;",
+							"     pm.test(\"Test All ESP Campaign Quota Limit Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"All ESP Campaign Quota Limit -\"+pm.globals.get(\"campaign_id_seg_quota_limit\"));",
+							"    });",
+							"}",
+							"pm.globals.set(\"count_0\", count_0);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"seg_quota_limit_2@hoohem.com\",\n    \"subject\": \"All ESP Campaign Quota Limit -{{campaign_id_seg_quota_limit}}\",\n    \"timeout\": 100000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail-3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var count_0 = pm.globals.get(\"count_0\")",
+							"if(pm.response.code === 200){",
+							"    count_0 = count_0 + 1;",
+							"     pm.test(\"Test All ESP Campaign Quota Limit Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"All ESP Campaign Quota Limit -\"+pm.globals.get(\"campaign_id_seg_quota_limit\"));",
+							"    });",
+							"}",
+							"pm.globals.set(\"count_0\", count_0);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"seg_quota_limit_3@hoohem.com\",\n    \"subject\": \"All ESP Campaign Quota Limit -{{campaign_id_seg_quota_limit}}\",\n    \"timeout\": 100000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail-4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var count_0 = pm.globals.get(\"count_0\")",
+							"if(pm.response.code === 200){",
+							"    count_0 = count_0 + 1;",
+							"     pm.test(\"Test All ESP Campaign Quota Limit Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"All ESP Campaign Quota Limit -\"+pm.globals.get(\"campaign_id_seg_quota_limit\"));",
+							"    });",
+							"}",
+							"pm.globals.set(\"count_0\", count_0);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"seg_quota_limit_4@hoohem.com\",\n    \"subject\": \"All ESP Campaign Quota Limit -{{campaign_id_seg_quota_limit}}\",\n    \"timeout\": 100000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail-5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var count_0 = pm.globals.get(\"count_0\")",
+							"if(pm.response.code === 200){",
+							"    count_0 = count_0 + 1;",
+							"     pm.test(\"Test All ESP Campaign Quota Limit Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"All ESP Campaign Quota Limit -\"+pm.globals.get(\"campaign_id_seg_quota_limit\"));",
+							"    });",
+							"}",
+							"if(count_0 !== 2) {",
+							"    pm.test(\"quota mail not working\", function() {",
+							"        pm.expect(\"\").to.equal('Quota mail not working');",
+							"    });",
+							"}",
+							"pm.globals.unset(\"count_0\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"seg_quota_limit_5@hoohem.com\",\n    \"subject\": \"All ESP Campaign Quota Limit -{{campaign_id_seg_quota_limit}}\",\n    \"timeout\": 100000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Test All ESP Campaign Quota Limit Quota Count Test is working\", function() {\r",
+							"        pm.expect(parseInt(jsonData.payload.quota_count)).to.eql(parseInt(3));\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"Test All ESP Campaign Quota Limit Final Targeted Test is working\", function() {\r",
+							"        pm.expect(parseInt(jsonData.payload.final_targeted)).to.eql(parseInt(2));\r",
+							"    });\r",
+							"\r",
+							"if(pm.response.code === 200)\r",
+							"{\r",
+							"    if((jsonData.payload) instanceof Array)\r",
+							"    {\r",
+							"        pm.globals.set(\"mail_count\", 0);\r",
+							"        pm.globals.unset(\"campaign_id_seg_quota_limit\");\r",
+							"        postman.setNextRequest(null);\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"\r",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){\r",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"\r",
+							"        }\r",
+							"        var connectionName='';\r",
+							"        for(var i=0;i<jsonData.payload.distribution.length;i++)\r",
+							"        {\r",
+							"            if(jsonData.payload.distribution[i]['esp_id'] !== undefined && jsonData.payload.distribution[i]['esp_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"            if(jsonData.payload.distribution[i]['name'] !== undefined && jsonData.payload.distribution[i]['name'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Name \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['name']+\"</td></tr>\"\r",
+							"            }\r",
+							"            connectionName += jsonData.payload.distribution[i]['name']+\",\";\r",
+							"            if(jsonData.payload.distribution[i]['esp_connection_id'] !== undefined && jsonData.payload.distribution[i]['esp_connection_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_connection_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"        }\r",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"\r",
+							"        }\r",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){\r",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"\r",
+							"        // }\r",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"\r",
+							"        pm.globals.set(\"html_code\", tableHtml);\r",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')\r",
+							"        {\r",
+							"            pm.globals.set(\"html_code\", tableHtml);\r",
+							"            pm.globals.set(\"mail_count\", 1);\r",
+							"        }\r",
+							"        else\r",
+							"        {\r",
+							"            pm.globals.set(\"mail_count\", 0);\r",
+							"            pm.globals.unset(\"campaign_id_seg_quota_limit\");\r",
+							"            postman.setNextRequest(null);\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"else\r",
+							"{\r",
+							"    pm.globals.set(\"mail_count\", 0);\r",
+							"    pm.globals.unset(\"campaign_id_seg_quota_limit\");\r",
+							"    postman.setNextRequest(null);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{campaign_id_seg_quota_limit}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{campaign_id_seg_quota_limit}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error-Campaign Test Cases Detail with {{esp_name}} on {{ongage_env}}\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

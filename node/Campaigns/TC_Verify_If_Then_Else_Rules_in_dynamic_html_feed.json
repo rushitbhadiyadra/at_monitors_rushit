@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "7f95004e-c843-41ab-b03d-826c87062dc6",
+		"name": "TC_Verify_If_Then_Else_Rules_in_dynamic_html_feed",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"if(pm.response.code === 412){    \r",
+							"    postman.setNextRequest('Send_ocx_if_transaction_dynamic_html_feed');\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"email\": \"verify_mailgun_if_else_1_{{connectionId}}@hoohem.com\",\r\n        \"city\": \"Rajkot\"\r\n    },\r\n    {\r\n        \"email\": \"verify_mailgun_if_else_2_{{connectionId}}@hoohem.com\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_ocx_if_transaction_dynamic_html_feed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"timecur\", new Date().toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"recipients\": [\r\n        \"verify_mailgun_if_else_1_{{connectionId}}@hoohem.com\",\r\n        \"verify_mailgun_if_else_2_{{connectionId}}@hoohem.com\"\r\n    ],\r\n    \"sending_connection_id\": {{connectionId}},\r\n    \"message\": {\r\n        \"subject\": \"Test Message Id Ocx Dynamic Feed-{{connectionId}}-{{env}}\",\r\n        \"content_html\": \"<html<head><meta content='text/html; charset=utf-8' http-equiv='Content-Type' /><meta content='width=device-width, initial-scale=1' name='viewport' /><meta content='IE=edge' http-equiv='X-UA-Compatible' /><meta name='x-apple-disable-message-reformatting' /><link href='https://fonts.googleapis.com' rel='preconnect' /><link crossorigin='' href='https://fonts.gstatic.com' rel='preconnect' /><link href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,600&display=swap' rel='stylesheet' /><title></title><style type='text/css'>@media only screen and (max-width:480px) {.pad {padding: 10px !important;}.heading {font-size: 18px !important;}.mobile-button1 {padding: 8px 12px !important;font-size: 16px !important;}}</style></head><body data-gr-ext-installed='' data-new-gr-c-s-check-loaded='14.1079.0' style='background-color:#ffffff;'><table align='center' cellpadding='0' cellspacing='0' role='presentation' style='max-width:100%;'><tbody><tr><td width='600'><table align='center' cellpadding='0' cellspacing='0' role='presentation' style='max-width:600px;' width='100%'><tbody><tr><td valign='top'><table align='center' bgcolor='#ffffff' border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; border:#08548c solid 2px;' width='100%'><tbody><tr><td align='center' style='padding: 20px 10px 0 10px;' valign='middle'><a alias='logo-header' data-id='1494097' href='https://www.findusajobs.com/jobs?keyword={{keyword}}&location={{zip}}&fname={{first_name}}&lname={{last_name}}&email={{email}}&address1={{address1}}&city={{city}}&state={{state}}&zip={{zip}}&source={{srcid}}&ip={{ip}}&caryear={{caryear}}&carmake={{carmake}}&carmodel={{carmodel}}&usedcar={{usedcar}}&credit_rating={{credit_rating}}&loan_type={{loan_type}}&va_eligible={{va_eligible}}&list_id={{ocx_list_id}}' style='color: #000000; font-weight: bold; text-decoration: none; font-size: 18px; line-height: 25px;' title='Find USA Jobs'><img alt='Find USA Jobs' src='https://ip.findusajobs.com/v2/6947/logo.png' style='margin: 0;' width='250' /></a></td></tr><tr><td align='center' style='padding:0px 20px;' valign='top'><table border='0' cellpadding='0' cellspacing='0' role='presentation' width='90%'><tbody><tr><td height='17' style='border-bottom:2px solid #dddddd;'></td></tr></tbody></table></td></tr><tr><td align='center' style='padding: 30px 10px 10px 10px; font-size:20px; line-height: 30px;' valign='middle'><strong>It's Time for a Career Change</strong></td></tr><tr><td align='center' class='pad' style='padding:5px 80px 10px;' valign='middle'>{{ocx_if first_name !is empty}}{{first_name}}, {{ocx_else}}{{ocx_endif}}Finding a career that also brings meaning to your life should be one of your top priorities.</td></tr><tr><td align='center' style='padding:20px 15px 30px 15px;' valign='middle'><table border='0' cellpadding='0' cellspacing='0' role='presentation'><tbody><tr><td align='center' bgcolor='#b8050a' style='border-radius: 30px; color:#ffffff;' valign='middle'><a alias='btn-body-1-of-2' class='mobile-button1' data-id='1494098' href='https://www.findusajobs.com/jobs?keyword={{keyword}}&location={{zip}}&fname={{first_name}}&lname={{last_name}}&email={{email}}&address1={{address1}}&city={{city}}&state={{state}}&zip={{zip}}&source={{srcid}}&ip={{ip}}&caryear={{caryear}}&carmake={{carmake}}&carmodel={{carmodel}}&usedcar={{usedcar}}&credit_rating={{credit_rating}}&loan_type={{loan_type}}&va_eligible={{va_eligible}}&list_id={{ocx_list_id}}' style='color: #ffffff; display: inline-block; font-family: 'Poppins', sans-serif; font-size:20px; line-height:32px; text-decoration:none; padding: 8px 20px; border:2px solid #b8050a; border-radius:30px;' target='_blank' title='Your Future Awaits'><strong>{{ocx_if first_name !is empty}}{{first_name}}, {{ocx_else}}{{ocx_endif}}Your Future Awaits</strong></a></td></tr></tbody></table></td></tr><tr><td align='center' style='padding:4px 25px 10px 25px;' valign='middle'><table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000;'><tbody><tr><td align='center' style='font-size:20px; line-height: 30px; padding:0 12px;' valign='middle'><strong>Discover the career you’ve been looking for. </strong></td></tr><tr><td align='center' style='padding:5px 12px 20px;' valign='middle'>Check out popular jobs {{ocx_if city !is empty}}in {{city}}{{ocx_else}}near you{{ocx_endif}}.</td></tr></tbody></table></td></tr><tr><td align='center' bgcolor='#fafdfd' style='padding:0 20px 20px 20px;' valign='middle'><table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-top: 20px; border-top: 2px solid #ebeced;' width='100%'><tbody><tr><td align='left' valign='top'><table border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-right: 20px;'><tbody><tr><td align='left' class='title' style='font-weight: bold;' valign='middle'>Real Estate Sales Representative</td></tr><tr><td align='left' class='company' valign='middle'><small>Berkshire Hathaway HomeServices California Properties</small></td></tr><tr><td align='left' class='location' style='padding-top: 0px;' valign='middle'><small>Lakewood CA 90712</small></td></tr></tbody></table></td><td align='center' valign='middle' width='125'><table border='0' cellpadding='0' cellspacing='0' role='presentation' width='100%'><tbody><tr><td align='center' bgcolor='#49C6E5' style='border-radius: 50px; color:#ffffff;' valign='middle'><a data-id='1494099' href='https://xtrk.sjobs.co/click/gAAAAABi6Xrdhn7IP0Y245yRJAbjTt6linvGcuVsmKVxDg1dhDFje7jzNp64q414Ydg1RXabH_uNsXDHCl0jWMWA0Ki7nG1uObqcJRel3LYo3-GcLF0Pct7gfUrlV8S6yiTBXvrex526NUFnKGCPbqez9cWYLwqS5szZJohfhZ33krKyNnyd9sDq7A-sFc4UhjPdHoGqHGWkUf9VrDFAWEniuwap9bEDXE8PIGSfUmp4vEW7bky5jNVbKrDWTwIW1-VJtk4AzhMimTCcnIVOs1bM4KdoLsG7_DDFVX8ceOlfNMhtQ0_Ag3CPTYNEVYYiRDjR4b9DN09wEh-pN1sND2mly7UOB894700J9TZWZ-KHIgBYML82iHJIR_7jWd5WF5vg-6NhYxZcHyDAzb2S0gqQFfoZb_cowL7efGhEvdMudra79K0dZPqs2HYmu02K05hymtzHBj8UWGaJblKWhvfxMjDsjCbSr9iyag1e71fXcQ_LmVlQRrBGc0ngpc3yEe6p1G6HqeVOs0D4qUDClVNvmovnltg15xs0NclKq_Q-rsVSil2LcC9ImMopbCCBOwYQbrFsimlVimOTq6A3LrjWtCITrJVYD96UWpvHpwMDFHqV3nzKnjA=?t=gAAAAABi6aG0FDdwDnMr71QWSy8ZNvr--u8l3jWqPLv0Roj8DXz9OlkAxP-kTJxL-y3jTyc3uXWAFQiZsDGyBt3kwdqYtb_OfcsfpbgB6orYmD3RsKk-rt3pd3Wo0m5HxBbXZlzwTJ-vJs2qstawfyIO9ITmnmli-S7DnE3J2fyK2vq0dO52_Sbh35TX2R7Xu5svLAJVjFelfHBmduknporE_hKG2tjeZkC_UP7lscn4z5GkaMBErc3F_dV4TDsldF8osa7H-nknFfLSrL-ee7xR5Z3WOt3RCHUEdCE4Jx1hkQU99Br9vK_St7-nYM5lGsmSLo91f_NLznxnHOKERBvUYBT3WHzXtH_st6aw9zp-0xYD3stopj0AxP7bRfppfvcrUdHRitdeImtADAPd6xW8RkQEqsjZwUz3ezawlRSNmhRFngbhknFoUcOiCIbRbxeoB8GHsuMdRJXbGFRBmVhZhhfLI9Gk7S08-z0_aDrBfNOJdIvtOnACLq1W5ZW1jKqVNZ9qhRGy-iGUN7PWm53EsbCi8H9jcrUCosuj1KYVJ2ajW-aRqbrMwtGYVsuendJ0oT4g1wLzD52qj3G7JhFLXO045xDhIdLTgTA0_MyQsEyIAX_saS8=' style='color: #efefef;font-family: 'Poppins', sans-serif; font-size:16px; line-height:16px; font-weight: 500;text-decoration:none; padding: 8px 0px; border:2px solid #49C6E5; border-radius:50px; display: block;' target='_blank' title='View Job'>View Job</a></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td align='center' bgcolor='#fafdfd' style='padding:0 20px 20px 20px;' valign='middle'><table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-top: 20px; border-top: 2px solid #ebeced;' width='100%'><tbody><tr><td align='left' valign='top'><table border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-right: 20px;'><tbody><tr><td align='left' class='title' style='font-weight: bold;' valign='middle'>Licensed Real Estate Sales Agent</td></tr><tr><td align='left' class='company' valign='middle'><small>Berkshire Hathaway HomeServices California Properties</small></td></tr><tr><td align='left' class='location' style='padding-top: 0px;' valign='middle'><small>Inglewood CA 90301</small></td></tr></tbody></table></td><td align='center' valign='middle' width='125'><table border='0' cellpadding='0' cellspacing='0' role='presentation' width='100%'><tbody><tr><td align='center' bgcolor='#49C6E5' style='border-radius: 50px; color:#ffffff;' valign='middle'><a data-id='1494100' href='https://xtrk.sjobs.co/click/gAAAAABi6WivKRL34K1Yrh5wZ3IamIeg8qrLp8RMYOWJdjs7pmFK_reVgHg6FNkwDVwypCV7-6P-uZRUlMpGS9TrIJ7_pTgZqVnL4Ly9rHqTd-chg0WhqxzveAZ02Z2blGnyhRinQs0vI2LwZXItfiCjJnSM0YjWAWw1kiblFMe0EWAt6cT008E0x9ohwBPmxvIUz07Vy7aFon0bWQ5ZQB6vqvhga01kDt_vetmlNlczbDQc-HCKc8R6LSR31HlZvUUHXbJrXH0DwBwAzlMpiPeHu1ev5sNXCVTeNz4W8psosuWgtNlUGhaELP_bz5xukSuS5o8f1Noa5m9whYvlFiViTWKhck_xPYyaDSj-T6eJJ2PfjQdQy1I628Wq34SQVUIoE2ljqVvim-YKQUeawrUipdtq8Wfpx3X15f7cUrQBE4-AeO8Se6-DxqhcZyJMtV6wKqEydY7wb3adxxfz80L9-w3XWg-IdgXv2V4BCwk4IPmnU17RuTQ6w4yXvppeVd-lNdn5jtkbHpwNxCGiB5ZbkRwdsA2SpW9Sr5UBkyoW_3qz6HgBnONsWIFxhcx_F4de3p-N2lQeWfL4NKu-pltfWWDnnstLBENtx5HszDBqJmuirawzioY=?t=gAAAAABi6aG0VvFEW7pxNhrgIAvSZu3HPF6IsGVroZcNW1rPzoS9ApRAjDanCUrbyABq333OY86hSWEpHkl4D1q8j1Atv5p7cT9S-fAGGkkwXoBSrVP4kn9B5ptkMWSORBV4Heu2wXe-9sWa1GWnmb6LsHO3BpeSOn3gc4TFFgzwxVWC9vN2aqH-jy3kxfI8HfOBPiOTt7hjHrtrEnE_pxZRvHIvYZsxhyvKf9jc08QQpIP2_VmYXR81ssOdgLgBpgIskhey3gH5apQaYQhHA4ZSSzDhG8q15Fr4q0JWPt3sNnb935DolP2leDLUHqjXrDDAc00xKO-DOpkgUNVfl8aycWcqaJu22szCE9HD7-_0UnofZDd_ZLIHAjgU3VL2Yza5cxmReAx52K1T-6gDpRvVHSnUo3Ux_4dNWoNQAli7r7gD_T-GlrZXz_wirtMfnuCVQVeXTAbrbC9YhlsOIjd7qQS9CGQGAoCZCltPROaDPGLo9YOkva56kQRkrldEtDCGzz3jO0ZET1K4lQLRGrwKfOTKtjvJQ8fy8lxBbM3GM2Ih7lJ0hy7CkSt7d86dqAYWhl9_TbxPd-R1eFfEoTTcFFzALyhuqlHoAcqjx0ZYH542rpMW1Cs=' style='color: #efefef;font-family: 'Poppins', sans-serif; font-size:16px; line-height:16px; font-weight: 500;text-decoration:none; padding: 8px 0px; border:2px solid #49C6E5; border-radius:50px; display: block;' target='_blank' title='View Job'>View Job</a></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td align='center' bgcolor='#fafdfd' style='padding:0 20px 20px 20px;' valign='middle'><table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-top: 20px; border-top: 2px solid #ebeced;' width='100%'><tbody><tr><td align='left' valign='top'><table border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-right: 20px;'><tbody><tr><td align='left' class='title' style='font-weight: bold;' valign='middle'>Real Estate Outside Sales Professional</td></tr><tr><td align='left' class='company' valign='middle'><small>Berkshire Hathaway HomeServices California Properties</small></td></tr><tr><td align='left' class='location' style='padding-top: 0px;' valign='middle'><small>Hacienda Heights CA 91745</small></td></tr></tbody></table></td><td align='center' valign='middle' width='125'><table border='0' cellpadding='0' cellspacing='0' role='presentation' width='100%'><tbody><tr><td align='center' bgcolor='#49C6E5' style='border-radius: 50px; color:#ffffff;' valign='middle'><a data-id='1494101' href='https://xtrk.sjobs.co/click/gAAAAABi6WMjKUqxHrx7ZraLuuAtpmnJ3uukLEsycty7hjLLw4uFm8E7oBQsX__tNzfy3YJFtxHs7aMnJ4y7VmnHHFe4peZCGMZm04qAcZ876jScjStsWrPM7Lb8WXWLPcOYTutsSfPO9a8UipAJId0zKhqLQd1gCjy8p8W7iuz6Pt8-oMGXER6VYs4yiwhD0sXWRKfyBZ7fYnptTrv9JXxsAvF0LbTmENadv0weWBQcH3SemHHVgR2yC_D3NCdjBPueaDSVlCCWpZDX-NpV-iDRQ5XTyar0ydqSPUVRgoIT5zXqG6oGry90m7w-aFpB7cIoPbJecyCSDUqz3-ulTqyEpIL4qcEz1mN0DHsq8InqZ5bJ39NajXyeskozVL23T9jia9er0_iIVaSlcub4hCo5tExldPC9qTF6mH-vZ3WFpBhrt7KiJnLZ0YFkI_5iNXYMRFMxRUY32jXJPNVa0Uo7DHBMlb9xTB_mHavwrqXBgxCxKgMbFJ24tPZ_yXn16ZmMcLnm_mbFUz1DhhuAu3FQ4SZvQrQW-sXohJgsAchKkRMCsgSF3hKiGGiAzq8TW0BihKsgklu2UByJ-KoWpBoKLPb0kgp_fw==?t=gAAAAABi6aG0yn7if0HWzPh00Ld9vSLVfbI2oSN4L1lsT4rmx7vApt4a98zEzecWA7SNXqOlieI09pTaVVW7gJZJHmG0HJUrSqW6Z5sMrtdjdbzaIOHTJj1BGDhuOP0mbiIouwB1eTg0NHalrAfuXA8EzYEBX5gYJl3yDnKVFWAxgGscapJummD1-0JdZANpf_xyixhOgJGGxBT8Rg6oEhrI_f0PYPMSUJQHYYHsNNiRdgWFSvvwQYk-NOE3XAIFetJYlrXMZbNtNes4Ru1qoriFwHKWhb0VzQmkdOOvWk55zIJJCa5lDLJk4LmOfy74A6opMk7ZDUtGyRKGK2CwF-b97NdQgReI-1uiZ4KWsAY0OzQ9zX3J8_kZ7lh5nc8n-Ng1k_1N_46yJutba6MGhLUz_6Bs3oZKkdSYg23Vl6RJ3ZiP3UDVQ3ps_5duXzJhcGV-SXTi3LGPU3bKM7fVYJt5_5i7UqUZPxiFWc52534eGes5WtuGSdrOVAQpwXxslzV8hizWv0yizpkmk7VKSQGTmI38tralhPkQjgXSThCZbj1fyjFXsnkBH3wys4zhYBtOZbWKaDK0wr6N7bmeil0QlQpJUeEGUmdUM8SCVAIAfbHRIH6LDP0=' style='color: #efefef;font-family: 'Poppins', sans-serif; font-size:16px; line-height:16px; font-weight: 500;text-decoration:none; padding: 8px 0px; border:2px solid #49C6E5; border-radius:50px; display: block;' target='_blank' title='View Job'>View Job</a></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td align='center' bgcolor='#fafdfd' style='padding:0 20px 20px 20px;' valign='middle'><table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-top: 20px; border-top: 2px solid #ebeced;' width='100%'><tbody><tr><td align='left' valign='top'><table border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-right: 20px;'><tbody><tr><td align='left' class='title' style='font-weight: bold;' valign='middle'>Real Estate Sales Representative -- Entry-Level</td></tr><tr><td align='left' class='company' valign='middle'><small>Berkshire Hathaway HomeServices California Properties</small></td></tr><tr><td align='left' class='location' style='padding-top: 0px;' valign='middle'><small>Norwalk CA 90650</small></td></tr></tbody></table></td><td align='center' valign='middle' width='125'><table border='0' cellpadding='0' cellspacing='0' role='presentation' width='100%'><tbody><tr><td align='center' bgcolor='#49C6E5' style='border-radius: 50px; color:#ffffff;' valign='middle'><a data-id='1494102' href='https://xtrk.sjobs.co/click/gAAAAABi6Yjuqgtizj5AjpnCW5-WW66l_pk7h8hxILb1ylZSY20YQ0eTynHcnnvXO6-a_2PthVeXA3ccKEgFyN-JI-vi0yel9gvaMRf2E5UDcVVSU95vf1Us2uOkiQ8XCFGd5l62GHQCZFKFrxMEYSKddPeLnmcBLWKNwUlBgd3p9XADyAYRS-UpJRFnRmKIqFtBPYExzQhjw4Vr9Ae2RvHQG9HoMY7evMPctDSKTli6GUOrDAl6sWTPiejzUgIZRVwhw1XjBp1mLu8kGFt4IAF_80wzQuvLWqBWGw7_Q4_49eU7dC44nj18woL14LRtYrWHktIn1v0_n76MSZpKo7IQo3rtz0q-Zkv_3WtJDgReRH8iOtH89uaRK_Oz1mlIoC9JYgGb6iSE-Ss22UthQXj4ACcpB88wd5qhv3T6_Wb86A69Qu2JMDPWvIykB4SyLUTP67QwHZN4rTAPVkMr-jrKot7Qbwb8WvH0EwXyaq7TfmgCDyleEoN0F1F-eHG8imc-326MFEyUWn7aOYc6KrJx0c4PrcfYH1erq_DWC49VObHLpsn_7Zxgj4Hl9N6SnU4bU99BjFzRSI6ZFandUUTlfd0oMYWcpRp2-n_qzkkUbX2_7ig5K3E=?t=gAAAAABi6aG0-K0lzHlopmZiLoFMmxR50vHuf5xUkw8l23Am0hzHn_Z1PINk0twdHvQRSdCOv_4I3MhA5F8pwPvIhQiX1gYZSruVS0TT6OXpvtCWf4MgiCKGGgMguiNK60VdqcZOLgc3geN7Mk-pVB49_G3CnVHeU2PGUzR0Y9ICyjSeLeHu3R96J7bxHGiQOdrUB8gNvSk3EaEMGabtpqoezCcyLBNi5YHwYRf-SUuCZ71_m8zzhhkcjz29YYNDLFobkdUAxaiWK2Cq_KNOj5DT54fT0ygS-x46lj-Aknc-lKQOCsPiSFC4m1XxmGkr9jK9msMczc7K9hc5_Guayp8LIRrrVZ1lqF97szC-EsX3bwj6addooB0H27eb-P-RgLaEGNX9VzRbEm3K6uO2l9f96LxuEobhm7evNUXL4UdqT5IUmb-yOfTN865rpYeK4sPe13GQ7HYTljI35KMhbd8YDVzpIaqJdUhCbI6xDc38ys7Yq3bCKYUn2lVfhpQ17Z164zexTb_zhPKjpCx8m-t9GmV-IbXsw6dlJ55m2IZ6T_RHJggobON962zAneXpejgYgT5AjP9LrKRmhkRO0h3vJ6y2eN-4RcMCuknImQFNaJiDmswvugU=' style='color: #efefef;font-family: 'Poppins', sans-serif; font-size:16px; line-height:16px; font-weight: 500;text-decoration:none; padding: 8px 0px; border:2px solid #49C6E5; border-radius:50px; display: block;' target='_blank' title='View Job'>View Job</a></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td align='center' bgcolor='#fafdfd' style='padding:0 20px 20px 20px;' valign='middle'><table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-top: 20px; border-top: 2px solid #ebeced;' width='100%'><tbody><tr><td align='left' valign='top'><table border='0' cellpadding='0' cellspacing='0' role='presentation' style='font-size: 16px; line-height: 26px; font-family: 'Poppins', sans-serif; color: #000000; padding-right: 20px;'><tbody><tr><td align='left' class='title' style='font-weight: bold;' valign='middle'>Sales Engineer</td></tr><tr><td align='left' class='company' valign='middle'><small>TEC Group, Inc.</small></td></tr><tr><td align='left' class='location' style='padding-top: 0px;' valign='middle'><small>La Mirada CA 90637</small></td></tr></tbody></table></td><td align='center' valign='middle' width='125'><table border='0' cellpadding='0' cellspacing='0' role='presentation' width='100%'><tbody><tr><td align='center' bgcolor='#49C6E5' style='border-radius: 50px; color:#ffffff;' valign='middle'><a data-id='1494103' href='https://xtrk.sjobs.co/click/gAAAAABi6S49OkSNYPZz2tvLSGbjkrfjvrCZpWMLdONaYppulbaCUVm7aQ9sZv7eiLWRKY0X0wkSsMwG6XmEsakGUguaf9K9iywGsyidQ1ImVlM6f42iJ0QzjFnTCJ6q1bO25Vw4Mn_1loYYph8WVLAWReEyp5ELrXuyyO4A5gknixUpbEGU1EWJU1Yu79B-uqprk5nwmFQityh_DiZENXzCkWfmy3YYL-6KO2hIQfUeHt3G2hOpowq71_pfwtW_ETMOSzLMLKWgHTQhrhXUZYgdhKr9JAhzcHVgm-IyQtaeLJDixZsEh-OHqksZoGpkRDatz96EGQw8kk1ZtyHy2kULg6YUutHJd8sBgWpjKarTmkygRR-j8fv9q9zP7B8sM50Tb0nR5c2PqNsKEBiO9MGN_d5qHU2eUTIrsjhRTE8pQdpCT3YCv8n0XyxRcvHVh1qxM8oYGRip?t=gAAAAABi6aG0nKYK6KYVwLQE5D1KSWGZvn-mHXIobrkE-AfPr8oToasinbqnGp8caxBf4rerGc2UHM9CfTeYSjND3n42WLb1ESzc4EbkhPaJwTggsV4dS8qKzafJJKH4eCslDwY6Pwc1xucg85a4dDiBZEsODoBYPNgJ6dRrHGO027nLVR6IwXXXR3zlIgyPMcsDN-xVKsmSL6OX96CAh9m-7-RrnSISn3OJqGoxBrQTZM3JFcEo1596UM5njF8aMa8ReNEXZz9rC_bTEbqGOf5rLTvZEAcpYKse6t7dyRmOOxWQw5fDYgIYGI6DjchAYiV03SlxpbxNPPkGUb8fP7I4g37DaVfIEf7-6AfrDMvp8OIkBOzeubwbiLHOhbG-fhcHcwGxTBJn7w1WjcuCbRuHCmE45YBuxmQU2kD4TlQUlBUJNLJve0SwcwWUK6Wjhh55-Q-Wj8BzT32aKY3cH904gfJLOSZkf6m4bzssy4Ka6YqFODW8O7oQx6HbxnucpgnCjR6lyMxMmo4lcD9pNAjDHjsN3UYCDAITgNqOrFJWpG-qGIliEpzU70axAT4AWTiymnqS9i3zT3DR5ekWBFVbh7xR05tqRHcltg4FgvFi_9ONmutdfP4=' style='color: #efefef;font-family: 'Poppins', sans-serif; font-size:16px; line-height:16px; font-weight: 500;text-decoration:none; padding: 8px 0px; border:2px solid #49C6E5; border-radius:50px; display: block;' target='_blank' title='View Job'>View Job</a></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td align='center' bgcolor='#fafdfd' style='padding:0px 20px 30px 20px; ' valign='middle'><table border='0' cellpadding='0' cellspacing='0' role='presentation' style=' border-top: 2px solid #ebeced; padding-top: 30px;' width='100%'><tbody><tr><td align='center' valign='middle'><table border='0' cellpadding='0' cellspacing='0' role='presentation'><tbody><tr><td align='center' bgcolor='#63D471' style='border-radius: 0px; color:#ffffff;' valign='middle'><a alias='btn-body-2-of-2' data-id='1494104' href='https://www.findusajobs.com/jobs?keyword={{keyword}}&location={{zip}}&fname={{first_name}}&lname={{last_name}}&email={{email}}&address1={{address1}}&city={{city}}&state={{state}}&zip={{zip}}&source={{srcid}}&ip={{ip}}&caryear={{caryear}}&carmake={{carmake}}&carmodel={{carmodel}}&usedcar={{usedcar}}&credit_rating={{credit_rating}}&loan_type={{loan_type}}&va_eligible={{va_eligible}}&list_id={{ocx_list_id}}' style='color: #ffffff; display: inline-block; font-family: 'Poppins', sans-serif; font-size:20px; line-height:32px; text-decoration:none; padding: 8px 20px; border:2px solid #63D471; border-radius:0px;' target='_blank' title='View More Jobs'><strong>View More Jobs</strong></a></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td align='center' bgcolor='#ffffff' style='font-family:Arial, Helvetica, sans-serif; color:#212121; font-size:13px; padding:25px 10px; line-height:20px;' valign='top'>This is an email advertisement.<br /> This email was sent from USA Jobs:<br /> 6009 W. Parker Road #149-827, Plano, TX 75093<br /> If you no longer want to receive these emails, you may <a alias='Advertiser Unsub' class='text-white' data-id='1494105' href='{{ocx_unsubscribe_link}}' style='color: #000000;' title='unsubscribe'>unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></body></html>\",\r\n        \"addresses\": \r\n        {\r\n            \"from_name\": \"{{system_field_from_name}}\",\r\n            \"from_address\": \"{{system_field_from_address}}\",\r\n            \"reply_address\": \"{{system_field_from_address}}\"\r\n        }\r\n    },\"check_status\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send_embed_content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test_ocx_if_dynamic_feed_html_with_value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    var city = jsonData.html\r",
+							"    var splits = city.split(\">\")\r",
+							"    var cityname = splits[83].split(\".\")\r",
+							"    console.log(cityname[0])\r",
+							"    pm.test(\"TC If-Then-Else_Rules is working in dynamic html feed\", function () {\r",
+							"        pm.expect(cityname[0]).to.eql(\"Check out popular jobs in Rajkot\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"TC If-Then-Else_Rules is working in dynamic html feed\", function () {\r",
+							"        pm.expect(cityname[0]).to.eql(\"Check out popular jobs in Rajkot\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"verify_mailgun_if_else_1_{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Test Message Id Ocx Dynamic Feed-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 100000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test_ocx_if_dynamic_feed_html_without_value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    var city = jsonData.html\r",
+							"    var splits = city.split(\">\")\r",
+							"    var cityname = splits[83].split(\".\")\r",
+							"    console.log(cityname[0])\r",
+							"    pm.test(\"TC If-Then-Else_Rules is working in dynamic html feed\", function () {\r",
+							"        pm.expect(cityname[0]).to.eql(\"Check out popular jobs near you\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"TC If-Then-Else_Rules is working in dynamic html feed\", function () {\r",
+							"        pm.expect(cityname[0]).to.eql(\"Check out popular jobs near you\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"verify_mailgun_if_else_2_{{connectionId}}@hoohem.com\",\r\n    \"subject\": \"Test Message Id Ocx Dynamic Feed-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 100000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

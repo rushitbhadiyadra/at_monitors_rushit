@@ -1,0 +1,2349 @@
+{
+	"info": {
+		"_postman_id": "082ee923-5a63-4d01-85f7-8d2affb57b86",
+		"name": "All_Esp_Event_Campaign_Open_Click",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "create campaign",
+			"item": [
+				{
+					"name": "Delete Mail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/All Esp Event Based On Campaign-Open-Click-{{connectionId}}-{{env}}",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"app",
+								"mail_db",
+								"mbox",
+								"subject",
+								"delete",
+								"All Esp Event Based On Campaign-Open-Click-{{connectionId}}-{{env}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"all_esp_event_cp{{connectionId}}@hoohem.com\",\n    \"address\": \"ahmedabad\",\n    \"gender\": \"Male\",\n    \"product_id\": 123,\n    \"country\": \"India\",\n    \"street_name\": \"Radha and Krishana\",\n    \"society_name\": \"Radha & Krishana\",\n    \"middle_name\": \"ongage's\",\n    \"state\": \"Gujarat\",\n    \"first_name\": \"Ongage\",\n    \"city\": \"bhavnagar\",\n    \"ip\": \"50.18.254.253\",\n    \"query\": \"sales\",\n    \"location\": \"78759\",\n    \"industry\": \"sales\",\n    \"keyword\": \"marketing\",\n    \"zip\": \"63090\",\n    \"search\": \"sales\",\n    \"userip\": \"108.200.249.191\",\n    \"job_title\": \"LPN\",\n    \"s1\": \"ong166\",\n    \"useragent\": \"useragent\",\n    \"zip1\": \"95050\"\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get old Event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"if(jsonData.payload.length > 0){",
+									"        for (var event of jsonData.payload) {",
+									"            if(event.name === \"All Esp Event Based On Campaign Open Static Content-\" + pm.globals.get(\"connectionId\")){",
+									"                pm.globals.set(\"old_event_id_event_content_open\", event.id);",
+									"            }",
+									"        }",
+									"}else{",
+									"    postman.setNextRequest('Get old Event Click');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/events",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete old Event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"old_event_id_event_content_open\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/events/{{old_event_id_event_content_open}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"events",
+								"{{old_event_id_event_content_open}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 1 sec",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get old Event Click",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"if(jsonData.payload.length > 0){",
+									"        for (var event of jsonData.payload) {",
+									"            if(event.name === \"All Esp Event Based On Campaign Click Static Content-\" + pm.globals.get(\"connectionId\")){",
+									"                pm.globals.set(\"old_event_id_event_content_click\", event.id);",
+									"            }",
+									"        }",
+									"}else{",
+									"    postman.setNextRequest('Get old Segment');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/events",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete old Event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"old_event_id_event_content_click\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/events/{{old_event_id_event_content_click}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"events",
+								"{{old_event_id_event_content_click}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 1 sec",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get old Segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"if(jsonData.payload.length > 0){",
+									"        for (var segment of jsonData.payload) {",
+									"            if(segment.name === \"All Esp Event Based On Campaign Segment-\" + pm.globals.get(\"connectionId\")){",
+									"                pm.globals.set(\"old_segment_id_event_open_list\", segment.id);",
+									"            }",
+									"        }",
+									"}else{",
+									"    postman.setNextRequest('Create Event Segment');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "500"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete old Segmet",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"old_segment_id_event_open_list\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_id_event_open_list}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{old_segment_id_event_open_list}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event Segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"segment_id_all_esp_event_based_on_campaign\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    if(jsonData.metadata.error === false){",
+									"        pm.globals.set(\"segment_id_all_esp_event_based_on_campaign\", jsonData.payload.id);",
+									"    }",
+									"});",
+									"pm.globals.set(\"event_campaign_count\", 0);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"All Esp Event Based On Campaign Segment-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"all_esp_event_cp{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Campaign_for_sent_open_click",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"all_esp_event_based_on_open_click_campaign_id_\"+pm.globals.get(\"connectionId\") , jsonData.payload.id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"All Esp Event Campaign-Sent Open Click\",\n   \"list_id\": {{list_id}},\n   \"email_message\": {{email_msg_all_esp_event_based_on_campaign_open_click}} ,\n   \"segments\": [{{segment_id_all_esp_event_based_on_campaign}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n     } \n   ],\n    \"schedule_date\": {{time_30}}\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/api/mailings/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"api",
+								"mailings",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read mali open-click",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const espId = pm.globals.get(\"espId\");",
+									"var connectionId = pm.globals.get(\"connectionId\");",
+									"var jsonData = pm.response.json();",
+									"if(pm.response.code === 200){",
+									"    pm.globals.set(\"all_esp_event_campaign_open_\"+connectionId, jsonData.HTMLOpenLinks[0]);",
+									"    pm.globals.set(\"all_esp_event_campaign_click_\"+connectionId, jsonData.HTMLTextLinks[0]);",
+									"    postman.setNextRequest(\"open_link\")",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"all_esp_event_cp{{connectionId}}@hoohem.com\",\n    \"subject\": \"All Esp Event Based On Campaign-Open-Click-{{connectionId}}-{{env}}\",\n    \"timeout\": 500000\n}"
+						},
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"app",
+								"mail_db",
+								"getLast"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read mali open-click",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var connectionId = pm.globals.get(\"connectionId\");",
+									"var jsonData = pm.response.json();",
+									"if(pm.response.code === 200){",
+									"    pm.globals.set(\"all_esp_event_campaign_open_\"+connectionId, jsonData.HTMLOpenLinks[0]);",
+									"    pm.globals.set(\"all_esp_event_campaign_click_\"+connectionId, jsonData.HTMLTextLinks[0]);",
+									"    pm.globals.unset(\"event_campaign_count\");",
+									"}else{",
+									"    var campaign_count = parseInt(pm.globals.get(\"event_campaign_count\"))",
+									"    if(campaign_count === 0){",
+									"        campaign_count = campaign_count + 1",
+									"        pm.globals.set(\"event_campaign_count\",campaign_count)",
+									"        postman.setNextRequest(\"Create_Campaign_for_sent_open_click\")",
+									"    }else{",
+									"    pm.test(\"Test All ESP Mirror Page Link is not working\", function() {",
+									"        pm.expect(\"\").to.eql(pm.globals.get(\"Mail not recived\"));",
+									"    });",
+									"    pm.globals.unset(\"event_campaign_count\");",
+									"    postman.setNextRequest(\"Delete_Segment\")",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"all_esp_event_cp{{connectionId}}@hoohem.com\",\n    \"subject\": \"All Esp Event Based On Campaign-Open-Click-{{connectionId}}-{{env}}\",\n    \"timeout\": 300000\n}"
+						},
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"app",
+								"mail_db",
+								"getLast"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "open_link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"all_esp_event_campaign_open_\"+pm.globals.get(\"connectionId\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if (typeof pm.globals.get(\"event_campaign_open_\"+pm.globals.get(\"connectionId\")) === 'undefined') {",
+									"",
+									"    pm.globals.set(\"event_campaign_open_\"+pm.globals.get(\"connectionId\"), \"https://httpstat.us/400\");",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{all_esp_event_campaign_open_{{connectionId}}}}",
+							"host": [
+								"{{all_esp_event_campaign_open_{{connectionId}}}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "click link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"all_esp_event_campaign_click_\"+pm.globals.get(\"connectionId\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if (typeof pm.globals.get(\"event_campaign_click_\"+pm.globals.get(\"connectionId\")) === 'undefined') {",
+									"",
+									"    pm.globals.set(\"event_campaign_click_\"+pm.globals.get(\"connectionId\"), \"https://httpstat.us/400\");",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{all_esp_event_campaign_click_{{connectionId}}}}",
+							"host": [
+								"{{all_esp_event_campaign_click_{{connectionId}}}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create event",
+			"item": [
+				{
+					"name": "Static Content open",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"pm.globals.set(\"all_esp_event_id_based_on_campaign_open_static_content\", jsonData.payload.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"All Esp Event Based On Campaign Open Static Content-{{connectionId}}\",\n    \"based_on\": \"mailing\",\n    \"ongoing_event\": true,\n    \"mailing_id\":\"{{all_esp_event_based_on_open_click_campaign_id_{{connectionId}}}}\",\n    \"status\": true,\n    \"segments\": [\n        {{segment_id_all_esp_event_based_on_campaign}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"triggers\": [\n        {\n            \"based_on\":\"mailing\",\n\t\t\t\"email_messages\":[\n\t\t\t\t\"{{email_msg_all_esp_event_based_on_campaign_open_static_content}}\"\n\t\t\t],\n            \"trigger_number\":1,\n\t\t\t\"operator\":\"after\",\n\t\t\t\"email_operator\": \"opened\",\n\t\t\t\"hours_diff\":\"1\",\n\t\t\t\"schedule_hour\": 1,\n\t\t\t\"schedule_minute\": 00,\n\t\t\t\"trigger_sending_unit\":\"hours\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/events",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Static Content click",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"pm.globals.set(\"all_esp_event_id_based_on_campaign_click_static_content\", jsonData.payload.id);",
+									"pm.globals.unset(\"all_esp_event_based_on_open_click_campaign_id_\"+pm.globals.get(\"connectionId\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"All Esp Event Based On Campaign Click Static Content-{{connectionId}}\",\n    \"based_on\": \"mailing\",\n    \"ongoing_event\": true,\n    \"mailing_id\": \"{{all_esp_event_based_on_open_click_campaign_id_{{connectionId}}}}\",\n    \"status\": true,\n    \"segments\": [\n        {{segment_id_all_esp_event_based_on_campaign}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"triggers\": [\n        {\n            \"based_on\": \"mailing\",\n            \"email_messages\": [\n                \"{{email_msg_all_esp_event_based_on_campaign_click_static_content}}\"\n            ],\n            \"trigger_number\": 1,\n            \"operator\": \"after\",\n            \"email_operator\": \"clicked\",\n            \"hours_diff\": \"1\",\n            \"schedule_hour\": 1,\n            \"schedule_minute\": 00,\n            \"trigger_sending_unit\": \"hours\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/events",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay  10 Min",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "600"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay  10 Min",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "600"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay  10 Min",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "600"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay  10 Min",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "600"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay  10 Min",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "600"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay  10 Min",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "600"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay  10 Min",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "600"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Cases for Open Click",
+			"item": [
+				{
+					"name": "Delete Segment with active event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"if(pm.response.code === 412){\r",
+									"    pm.test(`Test Segment Delete With Active Event Time : ${jsonData.date}`, function() {\r",
+									"        pm.expect(jsonData.payload.message).to.equal(\"Segment can not be deleted because it is used in the following entities: Active Events\");\r",
+									"    });\r",
+									"}else{\r",
+									"    pm.test(`Test Segment Delete With Active Event Time : ${jsonData.date}`, function() {\r",
+									"        pm.expect(\"\").to.equal(\"Segment can not be deleted because it is used in the following entities: Active Events\");\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{segment_id_all_esp_event_based_on_campaign}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{segment_id_all_esp_event_based_on_campaign}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Opne static content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const espId = pm.globals.get(\"espId\");",
+									"var connectionId = pm.globals.get(\"connectionId\");",
+									"var jsonData = pm.response.json();",
+									"if(pm.response.code === 200){",
+									"    pm.test(`Test Event Based On Campaign-Open in static content is working Time : ${jsonData.date}`, function() {",
+									"        const htmlText = jsonData.html;",
+									"        const fieldValue = htmlText.split(\"~!@#~\");",
+									"        pm.expect(jsonData.subject).to.equal(\"All Esp Event Based On Campaign-Open Static Content-\"+pm.globals.get(\"connectionId\") + \"-\"+ pm.environment.get(\"env\"));",
+									"        pm.expect(fieldValue[1]).to.equal(\"Test Mail\");",
+									"    });",
+									"    postman.setNextRequest(\"Click_static_content\")",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"all_esp_event_cp{{connectionId}}@hoohem.com\",\n    \"subject\": \"All Esp Event Based On Campaign-Open Static Content-{{connectionId}}-{{env}}\",\n    \"timeout\": 100000\n}"
+						},
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"app",
+								"mail_db",
+								"getLast"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Opne static content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const espId = pm.globals.get(\"espId\");",
+									"var connectionId = pm.globals.get(\"connectionId\");",
+									"var jsonData = pm.response.json();",
+									"if(pm.response.code === 200){",
+									"    pm.test(`Test Event Based On Campaign-Open in static content is working Time : ${jsonData.date}`, function() {",
+									"        const htmlText = jsonData.html;",
+									"        const fieldValue = htmlText.split(\"~!@#~\");",
+									"        pm.expect(jsonData.subject).to.equal(\"All Esp Event Based On Campaign-Open Static Content-\"+pm.globals.get(\"connectionId\") + \"-\"+ pm.environment.get(\"env\"));",
+									"        pm.expect(fieldValue[1]).to.equal(\"Test Mail\");",
+									"    });",
+									"} else {",
+									"    pm.test(\"Test Event Based On Campaign-Open in static content \\\"Is Working\\\"\", function() {",
+									"        pm.expect(\"\").to.equal(\"Test Event Based On Campaign-Open Static Content-\"+pm.globals.get(\"connectionId\") + \"-\"+ pm.environment.get(\"env\"));",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"all_esp_event_cp{{connectionId}}@hoohem.com\",\n    \"subject\": \"All Esp Event Based On Campaign-Open Static Content-{{connectionId}}-{{env}}\",\n    \"timeout\": 100000\n}"
+						},
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"app",
+								"mail_db",
+								"getLast"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Click_static_content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const espId = pm.globals.get(\"espId\");",
+									"var connectionId = pm.globals.get(\"connectionId\");",
+									"var jsonData = pm.response.json();",
+									"if(pm.response.code === 200){",
+									"    pm.test(`Test Event Based On Campaign-Click in static content is working Time : ${jsonData.date}`, function() {",
+									"        const htmlText = jsonData.html;",
+									"        const fieldValue = htmlText.split(\"~!@#~\");",
+									"        pm.expect(jsonData.subject).to.equal(\"Test Event Based On Campaign-Click Static Content-\"+pm.globals.get(\"connectionId\") + \"-\"+ pm.environment.get(\"env\"));",
+									"        pm.expect(fieldValue[1]).to.equal(\"Test Mail\");",
+									"    });",
+									"    postman.setNextRequest(\"Delay_5_Sec\")",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"all_esp_event_cp{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Event Based On Campaign-Click Static Content-{{connectionId}}-{{env}}\",\n    \"timeout\": 100000\n}"
+						},
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"app",
+								"mail_db",
+								"getLast"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Click static content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const espId = pm.globals.get(\"espId\");",
+									"var connectionId = pm.globals.get(\"connectionId\");",
+									"var jsonData = pm.response.json();",
+									"if(pm.response.code === 200){",
+									"    pm.test(`Test Event Based On Campaign-Click in static content is working Time : ${jsonData.date}`, function() {",
+									"        const htmlText = jsonData.html;",
+									"        const fieldValue = htmlText.split(\"~!@#~\");",
+									"        pm.expect(jsonData.subject).to.equal(\"Test Event Based On Campaign-Click Static Content-\"+pm.globals.get(\"connectionId\") + \"-\"+ pm.environment.get(\"env\"));",
+									"        pm.expect(fieldValue[1]).to.equal(\"Test Mail\");",
+									"    });",
+									"} else {",
+									"    pm.test(\"Test Event Based On Campaign-Click in static content \\\"Is Working\\\"\", function() {",
+									"        pm.expect(\"\").to.equal(\"Test Event Based On Campaign-Click Static Content-\"+pm.globals.get(\"connectionId\") + \"-\"+ pm.environment.get(\"env\"));",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"all_esp_event_cp{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Event Based On Campaign-Click Static Content-{{connectionId}}-{{env}}\",\n    \"timeout\": 100000\n}"
+						},
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"app",
+								"mail_db",
+								"getLast"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_5_Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "600"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete Event and Segment",
+			"item": [
+				{
+					"name": "Campaign Open Event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"all_esp_event_id_based_on_campaign_open_static_content\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_based_on_campaign_open_static_content}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"events",
+								"{{all_esp_event_id_based_on_campaign_open_static_content}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 1 sec",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Campaign Click Event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"all_esp_event_id_based_on_campaign_click_static_content\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_based_on_campaign_click_static_content}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"events",
+								"{{all_esp_event_id_based_on_campaign_click_static_content}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 1 sec",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Segment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"segment_id_all_esp_event_based_on_campaign\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{segment_id_all_esp_event_based_on_campaign}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{segment_id_all_esp_event_based_on_campaign}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Contact",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"change_to\":\"remove\",\n \"emails\": [\n  \"all_esp_event_cp{{connectionId}}@hoohem.com\"\n ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts",
+								"change_status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

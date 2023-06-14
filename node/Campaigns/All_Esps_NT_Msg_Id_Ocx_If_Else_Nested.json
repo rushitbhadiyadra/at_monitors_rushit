@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "309cf203-cd85-4924-b1b6-782a43a0e7b1",
+		"name": "All_Esps_NT_Msg_Id_Ocx_If_Else_Nested",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"nt_nested_ifm_1_@hoohem.com\",\n        \"country\": \"usa\",\n        \"address\": \"keshod\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"nt_nested_ifm_2_@hoohem.com\",\n        \"country\": \"India\",\n        \"address\": \"keshod\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"nt_nested_ifm_3_@hoohem.com\",\n         \"country\": \"India\",\n        \"address\": \"Junagadh\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"nt_nested_ifm_4_@hoohem.com\",\n         \"country\": \"India\",\n        \"address\": \"Junagadh\",\n        \"first_name\": \"stepin\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"nt_nested_ifm_1_@hoohem.com\",\n        \"nt_nested_ifm_2_@hoohem.com\",\n        \"nt_nested_ifm_3_@hoohem.com\",\n        \"nt_nested_ifm_4_@hoohem.com\"\n    ],\n    \"message_id\": {{nt_msg_if_nested_email_id}},\n    \"sending_connection_id\": {{connectionId}},\n    \"create_contact\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_200",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"NT Msg Id If Nested Preaheder is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Preaheder is working\", function () {",
+							"        pm.expect(body[2]).to.equal(\"keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Preaheder is working\", function () {",
+							"        pm.expect(body[3]).to.equal(\"usa-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Body is working\", function () {",
+							"        pm.expect(body[5]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Body is working\", function () {",
+							"        pm.expect(body[6]).to.equal(\"keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Body is working\", function () {",
+							"        pm.expect(body[7]).to.equal(\"usa-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\") + \"keshod-\" + pm.globals.get(\"connectionId\") + \"usa-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"NT Msg Id If is working\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nt_nested_ifm_1_@hoohem.com\",\n    \"subject\": \"ongage-{{connectionId}}keshod-{{connectionId}}usa-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_2 = body[2].split(\"<\")",
+							"    var body_3 = body[4].split(\"\\n\")",
+							"    pm.test(\"NT Msg Id If Nested Preaheder is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Preaheder is working\", function () {",
+							"        pm.expect(body_2[0]).to.equal(\"keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Body is working\", function () {",
+							"        pm.expect(body[3]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Body is working\", function () {",
+							"        pm.expect(body_3[0]).to.equal(\"keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"NT Msg Id If is working\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nt_nested_ifm_2_@hoohem.com\",\n    \"subject\": \"ongage-{{connectionId}}keshod-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_1 = body[1].split(\"<\")",
+							"    var body_2 = body[2].split(\"\\n\")",
+							"    pm.test(\"NT Msg Id If Nested Preaheder is working\", function () {",
+							"        pm.expect(body_1[0]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Body is working\", function () {",
+							"        pm.expect(body_2[0]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT Msg Id If Nested Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"",
+							"} else {",
+							"    pm.test(\"NT Msg Id If is working\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nt_nested_ifm_3_@hoohem.com\",\n    \"subject\": \"ongage-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_1 = body[1].split(\"<\")",
+							"    var body_2 = body[2].split(\"\\n\")",
+							"    pm.test(\"NT If Nested Preaheder is working\", function () {",
+							"        pm.expect(body_1[0]).to.equal(\"other-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT If Nested Body is working\", function () {",
+							"        pm.expect(body_2[0]).to.equal(\"other-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"NT If Nested Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"other-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"",
+							"} else {",
+							"    pm.test(\"NT If is working\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nt_nested_ifm_4_@hoohem.com\",\n    \"subject\": \"other-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

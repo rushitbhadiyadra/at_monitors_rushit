@@ -1,0 +1,1890 @@
+{
+	"info": {
+		"_postman_id": "1c895ab7-0d54-404c-8694-ba332fada652",
+		"name": "All-Esps-AR-Test-Cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-1c895ab7-0d54-404c-8694-ba332fada652?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "delete mail by id and subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_ar_transactional_{{connectionId}}@hoohem.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/deleteMailById",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"deleteMailById"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var segment of jsonData.payload) {",
+							"            if(segment.name === \"All ESPs AR-Test-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_segment_id_ar_test\", segment.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('delete mail by id and subject');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Segmet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_segment_id_ar_test\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_id_ar_test}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_segment_id_ar_test}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old AR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"    for (var ar of jsonData.payload) {",
+							"        if (ar.name === \"All_Esp_Test_Cases_Transactional-\" + pm.globals.get(\"connectionId\")){",
+							"            pm.globals.set(\"old_ar_id\", ar.id);",
+							"            if(ar.active === false){",
+							"            postman.setNextRequest('Delete-Automation-Rule') ",
+							"            }else{",
+							"                postman.setNextRequest('Deactive-automation-rule');",
+							"            }",
+							"        }",
+							"        ",
+							"    }   ",
+							"}else{",
+							"    postman.setNextRequest('Create Contact');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactive-automation-rule",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"active\": false\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{old_ar_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{old_ar_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-Automation-Rule",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_ar_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{old_ar_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{old_ar_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"ae_ar_transactional_{{connectionId}}@hoohem.com\",\n\t \"address\": \"ahmedabad\",\n        \"country\": \"India\",\n        \"first_name\": \"Si\",\n        \"last_name\": \"Dev2\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"dob\": \"03/10/2020\",\n        \"city\": \"bhavnagar\",\n        \"street_name\": \"Radha and Krishana\",\n        \"society_name\": \"Radha & Krishana\",\n        \"middle_name\": \"ongage's\",\n        \"state\": \"Gujarat\",\n        \"query\": \"sales\",\n        \"location\": \"78759\",\n        \"industry\": \"sales\",\n        \"keyword\": \"marketing\",\n        \"zip\": \"63090\",\n        \"search\": \"sales\",\n        \"userip\": \"108.200.249.191\",\n        \"s1\": \"ong166\",\n        \"useragent\": \"useragent\",\n        \"zip1\": \"95050\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 100 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esps_ar_segment_id\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esps_ar_segment_id\", jsonData.payload.id);",
+							"        pm.globals.set(\"all_esps_ar_segment_name\", jsonData.payload.name);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs AR-Test-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ae_ar_transactional_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 100 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Automation Rule",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esp_automation_rule_id\", jsonData.payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All_Esp_Test_Cases_Transactional-{{connectionId}}\",\n    \"description\": \"\",\n    \"trigger\": \"clicked\",\n    \"trigger_frequency\": \"once_per_campaign\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 1,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ae_ar_transactional_{{connectionId}}@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n   \n    \"actions\": [\n\t    {\n\t    \t\"name\": \"All-Esps-Transactional Action\",\n\t\t\t\"action_number\":1,\n\t\t\t\"type\":\"transactional\",\n\t\t\t\"data\":{\n\t\t\t\"message_id\":{{msg_id_ar_test}},\n\t\t\t\"campaign_id\":{{all_esp_ar_campaign_id}},\n\t\t\t\"sending_connection_id\":{{connectionId}}\n\t\t\t},\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n\t\t}\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active Automation Rule",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{all_esp_automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{all_esp_automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create and Run Campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"time_30\");",
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esp_ar_ocxbe_maling_id\", jsonData.payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"All-Esps-Ar-Test-Cases-{{connectionId}}\",\n   \"description\": \"All Esp-Ar-campaign\",\n   \"list_id\": {{list_id}} ,\n   \"email_message\": {{all_esp_ar_behavioural_stats}} ,\n   \"segments\": [{{all_esps_ar_segment_id}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseText = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"pm.globals.set(\"ar_mail_click_links\", responseText.HTMLTextLinks[0]);",
+							"postman.setNextRequest(\"Get_contact_info\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_ar_transactional_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test All Esp Ar-Behavioural Stats Email-{{connectionId}}-{{env}}\",\n    \"timeout\": 1200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseText = pm.response.json();",
+							"if(pm.response.code !== 200){",
+							"    pm.test(\"Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"    postman.setNextRequest(\"Contact Delete\")",
+							"}else{",
+							"pm.globals.set(\"ar_mail_click_links\", responseText.HTMLTextLinks[0]);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_ar_transactional_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test All Esp Ar-Behavioural Stats Email-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_contact_info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esp_ar_contact_id\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"all_esp_ar_creaed_date\", str.substring(0,8));",
+							"pm.globals.set(\"all_esp_ar_address\", jsonData.payload.address);",
+							"pm.globals.set(\"all_esp_ar_gender\", jsonData.payload.gender);",
+							"pm.globals.set(\"all_esp_ar_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"all_esp_ar_dob\", jsonData.payload.dob);",
+							"pm.globals.set(\"all_esp_ar_email\", jsonData.payload.email);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ae_ar_transactional_{{connectionId}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ae_ar_transactional_{{connectionId}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test open",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ar_mail_click_links\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ar_mail_click_links}}",
+					"host": [
+						"{{ar_mail_click_links}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Transactional Action",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"",
+							"var today = new Date();",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"",
+							"const timestamp_to_date = (timeStamp_value) => {",
+							"    var date = new Date(timeStamp_value * 1000); ",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const content = JSON.parse(fieldValue[2]);",
+							"",
+							"    // TODO : System Field",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_contact_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_contact_id).to.equal(pm.globals.get(\"all_esp_ar_contact_id\"));",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_created_date Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        var str = Math.round(content.system_fields.ocx_created_date).toString();",
+							"        pm.expect(str.substring(0, 8)).to.equal(pm.globals.get(\"all_esp_ar_creaed_date\"));",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_from_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_from_address_domain Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_address_domain).to.equal(pm.globals.get(\"system_field_from_address_domain\"));",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_from_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_from_name).to.equal(pm.globals.get(\"system_field_from_name\"));",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_list_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.system_fields.ocx_list_id)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_mailing_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.system_fields.ocx_mailing_id)).to.equal(parseInt(pm.environment.get(\"all_esp_ar_campaign_id\")));",
+							"    });",
+							"    ",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_campaign_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_campaign_name).to.equal(\"Transactional Campaign\");",
+							"    });",
+							"    ",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_reply_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_reply_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_subject Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_subject).to.equal(\"Test All Esps Ar message-\" +pm.globals.get(\"connectionId\") + \"-\" + pm.environment.get(\"env\"));",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_esp_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_esp_id).to.equal(espId);",
+							"    });",
+							"",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in system fields \\\"ocx_connection_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_connection_id).to.equal(connectionId);",
+							"    });",
+							"",
+							"    // TODO : Verify Date Function",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_day Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_day).to.equal(day);",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_month Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month).to.equal(month);",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_year Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_year).to.equal(year);",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_dow_long Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_dow_long).to.equal(dowLong);",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_dow Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_dow).to.equal(dow);",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_month_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month_name).to.equal(monthName);",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_month_short Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_month_short).to.equal(monthShort);",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_yy Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_yy).to.equal(yy);",
+							"    });",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_now Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_now).to.equal(month + \"/\" + day + \"/\" + year);",
+							"    });",
+							"     pm.test(`Test All Esps Ar-Transactional Action in date function \\\"ocx_timestamp Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.date_function.ocx_timestamp.split(\" \")[0]).to.equal(year + \"-\" + month + \"-\" + day);",
+							"    });",
+							" ",
+							"    //TODO : List Dynamic Value",
+							"",
+							"",
+							"    pm.test(`Test All Esps Ar-Transactional Action in List Dynamic Field \\\"email Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.email).to.equal(pm.globals.get(\"all_esp_ar_email\"));",
+							"    });",
+							"    pm.test(`Test All Esps Ar-Transactional Action in List Dynamic Field \\\"address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.address).to.equal(pm.globals.get(\"all_esp_ar_address\"));",
+							"    });",
+							"    pm.test(`Test All Esps Ar-Transactional Action in List Dynamic Field \\\"gender Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.dynamic_fields.gender).to.equal(pm.globals.get(\"all_esp_ar_gender\"));",
+							"    });",
+							"    pm.test(`Test All Esps Ar-Transactional Action in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.dynamic_fields.product_id)).to.equal(parseInt(pm.globals.get(\"all_esp_ar_product_id\")));",
+							"    });",
+							"    pm.test(`Test All Esps Ar-Transactional Action in List Dynamic Field \\\"dob Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(timestamp_to_date(parseInt(content.dynamic_fields.dob))).to.equal(timestamp_to_date(parseInt(pm.globals.get(\"all_esp_ar_dob\"))));",
+							"    });",
+							"    ",
+							"    pm.test(\"Test All Esps Ar-Transactional Action ocx_generate_hash sha1 is working\", function () { ",
+							"    pm.expect(fieldValue[5]).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\"); ",
+							"    });",
+							"    ",
+							"    pm.test(\"Test All Esps Ar-Transactional Action ocx_generate_hash sha256 is working\", function () { ",
+							"        pm.expect(fieldValue[8]).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"    });",
+							"    ",
+							"    pm.test(\"Test All Esps Ar-Transactional Action ocx_generate_hash md5 is working\", function () { ",
+							"        pm.expect(fieldValue[11]).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"    });",
+							"",
+							"    pm.globals.set(\"sha1_link\", jsonData.HTMLTextLinks[0]);",
+							"    pm.globals.set(\"sha256_link\", jsonData.HTMLTextLinks[1]);",
+							"    pm.globals.set(\"md5_link\", jsonData.HTMLTextLinks[2]);",
+							"",
+							"    var jsonData = pm.response.json();",
+							"    var today = new Date();",
+							"    var day = String(today.getDate()).padStart(2, '0');",
+							"    var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"    var year = String(today.getFullYear());",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    var jsonFields = JSON.parse(fieldValue[12]);",
+							"    ",
+							"    pm.test(\"Test ocxbe_type working with transactional mail\", function () {",
+							"        pm.expect(jsonFields.ocxbe_type).to.equal(\"click\");",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_esp_id working with transactional mail\", function () {",
+							"        pm.expect(parseInt(jsonFields.ocxbe_esp_id)).to.equal(parseInt(pm.globals.get(\"espId\")));",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_connection_id working with transactional mail\", function () {",
+							"        pm.expect(parseInt(jsonFields.ocxbe_connection_id)).to.equal(parseInt(pm.globals.get(\"connectionId\")));",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_mailing_id working with transactional mail\", function () {",
+							"        pm.expect(parseInt(jsonFields.ocxbe_mailing_id)).to.equal(parseInt(pm.globals.get(\"all_esp_ar_ocxbe_maling_id\")));",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_timestamp working with transactional mail\", function () {",
+							"        const date = jsonFields.ocxbe_timestamp.split(' ')",
+							"        pm.expect(date[0]).to.equal(year+'-'+month+'-'+day);",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_email_message_id working with transactional mail\", function () {",
+							"        pm.expect(parseInt(jsonFields.ocxbe_email_message_id)).to.equal(parseInt(pm.environment.get(\"all_esp_ar_behavioural_stats\")));",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_segment_id working with transactional mail\", function () {",
+							"        pm.expect(parseInt(jsonFields.ocxbe_segment_id)).to.equal(parseInt(pm.globals.get(\"all_esps_ar_segment_id\")));",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_ip working with transactional mail\", function () {",
+							"        var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;",
+							"        pm.expect(jsonFields.ocxbe_ip).match(ipformat);",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_country_code working with transactional mail\", function () {",
+							"        if(jsonFields.ocxbe_country_code === \"IN\"){",
+							"            pm.expect(jsonFields.ocxbe_country_code).to.equal('IN');",
+							"        }else if(jsonFields.ocxbe_country_code === \"IE\"){",
+							"            pm.expect(jsonFields.ocxbe_country_code).to.equal('IE');",
+							"        }else{",
+							"            pm.expect(jsonFields.ocxbe_country_code).not.equal(undefined);",
+							"            pm.expect(jsonFields.ocxbe_country_code).not.equal(null);",
+							"            pm.expect(jsonFields.ocxbe_country_code).not.equal(\"\");",
+							"        }",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_browser working with transactional mail\", function () {",
+							"        pm.expect(jsonFields.ocxbe_browser).not.equal(undefined);",
+							"        pm.expect(jsonFields.ocxbe_browser).not.equal(null);",
+							"        pm.expect(jsonFields.ocxbe_browser).not.equal(\"\");",
+							"        pm.expect(jsonFields.ocxbe_browser).to.equal('Chrome');",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxbe_os working with transactional mail\", function () {",
+							"        pm.expect(jsonFields.ocxbe_os).not.equal(undefined);",
+							"        pm.expect(jsonFields.ocxbe_os).not.equal(null);",
+							"        pm.expect(jsonFields.ocxbe_os).not.equal(\"\");",
+							"        pm.expect(jsonFields.ocxbe_os).to.equal('Win10');",
+							"    });",
+							"}else{",
+							"    pm.test(\"Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							"",
+							"pm.globals.unset(\"all_esp_ar_creaed_date\");",
+							"pm.globals.unset(\"all_esp_ar_address\");",
+							"pm.globals.unset(\"all_esp_ar_gender\");",
+							"pm.globals.unset(\"all_esp_ar_product_id\");",
+							"pm.globals.unset(\"all_esp_ar_dob\");",
+							"pm.globals.unset(\"ar_mail_click_links\");",
+							"pm.globals.unset(\"all_esp_ar_maling_id\");",
+							"pm.globals.unset(\"ar_test_ocxbe_link_id\");",
+							"pm.globals.unset(\"all_esp_ar_email\");",
+							"pm.globals.unset(\"all_esps_ar_segment_name\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_ar_transactional_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test All Esps Ar message-{{connectionId}}-{{env}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash SHA1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All-Esp Ar Transactional Actional ocx_generate_hash sha1 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\"); ",
+							"});",
+							"pm.globals.unset(\"sha1_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{sha1_link}}",
+					"host": [
+						"{{sha1_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash SHA256",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All-Esp Ar Transactional Actional ocx_generate_hash sha256 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"});",
+							"pm.globals.unset(\"sha256_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{sha256_link}}",
+					"host": [
+						"{{sha256_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash MD5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"Test All-Esp Ar Transactional Actional ocx_generate_hash md5 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"});",
+							"pm.globals.unset(\"md5_link\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{md5_link}}",
+					"host": [
+						"{{md5_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contact Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esp_ar_contact_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"change_to\": \"remove\",\n    \"emails\": [\n        \"ae_ar_transactional_{{connectionId}}@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Segmet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esps_ar_segment_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{all_esps_ar_segment_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{all_esps_ar_segment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": false}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{all_esp_automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{all_esp_automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esp_automation_rule_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{all_esp_automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{all_esp_automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

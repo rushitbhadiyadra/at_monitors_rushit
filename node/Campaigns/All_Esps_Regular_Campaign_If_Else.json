@@ -1,0 +1,865 @@
+{
+	"info": {
+		"_postman_id": "3f77b21b-31a1-446c-871b-5f2af2ad4989",
+		"name": "All_Esps_Regular_Campaign_If_Else",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"rc_ocx_if_1_{{connectionId}}@hoohem.com\",\n        \"country\": \"India\"\n    },\n    {\n        \"email\": \"rc_ocx_if_2_{{connectionId}}@hoohem.com\",\n        \"country\": \"UK\"\n    },\n    {\n        \"email\": \"rc_ocx_if_3_{{connectionId}}@hoohem.com\",\n        \"country\": \"Russia\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get old segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"RC Ocx If Else-\" + pm.globals.get(\"connectionId\")){",
+							"            count = 1",
+							"            pm.globals.set(\"Segment_id_rc_if_else\", segment.id);      ",
+							"        }      ",
+							"    }",
+							"}",
+							"",
+							"if(count===1){",
+							"    postman.setNextRequest(\"create and send campaign\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Segment_id_rc_if_else\", function() {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"Segment_id_rc_if_else\", jsonData.payload.id);",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"RC Ocx If Else-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"rc_ocx_if_1_{{connectionId}}@hoohem.com\",\n                \"rc_ocx_if_2_{{connectionId}}@hoohem.com\",\n                \"rc_ocx_if_3_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time\", Math.round(new Date().getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.globals.set(\"rc_campaign_id_if_else\", jsonData.payload.id);\r",
+							"pm.globals.unset(\"time\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Campaign RC If Else-{{connectionId}}\",\n    \"email_message\": {{rcif_email_id}},\n    \"segments\": [\n        {{Segment_id_rc_if_else}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_200",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var preaheder = data.split('>')",
+							"    var preaheder_2 = preaheder[9].split(\"<\")",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"RC If Preaheder is working\", function () {",
+							"        pm.expect(preaheder_2[0]).to.equal(\"Country is India-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"RC If Body is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"Country is India-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"RC If Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Country is India-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"RC If is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_ocx_if_1_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Country is India-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var preaheder = data.split('>')",
+							"    var preaheder_2 = preaheder[9].split(\"<\")",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"RC Else If Preaheder is working\", function () {",
+							"        pm.expect(preaheder_2[0]).to.equal(\"Country is UK-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"RC Else If Body is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"Country is UK-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"RC Else If Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Country is UK-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"RC Else If is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_ocx_if_2_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Country is UK-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var preaheder = data.split('>')",
+							"    var preaheder_2 = preaheder[9].split(\"<\")",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"RC Else Preaheder is working\", function () {",
+							"        pm.expect(preaheder_2[0]).to.equal(\"other country-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"RC Else Body is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"other country-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"RC Else Subject is working\", function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"other country-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"RC Else is working\", function () {",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"rc_ocx_if_3_{{connectionId}}@hoohem.com\",\n    \"subject\": \"other country-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"if(pm.response.code === 200)\r",
+							"{\r",
+							"    if((jsonData.payload) instanceof Array)\r",
+							"    {\r",
+							"        pm.globals.set(\"mail_count\", 0);\r",
+							"        pm.globals.unset(\"rc_campaign_id_if_else\");\r",
+							"        postman.setNextRequest(null);\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"\r",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){\r",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"\r",
+							"        }\r",
+							"        var connectionName='';\r",
+							"        for(var i=0;i<jsonData.payload.distribution.length;i++)\r",
+							"        {\r",
+							"            if(jsonData.payload.distribution[i]['esp_id'] !== undefined && jsonData.payload.distribution[i]['esp_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"            if(jsonData.payload.distribution[i]['name'] !== undefined && jsonData.payload.distribution[i]['name'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Name \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['name']+\"</td></tr>\"\r",
+							"            }\r",
+							"            connectionName += jsonData.payload.distribution[i]['name']+\",\";\r",
+							"            if(jsonData.payload.distribution[i]['esp_connection_id'] !== undefined && jsonData.payload.distribution[i]['esp_connection_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_connection_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"        }\r",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"\r",
+							"        }\r",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){\r",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"\r",
+							"        // }\r",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"\r",
+							"        pm.globals.set(\"html_code\", tableHtml);\r",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')\r",
+							"        {\r",
+							"            pm.globals.set(\"html_code\", tableHtml);\r",
+							"            pm.globals.set(\"mail_count\", 1);\r",
+							"        }\r",
+							"        else\r",
+							"        {\r",
+							"            pm.globals.set(\"mail_count\", 0);\r",
+							"            pm.globals.unset(\"rc_campaign_id_if_else\");\r",
+							"            postman.setNextRequest(null);\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"else\r",
+							"{\r",
+							"    pm.globals.set(\"mail_count\", 0);\r",
+							"    pm.globals.unset(\"rc_campaign_id_if_else\");\r",
+							"    postman.setNextRequest(null);\r",
+							"}\r",
+							"pm.globals.unset(\"Segment_id_rc_if_else\")"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{rc_campaign_id_if_else}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{rc_campaign_id_if_else}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error-Campaign Test Cases Detail with {{esp_name}} on {{ongage_env}}\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

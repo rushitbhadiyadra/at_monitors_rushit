@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "0e85c544-c2d8-46b6-8841-7a05ea4a0452",
+		"name": "All_Esps_TC_Dynamic_Ocx_Feed_Link",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-0e85c544-c2d8-46b6-8841-7a05ea4a0452?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"tc_feed_link@hoohem.com\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"tc_feed_link@hoohem.com\"\n    ],\n    \"sending_connection_id\": {{connectionId}},\n    \"message\": {\n        \"subject\": \"TC Html Link Dynamic Ocx Feed-{{ocx_connection_id}}\",\n        \"content_html\": \"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD HTML 4.0 Transitional//EN\\\" \\\"http://www.w3.org/TR/REC-html40/loose.dtd\\\">\\n<html>\\n<head>\\n<meta content=\\\"text/html; charset=utf-8\\\" http-equiv=\\\"Content-Type\\\">\\n<title></title>\\n</head>\\n<body data-gr-ext-installed=\\\"\\\" data-new-gr-c-s-check-loaded=\\\"14.1016.0\\\">\\n<p>{{ocx_feed_dynamic{url={{at_site}}/campaign_automated_test/dynamic_feed_creator/get_dynamic_feed.php?key=ahmedabad&feed_type=xml}}}<a href=\\\"https://www.google.com\\\">Link</a>{{ocx_loop{block=jobs}}}<a href=\\\"https://www.google.com\\\">Link</a>{{ocx_loop_end}}</p>\\n</body>\\n</html>\",\n        \"addresses\": {\n            \"from_name\": \"{{system_field_from_name}}\",\n            \"from_address\": \"{{system_field_from_address}}\",\n            \"reply_address\": \"{{system_field_from_address}}\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send_embed_content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_200",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.globals.set(\"tc_html_link_feed_1\", jsonData.HTMLTextLinks[0]);",
+							"    pm.globals.set(\"tc_html_link_feed_2\", jsonData.HTMLTextLinks[1]);",
+							"    pm.globals.set(\"tc_html_link_feed_3\", jsonData.HTMLTextLinks[2]);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tc_feed_link@hoohem.com\",\n    \"subject\": \"TC Html Link Dynamic Ocx Feed-{{connectionId}}\",\n    \"timeout\": 600000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code==302){",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link`, function () {",
+							"    pm.expect(pm.response.headers.get('location')).to.equal(\"https://www.google.com\");",
+							"    });",
+							"    var link = pm.globals.get(\"tc_html_link_feed_1\")",
+							"    var link_1 = link.toString().split(\"eih=\")",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link Eih`, function () {",
+							"        pm.expect(link_1[1]).to.equal(pm.environment.get(\"tc_html_link_eih\"));",
+							"    });",
+							"}else{",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link Eih`, function () {",
+							"        pm.expect().to.equal(\"Mail Not Received\");",
+							"    });",
+							"}",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{tc_html_link_feed_1}}",
+					"host": [
+						"{{tc_html_link_feed_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code==302){",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link`, function () {",
+							"    pm.expect(pm.response.headers.get('location')).to.equal(\"https://www.google.com\");",
+							"    });",
+							"    var link = pm.globals.get(\"tc_html_link_feed_2\")",
+							"    var link_1 = link.toString().split(\"eih=\")",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link Eih`, function () {",
+							"        pm.expect(link_1[1]).to.equal(pm.environment.get(\"tc_html_link_eih\"));",
+							"    });",
+							"}else{",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link Eih`, function () {",
+							"        pm.expect().to.equal(\"Mail Not Received\");",
+							"    });",
+							"}",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{tc_html_link_feed_2}}",
+					"host": [
+						"{{tc_html_link_feed_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code==302){",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link`, function () {",
+							"    pm.expect(pm.response.headers.get('location')).to.equal(\"https://www.google.com\");",
+							"    });",
+							"    var link = pm.globals.get(\"tc_html_link_feed_3\")",
+							"    var link_1 = link.toString().split(\"eih=\")",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link Eih`, function () {",
+							"        pm.expect(link_1[1]).to.equal(pm.environment.get(\"tc_html_link_eih\"));",
+							"    });",
+							"}else{",
+							"    pm.test(`Test tc Dynamic Ocx Feed Link Eih`, function () {",
+							"        pm.expect().to.equal(\"Mail Not Received\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"tc_html_link_feed_1\")",
+							"pm.globals.unset(\"tc_html_link_feed_2\")",
+							"pm.globals.unset(\"tc_html_link_feed_3\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{tc_html_link_feed_3}}",
+					"host": [
+						"{{tc_html_link_feed_3}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

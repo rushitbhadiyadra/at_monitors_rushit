@@ -1,0 +1,41 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: test1 sparkpost Monitor
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prodsparkpost:
+    runs-on: ubuntu-latest 
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x]
+        collection: [  All_Esps_Transactional_Send_Content_HTML_SystemField_DateFunction_OcxNow_Offset ]
+    steps:
+    - uses: actions/checkout@v3.3.0
+    - name: Prod sparkpost Monitor collections
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    # Install the newman command-line utility, also install the html extra reporter
+    - name: Install newman and newman-reporter-htmlextra and artifact
+      run: |
+        npm install -g newman
+        npm install -g newman-reporter-htmlextra
+        npm install install-artifact-from-github
+    
+    - name: Run ${{ matrix.collection }}
+      id: first_run
+      run: newman run ./node/Campaigns/${{ matrix.collection }}.json -e ./node/Campaigns/Env/all-esps-production-10998.json -g ./node/Campaigns/Env/prod-sparkpost-monitor-global-env.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/prod-sparkpost-"${{ matrix.collection }}"-report.html      
+      #continue-on-error: true
+    
+    # Upload the contents of test results directory to workspace
+    - name: Output prod sparkpost monitor collection
+      uses: actions/upload-artifact@v3
+      with:
+          name: prod-sparkpost-monitor-report
+          path: newman

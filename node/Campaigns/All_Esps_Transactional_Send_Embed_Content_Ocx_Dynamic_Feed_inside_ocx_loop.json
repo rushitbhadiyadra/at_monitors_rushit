@@ -1,0 +1,500 @@
+{
+	"info": {
+		"_postman_id": "273450fd-ee47-4cfd-a153-d1b0c914f1df",
+		"name": "All_Esps_Transactional_Send_Embed_Content_Ocx_Dynamic_Feed_inside_ocx_loop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"ae_tc_msg_dy_ocx_loop@hoohem.com\",\n        \"ae_tc_msg_dy_ocx_loop1@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"ae_tc_msg_dy_ocx_loop@hoohem.com\",\n        \"ae_tc_msg_dy_ocx_loop1@hoohem.com\"\n    ],\n    \"sending_connection_id\": {{connectionId}},\n    \"message\": {\n        \"subject\": \"Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop-{{ocx_connection_id}}\",\n        \"content_html\": \"<head>\\n\\t<meta content=\\\"text/html; charset=utf-8\\\" http-equiv=\\\"Content-Type\\\" />\\n\\t<title></title>\\n</head>\\n<body>\\n<p>{{timecur}}<span>~!@#~{{ocx_feed_dynamic{url={{at_site}}/campaign_automated_test/dynamic_feed_creator/get_dynamic_feed.php?key={{city}}&feed_type=xml}}}{{ocx_loop{block=jobs}}}</span></p>\\n<a data-id=\\\"1022107\\\" href=\\\"http://ongageqa.site/campaign_automated_test/bvn_test.html?dummy1={{first_name}}&dummy2={{address}}\\\">Test Link </a>\\n\\n<p><span>{{ocx_loop_end}}</span></p>\\n\\n<p>~!@#~Test~!@#~</p>\\n</body>\\n</html></html>\",\n        \"addresses\": {\n            \"from_name\": \"{{system_field_from_name}}\",\n            \"from_address\": \"{{system_field_from_address}}\",\n            \"from_address_domain\": \"{{system_field_from_address_domain}}\",\n            \"reply_address\": \"{{system_field_from_address}}\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send_embed_content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.globals.set(\"link_1_tcc\",jsonData.HTMLTextLinks[0])",
+							"    pm.test(`Test Transactional Send Embed Content Dynnamic Ocx Feed Inside Loop\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop-\"+pm.globals.get(\"connectionId\"));",
+							"});",
+							"}else{",
+							"    pm.test(`Test Transactional Send Embed Content Dynnamic Ocx Feed Inside Loop`, function () {",
+							"        pm.expect(\"\").to.equal(\"Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop-\"+pm.globals.get(\"connectionId\"));",
+							"});",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_tc_msg_dy_ocx_loop@hoohem.com\",\n    \"subject\": \"Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop-{{connectionId}}\",\n    \"timeout\": 600000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.globals.set(\"link_2_tcc\",jsonData.HTMLTextLinks[0])",
+							"    pm.test(`Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(jsonData.subject).to.equal(\"Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop-\"+pm.globals.get(\"connectionId\"));",
+							"});",
+							"}else{",
+							"    pm.test(`Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop`, function () {",
+							"        pm.expect(\"\").to.equal(\"Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop-\"+pm.globals.get(\"connectionId\"));",
+							"});",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_tc_msg_dy_ocx_loop1@hoohem.com\",\n    \"subject\": \"Transactional Send Embed Content Dynamic Ocx Feed Inside Ocx Loop-{{connectionId}}\",\n    \"timeout\": 60000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read link 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.text()\r",
+							"    var data = jsonData.split(\"<td>\")\r",
+							"    var hotel_name = data[1].split(\"</td>\")\r",
+							"    var hotel_location = data[2].split(\"</td>\")\r",
+							"    var first_name = data[3].split(\"</td>\")\r",
+							"    var address = data[4].split(\"</td>\")\r",
+							"    var bvnn = data[5].split(\"</td>\")\r",
+							"    var static = data[6].split(\"</td>\")\r",
+							"    pm.test(`Test Transactional Send Embed Content Dynnamic Ocx Feed Inside Loop`, function () {\r",
+							"       pm.expect(hotel_name[0]).to.equal(\"Hotel name\");\r",
+							"        pm.expect(hotel_location[0]).to.equal(\"Hotel location\");\r",
+							"        pm.expect(first_name[0]).to.equal(\"First Name\");\r",
+							"        pm.expect(address[0]).to.equal(\"address\");\r",
+							"        pm.expect(bvnn[0]).to.equal(\"BVN\");\r",
+							"        pm.expect(static[0]).to.equal(\"10\");\r",
+							"    });\r",
+							"}else{\r",
+							"    pm.test(`Test Transactional Send Embed Content Dynnamic Ocx Feed Inside Loop`, function () {\r",
+							"        pm.expect(\"\").to.equal(\"Check Link Please\");\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.unset(\"link_1_tcc\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{link_1_tcc}}",
+					"host": [
+						"{{link_1_tcc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read link 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.text()\r",
+							"    var data = jsonData.split(\"<td>\")\r",
+							"    var hotel_name = data[1].split(\"</td>\")\r",
+							"    var hotel_location = data[2].split(\"</td>\")\r",
+							"    var first_name = data[3].split(\"</td>\")\r",
+							"    var address = data[4].split(\"</td>\")\r",
+							"    var bvnn = data[5].split(\"</td>\")\r",
+							"    var static = data[6].split(\"</td>\")\r",
+							"    pm.test(`Test Transactional Send Embed Content Dynnamic Ocx Feed Inside Loop`, function () {\r",
+							"        pm.expect(hotel_name[0]).to.equal(\"Hotel name\");\r",
+							"        pm.expect(hotel_location[0]).to.equal(\"Hotel location\");\r",
+							"        pm.expect(first_name[0]).to.equal(\"First Name\");\r",
+							"        pm.expect(address[0]).to.equal(\"address\");\r",
+							"        pm.expect(bvnn[0]).to.equal(\"BVN\");\r",
+							"        pm.expect(static[0]).to.equal(\"10\");\r",
+							"    });\r",
+							"}else{\r",
+							"    pm.test(`Test Transactional Send Embed Content Dynnamic Ocx Feed Inside Loop`, function () {\r",
+							"        pm.expect(\"\").to.equal(\"Check Link Please\");\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.unset(\"link_2_tcc\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{link_2_tcc}}",
+					"host": [
+						"{{link_2_tcc}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

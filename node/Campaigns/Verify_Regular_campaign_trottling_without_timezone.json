@@ -1,0 +1,567 @@
+{
+	"info": {
+		"_postman_id": "b5dfd1fa-cdac-483b-bff8-1d2cec8da60b",
+		"name": "Verify_Regular_campaign_trottling_without_timezone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.json().length > 0){\r",
+							"var jsonData = pm.response.json()\r",
+							"    var smallest = jsonData[0].date;\r",
+							"        for(i=0; i<jsonData.length; i++) \r",
+							"        {\r",
+							"\t\t\tif(jsonData[i].date < smallest)\r",
+							"            {\r",
+							"\t\t\t\tsmallest = jsonData[i].date; \r",
+							"            }\r",
+							"\t\t}pm.globals.set(\"smallest_value\",smallest)\r",
+							"\r",
+							"    var largest = jsonData[0].date;\r",
+							"        for(j=0; j< jsonData.length; j++)\r",
+							"        {\r",
+							"\t\t\tif(jsonData[j].date > largest)\r",
+							"            {\r",
+							"\t\t\t\tlargest = jsonData[j].date; \r",
+							"\t\t\t}\r",
+							"\t\t}\r",
+							"        pm.globals.set(\"largest_value\",largest) \r",
+							"\r",
+							"var small_stdtime =new Date(pm.globals.get(\"smallest_value\"))\r",
+							"var large_stdtime = new Date(pm.globals.get(\"largest_value\"))\r",
+							"\r",
+							"var diff = (large_stdtime.getTime()- small_stdtime.getTime())\r",
+							"var diffMins = Math.floor((diff / 1000) / 60); \r",
+							"console.log(diffMins)\r",
+							"\r",
+							"pm.test(\"Throttling time between first & last mail receive\", function () {\r",
+							"    pm.expect(diffMins).to.be.above(100);\r",
+							"});\r",
+							"}else{\r",
+							"pm.test(\"Throttling time between first & last mail receive\", function () {\r",
+							"    pm.expect(\"\").to.be.above(100);\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/All Esps Test throttling without timezone-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"All Esps Test throttling without timezone-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"throttling_without_timezone_segment_id\")\r",
+							"pm.globals.unset(\"time_30\")\r",
+							"pm.globals.unset(\"start_time\")\r",
+							"pm.globals.unset(\"end_time\")\r",
+							"pm.globals.unset(\"smallest_value\")\r",
+							"pm.globals.unset(\"largetest_value\")\r",
+							"pm.globals.unset(\"throttling_time\")"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/All Esps Test throttling without timezone-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"All Esps Test throttling without timezone-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    { \r\n        \"email\": \"throttling_1@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_2@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_3@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_4@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_5@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_6@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_7@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_8@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_9@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_10@hoohem.com\" \r\n    },\r\n        { \r\n        \"email\": \"throttling_11@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_12@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_13@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_14@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_15@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_16@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_17@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_18@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_19@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"throttling_20@hoohem.com\" \r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segmet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if (jsonData.payload.length > 0) {",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name == \"Verify throttling without timezone-\" +pm.globals.get(\"connectionId\")) {",
+							"            pm.globals.set(\"throttling_without_timezone_segment_id\", segment.id);",
+							"            postman.setNextRequest(\"Send_mail\")",
+							"        }",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json() \r",
+							"pm.globals.set(\"throttling_without_timezone_segment_id\",jsonData.payload.id) "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"Verify throttling without timezone-{{connectionId}}\" ,\r\n   \"type\":\"regular\",\r\n   \"description\":\"Verify throttling without timezone \",\r\n   \"criteria\":[\r\n      {\r\n         \"field_id\":{{list_field_email_id}},\r\n         \"type\":\"email\",\r\n         \"position\":0,\r\n         \"operator\":\"=\",\r\n         \"operand\":[\r\n            \"throttling_1@hoohem.com\",\r\n            \"throttling_2@hoohem.com\",\r\n            \"throttling_3@hoohem.com\",\r\n            \"throttling_4@hoohem.com\",\r\n            \"throttling_5@hoohem.com\",\r\n            \"throttling_6@hoohem.com\",\r\n            \"throttling_7@hoohem.com\",\r\n            \"throttling_8@hoohem.com\",\r\n            \"throttling_9@hoohem.com\",\r\n            \"throttling_10@hoohem.com\",\r\n            \"throttling_11@hoohem.com\",\r\n            \"throttling_12@hoohem.com\",\r\n            \"throttling_13@hoohem.com\",\r\n            \"throttling_14@hoohem.com\",\r\n            \"throttling_15@hoohem.com\",\r\n            \"throttling_16@hoohem.com\",\r\n            \"throttling_17@hoohem.com\",\r\n            \"throttling_18@hoohem.com\",\r\n            \"throttling_19@hoohem.com\",\r\n            \"throttling_20@hoohem.com\"\r\n         ],\r\n         \"condition\":\"and\"\r\n      }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30)\r",
+							"const cDate = Date.now()\r",
+							"const eDate = Date.now() +7200000\r",
+							"var createdDate = new Date(cDate);\r",
+							"var createdhours = createdDate.getHours()\r",
+							"var createdminute = createdDate.getMinutes()\r",
+							"var total_createdhours = createdDate.getUTCHours()\r",
+							"var endDate = new Date(eDate);\r",
+							"var endhours = endDate.getHours()\r",
+							"var endminute = endDate.getMinutes()\r",
+							"var total_endhours = endDate.getUTCHours()\r",
+							"if(total_createdhours === 0){\r",
+							"    pm.globals.set(\"start_time\", 24);\r",
+							"}else{\r",
+							"    pm.globals.set(\"start_time\",total_createdhours);\r",
+							"}\r",
+							"if(total_endhours === 0){\r",
+							"    pm.globals.set(\"end_time\", 24);\r",
+							"}else{\r",
+							"    pm.globals.set(\"end_time\",total_endhours);\r",
+							"}\r",
+							"var hours = endhours - createdhours\r",
+							"var minutes = endminute - createdminute\r",
+							"var throttlingtime = hours+ ':' +minutes\r",
+							"pm.globals.set(\"throttling_time\",throttlingtime)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Verify throttling without timezone from Regular Campaign\",\r\n    \"description\": \"Verify throttling without timezone from Regular Campaign\",\r\n    \"email_message\": {{throttling_without_timezone_mail_id}},\r\n    \"segments\": [{{throttling_without_timezone_segment_id}}],\r\n    \"distribution\": [\r\n        {\r\n            \"esp_connection_id\": {{connectionId}},\r\n            \"percent\": 100\r\n        }\r\n    ],\r\n    \"schedule_date\": {{time_30}},\r\n    \"time_to_send_config\": {\r\n        \"delivery_timing_type\": \"throttling\",\r\n        \"throttling_type\": \"dayparting\",\r\n        \"days\": 1,\r\n        \"start_hour\": {{start_time}},\r\n        \"end_hour\": {{end_time}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

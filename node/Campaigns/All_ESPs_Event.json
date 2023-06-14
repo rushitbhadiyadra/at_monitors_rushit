@@ -1,0 +1,5951 @@
+{
+	"info": {
+		"_postman_id": "4573ccb3-a84b-4134-8cbf-31237cb21091",
+		"name": "All_ESPs_Event",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Delete Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"list_id\": {{list_id}},\n \"change_to\":\"remove\",\n \"emails\": [\n  \"ae_evn_field_{{connectionId}}@hoohem.com\",\"ae_evn_dy_of_htm_{{connectionId}}@hoohem.com\",\"ae_evn_of_rss_{{connectionId}}@hoohem.com\",\"ae_evn_of_{{connectionId}}@hoohem.com\",\"ae_evn_dy_of_{{connectionId}}@hoohem.com\",\"ae_evn_of_htm_{{connectionId}}@hoohem.com\"]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old event System Field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var event of jsonData.payload) {",
+							"            if(event.name === \"All ESPs Event System Field, List Field, Date and Hash Function-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_event_id_event_system_field\", event.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old Segment System Field');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Event System Field",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_event_id_event_system_field\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{old_event_id_event_system_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{old_event_id_event_system_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segment System Field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var segment of jsonData.payload) {",
+							"            if(segment.name === \"All ESPs Event System Field, List Field, Date Hash Function-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_segment_id_event_system_field\", segment.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old Event Dynamic ocx feed');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Segmet System Field",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_segment_id_event_system_field\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_id_event_system_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_segment_id_event_system_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Event Dynamic ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var event of jsonData.payload) {",
+							"            if(event.name === \"All ESPs Event Dynamic ocx feed-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_event_id_event_dy_ocx_field\", event.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old Segment Dynamic ocx feed');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Events Dynamic ocx feed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_event_id_event_dy_ocx_field\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{old_event_id_event_dy_ocx_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{old_event_id_event_dy_ocx_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segment Dynamic ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var segment of jsonData.payload) {",
+							"            if(segment.name === \"All ESPs Event Dynamic ocx feed-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_segment_id_event_dy_ocx_field\", segment.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old events Ocx feed');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Segmet Dynamic ocx feed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_segment_id_event_dy_ocx_field\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_id_event_dy_ocx_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_segment_id_event_dy_ocx_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old events Ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var event of jsonData.payload) {",
+							"            if(event.name === \"All ESPs Event ocx feed-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_event_id_event_ocx_field\", event.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old Segment ocx feed');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old events Ocx feed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_event_id_event_ocx_field\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{old_event_id_event_ocx_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{old_event_id_event_ocx_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segment ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var segment of jsonData.payload) {",
+							"            if(segment.name === \"All ESPs Event Ocx feed-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_segment_id_event_ocx_field\", segment.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old events Dynamic ocx feed html');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Segment ocx feed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_segment_id_event_ocx_field\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_id_event_ocx_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_segment_id_event_ocx_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old events Dynamic ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var event of jsonData.payload) {",
+							"            if(event.name === \"All ESPs Event Dynamic ocx feed Html-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_event_id_dy_ocx_field_html\", event.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old Segment Dynamic ocx feed html');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old events Dynamic ocx feed html",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_event_id_dy_ocx_field_html\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{old_event_id_dy_ocx_field_html}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{old_event_id_dy_ocx_field_html}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segment Dynamic ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var segment of jsonData.payload) {",
+							"            if(segment.name === \"All ESPs Event Dynamic ocx feed html-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_segment_id_event_dy_ocx_field_html\", segment.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old events Ocx feed html');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Segment Dynamic ocx feed html",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_segment_id_event_dy_ocx_field_html\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_id_event_dy_ocx_field_html}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_segment_id_event_dy_ocx_field_html}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old events Ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var event of jsonData.payload) {",
+							"            if(event.name === \"All ESPs Event ocx feed html-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_event_id_ocx_field_html\", event.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old Segment Ocx feed html');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old events Ocx feed html",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_event_id_ocx_field_html\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{old_event_id_ocx_field_html}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{old_event_id_ocx_field_html}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segment Ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var segment of jsonData.payload) {",
+							"            if(segment.name === \"All ESPs Event Ocx feed Html-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_segment_id_event_ocx_field_html\", segment.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old events Ocx feed html rss');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Segment Ocx feed html",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_segment_id_event_ocx_field_html\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_id_event_ocx_field_html}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_segment_id_event_ocx_field_html}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old events Ocx feed html rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var event of jsonData.payload) {",
+							"            if(event.name === \"All ESPs Event Ocx feed Rss-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_event_id_ocx_field_rss\", event.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Get old Segment Ocx feed html rss');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old events Ocx feed html rss",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_event_id_ocx_field_rss\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_event_id_ocx_field_rss}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_event_id_ocx_field_rss}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segment Ocx feed html rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"        for (var segment of jsonData.payload) {",
+							"            if(segment.name === \"All ESPs Event Ocx feed Rss-\" + pm.globals.get(\"connectionId\")){",
+							"                pm.globals.set(\"old_segment_id_event_ocx_field_rss\", segment.id);",
+							"            }",
+							"        }",
+							"}else{",
+							"    postman.setNextRequest('Create Segment System field, list field, date function, hash function');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old Segment Ocx feed html rss",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"old_segment_id_event_ocx_field_rss\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{old_segment_id_event_ocx_field_rss}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{old_segment_id_event_ocx_field_rss}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Segment System field, list field, date function, hash function",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esps_event_segment_id_system_field\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esps_event_segment_id_system_field\", jsonData.payload.id);",
+							"    }",
+							"});",
+							"pm.globals.set(\"create_event_time\",  Math.round((new Date()).getTime() / 1000));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event System Field, List Field, Date Hash Function-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ae_evn_field_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}\t"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Segment Dynamic ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esps_event_segment_id_dynamic_ocx_feed\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esps_event_segment_id_dynamic_ocx_feed\", jsonData.payload.id);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event Dynamic ocx feed-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ae_evn_dy_of_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Segment Ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esps_event_segment_id_ocx_feed\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esps_event_segment_id_ocx_feed\", jsonData.payload.id);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event Ocx feed-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ae_evn_of_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Segment Dynamic ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esps_event_segment_id_dynamic_ocx_feed_html\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esps_event_segment_id_dynamic_ocx_feed_html\", jsonData.payload.id);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event Dynamic ocx feed html-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ae_evn_dy_of_htm_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Segment Ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esps_event_segment_id_ocx_feed_html\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esps_event_segment_id_ocx_feed_html\", jsonData.payload.id);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event Ocx feed Html-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ae_evn_of_htm_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Segment Ocx feed rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esps_event_segment_id_ocx_feed_rss\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esps_event_segment_id_ocx_feed_rss\", jsonData.payload.id);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event Ocx feed Rss-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ae_evn_of_rss_{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event System_field_list_field_Date_function",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"pm.globals.set(\"all_esp_event_id_system_field\", jsonData.payload.id);",
+							"pm.globals.set(\"create_event_time\", Math.round((new Date()).getTime() / 1000));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event System Field, List Field, Date and Hash Function-{{connectionId}}\",\n    \"based_on\": \"date_field\",\n    \"date_field_name\":\"ocx_created_date\",\n    \"ongoing_event\": true,\n    \"status\": true,\n    \"segments\": [\n        {{all_esps_event_segment_id_system_field}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"triggers\": [\n        { \n            \"based_on\": \"list_field\",\n            \"email_messages\": [\n                {{msg_id_event_system_field_mearg_operator}}\n            ],\n            \"trigger_number\":1,\n\t\t\t\"operator\":\"after\",\n\t\t\t\"hours_diff\":\"1\",\n\t\t\t\"schedule_hour\": 1, \n\t\t\t\"schedule_minute\": 0,\n\t\t\t\"trigger_sending_unit\":\"hours\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Event Info List field-system field-date function",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"",
+							"pm.test(\"all_esp_event_system_field_campaign_name\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esp_event_trriger_id\",  jsonData.payload.triggers[0].id);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_system_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{all_esp_event_id_system_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event Dynamic ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"pm.globals.set(\"all_esp_event_id_dynamic_ocx_feed\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event Dynamic ocx feed-{{connectionId}}\",\n    \"based_on\": \"date_field\",\n    \"date_field_name\":\"ocx_created_date\",\n    \"ongoing_event\": true,\n    \"status\": true,\n    \"segments\": [\n        {{all_esps_event_segment_id_dynamic_ocx_feed}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"triggers\": [\n        {\n            \"based_on\": \"list_field\",\n            \"email_messages\": [\n                {{msg_id_transactional_send_dynamic_ocx_feed}}\n            ],\n            \"trigger_number\":1,\n\t\t\t\"operator\":\"after\",\n\t\t\t\"hours_diff\":\"1\",\n\t\t\t\"schedule_hour\": 1,\n\t\t\t\"schedule_minute\": 00,\n\t\t\t\"trigger_sending_unit\":\"hours\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event Dynamic ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"pm.globals.set(\"all_esp_event_id_dynamic_ocx_feed_html\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event Dynamic ocx feed Html-{{connectionId}}\",\n    \"based_on\": \"date_field\",\n    \"date_field_name\":\"ocx_created_date\",\n    \"ongoing_event\": true,\n    \"status\": true,\n    \"segments\": [\n        {{all_esps_event_segment_id_dynamic_ocx_feed_html}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"triggers\": [\n        {\n            \"based_on\": \"list_field\",\n            \"email_messages\": [\n                {{msg_id_transactional_send_dynamic_ocx_feed_html}}\n            ],\n            \"trigger_number\":1,\n\t\t\t\"operator\":\"after\",\n\t\t\t\"hours_diff\":\"1\",\n\t\t\t\"schedule_hour\": 1,\n\t\t\t\"schedule_minute\": 00,\n\t\t\t\"trigger_sending_unit\":\"hours\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event Ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"pm.globals.set(\"all_esp_event_id_ocx_feed\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event ocx feed-{{connectionId}}\",\n    \"based_on\": \"date_field\",\n    \"date_field_name\":\"ocx_created_date\",\n    \"ongoing_event\": true,\n    \"status\": true,\n    \"segments\": [\n        {{all_esps_event_segment_id_ocx_feed}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"triggers\": [\n        {\n            \"based_on\": \"list_field\",\n            \"email_messages\": [\n                {{msg_id_transactional_send_ocx_feed1}}\n            ],\n            \"trigger_number\":1,\n\t\t\t\"operator\":\"after\",\n\t\t\t\"hours_diff\":\"1\",\n\t\t\t\"schedule_hour\": 1,\n\t\t\t\"schedule_minute\": 00,\n\t\t\t\"trigger_sending_unit\":\"hours\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event  Ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"pm.globals.set(\"all_esp_event_id_ocx_feed_html\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event ocx feed html-{{connectionId}}\",\n    \"based_on\": \"date_field\",\n    \"date_field_name\":\"ocx_created_date\",\n    \"ongoing_event\": true,\n    \"status\": true,\n    \"segments\": [\n        {{all_esps_event_segment_id_ocx_feed_html}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"triggers\": [\n        {\n            \"based_on\": \"list_field\",\n            \"email_messages\": [\n                {{msg_id_transactional_send_ocx_feed_html}}\n            ],\n            \"trigger_number\":1,\n\t\t\t\"operator\":\"after\",\n\t\t\t\"hours_diff\":\"1\",\n\t\t\t\"schedule_hour\": 1,\n\t\t\t\"schedule_minute\": 00,\n\t\t\t\"trigger_sending_unit\":\"hours\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event Ocx feed Rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"pm.globals.set(\"all_esp_event_id_ocx_feed_rss\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All ESPs Event Ocx feed rss-{{connectionId}}\",\n    \"based_on\": \"date_field\",\n    \"date_field_name\":\"ocx_created_date\",\n    \"ongoing_event\": true,\n    \"status\": true,\n    \"segments\": [\n        {{all_esps_event_segment_id_ocx_feed_rss}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"triggers\": [\n        {\n            \"based_on\": \"list_field\",\n            \"email_messages\": [\n                {{msg_id_transactional_send_ocx_feed_rss1}}\n            ],\n            \"trigger_number\":1,\n\t\t\t\"operator\":\"after\",\n\t\t\t\"hours_diff\":\"1\",\n\t\t\t\"schedule_hour\": 1,\n\t\t\t\"schedule_minute\": 00,\n\t\t\t\"trigger_sending_unit\":\"hours\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esp_event_message_id_contact_created\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"ae_evn_field_{{connectionId}}@hoohem.com\",\n        \"address\": \"ahmedabad\",\n        \"country\": \"India\",\n        \"first_name\": \"Si\",\n        \"last_name\": \"Dev2\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"dob\": \"03/10/2020\",\n        \"city\": \"bhavnagar\",\n        \"street_name\": \"Radha and Krishana\",\n        \"society_name\": \"Radha & Krishana\",\n        \"middle_name\": \"ongage's\",\n        \"state\": \"Gujarat\",\n        \"query\": \"sales\",\n        \"location\": \"78759\",\n        \"industry\": \"sales\",\n        \"keyword\": \"marketing\",\n        \"zip\": \"63090\",\n        \"search\": \"sales\",\n        \"userip\": \"108.200.249.191\",\n        \"s1\": \"ong166\",\n        \"useragent\": \"useragent\",\n        \"zip1\": \"95050\"\n    },\n    {\n        \"email\": \"ae_evn_dy_of_htm_{{connectionId}}@hoohem.com\",\n        \"country\": \"India\",\n        \"first_name\": \"SiDev\",\n        \"address\": \"ahmedabad\",\n        \"last_name\": \"Patel\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"city\": \"bhavnagar\"\n    },\n    {\n        \"email\": \"ae_evn_of_rss_{{connectionId}}@hoohem.com\",\n        \"country\": \"India\",\n        \"first_name\": \"SiDev\",\n        \"address\": \"ahmedabad\",\n        \"last_name\": \"Patel\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"city\": \"bhavnagar\"\n    },\n    {\n        \"email\": \"ae_evn_of_{{connectionId}}@hoohem.com\",\n        \"country\": \"India\",\n        \"first_name\": \"SiDev\",\n        \"address\": \"ahmedabad\",\n        \"last_name\": \"Patel\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"city\": \"bhavnagar\"\n    },\n    {\n        \"email\": \"ae_evn_dy_of_{{connectionId}}@hoohem.com\",\n        \"country\": \"India\",\n        \"first_name\": \"SiDev\",\n        \"address\": \"ahmedabad\",\n        \"last_name\": \"Patel\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"city\": \"bhavnagar\"\n    },\n    {\n        \"email\": \"ae_evn_of_htm_{{connectionId}}@hoohem.com\",\n        \"country\": \"India\",\n        \"first_name\": \"SiDev\",\n        \"address\": \"ahmedabad\",\n        \"last_name\": \"Patel\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"city\": \"bhavnagar\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 10 min",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 10 min",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 10 min",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 10 min",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 10 min",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 10 min",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 10 min",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=600",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "600"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Info system field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"event_all_esp_system_field_contact_id\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"event_all_esp_system_field_creaed_date\", str.substring(0,8));",
+							"pm.globals.set(\"event_all_esp_list_field_email\", jsonData.payload.email)",
+							"pm.globals.set(\"event_all_esp_list_field_address\", jsonData.payload.address)",
+							"pm.globals.set(\"event_all_esp_list_field_gender\", jsonData.payload.gender)",
+							"pm.globals.set(\"event_all_esp_list_field_product_id\", jsonData.payload.product_id)",
+							"pm.globals.set(\"event_all_esp_list_field_dob\", jsonData.payload.dob)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ae_evn_field_{{connectionId}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ae_evn_field_{{connectionId}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Event Analytics Report",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esp_event_system_field_campaign_id\", jsonData.payload[0].mailing_instance_id);",
+							"pm.globals.unset(\"past_date\");",
+							"pm.globals.unset(\"current_date\");",
+							"pm.globals.unset(\"create_event_time\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if(typeof pm.globals.get(\"create_event_time\") === 'undefined'){",
+							"    pm.globals.set(\"create_event_time\", Math.round((new Date()).getTime() / 1000) - 7200);",
+							"}",
+							"pm.globals.set(\"current_date\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"select\": [\n        [\n            \"mailing_type\",\n            \"group2field\"\n        ],\n        \"mailing_id\",\n        \"email_message_name\",\n        \"email_message_id\",\n        \"mailing_name\",\n        \"event_id\",\n        \"event_name\",\n        \"stats_date\",\n        \"delivery_timestamp\",\n        \"sum(`targeted`)\",\n        \"sum(`sent`)\",\n        \"sum(`success`)\",\n        \"sum(`hard_bounces`)\",\n        \"sum(`soft_bounces`)\",\n        \"sum(`failed`)\",\n        \"sum(`opens`)\",\n        \"sum(`unique_opens`)\",\n        \"sum(`clicks`)\",\n        \"sum(`unique_clicks`)\",\n        \"sum(`unsubscribes`)\",\n        \"sum(`complaints`)\",\n        \"failure_rate\"\n    ],\n    \"from\": \"mailing\",\n    \"group\": [\n        \"mailing_instance_id\",\n        \"mailing_id\"\n    ],\n    \"order\": [\n        [\n            \"delivery_timestamp\",\n            \"desc\"\n        ]\n    ],\n    \"filter\": [\n        [\n            \"event_id\",\n            \">\",\n            0\n        ],\n        [\n            \"event_id\",\n            \"IN\",\n            [\n                \"{{all_esp_event_id_system_field}}\"\n            ]\n        ],\n        [\n            \"stats_date\",\n            \">=\",\n            {{create_event_time}}\n        ],\n        [\n            \"stats_date\",\n            \"<=\",\n            {{current_date}}\n        ]\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/reports/query",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"reports",
+						"query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail system field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"var dateTimestamp = Math.round(Date.parse(jsonData.date))",
+							"",
+							"var today = new Date(dateTimestamp);",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"",
+							"const timestamp_to_date = (timeStamp_value) => {",
+							"var date = new Date(timeStamp_value * 1000); ",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"return mm + '/' + dd + '/' + yy",
+							"}",
+							"if(pm.response.code === 200){",
+							"var htmlText = jsonData.html;",
+							"htmlText = htmlText.replace(/&#x2F;/g, \"/\")",
+							"var fieldValue = htmlText.split(\"~!@#~\"); ",
+							"const content = JSON.parse(fieldValue[2]);",
+							"const ocxIf = fieldValue[13]",
+							"const ocxElseIf = fieldValue[15] ",
+							"const ocxElse = fieldValue[17]",
+							"// TODO : System Field",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_contact_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_contact_id).to.equal(pm.globals.get(\"event_all_esp_system_field_contact_id\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_created_date Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"var str = Math.round(content.system_fields.ocx_created_date).toString();",
+							"pm.expect(str.substring(0, 8)).to.equal(pm.globals.get(\"event_all_esp_system_field_creaed_date\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_from_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_from_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_from_address_domain Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_from_address_domain).to.equal(pm.globals.get(\"system_field_from_address_domain\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_from_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_from_name).to.equal(pm.globals.get(\"system_field_from_name\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_list_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(parseInt(content.system_fields.ocx_list_id)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"});",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_mailing_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.system_fields.ocx_mailing_id)).to.equal(parseInt(pm.globals.get(\"all_esp_event_system_field_campaign_id\")));",
+							"});",
+							"    pm.test(`Test Event All Esp in system fields \\\"ocx_campaign_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_campaign_name).to.equal(\"All ESPs Event System Field, List Field, Date and Hash Function-\" + connectionId);",
+							"    });",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_reply_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_reply_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_subject Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_subject).to.equal(\"Test Transactional Send Message Id Date-Hash Function and List-System Field Ocx Operator-\" +pm.globals.get(\"connectionId\") + \"-\" + pm.environment.get(\"env\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_esp_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_esp_id).to.equal(espId);",
+							"});",
+							"",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_connection_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_connection_id).to.equal(connectionId);",
+							"});",
+							"",
+							"// TODO : Verify Date Function",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_day Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_day).to.equal(day);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_month Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_month).to.equal(month);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_year Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_year).to.equal(year);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_dow_long Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_dow_long).to.equal(dowLong);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_dow Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_dow).to.equal(dow);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_month_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_month_name).to.equal(monthName);",
+							"});",
+							"",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_month_short Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_month_short).to.equal(monthShort);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_yy Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_yy).to.equal(yy);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_now Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_now).to.equal(month + \"/\" + day + \"/\" + year);",
+							"});",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_timestamp Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_timestamp.split(\" \")[0]).to.equal(year + \"-\" + month + \"-\" + day);",
+							"});",
+							"",
+							"//TODO : List Dynamic Value",
+							"",
+							"",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"email Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.dynamic_fields.email).to.equal(pm.globals.get(\"event_all_esp_list_field_email\"));",
+							"});",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.dynamic_fields.address).to.equal(pm.globals.get(\"event_all_esp_list_field_address\"));",
+							"});",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"gender Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.dynamic_fields.gender).to.equal(pm.globals.get(\"event_all_esp_list_field_gender\"));",
+							"});",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(parseInt(content.dynamic_fields.product_id)).to.equal(parseInt(pm.globals.get(\"event_all_esp_list_field_product_id\")));",
+							"});",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"dob Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.dynamic_fields.dob).to.equal(timestamp_to_date(parseInt(pm.globals.get(\"event_all_esp_list_field_dob\"))));",
+							"});",
+							"",
+							"pm.test(\"Test Event All Esp ocx_generate_hash sha1 is working\", function () { ",
+							"pm.expect(fieldValue[5]).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\"); ",
+							"});",
+							"",
+							"pm.test(\"Test Event All Esp ocx_generate_hash sha256 is working\", function () { ",
+							"pm.expect(fieldValue[8]).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"});",
+							"",
+							"pm.test(\"Test Event All Esp ocx_generate_hash md5 is working\", function () { ",
+							"pm.expect(fieldValue[11]).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"});",
+							"",
+							"pm.globals.set(\"sha1_link\", jsonData.HTMLTextLinks[0]);",
+							"pm.globals.set(\"sha256_link\", jsonData.HTMLTextLinks[1]);",
+							"pm.globals.set(\"md5_link\", jsonData.HTMLTextLinks[2]);",
+							"",
+							"pm.test(`Test All Esp Event Block Operator Field Time : ${jsonData.date}`, function() {",
+							"    pm.expect(JSON.parse(ocxIf).first_name).to.equal(\"Ongage\");",
+							"});",
+							"pm.test(`Test All Esp Event Block Operator Field Time : ${jsonData.date}`, function() {",
+							"    pm.expect(JSON.parse(ocxElseIf).first_name).to.equal(\"Stepin\");",
+							"});",
+							"pm.test(`Test All Esp Event Block Operator Field Time : ${jsonData.date}`, function() {",
+							"    pm.expect(JSON.parse(ocxElse).first_name).to.equal(\"Devang\");",
+							"});",
+							"postman.setNextRequest(\"Test_ocx_generate_hash_SHA\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_evn_field_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Message Id Date-Hash Function and List-System Field Ocx Operator-{{connectionId}}-{{env}}\",\n    \"timeout\": 100000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail system field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"var dateTimestamp = Math.round(Date.parse(jsonData.date))",
+							"",
+							"var today = new Date(dateTimestamp);",
+							"var day = String(today.getDate()).padStart(2, '0');",
+							"var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"var year = String(today.getFullYear());",
+							"var yy = year.toString().substr(-2);",
+							"var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"",
+							"const timestamp_to_date = (timeStamp_value) => {",
+							"var date = new Date(timeStamp_value * 1000); ",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"return mm + '/' + dd + '/' + yy",
+							"}",
+							"if(pm.response.code === 200){",
+							"var htmlText = jsonData.html;",
+							"htmlText = htmlText.replace(/&#x2F;/g, \"/\")",
+							"var fieldValue = htmlText.split(\"~!@#~\"); ",
+							"const content = JSON.parse(fieldValue[2]);",
+							"const ocxIf = fieldValue[13]",
+							"const ocxElseIf = fieldValue[15] ",
+							"const ocxElse = fieldValue[17]",
+							"// TODO : System Field",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_contact_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_contact_id).to.equal(pm.globals.get(\"event_all_esp_system_field_contact_id\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_created_date Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"var str = Math.round(content.system_fields.ocx_created_date).toString();",
+							"pm.expect(str.substring(0, 8)).to.equal(pm.globals.get(\"event_all_esp_system_field_creaed_date\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_from_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_from_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_from_address_domain Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_from_address_domain).to.equal(pm.globals.get(\"system_field_from_address_domain\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_from_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_from_name).to.equal(pm.globals.get(\"system_field_from_name\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_list_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(parseInt(content.system_fields.ocx_list_id)).to.equal(parseInt(pm.environment.get(\"list_id\")));",
+							"});",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_mailing_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(parseInt(content.system_fields.ocx_mailing_id)).to.equal(parseInt(pm.globals.get(\"all_esp_event_system_field_campaign_id\")));",
+							"});",
+							"    pm.test(`Test Event All Esp in system fields \\\"ocx_campaign_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"        pm.expect(content.system_fields.ocx_campaign_name).to.equal(\"All ESPs Event System Field, List Field, Date and Hash Function-\" + connectionId);",
+							"    });",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_reply_address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_reply_address).to.equal(pm.globals.get(\"system_field_from_address\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_subject Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_subject).to.equal(\"Test Transactional Send Message Id Date-Hash Function and List-System Field Ocx Operator-\" +pm.globals.get(\"connectionId\") + \"-\" + pm.environment.get(\"env\"));",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_esp_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_esp_id).to.equal(espId);",
+							"});",
+							"",
+							"",
+							"pm.test(`Test Event All Esp in system fields \\\"ocx_connection_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.system_fields.ocx_connection_id).to.equal(connectionId);",
+							"});",
+							"",
+							"// TODO : Verify Date Function",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_day Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_day).to.equal(day);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_month Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_month).to.equal(month);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_year Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_year).to.equal(year);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_dow_long Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_dow_long).to.equal(dowLong);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_dow Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_dow).to.equal(dow);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_month_name Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_month_name).to.equal(monthName);",
+							"});",
+							"",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_month_short Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_month_short).to.equal(monthShort);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_yy Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_yy).to.equal(yy);",
+							"});",
+							"",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_now Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_now).to.equal(month + \"/\" + day + \"/\" + year);",
+							"});",
+							"pm.test(`Test Event All Esp in date function \\\"ocx_timestamp Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.date_function.ocx_timestamp.split(\" \")[0]).to.equal(year + \"-\" + month + \"-\" + day);",
+							"});",
+							"",
+							"//TODO : List Dynamic Value",
+							"",
+							"",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"email Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.dynamic_fields.email).to.equal(pm.globals.get(\"event_all_esp_list_field_email\"));",
+							"});",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"address Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.dynamic_fields.address).to.equal(pm.globals.get(\"event_all_esp_list_field_address\"));",
+							"});",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"gender Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.dynamic_fields.gender).to.equal(pm.globals.get(\"event_all_esp_list_field_gender\"));",
+							"});",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"product_id Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(parseInt(content.dynamic_fields.product_id)).to.equal(parseInt(pm.globals.get(\"event_all_esp_list_field_product_id\")));",
+							"});",
+							"pm.test(`Test Event All Esp in List Dynamic Field \\\"dob Is equals to\\\" Time : ${jsonData.date}`, function () {",
+							"pm.expect(content.dynamic_fields.dob).to.equal(timestamp_to_date(parseInt(pm.globals.get(\"event_all_esp_list_field_dob\"))));",
+							"});",
+							"",
+							"pm.test(\"Test Event All Esp ocx_generate_hash sha1 is working\", function () { ",
+							"pm.expect(fieldValue[5]).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\"); ",
+							"});",
+							"",
+							"pm.test(\"Test Event All Esp ocx_generate_hash sha256 is working\", function () { ",
+							"pm.expect(fieldValue[8]).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"});",
+							"",
+							"pm.test(\"Test Event All Esp ocx_generate_hash md5 is working\", function () { ",
+							"pm.expect(fieldValue[11]).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"});",
+							"",
+							"pm.globals.set(\"sha1_link\", jsonData.HTMLTextLinks[0]);",
+							"pm.globals.set(\"sha256_link\", jsonData.HTMLTextLinks[1]);",
+							"pm.globals.set(\"md5_link\", jsonData.HTMLTextLinks[2]);",
+							"",
+							"pm.test(`Test All Esp Event Block Operator Field Time : ${jsonData.date}`, function() {",
+							"    pm.expect(JSON.parse(ocxIf).first_name).to.equal(\"Ongage\");",
+							"});",
+							"pm.test(`Test All Esp Event Block Operator Field Time : ${jsonData.date}`, function() {",
+							"    pm.expect(JSON.parse(ocxElseIf).first_name).to.equal(\"Stepin\");",
+							"});",
+							"pm.test(`Test All Esp Event Block Operator Field Time : ${jsonData.date}`, function() {",
+							"    pm.expect(JSON.parse(ocxElse).first_name).to.equal(\"Devang\");",
+							"});",
+							"}else{",
+							"    pm.test(\"Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"all_esp_event_system_field_campaign_id\");",
+							"pm.globals.unset(\"create_event_time\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_evn_field_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Message Id Date-Hash Function and List-System Field Ocx Operator-{{connectionId}}-{{env}}\",\n    \"timeout\": 100000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test_ocx_generate_hash_SHA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"All Esp Event in system fields ocx_generate_hash sha1 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"967ce367d89dccc133d71049f1197d29561b3726\"); ",
+							"});",
+							"pm.globals.unset(\"sha1_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{sha1_link}}",
+					"host": [
+						"{{sha1_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash SHA256",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"All Esp Event in system fields ocx_generate_hash sha256 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"abd149214539d9f222d25de6358735b9fa0efd3956f66102b2c119ae2d9f6348\");",
+							"});",
+							"pm.globals.unset(\"sha256_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{sha256_link}}",
+					"host": [
+						"{{sha256_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_generate_hash MD5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.text();",
+							"pm.test(\"All Esp Event in system fields ocx_generate_hash md5 with link is working\", function () { ",
+							"    pm.expect(jsonData).to.equal(\"7d31e0da1ab99fe8b08a22118e2f402b\");",
+							"});",
+							"pm.globals.unset(\"md5_link\");",
+							"pm.globals.unset(\"all_esp_event_system_field_campaign_id\");",
+							"pm.globals.unset(\"create_event_time\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{md5_link}}",
+					"host": [
+						"{{md5_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Dynamic Ocx Feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedDynamic = xml2Json(fieldValue[1])",
+							"    ",
+							"    pm.test(`Test All Esp Event in ocx_feed_dynamic with nested loop is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[0]).to.equal(\"Hotel Name\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[1]).to.equal(\"Location\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[2]).to.equal(\"Rooms\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[0]).to.equal(\"Hilton\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[1]).to.equal(\"NYC\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[0].td[0]).to.equal(\"Room Type\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[0].td[1]).to.equal(\"Count\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[1].td[0]).to.equal(\"Regular\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[1].td[1]).to.equal(\"111\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[2].td[0]).to.equal(\"suit\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[2].td[1]).to.equal(\"222\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[3].td[0]).to.equal(\"Gorgeous\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[3].td[1]).to.equal(\"555\");",
+							"    });",
+							"    postman.setNextRequest(\"Get_Contact_Info_Dynamic_ocx_feed_html\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_dy_of_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Dynamic Ocx Feed-{{connectionId}}-{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Dynamic Ocx Feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedDynamic = xml2Json(fieldValue[1])",
+							"    ",
+							"    pm.test(`Test All Esp Event in ocx_feed_dynamic with nested loop is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[0]).to.equal(\"Hotel Name\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[1]).to.equal(\"Location\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[0].td[2]).to.equal(\"Rooms\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[0]).to.equal(\"Hilton\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[1]).to.equal(\"NYC\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[0].td[0]).to.equal(\"Room Type\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[0].td[1]).to.equal(\"Count\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[1].td[0]).to.equal(\"Regular\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[1].td[1]).to.equal(\"111\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[2].td[0]).to.equal(\"suit\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[2].td[1]).to.equal(\"222\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[3].td[0]).to.equal(\"Gorgeous\");",
+							"        pm.expect(ocxFeedDynamic.table.tbody.tr[1].td[2].table.tbody.tr[3].td[1]).to.equal(\"555\");",
+							"    });",
+							"}",
+							"else{",
+							"    pm.test(\"Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_dy_of_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Dynamic Ocx Feed-{{connectionId}}-{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Contact_Info_Dynamic_ocx_feed_html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"event_all_esp_list_field_first_name\", jsonData.payload.first_name)",
+							"pm.globals.set(\"event_all_esp_list_field_address\", jsonData.payload.address)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ae_evn_dy_of_htm_{{connectionId}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ae_evn_dy_of_htm_{{connectionId}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Dynamic Ocx Feed Html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedDynamicHtml = xml2Json(fieldValue[1])",
+							"    pm.test(`Test All Esp Event in ocx_feed_dynamic_html is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[0]).to.equal(\"Hotel name\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[1]).to.equal(\"Hotel location\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[2]).to.equal(\"First Name\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[3]).to.equal(\"address\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[0]).to.equal(\"BVN\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[1]).to.equal(\"10\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[2]).to.equal(pm.globals.get(\"event_all_esp_list_field_first_name\"));",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[3]).to.equal(pm.globals.get(\"event_all_esp_list_field_address\"));",
+							"    });",
+							"    postman.setNextRequest(\"Test_Ocx_Feed_Html\")",
+							"    pm.globals.unset(\"event_all_esp_list_field_first_name\");",
+							"pm.globals.unset(\"event_all_esp_list_field_address\");",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_dy_of_htm_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Dynamic Ocx Feed Html-{{connectionId}}-{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Dynamic Ocx Feed Html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedDynamicHtml = xml2Json(fieldValue[1])",
+							"    pm.test(`Test All Esp Event in ocx_feed_dynamic_html is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[0]).to.equal(\"Hotel name\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[1]).to.equal(\"Hotel location\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[2]).to.equal(\"First Name\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[3]).to.equal(\"address\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[0]).to.equal(\"BVN\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[1]).to.equal(\"10\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[2]).to.equal(pm.globals.get(\"event_all_esp_list_field_first_name\"));",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[3]).to.equal(pm.globals.get(\"event_all_esp_list_field_address\"));",
+							"    });",
+							"}else{",
+							"    pm.test(\"Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"event_all_esp_list_field_first_name\");",
+							"pm.globals.unset(\"event_all_esp_list_field_address\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_dy_of_htm_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Dynamic Ocx Feed Html-{{connectionId}}-{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test_Ocx_Feed_Html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedHtml = xml2Json(fieldValue[1])",
+							"    pm.test(`Test All Esp Event in ocx_feed_html is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[0]).to.equal(\"Hotel name\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[1]).to.equal(\"Hotel location\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[2]).to.equal(\"First Name\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[3]).to.equal(\"address\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[0]).to.equal(\"BVN\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[1]).to.equal(\"Ahmedabad\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[2]).to.equal(\"Ongage\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[3]).to.equal(\"Ahmedabad\");",
+							"    });",
+							"    postman.setNextRequest(\"Test_Ocx_Feed\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_of_htm_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Ocx Feed Html-{{connectionId}}-{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Ocx Feed Html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedHtml = xml2Json(fieldValue[1])",
+							"    pm.test(`Test All Esp Event in ocx_feed_html is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[0]).to.equal(\"Hotel name\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[1]).to.equal(\"Hotel location\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[2]).to.equal(\"First Name\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[3]).to.equal(\"address\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[0]).to.equal(\"BVN\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[1]).to.equal(\"Ahmedabad\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[2]).to.equal(\"Ongage\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[3]).to.equal(\"Ahmedabad\");",
+							"    });",
+							"} else{",
+							"    pm.test(\"Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_of_htm_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Ocx Feed Html-{{connectionId}}-{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test_Ocx_Feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    var ocxFeedData = xml2Json(fieldValue[1])",
+							"    pm.test(`Test All Esp Event in ocx_feed is working Time : ${jsonData.date}`, function () { ",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[0]).to.equal(\"Hotel Name\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[1]).to.equal(\"Location\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[2]).to.equal(\"Link\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[0]).to.equal(\"Regular\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[1]).to.equal(\"India\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[2]).to.equal(\"www.test.com\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[0]).to.equal(\"Suit\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[1]).to.equal(\"Rajasthan\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[2]).to.equal(\"www.google.com\");",
+							"    });",
+							"    postman.setNextRequest(\"Test_Ocx_Feed_Rss\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_of_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Ocx Feed-{{connectionId}}-{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Ocx Feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    var ocxFeedData = xml2Json(fieldValue[1])",
+							"    pm.test(`Test All Esp Event in ocx_feed is working Time : ${jsonData.date}`, function () { ",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[0]).to.equal(\"Hotel Name\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[1]).to.equal(\"Location\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[2]).to.equal(\"Link\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[0]).to.equal(\"Regular\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[1]).to.equal(\"India\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[2]).to.equal(\"www.test.com\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[0]).to.equal(\"Suit\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[1]).to.equal(\"Rajasthan\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[2]).to.equal(\"www.google.com\");",
+							"    });",
+							"} else{",
+							"    pm.test(\"Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_of_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Ocx Feed-{{connectionId}}-{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test_Ocx_Feed_Rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxRSSTitle = fieldValue[1]",
+							"    const ocxRSSLink = fieldValue[2]",
+							"    const ocxRSSDesc = fieldValue[3]",
+							"    pm.test(`Test All Esp Event in ocx_rss with title \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSTitle).to.equal(pm.environment.get(\"ocx_rss_title\"));",
+							"    });",
+							"    ",
+							"    pm.test(`Test All Esp Event in ocx_rss with link \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSLink).to.equal(pm.environment.get(\"ocx_rss_link\"));",
+							"    });",
+							"    ",
+							"    pm.test(`Test All Esp Event in ocx_rss with description \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSDesc).to.equal(pm.environment.get(\"ocx_rss_desc\"));",
+							"    });",
+							"    jsonData.headerLines.forEach(function(data, index) {",
+							"    if(data.key.toLowerCase()===\"customheader\"){",
+							"        pm.test(`Test customheader \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"            const header = data.line.split(\":\")",
+							"            pm.expect(header[0].toLowerCase()).to.equal(\"customheader\")",
+							"            pm.expect(header[1].toLowerCase().trim()).to.equal(\"test\");",
+							"        });",
+							"    }",
+							"})",
+							"    postman.setNextRequest(\"Delete_Contact\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_of_rss_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Ocx Feed Rss-{{connectionId}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Ocx Feed Rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxRSSTitle = fieldValue[1]",
+							"    const ocxRSSLink = fieldValue[2]",
+							"    const ocxRSSDesc = fieldValue[3]",
+							"    pm.test(`Test All Esp Event in ocx_rss with title \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSTitle).to.equal(pm.environment.get(\"ocx_rss_title\"));",
+							"    });",
+							"    ",
+							"    pm.test(`Test All Esp Event in ocx_rss with link \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSLink).to.equal(pm.environment.get(\"ocx_rss_link\"));",
+							"    });",
+							"    ",
+							"    pm.test(`Test All Esp Event in ocx_rss with description \"Is equals to\" Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxRSSDesc).to.equal(pm.environment.get(\"ocx_rss_desc\"));",
+							"    });",
+							"    jsonData.headerLines.forEach(function(data, index) {",
+							"    if(data.key.toLowerCase()===\"customheader\"){",
+							"        pm.test(`Test customheader \"Is Working\" Time : ${jsonData.date}`, function() {",
+							"            const header = data.line.split(\":\")",
+							"            pm.expect(header[0].toLowerCase()).to.equal(\"customheader\")",
+							"            pm.expect(header[1].toLowerCase().trim()).to.equal(\"test\");",
+							"        });",
+							"    }",
+							"})",
+							"}else{",
+							"    pm.test(\"Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ae_evn_of_rss_{{connectionId}}@hoohem.com\",\n\t\"subject\":\"Test Transactional Send Message Id Ocx Feed Rss-{{connectionId}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"event_all_esp_system_field_contact_id\");",
+							"pm.globals.unset(\"event_all_esp_list_field_dob\");",
+							"pm.globals.unset(\"event_all_esp_system_field_creaed_date\");",
+							"pm.globals.unset(\"event_all_esp_list_field_email\");",
+							"pm.globals.unset(\"event_all_esp_list_field_address\");",
+							"pm.globals.unset(\"event_all_esp_list_field_gender\");",
+							"pm.globals.unset(\"event_all_esp_list_field_product_id\");",
+							"pm.globals.unset(\"event_all_esp_list_field_first_name\");",
+							"pm.globals.unset(\"event_all_esp_list_field_address\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"list_id\": {{list_id}},\n \"change_to\":\"remove\",\n \"emails\": [\n  \"ae_evn_field_{{connectionId}}@hoohem.com\",\"ae_evn_dy_of_htm_{{connectionId}}@hoohem.com\",\"ae_evn_of_rss_{{connectionId}}@hoohem.com\",\"ae_evn_of_{{connectionId}}@hoohem.com\",\"ae_evn_dy_of_{{connectionId}}@hoohem.com\",\"ae_evn_of_htm_{{connectionId}}@hoohem.com\"]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete event system field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_system_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{all_esp_event_id_system_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete event dynamic ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_dynamic_ocx_feed_html}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{all_esp_event_id_dynamic_ocx_feed_html}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete event ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_ocx_feed}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{all_esp_event_id_ocx_feed}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete event  dynamic ocx feed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_dynamic_ocx_feed}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{all_esp_event_id_dynamic_ocx_feed}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete event ocx feed html",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_ocx_feed_html}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{all_esp_event_id_ocx_feed_html}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete event ocx feed rss",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esp_event_id_system_field\");",
+							"pm.globals.unset(\"all_esp_event_id_content_block\");",
+							"pm.globals.unset(\"all_esp_event_id_dynamic_ocx_feed\");",
+							"pm.globals.unset(\"all_esp_event_id_dynamic_ocx_feed_html\");",
+							"pm.globals.unset(\"all_esp_event_id_ocx_feed\");",
+							"pm.globals.unset(\"all_esp_event_id_ocx_feed_html\");",
+							"pm.globals.unset(\"all_esp_event_id_ocx_feed_rss\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/events/{{all_esp_event_id_ocx_feed_rss}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"events",
+						"{{all_esp_event_id_ocx_feed_rss}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 1 sec",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Segmet System Field",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esps_event_segment_id_system_field\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{all_esps_event_segment_id_system_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{all_esps_event_segment_id_system_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Segment Dynamic Ocx Feed html",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esps_event_segment_id_dynamic_ocx_feed_html\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{all_esps_event_segment_id_dynamic_ocx_feed_html}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{all_esps_event_segment_id_dynamic_ocx_feed_html}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Segment Ocx Feed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esps_event_segment_id_ocx_feed\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{all_esps_event_segment_id_ocx_feed}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{all_esps_event_segment_id_ocx_feed}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Segment Ocx Feed html",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esps_event_segment_id_ocx_feed_html\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{all_esps_event_segment_id_ocx_feed_html}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{all_esps_event_segment_id_ocx_feed_html}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Segment Ocx Feed rss",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esps_event_segment_id_ocx_feed_rss\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{all_esps_event_segment_id_ocx_feed_rss}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{all_esps_event_segment_id_ocx_feed_rss}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Segment Dynamic Ocx Feed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"all_esps_event_segment_id_dynamic_ocx_feed\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments/{{all_esps_event_segment_id_dynamic_ocx_feed}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments",
+						"{{all_esps_event_segment_id_dynamic_ocx_feed}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

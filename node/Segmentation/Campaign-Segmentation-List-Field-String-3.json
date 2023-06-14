@@ -1,0 +1,2515 @@
+{
+	"info": {
+		"_postman_id": "98421a1b-aceb-4ce6-a87d-90b0ecfd3f74",
+		"name": "Campaign-Segmentation-List-Field-String-3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Segmentation~97a2a379-2ebf-4617-8e2a-bda7b4141f63/collection/6765444-98421a1b-aceb-4ce6-a87d-90b0ecfd3f74?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "And condition",
+			"item": [
+				{
+					"name": "Create contact",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"ta_126_2_{{connectionId}}@hoohem.com\", \"os\": \"\",\"language\":\"\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update contact",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"ta_126_2_{{connectionId}}@hoohem.com\", \"os\": \"\",\"language\":\"\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"if(jsonData.payload.length > 0){",
+									"    for (var segment of jsonData.payload) {",
+									"        if (segment.name === \"Cam_seg_lst_fld_string_and_condition-\" + pm.globals.get(\"connectionId\")){",
+									"            pm.globals.set(\"segment_id\", segment.id);",
+									"        }      ",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{segment_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{segment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create segment list fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"listfields_andcondition_segment_id\",jsonData.payload.id)",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cam_seg_lst_fld_string_and_condition-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"Campaign-segmentation\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_os_id}}\",\n            \"field_name\": \"os\",\n            \"type\": \"string\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"case_sensitive\": true,\n            \"operand\": [\n                \"AAAAA\"\n            ],\n            \"external_operand_s3_filename\": \"\",\n            \"external_operand_original_filename\": \"\",\n            \"is_external_operand_exists\": \"0\",\n            \"external_criteria_count\": \"\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        },\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_language_id}}\",\n            \"field_name\": \"language\",\n            \"type\": \"string\",\n            \"position\": 1,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"case_sensitive\": true,\n            \"operand\": [\n                \"AAAAA\"\n            ],\n            \"external_operand_s3_filename\": \"\",\n            \"external_operand_original_filename\": \"\",\n            \"is_external_operand_exists\": \"0\",\n            \"external_criteria_count\": \"\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check contact criteria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"pm.globals.set(\"listfield_contact_id\",jsonData.payload.id);",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"segment_id\":\"{{listfields_andcondition_segment_id}}\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_counts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_counts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get contact count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Check segment count\", function () {",
+									"    if(jsonData.metadata.total === null)",
+									"    {",
+									"        pm.expect(jsonData.metadata.total).to.equal(null);",
+									"    }",
+									"    else",
+									"    {",
+									"        pm.expect(jsonData.metadata.total).to.equal(\"0\");",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_counts/{{listfield_contact_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_counts",
+								"{{listfield_contact_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search contact report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"contact_report_id\",jsonData.payload.id)",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"List-field-string-and-condition-not-match\",\n    \"include_behavior\": false,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"field_name\": \"segment\",\n                \"type\": \"segment\",\n                \"operator\": \"=\",\n                \"operand\": [\n                    \"{{listfields_andcondition_segment_id}}\"\n                ],\n                \"case_sensitive\": 0,\n                \"condition\": \"and\"\n            }\n        ],\n        \"user_type\": \"all\"\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_created_date\",\n        \"ocx_status\",\n        \"ocx_unsubscribe_date\",\n        \"ocx_resubscribe_date\",\n        \"ocx_import_id\",\n        \"ocx_bounce_date\",\n        \"ocx_complaint_date\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_search",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 100 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_10_Sec",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"report_count\", 0);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=10",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_20_Sec1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var count = pm.globals.get(\"report_count\");",
+									"count += 1",
+									"",
+									"pm.globals.set(\"report_count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=20",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact activity result",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"var reportCount = pm.globals.get(\"report_count\");",
+									"if(reportCount <=3){",
+									"    if(pm.response.code === 412){",
+									"        postman.setNextRequest(\"Delay_20_Sec1\")",
+									"        console.log(pm.response.json())",
+									"    }else{",
+									"        var jsonData = pm.response.json();",
+									"",
+									"        pm.test(\"Check Campaign segmentation List field criteria equalto\", function () {",
+									"            pm.expect(jsonData.payload.length).to.equal(0);",
+									"        })",
+									"    }",
+									"}else{",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"Check Campaign segmentation List field criteria equalto\", function () {",
+									"        pm.expect(jsonData.payload.length).to.equal(0);",
+									"    })",
+									"}",
+									"pm.globals.unset(\"report_count\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{contact_report_id}}/result?limit=5000",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_activity",
+								"{{contact_report_id}}",
+								"result"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"ta_126_2_{{connectionId}}@hoohem.com\",\"os\": \"AAAAA\",\"language\":\"AAAAA\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search contact report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.globals.set(\"contact_report_id\",jsonData.payload.id)",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"List-field-string-and-condition-match\",\n    \"include_behavior\": false,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"field_name\": \"segment\",\n                \"type\": \"segment\",\n                \"operator\": \"=\",\n                \"operand\": [\n                    \"{{listfields_andcondition_segment_id}}\"\n                ],\n                \"case_sensitive\": 0,\n                \"condition\": \"and\"\n            }\n        ],\n        \"user_type\": \"all\"\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_created_date\",\n        \"ocx_status\",\n        \"ocx_unsubscribe_date\",\n        \"ocx_resubscribe_date\",\n        \"ocx_import_id\",\n        \"ocx_bounce_date\",\n        \"ocx_complaint_date\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_search",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 100 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_10_Sec",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"report_count\", 0);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=10",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_20_Sec2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var count = pm.globals.get(\"report_count\");",
+									"count += 1",
+									"",
+									"pm.globals.set(\"report_count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=20",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact activity result",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var reportCount = pm.globals.get(\"report_count\");",
+									"if(reportCount <=3){",
+									"    if(pm.response.code === 412){",
+									"        postman.setNextRequest(\"Delay_20_Sec2\")",
+									"        console.log(pm.response.json())",
+									"    }else{",
+									"        var jsonData = pm.response.json();",
+									"        ",
+									"        pm.test(\"Check Campaign segmentation List field criteria equalto\", function () {",
+									"            pm.expect(jsonData.payload.length).to.equal(1);",
+									"            pm.expect(jsonData.payload[0].email).to.equal(\"ta_126_2_\"+pm.globals.get(\"connectionId\")+\"@hoohem.com\");",
+									"        })",
+									"    }",
+									"}else{",
+									"    var jsonData = pm.response.json();",
+									"    ",
+									"    pm.test(\"Check Campaign segmentation List field criteria equalto\", function () {",
+									"        pm.expect(jsonData.payload.length).to.equal(1);",
+									"        pm.expect(jsonData.payload[0].email).to.equal(\"ta_126_2_\"+pm.globals.get(\"connectionId\")+\"@hoohem.com\");",
+									"    })",
+									"}",
+									"pm.globals.unset(\"report_count\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{contact_report_id}}/result?limit=5000",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_activity",
+								"{{contact_report_id}}",
+								"result"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"ta_126_2_{{connectionId}}@hoohem.com\",\"os\": \"\",\"language\":\"\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"listfields_andcondition_segment_id\");",
+									"pm.globals.unset(\"listfield_contact_id\");",
+									"pm.globals.unset(\"contact_report_id\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{listfields_andcondition_segment_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{listfields_andcondition_segment_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Or condition",
+			"item": [
+				{
+					"name": "Update contact",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"ta_126_2_{{connectionId}}@hoohem.com\",\"os\": \"\",\"language\":\"\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"if(jsonData.payload.length > 0){",
+									"    for (var segment of jsonData.payload) {",
+									"        if (segment.name === \"Cam_seg_lst_fld_string_OR_condition-\" + pm.globals.get(\"connectionId\")){",
+									"            pm.globals.set(\"segment_id\", segment.id);",
+									"        }      ",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{segment_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{segment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create segment list fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.globals.set(\"listfields_orcondition_segment_id\",jsonData.payload.id)",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cam_seg_lst_fld_string_OR_condition-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_os_id}}\",\n            \"field_name\": \"os\",\n            \"type\": \"string\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"case_sensitive\": true,\n            \"operand\": [\n                \"AAAAA\"\n            ],\n            \"external_operand_s3_filename\": \"\",\n            \"external_operand_original_filename\": \"\",\n            \"is_external_operand_exists\": \"0\",\n            \"external_criteria_count\": \"\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        },\n        {\n            \"condition\": \"or\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_language_id}}\",\n            \"field_name\": \"language\",\n            \"type\": \"string\",\n            \"position\": 1,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"case_sensitive\": true,\n            \"operand\": [\n                \"AAAAA\"\n            ],\n            \"external_operand_s3_filename\": \"\",\n            \"external_operand_original_filename\": \"\",\n            \"is_external_operand_exists\": \"0\",\n            \"external_criteria_count\": \"\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check contact criteria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"pm.globals.set(\"listfield_contact_id\",jsonData.payload.id);",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"segment_id\":\"{{listfields_orcondition_segment_id}}\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_counts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_counts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get contact count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Check segment count\", function () {",
+									"    if(jsonData.metadata.total === null)",
+									"    {",
+									"        pm.expect(jsonData.metadata.total).to.equal(null);",
+									"    }",
+									"    else",
+									"    {",
+									"        pm.expect(jsonData.metadata.total).to.equal(\"0\");",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_counts/{{listfield_contact_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_counts",
+								"{{listfield_contact_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search contact report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"contact_report_id\",jsonData.payload.id)",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"List-field-string-or-condition-not-match\",\n    \"include_behavior\": false,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"field_name\": \"segment\",\n                \"type\": \"segment\",\n                \"operator\": \"=\",\n                \"operand\": [\n                    \"{{listfields_orcondition_segment_id}}\"\n                ],\n                \"case_sensitive\": 0,\n                \"condition\": \"and\"\n            }\n        ],\n        \"user_type\": \"all\"\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_created_date\",\n        \"ocx_status\",\n        \"ocx_unsubscribe_date\",\n        \"ocx_resubscribe_date\",\n        \"ocx_import_id\",\n        \"ocx_bounce_date\",\n        \"ocx_complaint_date\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_search",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 100 Sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_10_Sec",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"report_count\", 0);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=10",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_20_Sec3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var count = pm.globals.get(\"report_count\");",
+									"count += 1",
+									"",
+									"pm.globals.set(\"report_count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=20",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact activity result",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var reportCount = pm.globals.get(\"report_count\");",
+									"if(reportCount <=3){",
+									"    if(pm.response.code === 412){",
+									"        postman.setNextRequest(\"Delay_20_Sec3\")",
+									"        console.log(pm.response.json())",
+									"    }else{",
+									"        var jsonData = pm.response.json();",
+									"",
+									"        pm.test(\"Check Campaign segmentation List field criteria equalto\", function () {",
+									"            pm.expect(jsonData.payload.length).to.equal(0);",
+									"",
+									"        })",
+									"    }",
+									"}else{",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"Check Campaign segmentation List field criteria equalto\", function () {",
+									"        pm.expect(jsonData.payload.length).to.equal(0);",
+									"",
+									"    })",
+									"}",
+									"pm.globals.unset(\"report_count\");",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{contact_report_id}}/result?limit=5000",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_activity",
+								"{{contact_report_id}}",
+								"result"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"ta_126_2_{{connectionId}}@hoohem.com\",\"language\": \"AAAAA\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 200 sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search contact report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.globals.set(\"contact_report_id\",jsonData.payload.id)",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"value": "{{username}}",
+								"type": "text"
+							},
+							{
+								"key": "X_PASSWORD",
+								"value": "{{password}}",
+								"type": "text"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"value": "{{account_code}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"List-field-string-or-condition-match\",\n    \"include_behavior\": false,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"field_name\": \"segment\",\n                \"type\": \"segment\",\n                \"operator\": \"=\",\n                \"operand\": [\n                    \"{{listfields_orcondition_segment_id}}\"\n                ],\n                \"case_sensitive\": 0,\n                \"condition\": \"and\"\n            }\n        ],\n        \"user_type\": \"all\"\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_created_date\",\n        \"ocx_status\",\n        \"ocx_unsubscribe_date\",\n        \"ocx_resubscribe_date\",\n        \"ocx_import_id\",\n        \"ocx_bounce_date\",\n        \"ocx_complaint_date\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_search",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay 100 sec",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_10_Sec",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"report_count\", 0);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=10",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delay_20_Sec4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var count = pm.globals.get(\"report_count\");",
+									"count += 1",
+									"",
+									"pm.globals.set(\"report_count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ongageqa86",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "proxy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automated_tests-l2.ongage.net/delay?seconds=20",
+							"protocol": "https",
+							"host": [
+								"automated_tests-l2",
+								"ongage",
+								"net"
+							],
+							"path": [
+								"delay"
+							],
+							"query": [
+								{
+									"key": "seconds",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact activity result",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var reportCount = pm.globals.get(\"report_count\");",
+									"if(reportCount <=3){",
+									"    if(pm.response.code === 412){",
+									"        postman.setNextRequest(\"Delay_20_Sec4\")",
+									"        console.log(pm.response.json())",
+									"    }else{",
+									"        var jsonData = pm.response.json();",
+									"        ",
+									"        pm.test(\"Check Campaign segmentation List field criteria equalto\", function () {",
+									"            pm.expect(jsonData.payload.length).to.equal(1);",
+									"            pm.expect(jsonData.payload[0].email).to.equal(\"ta_126_2_\"+pm.globals.get(\"connectionId\")+\"@hoohem.com\");",
+									"        })",
+									"    }",
+									"}else{",
+									"    var jsonData = pm.response.json();",
+									"    ",
+									"    pm.test(\"Check Campaign segmentation List field criteria equalto\", function () {",
+									"        pm.expect(jsonData.payload.length).to.equal(1);",
+									"        pm.expect(jsonData.payload[0].email).to.equal(\"ta_126_2_\"+pm.globals.get(\"connectionId\")+\"@hoohem.com\");",
+									"    })",
+									"}",
+									"pm.globals.unset(\"report_count\");",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{contact_report_id}}/result?limit=5000",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"contact_activity",
+								"{{contact_report_id}}",
+								"result"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"ta_126_2_{{connectionId}}@hoohem.com\", \"os\": \"\", \"language\":\"\"}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"v2",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete segment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"listfields_orcondition_segment_id\");",
+									"pm.globals.unset(\"listfield_contact_id\");",
+									"pm.globals.unset(\"contact_report_id\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/segments/{{listfields_orcondition_segment_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"segments",
+								"{{listfields_orcondition_segment_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

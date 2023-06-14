@@ -1,0 +1,2112 @@
+{
+	"info": {
+		"_postman_id": "1108c93a-7571-478c-9776-66653247e9cb",
+		"name": "ALL_Esps_Transactional_Send_Content_HTML_Behaviour_Stats_13230",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "delete mail by id and subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"ae_trnsl_sd_htm_bs_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/deleteMailBySubjectAndId",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"deleteMailBySubjectAndId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"ae_trnsl_sd_htm_bs_{{connectionId}}@hoohem.com\",\n        \"address\": \"ahmedabad\",\n        \"country\": \"India\",\n        \"first_name\": \"Si\",\n        \"last_name\": \"Dev2\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"dob\": \"03/10/2020\",\n        \"city\": \"bhavnagar\",\n        \"street_name\": \"Radha and Krishana\",\n        \"society_name\": \"Radha & Krishana\",\n        \"middle_name\": \"ongage's\",\n        \"state\": \"Gujarat\",\n        \"query\": \"sales\",\n        \"location\": \"78759\",\n        \"industry\": \"sales\",\n        \"keyword\": \"marketing\",\n        \"zip\": \"63090\",\n        \"search\": \"sales\",\n        \"userip\": \"108.200.249.191\",\n        \"s1\": \"ong166\",\n        \"useragent\": \"useragent\",\n        \"zip1\": \"95050\"\n    },\n    {\n        \"email\": \"ae_trnsl_sd_htm_bs_1_{{connectionId}}@hoohem.com\",\n        \"address\": \"ahmedabad\",\n        \"country\": \"India\",\n        \"first_name\": \"Si\",\n        \"last_name\": \"Dev2\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"dob\": \"03/10/2020\",\n        \"city\": \"bhavnagar\",\n        \"street_name\": \"Radha and Krishana\",\n        \"society_name\": \"Radha & Krishana\",\n        \"middle_name\": \"ongage's\",\n        \"state\": \"Gujarat\",\n        \"query\": \"sales\",\n        \"location\": \"78759\",\n        \"industry\": \"sales\",\n        \"keyword\": \"marketing\",\n        \"zip\": \"63090\",\n        \"search\": \"sales\",\n        \"userip\": \"108.200.249.191\",\n        \"s1\": \"ong166\",\n        \"useragent\": \"useragent\",\n        \"zip1\": \"95050\"\n    },\n    {\n        \"email\": \"ae_trnsl_sd_htm_bs_2_{{connectionId}}@hoohem.com\",\n        \"address\": \"ahmedabad\",\n        \"country\": \"India\",\n        \"first_name\": \"Si\",\n        \"last_name\": \"Dev2\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"dob\": \"03/10/2020\",\n        \"city\": \"bhavnagar\",\n        \"street_name\": \"Radha and Krishana\",\n        \"society_name\": \"Radha & Krishana\",\n        \"middle_name\": \"ongage's\",\n        \"state\": \"Gujarat\",\n        \"query\": \"sales\",\n        \"location\": \"78759\",\n        \"industry\": \"sales\",\n        \"keyword\": \"marketing\",\n        \"zip\": \"63090\",\n        \"search\": \"sales\",\n        \"userip\": \"108.200.249.191\",\n        \"s1\": \"ong166\",\n        \"useragent\": \"useragent\",\n        \"zip1\": \"95050\"\n    },\n    {\n        \"email\": \"ae_trnsl_sd_htm_bs_3_{{connectionId}}@hoohem.com\",\n        \"address\": \"ahmedabad\",\n        \"country\": \"India\",\n        \"first_name\": \"Si\",\n        \"last_name\": \"Dev2\",\n        \"gender\": \"Male\",\n        \"ip\": \"50.18.254.253\",\n        \"job_title\": \"LPN\",\n        \"language\": \"English\",\n        \"phone\": \"1234567890\",\n        \"os\": \"Linux\",\n        \"product_id\": 123,\n        \"dob\": \"03/10/2020\",\n        \"city\": \"bhavnagar\",\n        \"street_name\": \"Radha and Krishana\",\n        \"society_name\": \"Radha & Krishana\",\n        \"middle_name\": \"ongage's\",\n        \"state\": \"Gujarat\",\n        \"query\": \"sales\",\n        \"location\": \"78759\",\n        \"industry\": \"sales\",\n        \"keyword\": \"marketing\",\n        \"zip\": \"63090\",\n        \"search\": \"sales\",\n        \"userip\": \"108.200.249.191\",\n        \"s1\": \"ong166\",\n        \"useragent\": \"useragent\",\n        \"zip1\": \"95050\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 40 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=40",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create transactional campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"pm.globals.set(\"all_esps_transactionsl_send_content_html_behaviour_stats_campaign_id\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All Esps Transactional Send Content HTML Behaviour Stats\",\n    \"description\": \"Test Transactional Send Content HTML Behaviour Stats\",\n    \"list_id\":{{list_id}},\n    \"message_type\":\"email\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/transactional",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"transactional"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Embed mail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"ae_trnsl_sd_htm_bs_{{connectionId}}@hoohem.com\",\n        \"ae_trnsl_sd_htm_bs_1_{{connectionId}}@hoohem.com\",\n        \"ae_trnsl_sd_htm_bs_2_{{connectionId}}@hoohem.com\",\n        \"ae_trnsl_sd_htm_bs_3_{{connectionId}}@hoohem.com\"\n    ],\n    \"sending_connection_id\": {{connectionId}},\n    \"campaign_id\": {{all_esps_transactionsl_send_content_html_behaviour_stats_campaign_id}},\n    \"message\": {\n        \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n        \"content_html\": \"<html><head><title></title><meta content='text/html; charset=utf-8' http-equiv='Content-Type' /></head><body><p><a data-title='Link' href='https://www.lipsum.com/'>Link</a></p></body></html>\",\n        \"unsubscribe_default_link\": true,\n        \"unsubscribe_confirmation_html_active\": true,\n        \"unsubscribe_confirmation_html\": \"~!@#~To confirm you want to unsubscribe, please click the button below~!@#~ \",\n        \"unsubscribe_confirmation_button\": \"Unsubscribe\",\n        \"frequency_active\": false,\n        \"frequency_field_id\": \"\",\n        \"unsubscribe_success_html_active\": true,\n        \"unsubscribe_success_page\": \"text\",\n        \"unsubscribe_success_html\": \"~!@#~You have been successfully unsubscribed~!@#~\",\n        \"addresses\": {\n            \"from_name\": \"{{system_field_from_name}}\",\n            \"from_address\": \"{{system_field_from_address}}\",\n            \"reply_address\": \"{{system_field_from_address}}\"\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send_embed_content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    let responseText = pm.response.json();",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_click_link\", responseText.HTMLTextLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_open_link\", responseText.HTMLOpenLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_unsub_link\", responseText.HTMLUnsubLinks);",
+							"    postman.setNextRequest(\"Open_mail1\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_trnsl_sd_htm_bs_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n    \"timeout\": 1200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    let responseText = pm.response.json();",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_click_link\", responseText.HTMLTextLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_open_link\", responseText.HTMLOpenLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_unsub_link\", responseText.HTMLUnsubLinks);",
+							"}else{",
+							"    pm.test(\"Transactional Send content html Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"    postman.setNextRequest(\"Remove_contact\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_trnsl_sd_htm_bs_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open_mail1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_open_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_open_link}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_open_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_click_link\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_click_link}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_click_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unsubscribe link1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseText = pm.response.text();",
+							"var unsubscribe = responseText.split(\"~!@#~\")",
+							"pm.globals.set(\"transactional_send_unsubscribe_link\", \"http://\"+pm.environment.get(\"tracking_url\")+responseText.split(\"'\")[1]);",
+							"pm.test(\"Test Transacional Send Content HTML Behaviour Unsubscribe Link Is Working \", function () {",
+							"    pm.expect(unsubscribe[1]).to.eql(\"To confirm you want to unsubscribe, please click the button below\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_unsub_link}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_unsub_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unsubscribe link1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseText = pm.response.text();",
+							"var unsubscribe = responseText.split(\"~!@#~\")",
+							"pm.test(\"Test Transacional Send Content HTML Behaviour Unsubscribe Link Is Working \", function () {",
+							"    pm.expect(unsubscribe[1]).to.eql(\"You have been successfully unsubscribed\");",
+							"});",
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_unsub_link\");",
+							"pm.globals.unset(\"transactional_send_unsubscribe_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_unsubscribe_link}}",
+					"host": [
+						"{{transactional_send_unsubscribe_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    let responseText = pm.response.json();",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_click_link_1\", responseText.HTMLTextLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_open_link_1\", responseText.HTMLOpenLinks);",
+							"    postman.setNextRequest(\"Open_mail2\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_trnsl_sd_htm_bs_1_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n    \"timeout\": 1200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    let responseText = pm.response.json();",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_click_link_1\", responseText.HTMLTextLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_open_link_1\", responseText.HTMLOpenLinks);",
+							"}else{",
+							"    pm.test(\"Transactional Send content html Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"    postman.setNextRequest(\"Remove_contact\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_trnsl_sd_htm_bs_1_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open_mail2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_open_link_1\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_open_link_1}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_open_link_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_click_link_1\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_click_link_1}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_click_link_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    let responseText = pm.response.json();",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_click_link_2\", responseText.HTMLTextLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_open_link_2\", responseText.HTMLOpenLinks);",
+							"    postman.setNextRequest(\"Open_mail3\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_trnsl_sd_htm_bs_2_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n    \"timeout\": 1200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail33",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    let responseText = pm.response.json();",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_click_link_2\", responseText.HTMLTextLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_open_link_2\", responseText.HTMLOpenLinks);",
+							"}else{",
+							"    pm.test(\"Transactional Send content html Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"    postman.setNextRequest(\"Remove_contact\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_trnsl_sd_htm_bs_2_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open_mail3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_open_link_2\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_open_link_2}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_open_link_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_click_link_2\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_click_link_2}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_click_link_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    let responseText = pm.response.json();",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_click_link_3\", responseText.HTMLTextLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_open_link_3\", responseText.HTMLOpenLinks);",
+							"    postman.setNextRequest(\"Open_mail4\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_trnsl_sd_htm_bs_3_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n    \"timeout\": 1200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail44",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    let responseText = pm.response.json();",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_click_link_3\", responseText.HTMLTextLinks);",
+							"    pm.globals.set(\"transactional_send_content_html_behaviour_stats_open_link_3\", responseText.HTMLOpenLinks);",
+							"}else{",
+							"    pm.test(\"Transactional Send content html Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"    postman.setNextRequest(\"Remove_contact\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_trnsl_sd_htm_bs_3_{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Transactional Send Content HTML Behavioral Stats-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open_mail4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_open_link_3\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_open_link_3}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_open_link_3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Link4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"transactional_send_content_html_behaviour_stats_click_link_3\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{transactional_send_content_html_behaviour_stats_click_link_3}}",
+					"host": [
+						"{{transactional_send_content_html_behaviour_stats_click_link_3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transactional report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"const  TCI = pm.globals.get(\"all_esps_transactionsl_send_content_html_behaviour_stats_campaign_id\"); ",
+							"pm.test(`Test Transactional Send Using HTML Message Open stats Transactiona Campaign Id : ${TCI}`, function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].unique_opens)).to.be.above(0);",
+							"});",
+							"pm.test(`Test Transactional Send Using HTML Message Sent stats Transactiona Campaign Id : ${TCI}`, function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].sent)).to.be.above(0);",
+							"});",
+							"pm.test(`Test Transactional Send Using HTML Message Click stats Transactiona Campaign Id : ${TCI}`, function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].clicks)).to.be.above(0);",
+							"});",
+							"pm.test(`Test Transactional Send Using HTML Message Unsubscribes stats Transactiona Campaign Id : ${TCI}`, function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].unsubscribes)).to.be.above(0);",
+							"});",
+							"pm.test(`Test Transactional Send Using HTML Message Success stats Transactiona Campaign Id : ${TCI}`, function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].success)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test Transactional Send Using HTML Message unique_opens stats\", function() {",
+							"pm.expect(parseInt(jsonData.payload[0].unique_opens)).to.equal(4);",
+							"});",
+							"pm.test(\"Test Transactional Send Using HTML Message unique_clicks stats\", function() {",
+							"pm.expect(parseInt(jsonData.payload[0].unique_clicks)).to.equal(4);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"select\": [\n        \"mailing_name\",\n        \"mailing_type\",\n        \"split_type\",\n        \"mailing_name_id\",\n        [\n            \"MAX(`stats_date`)\",\n            \"stats_date\"\n        ],\n        [\n            \"MAX(`delivery_timestamp`)\",\n            \"delivery_timestamp\"\n        ],\n        [\n            \"schedule_date\",\n            \"schedule_date\"\n        ],\n        \"sum(`targeted`)\",\n        \"sum(`sent`)\",\n        \"sum(`success`)\",\n        \"sum(`failed`)\",\n        \"sum(`opens`)\",\n        \"sum(`unique_opens`)\",\n        \"sum(`unsubscribes`)\",\n        \"sum(`complaints`)\",\n        \"sum(`clicks`)\",\n        \"sum(`unique_clicks`)\",\n        \"sum(`soft_bounces`)\",\n        \"sum(`hard_bounces`)\",\n        \"mailing_id\",\n        \"sum(`post_back_clicks`)\"\n    ],\n    \"from\": \"mailing\",\n    \"group\": [\n        \"mailing_id\"\n    ],\n    \"order\": [\n        [\n            \"delivery_timestamp\",\n            \"desc\"\n        ]\n    ],\n    \"filter\": [\n        [\n            \"mailing_id\",\n            \"IN\",\n            [\n                \"{{all_esps_transactionsl_send_content_html_behaviour_stats_campaign_id}}\"\n            ]\n        ]\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/reports/query",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"reports",
+						"query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generate Contact Activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)",
+							"var pre_date = Math.round(today - (24*60*60))",
+							"pm.globals.set(\"current_date\",today)",
+							"pm.globals.set(\"pre_date\",pre_date)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esps_transactional_send_content_html_behaviour_report_id\", jsonData.payload.id);",
+							"pm.globals.unset(\"pre_date\")",
+							"pm.globals.unset(\"current_date\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Active gmail contacts\",\n    \"selected_fields\": [\n        \"email\",\n\t\t\"ocx_created_date\",\n\t\t\"ocx_status\",\n\t\t\"sent\",\n\t\t\"opens\",\n\t\t\"clicks\",\n\t\t\"ocx_unsubscribe_date\",\n\t\t\"ocx_resubscribe_date\",\n\t\t\"ocx_bounce_date\",\n\t\t\"ocx_complaint_date\",\n\t\t\"last_sent_date\",\n\t\t\"last_open_date\"\n    ],\n    \"filters\": {\n        \"criteria\": [\n            {\n                \"field_name\": \"sent\",\n                \"type\": \"behavioral\",\n                \"operator\": \"=\",\n                \"operand\": {\n                    \"mailing_ids\": [\n                        \"{{all_esps_transactionsl_send_content_html_behaviour_stats_campaign_id}}\"\n                    ]\n                },\n                \"case_sensitive\": 0,\n                \"condition\": \"and\"\n            }\n        ],\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    }\n}\n\n\n\n"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 120 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=120",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "120"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contact Activity report result",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"const TCI = pm.globals.get(\"all_esps_transactionsl_send_content_html_behaviour_stats_campaign_id\");",
+							"pm.test(`Test Transactional Send Using HTML Message Behavioural Open stats Transactiona Campaign Id : ${TCI}`, function () {",
+							"    pm.expect(parseInt(jsonData.payload[0].opens)).to.be.above(0);",
+							"});",
+							"pm.test(`Test Transactional Send Using HTML Message Behavioural Sent stats Transactiona Campaign Id : ${TCI}`, function () {",
+							"    pm.expect(parseInt(jsonData.payload[0].sent)).to.be.above(0);",
+							"});",
+							"pm.test(`Test Transactional Send Using HTML Message Behavioural Click stats Transactiona Campaign Id : ${TCI}`, function () {",
+							"    pm.expect(parseInt(jsonData.payload[0].clicks)).to.be.above(0);",
+							"});",
+							"if (pm.environment.get(\"env\") == \"All-Esps-Dev-28299\") {",
+							"    pm.test(`Test Transactional Send Using HTML Message Behavioural Unsubscribes stats is equal to \\\" contact status\\\" Transactiona Campaign Id : ${TCI}`, function () {",
+							"        pm.expect(jsonData.payload[0].ocx_status).to.equal(\"Unsubscribed\")",
+							"    });",
+							"} else {",
+							"    pm.test(`Test Transactional Send Using HTML Message Behavioural Unsubscribes stats is equal to \\\" contact status\\\" Transactiona Campaign Id : ${TCI}`, function () {",
+							"        pm.expect(jsonData.payload[3].ocx_status).to.equal(\"Unsubscribed\")",
+							"    });",
+							"}",
+							"pm.globals.unset(\"all_esps_transactionsl_send_content_html_behaviour_stats_campaign_id\");",
+							"pm.globals.unset(\"all_esps_transactional_send_content_html_behaviour_report_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{all_esps_transactional_send_content_html_behaviour_report_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity",
+						"{{all_esps_transactional_send_content_html_behaviour_report_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove_contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"remove\",\n    \"emails\": [\n        \"ae_trnsl_sd_htm_bs_{{connectionId}}@hoohem.com\",\n        \"ae_trnsl_sd_htm_bs_1_{{connectionId}}@hoohem.com\",\n        \"ae_trnsl_sd_htm_bs_2_{{connectionId}}@hoohem.com\",\n        \"ae_trnsl_sd_htm_bs_3_{{connectionId}}@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

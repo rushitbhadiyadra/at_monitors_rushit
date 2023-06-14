@@ -1,0 +1,45 @@
+name: mailgun_schedule
+
+on:
+  workflow_dispatch:
+
+env:
+  SENTRY_DSN: https://2bd6ab683e7c4452ade1c7ef1e547e89@sentryf.ongage.net/110
+
+jobs:
+  amazondev:
+
+    runs-on: self-hosted
+      
+    strategy:
+      matrix:
+        node-version: [14.x]
+        #collection: [ All_Esps_Campaign_Test_Mail_1_failed ]
+        collection: [ All_Esps_Campaign_Test_Mail_1 ]
+    steps:
+    - uses: actions/checkout@v3.3.0
+    - name: Dev Amazon Monitor collections
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install newman and newman-reporter-htmlextra
+      run: |
+        npm install -g newman
+        npm install -g newman-reporter-htmlextra
+        npm install install-artifact-from-github
+        npm install @sentry/node
+    - name: Run ${{ matrix.collection }}
+      id: first_run
+      run: newman run ./node/Campaigns/${{ matrix.collection }}.json -e ./node/Campaigns/Env/all-esps-dev-env-28299.json -g ./node/Campaigns/Env/dev-mailgun-monitor-globals-env.json --reporter-cli --reporter-htmlextra-export ./newman/dev-amazon-"${{ matrix.collection }}"-report.html      
+      continue-on-error: false
+    
+    - name: Report failure to Sentry
+      if: ${{ failure() }}
+      run: node ./report-error.js
+      
+    - name: Output the run details
+      uses: actions/upload-artifact@v3
+      with:
+          name: private-smtp-schedule
+          path: newman

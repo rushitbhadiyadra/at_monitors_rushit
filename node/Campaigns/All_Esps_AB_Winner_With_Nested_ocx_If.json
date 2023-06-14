@@ -1,0 +1,1038 @@
+{
+	"info": {
+		"_postman_id": "9c91c323-84eb-4faa-a931-760ef7346fad",
+		"name": "All_Esps_AB_Winner_With_Nested_ocx_If",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "read mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var count = pm.globals.get(\"count\")",
+							"if (count != 1) {",
+							"    pm.globals.set(\"count\", 0)",
+							"    var count = pm.globals.get(\"count\")",
+							"}",
+							"if (pm.response.code == 200) {",
+							"    var count = count + 1",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    pm.test(\"AB Winner With If Nested is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"AB Winner With If Nested is working\", function () {",
+							"        pm.expect(body[2]).to.equal(\"keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"AB Winner With If Nested is working\", function () {",
+							"        pm.expect(body[3]).to.equal(\"usa-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							"pm.globals.set(\"count\", count)"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"abw_nested_if1@hoohem.com\",\n    \"subject\": \"AB Winner Nested Ocx If-{{connectionId}}\",\n    \"timeout\": 300000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")",
+							"if (pm.response.code == 200) {",
+							"    var count = count + 1",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_2 = body[2].split(\"\\n\")",
+							"    var body_3 = body_2[0].split(\"!\")",
+							"    pm.test(\"AB Winner If Nested Body is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"AB Winner If Nested Body is working\", function () {",
+							"        pm.expect(body_3[0]).to.equal(\"keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							"pm.globals.set(\"count\", count)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"abw_nested_if2@hoohem.com\",\n    \"subject\": \"AB Winner Nested Ocx If-{{connectionId}}\",\n    \"timeout\": 300000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")",
+							"if (pm.response.code == 200) {",
+							"    var count = count + 1",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_2 = body[1].split(\"\\n\")",
+							"    var body_3 = body_2[0].split(\"!\")",
+							"    pm.test(\"AB Split If Nested Body is working\", function () {",
+							"        pm.expect(body_3[0]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							"pm.globals.set(\"count\", count)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"abw_nested_if3@hoohem.com\",\n    \"subject\": \"AB Winner Nested Ocx If-{{connectionId}}\",\n    \"timeout\": 300000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var count = pm.globals.get(\"count\")",
+							"if (pm.response.code == 200) {",
+							"    var count = count + 1",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_2 = body[1].split(\"\\n\")",
+							"    var body_3 = body_2[0].split(\"!\")",
+							"    pm.test(\"AB Winner If Nested Body is working\", function () {",
+							"        pm.expect(body_3[0]).to.equal(\"other-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							"if (count != 2) {",
+							"    pm.test(\"AB Winner If Nested Body is working\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"count\")"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"abw_nested_if4@hoohem.com\",\n    \"subject\": \"AB Winner Nested Ocx If-{{connectionId}}\",\n    \"timeout\": 300000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"abw_nested_if1@hoohem.com\",\n        \"country\": \"usa\",\n        \"address\": \"keshod\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"abw_nested_if2@hoohem.com\",\n        \"country\": \"India\",\n        \"address\": \"keshod\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"abw_nested_if3@hoohem.com\",\n        \"country\": \"India\",\n        \"address\": \"Junagadh\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"abw_nested_if4@hoohem.com\",\n        \"country\": \"India\",\n        \"address\": \"Junagadh\",\n        \"first_name\": \"stepin\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get old segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"AB Winner Segment Nested If-\" + pm.globals.get(\"connectionId\")){",
+							"            count = 1",
+							"            pm.globals.set(\"segment_id_abwnif\", segment.id);      ",
+							"        }      ",
+							"    }",
+							"}",
+							"",
+							"if(count===1){",
+							"    postman.setNextRequest(\"create and send campaign\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"segment_id_abwnif\", function() {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"segment_id_abwnif\", jsonData.payload.id);",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"AB Winner Segment Nested If-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"abw_nested_if1@hoohem.com\",\n                \"abw_nested_if2@hoohem.com\",\n                \"abw_nested_if3@hoohem.com\",\n                \"abw_nested_if4@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and send campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0",
+							"pm.globals.set(\"count\",count)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time\", Math.round(new Date().getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"AB-Winner Nested Ocx If\",\n    \"type\": \"split\",\n    \"split_type\": \"email\",\n    \"email_message\": [\n        {{all_esp_ab_winner_common_message}},\n        {{abwnif_email_id}}\n    ],\n    \"segments\": [\n        \"{{segment_id_abwnif}}\"\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"domain\": \"default\",\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time}},\n    \"winner_quota_value\":\"1\",\n\t\"winner_conversion_field\":\"unique_clicks\",\n\t\"winner_send_after_hours\":\"1\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_400",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=400",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "400"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var count = pm.globals.get(\"count\")",
+							"if (pm.response.code == 200) {",
+							"    var count = count + 1",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var link = jsonData.HTMLTextLinks",
+							"    pm.globals.set(\"link_winner_if\",link)",
+							"    pm.test(\"AB Winner With If Nested is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"AB Winner With If Nested is working\", function () {",
+							"        pm.expect(body[2]).to.equal(\"keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"AB Winner With If Nested is working\", function () {",
+							"        pm.expect(body[3]).to.equal(\"usa-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							"pm.globals.set(\"count\",count)"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"abw_nested_if1@hoohem.com\",\n    \"subject\": \"AB Winner Nested Ocx If-{{connectionId}}\",\n    \"timeout\": 300000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var count = pm.globals.get(\"count\")",
+							"if (pm.response.code == 200) {",
+							"",
+							"    var count = count + 1",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_2 = body[2].split(\"\\n\")",
+							"    var body_3 = body_2[0].split(\"!\")",
+							"    pm.test(\"AB Winner If Nested Body is working\", function () {",
+							"        pm.expect(body[1]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"AB Winner If Nested Body is working\", function () {",
+							"        pm.expect(body_3[0]).to.equal(\"keshod-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    var link = jsonData.HTMLTextLinks",
+							"    pm.globals.set(\"link_winner_if\", link)",
+							"}",
+							"pm.globals.set(\"count\", count)"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"abw_nested_if2@hoohem.com\",\n    \"subject\": \"AB Winner Nested Ocx If-{{connectionId}}\",\n    \"timeout\": 300000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var count = pm.globals.get(\"count\")",
+							"if (pm.response.code == 200) {",
+							"    var count = count + 1",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_2 = body[1].split(\"\\n\")",
+							"    var body_3 = body_2[0].split(\"!\")",
+							"    pm.test(\"AB Split If Nested Body is working\", function () {",
+							"        pm.expect(body_3[0]).to.equal(\"ongage-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    var link = jsonData.HTMLTextLinks",
+							"    pm.globals.set(\"link_winner_if\", link)",
+							"}",
+							"pm.globals.set(\"count\", count)"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"abw_nested_if3@hoohem.com\",\n    \"subject\": \"AB Winner Nested Ocx If-{{connectionId}}\",\n    \"timeout\": 300000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var count = pm.globals.get(\"count\")",
+							"if (pm.response.code == 200) {",
+							"    var count = count + 1",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var body = data.split(\"~!@#~\")",
+							"    var body_2 = body[1].split(\"\\n\")",
+							"    var body_3 = body_2[0].split(\"!\")",
+							"    pm.test(\"AB Split If Nested Body is working\", function () {",
+							"        pm.expect(body_3[0]).to.equal(\"other-\" + pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    var link = jsonData.HTMLTextLinks",
+							"    pm.globals.set(\"link_winner_if\", link)",
+							"}",
+							"if (count != 1) {",
+							"    pm.test(\"AB Split If Nested Body is working\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"count\")"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"abw_nested_if4@hoohem.com\",\n    \"subject\": \"AB Winner Nested Ocx If-{{connectionId}}\",\n    \"timeout\": 300000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "click link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.globals.unset(\"link_winner_if\")"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{link_winner_if}}",
+					"host": [
+						"{{link_winner_if}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

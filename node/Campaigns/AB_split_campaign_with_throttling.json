@@ -1,0 +1,688 @@
+{
+	"info": {
+		"_postman_id": "467e2e4f-e046-410b-a7a3-b5f672e57c78",
+		"name": "AB_split_campaign_with_throttling",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Read_mail_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0\r",
+							"if(pm.response.json().length == 5){\r",
+							"    var count = count + 1\r",
+							"    pm.globals.set(\"count\",count)\r",
+							"}else{\r",
+							"    pm.globals.set(\"count\",count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/ab split with throttling message-a-{{connectionId}}-{{env}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"ab split with throttling message-a-{{connectionId}}-{{env}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if(pm.response.code == 200){\r",
+							"if(pm.response.json().length == 5){\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"Ab split campiagn with throttling is working\", function() {\r",
+							"  pm.expect(count).to.eql(2);\r",
+							"});\r",
+							"}else{\r",
+							"        pm.test(\"Ab split campiagn with throttling is working\", function() {\r",
+							"  pm.expect(count).to.eql(2);\r",
+							"});\r",
+							"}\r",
+							"}else{\r",
+							"        pm.test(\"Ab split campiagn with throttling is working\", function() {\r",
+							"  pm.expect(count).to.eql(2);\r",
+							"});    \r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/ab split with throttling message-b-{{connectionId}}-{{env}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"ab split with throttling message-b-{{connectionId}}-{{env}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_mail_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/ab split with throttling message-a-{{connectionId}}-{{env}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"ab split with throttling message-a-{{connectionId}}-{{env}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_mail_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ab_split_with_throttling_segment\")\r",
+							"pm.globals.unset(\"time_30\")\r",
+							"pm.globals.unset(\"start_time\")\r",
+							"pm.globals.unset(\"end_time\")\r",
+							"pm.globals.unset(\"count\")\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/ab split with throttling message-b-{{connectionId}}-{{env}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"ab split with throttling message-b-{{connectionId}}-{{env}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    { \r\n        \"email\": \"absplit_throttling_1@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_2@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_3@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_4@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_5@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_6@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_7@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_8@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_9@hoohem.com\" \r\n    },\r\n    { \r\n        \"email\": \"absplit_throttling_10@hoohem.com\" \r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get old Segmet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if (jsonData.payload.length > 0) {",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"Verify ab split campaign with throttling\") {",
+							"            pm.globals.set(\"ab_split_with_throttling_segment\", segment.id);",
+							"            postman.setNextRequest(\"Send_mail\")",
+							"        }",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json() \r",
+							"pm.globals.set(\"ab_split_with_throttling_segment\",jsonData.payload.id) "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"Verify ab split campaign with throttling\" ,\r\n   \"type\":\"regular\",\r\n   \"description\":\"Verify ab split campaign with throttling\",\r\n   \"criteria\":[\r\n      {\r\n         \"field_id\":{{list_field_email_id}},\r\n         \"type\":\"email\",\r\n         \"position\":0,\r\n         \"operator\":\"=\",\r\n         \"operand\":[\r\n            \"absplit_throttling_1@hoohem.com\",\r\n            \"absplit_throttling_2@hoohem.com\",\r\n            \"absplit_throttling_3@hoohem.com\",\r\n            \"absplit_throttling_4@hoohem.com\",\r\n            \"absplit_throttling_5@hoohem.com\",\r\n            \"absplit_throttling_6@hoohem.com\",\r\n            \"absplit_throttling_7@hoohem.com\",\r\n            \"absplit_throttling_8@hoohem.com\",\r\n            \"absplit_throttling_9@hoohem.com\",\r\n            \"absplit_throttling_10@hoohem.com\"\r\n         ],\r\n         \"condition\":\"and\"\r\n      }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30)\r",
+							"const cDate = Date.now()\r",
+							"const eDate = Date.now() +7200000\r",
+							"var createdDate = new Date(cDate);\r",
+							"var total_createdhours = createdDate.getUTCHours()\r",
+							"var endDate = new Date(eDate);\r",
+							"var total_endhours = endDate.getUTCHours()\r",
+							"if(total_createdhours === 0){\r",
+							"    pm.globals.set(\"start_time\", 24);\r",
+							"}else{\r",
+							"    pm.globals.set(\"start_time\",total_createdhours);\r",
+							"}\r",
+							"if(total_endhours === 0){\r",
+							"    pm.globals.set(\"end_time\", 24);\r",
+							"}else{\r",
+							"    pm.globals.set(\"end_time\",total_endhours);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"split\",\r\n    \"split_type\": \"email\",\r\n    \"name\": \"AB split campaign with throttling\",\r\n    \"email_message\": [\r\n        {{ab_split_with_throttling_a}},\r\n        {{ab_split_with_throttling_b}}\r\n    ],\r\n    \"segments\": [\r\n        {{ab_split_with_throttling_segment}}\r\n    ],\r\n    \"distribution\": [\r\n        {\r\n            \"esp_connection_id\":{{connectionId}},\r\n            \"percent\": \"100\"\r\n        }\r\n    ],\r\n    \"schedule_date\": {{time_30}},\r\n    \"notify_onlaunch\": \"0\",\r\n    \"notify_onfailed\": \"0\",\r\n    \"notify_oncomplete\": \"0\",\r\n    \"time_to_send_config\": {\r\n        \"delivery_timing_type\": \"throttling\",\r\n        \"throttling_type\": \"dayparting\",\r\n        \"days\": 1,\r\n        \"start_hour\": {{start_time}},\r\n        \"end_hour\": {{end_time}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

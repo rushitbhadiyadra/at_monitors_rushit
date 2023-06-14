@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "004fba73-16f0-40d0-8b37-53e5db2ed64e",
+		"name": "All_Esps_AB_Split_One_Minute_Throttling_1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-004fba73-16f0-40d0-8b37-53e5db2ed64e?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Get Mail Count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"var count_a = 0",
+							"var count_b = 0",
+							"jsonData.forEach((nail) => {",
+							"    const htmlText = nail.html;",
+							"    const fieldValue = htmlText.split(\"~!@#~\");",
+							"    if(fieldValue[1] === \"A\"){",
+							"        count_a += 1",
+							"    }",
+							"    if(fieldValue[1] === \"B\"){",
+							"        count_b += 1",
+							"    }",
+							"})",
+							"",
+							"var mailtimearray = []",
+							"var count = 0",
+							"for (var mail of jsonData) {",
+							"  mailtimearray.push((Date.parse(mail.date))/1000)",
+							"}",
+							"mailtimearray.sort( function( a , b){",
+							"    if(a > b) return 1;",
+							"    if(a < b) return -1;",
+							"    return 0;",
+							"});",
+							"for (var i = mailtimearray.length - 1; i > 0; i--) {",
+							"  if(mailtimearray[i] - mailtimearray[i-1] <= 1) {",
+							"      count = 1",
+							"  }",
+							"} ",
+							"pm.test(`Test AB Split One Minute Throttling`, function () {",
+							"        pm.expect(count).to.equal(0)",
+							"        pm.expect(count_a).not.eql(10);",
+							"        pm.expect(count_b).not.eql(10);",
+							"        pm.expect(count_a).not.eql(0);",
+							"        pm.expect(count_b).not.eql(0);",
+							"        pm.expect(count_a + count_b).to.eql(10);",
+							"    });",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Test AB-Split One Minute Throttling-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Test AB-Split One Minute Throttling-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Test AB-Split One Minute Throttling-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Test AB-Split One Minute Throttling-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get variable from webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"ab_split_one_minute_throttle_cid\", jsonData.ab_split_one_minute_throttle_cid);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-All-Esp-AB-Split-One-Minute-Throttle-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-All-Esp-AB-Split-One-Minute-Throttle-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    if((jsonData.payload) instanceof Array)",
+							"    {",
+							"        postman.setNextRequest('Clear_webhook');",
+							"    }",
+							"    else",
+							"    {",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.distribution[0]['esp_id'] !== undefined && jsonData.payload.distribution[0]['esp_id'] !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>ESP Id</td><td style='width: 50%;'>\"+jsonData.payload.distribution[0]['esp_id']+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.distribution[0]['name'] !== undefined && jsonData.payload.distribution[0]['name'] !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>ESP Name</td><td style='width: 50%;'>\"+jsonData.payload.distribution[0]['name']+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.distribution[0]['esp_connection_id'] !== undefined && jsonData.payload.distribution[0]['esp_connection_id'] !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id</td><td style='width: 50%;'>\"+jsonData.payload.distribution[0]['esp_connection_id']+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"",
+							"        }",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"",
+							"        // }",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"",
+							"        pm.globals.set(\"html_code\", tableHtml);",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')",
+							"        {",
+							"            pm.globals.set(\"html_code\", tableHtml);",
+							"        }",
+							"        else",
+							"        {",
+							"            postman.setNextRequest('Clear_webhook');",
+							"        }",
+							"    }",
+							"}else{",
+							"    postman.setNextRequest('Clear_webhook');",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{throttling_list_id}}/api/mailings/{{ab_split_one_minute_throttle_cid}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{throttling_list_id}}",
+						"api",
+						"mailings",
+						"{{ab_split_one_minute_throttle_cid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error-Campaign Test Cases Detail with {{esp_name}} on {{ongage_env}}\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{throttling_list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{throttling_list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-All-Esp-AB-Split-One-Minute-Throttle-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-All-Esp-AB-Split-One-Minute-Throttle-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{throttling_list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"ae_rc_throttal_21@hoohem.com\",\n        \"ae_rc_throttal_22@hoohem.com\",\n        \"ae_rc_throttal_23@hoohem.com\",\n        \"ae_rc_throttal_24@hoohem.com\",\n        \"ae_rc_throttal_25@hoohem.com\",\n        \"ae_rc_throttal_26@hoohem.com\",\n        \"ae_rc_throttal_27@hoohem.com\",\n        \"ae_rc_throttal_28@hoohem.com\",\n        \"ae_rc_throttal_29@hoohem.com\",\n        \"ae_rc_throttal_30@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{throttling_list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{throttling_list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 100 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"ab_split_one_minute_throttle_cid\",jsonData.payload.id);",
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All Esp AB-Split One Minute Throttling \",\n    \"type\": \"split\",\n    \"list_id\": {{throttling_list_id}},\n    \"split_type\": \"email\",\n    \"email_message\": [\n        \"{{msg_id_ae_ab_split_onemin_a}}\",\n        \"{{msg_id_ae_ab_split_onemin_b}}\"\n    ],\n    \"segments\": [\n        \"{{all_esps_segment_id_throttal_one_hour}}\"\n    ],\n    \"esp_optional_routes\":\"single\",\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": \"100\"\n        }\n    ],\n    \"time_to_send_config\": {\n        \"delivery_timing_type\": \"throttling\",\n        \"throttling_type\": \"hours\",\n        \"hours\": 2\n    },\n    \"schedule_date\": {{time_30}},\n    \"notify_onlaunch\": \"0\",\n    \"notify_onfaile d\": \"0\",\n    \"notify_oncomplete\": \"0\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set_variable_in_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ab_split_one_minute_throttle_cid\": \"{{ab_split_one_minute_throttle_cid}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-All-Esp-AB-Split-One-Minute-Throttle-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"{{env}}-All-Esp-AB-Split-One-Minute-Throttle-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

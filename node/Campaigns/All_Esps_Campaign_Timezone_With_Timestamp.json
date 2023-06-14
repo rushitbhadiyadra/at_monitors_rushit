@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "95ab081b-f6b5-41ea-8a87-b0b05751624a",
+		"name": "All_Esps_Campaign_Timezone_With_Timestamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Get variable from webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_all_esps_campaign_timestamp\", jsonData.campaign_id_all_esps_campaign_timestamp);",
+							"if(parseInt(jsonData.mail_count) ===1 )",
+							"{",
+							"    postman.setNextRequest('Clear_webhook');",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-All_Esps_Campaign_timestamp-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-All_Esps_Campaign_timestamp-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.text();",
+							"",
+							"if(jsonData !==null && jsonData !== '{}'){",
+							"    var fieldValue = jsonData.split(\"~!@#~\");",
+							"    pm.test(\"Test All ESP Ragular Campaign With Timestampe is working\", function () {",
+							"        pm.expect(fieldValue[1]).to.eql(pm.globals.get(\"connectionId\"));",
+							"    });",
+							" }",
+							" else{",
+							"    pm.test(\"Test All ESP Ragular Campaign With Timestampe is not working\", function() {",
+							"        pm.expect(\"\").to.eql(pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_rc_with_timestamp1@hoohem.com\",\n    \"subject\": \"Test Ragular Campaign With Timestampe-{{connectionId}}-{{campaign_id_all_esps_campaign_timestamp}}\",\n    \"timeout\": 1000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    if((jsonData.payload) instanceof Array)",
+							"    {",
+							"        postman.setNextRequest('Clear_webhook');",
+							"    }",
+							"    else",
+							"    {",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"",
+							"        }",
+							"        var connectionName='';",
+							"        for(var i=0;i<jsonData.payload.distribution.length;i++)",
+							"        {",
+							"            if(jsonData.payload.distribution[i]['esp_id'] !== undefined && jsonData.payload.distribution[i]['esp_id'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_id']+\"</td></tr>\"",
+							"            }",
+							"            if(jsonData.payload.distribution[i]['name'] !== undefined && jsonData.payload.distribution[i]['name'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Name \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['name']+\"</td></tr>\"",
+							"            }",
+							"            connectionName += jsonData.payload.distribution[i]['name']+\",\";",
+							"            if(jsonData.payload.distribution[i]['esp_connection_id'] !== undefined && jsonData.payload.distribution[i]['esp_connection_id'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_connection_id']+\"</td></tr>\"",
+							"            }",
+							"        }",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"",
+							"        }",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"",
+							"        // }",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"",
+							"        pm.globals.set(\"html_code\", tableHtml);",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')",
+							"        {",
+							"            pm.globals.set(\"html_code\", tableHtml);",
+							"            connectionName =connectionName.slice(0, -1);",
+							"            pm.globals.set(\"esp_name\", connectionName);",
+							"        }",
+							"        else",
+							"        {",
+							"            postman.setNextRequest('Clear_webhook');",
+							"        }",
+							"    }",
+							"}else{",
+							"    postman.setNextRequest('Clear_webhook');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{campaign_id_all_esps_campaign_timestamp}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{campaign_id_all_esps_campaign_timestamp}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error-Campaign Test Cases Detail with {{esp_name}} on {{ongage_env}}\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"campaign_id_all_esps_campaign_timestamp\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-All_Esps_Campaign_timestamp-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-All_Esps_Campaign_timestamp-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"ae_rc_with_timestamp1@hoohem.com\",\"ae_rc_with_timestamp2@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create and run campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_all_esps_campaign_timestamp\", jsonData.payload.id);",
+							"pm.globals.unset(\"time\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All Ragular Campaign With Timestampe-{{connectionId}}\",\n    \"list_id\": {{list_id}},\n    \"email_message\": {{msg_id_campaign_timesamp}},\n    \"segments\": [\n        {{ae_segment_id_campaign_timesamp}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"time_to_send_config\": {\n        \"send_by_timezone\": {\n            \"timezone_source\": \"timezone\",\n            \"contact_field_id\": \"{{list_field_timestmp1_id}}\",\n            \"start_timezone\": \"UTC\"\n        },\n        \"delivery_timing_type\":\"schedule_date\"\n    },\n    \"enable-timezone\": true,\n    \"pre_process\": true,\n    \"schedule_date\": {{time}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.text();",
+							"",
+							"if(jsonData !==null && jsonData !== '{}'){",
+							"    var fieldValue = jsonData.split(\"~!@#~\");",
+							"    pm.test(\"Test All ESP Ragular Campaign With Timestampe is working\", function () {",
+							"        pm.expect(fieldValue[1]).to.eql(pm.globals.get(\"connectionId\"));",
+							"    });",
+							" }",
+							" else{",
+							"    pm.test(\"Test All ESP Ragular Campaign With Timestampe is not working\", function() {",
+							"        pm.expect(\"\").to.eql(pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ae_rc_with_timestamp2@hoohem.com\",\n    \"subject\": \"Test Ragular Campaign With Timestampe-{{connectionId}}-{{campaign_id_all_esps_campaign_timestamp}}\",\n    \"timeout\": 1000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"if(pm.response.code === 200)\r",
+							"{\r",
+							"    if((jsonData.payload) instanceof Array)\r",
+							"    {\r",
+							"        pm.globals.set(\"mail_count\", 0);\r",
+							"        postman.setNextRequest('Set_variable_in_webhook');\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"\r",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){\r",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"\r",
+							"        }\r",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"\r",
+							"        }\r",
+							"        var connectionName='';\r",
+							"        for(var i=0;i<jsonData.payload.distribution.length;i++)\r",
+							"        {\r",
+							"            if(jsonData.payload.distribution[i]['esp_id'] !== undefined && jsonData.payload.distribution[i]['esp_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"            if(jsonData.payload.distribution[i]['name'] !== undefined && jsonData.payload.distribution[i]['name'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Name \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['name']+\"</td></tr>\"\r",
+							"            }\r",
+							"            connectionName += jsonData.payload.distribution[i]['name']+\",\";\r",
+							"            if(jsonData.payload.distribution[i]['esp_connection_id'] !== undefined && jsonData.payload.distribution[i]['esp_connection_id'] !== null){\r",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_connection_id']+\"</td></tr>\"\r",
+							"            }\r",
+							"        }\r",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){\r",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"\r",
+							"        }\r",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){\r",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"\r",
+							"        // }\r",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"\r",
+							"        pm.globals.set(\"html_code\", tableHtml);\r",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')\r",
+							"        {\r",
+							"            pm.globals.set(\"html_code\", tableHtml);\r",
+							"            pm.globals.set(\"mail_count\", 1);\r",
+							"        }\r",
+							"        else\r",
+							"        {\r",
+							"            pm.globals.set(\"mail_count\", 0);\r",
+							"            postman.setNextRequest('Set_variable_in_webhook');\r",
+							"        }\r",
+							"    }\r",
+							"}\r",
+							"else\r",
+							"{\r",
+							"    pm.globals.set(\"mail_count\", 0);\r",
+							"    postman.setNextRequest('Set_variable_in_webhook');\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{campaign_id_all_esps_campaign_timestamp}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{campaign_id_all_esps_campaign_timestamp}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error - Campaign Test Cases Detail\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set_variable_in_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"campaign_id_all_esps_campaign_timestamp\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"campaign_id_all_esps_campaign_timestamp\": \"{{campaign_id_all_esps_campaign_timestamp}}\",\n    \"mail_count\": \"{{mail_count}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-All_Esps_Campaign_timestamp-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"{{env}}-All_Esps_Campaign_timestamp-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

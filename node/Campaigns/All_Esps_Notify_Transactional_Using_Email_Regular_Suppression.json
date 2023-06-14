@@ -1,0 +1,433 @@
+{
+	"info": {
+		"_postman_id": "c0490d62-b999-4158-9e2d-a10c19324100",
+		"name": "All_Esps_Notify_Transactional_Using_Email_Regular_Suppression",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"rc_suppression_list1@hoohem.com\",\n        \"rc_suppression_list2@hoohem.com\",\n        \"rc_suppression_list3@hoohem.com\",\n        \"rc_suppression_list4@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"   var jsonData = pm.response.json();",
+							"   pm.test(\"Test Notify Transactional Send with suppression Using Email\", function () {",
+							"      pm.expect(jsonData.payload.suppressed[0]).to.eql(\"rc_suppression_list1@hoohem.com\");",
+							"   });",
+							"   pm.test(\"Test Notify Transactional Send with suppression Using Email\", function () {",
+							"      pm.expect(jsonData.payload.suppressed[1]).to.eql(\"rc_suppression_list2@hoohem.com\");",
+							"   });",
+							"   pm.test(\"Test Notify Transactional Send with suppression Using Email\", function () {",
+							"      pm.expect(jsonData.payload.suppressed[2]).to.eql(\"rc_suppression_list3@hoohem.com\");",
+							"   });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"rc_suppression_list1@hoohem.com\",\n        \"rc_suppression_list2@hoohem.com\",\n        \"rc_suppression_list3@hoohem.com\",\n        \"rc_suppression_list4@hoohem.com\"\n    ],\n    \"email_message_id\": {{msg_id_nt_email_rc_suppression}},\n    \"check_global_and_list_suppression\": true,\n    \"campaign_suppression_list_ids\": [\n        \"{{rc_suppresion_campaign_level_id}}\"\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"domain\": \"default\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test All Esps Suppression message : ${jsonData.date}`, function() {",
+							"            pm.expect(jsonData.subject).to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}else{",
+							"        pm.test(`Test All Esps Suppression message : ${jsonData.date}`, function() {",
+							"            pm.expect(\" \").to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_suppression_list4@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":600000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail List level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test All Esps list level Suppression message : ${jsonData.date}`, function() {",
+							"            pm.expect().to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_suppression_list1@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail Globle level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test All Esps globals level Suppression message : ${jsonData.date}`, function() {",
+							"            pm.expect().to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_suppression_list2@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail Campaign level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test All Esps Campaign level Suppression message : ${jsonData.date}`, function() {",
+							"            pm.expect().to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_suppression_list3@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

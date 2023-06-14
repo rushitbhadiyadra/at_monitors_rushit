@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "366b6372-6620-4166-8f98-34c01928a720",
+		"name": "All_Esps_Transactional_Msg_Id_Asp_8720",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"email\":\"tcm_asp_8720_1{{connectionId}}@hoohem.com\",\r\n        \"HasSPA\" : \"Y\",\r\n        \"HasSKI\" : \"Y\"\r\n    },\r\n    {\r\n        \"email\":\"tcm_asp_8720_2{{connectionId}}@hoohem.com\",\r\n        \"HasSPA\" : \"Y\",\r\n        \"HasSKI\" : \"N\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send mail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"recipients\": [\r\n        \"tcm_asp_8720_1{{connectionId}}@hoohem.com\",\r\n        \"tcm_asp_8720_2{{connectionId}}@hoohem.com\"\r\n    ],\r\n    \"message_id\": {{ASP_8720_email_id}},\r\n    \"sending_connection_id\": {{connectionId}},\r\n    \"message_dynamic_fields\": {\r\n        \"dynamic_feed\": \"<feed><mailing><blocks><block name=\\\"PMSFolios\\\"><items /></block><block name=\\\"SPAFolios\\\"><items><item><variables><variable><key>loop_SpaFolioId</key><value>564798</value></variable><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Monday, August 8, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Monday, August 8, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable><variable><key>loop_ActivatesPromo</key><value>N</value></variable><variable><key>loop_Salutation</key><value>Mr.</value></variable><variable><key>loop_FirstName</key><value>Nhan</value></variable><variable><key>loop_LastName</key><value>Le</value></variable><variable><key>loop_ClientInstructions</key><value /></variable><variable><key>loop_ItemCategory</key><value>Season Pass</value></variable><variable><key>loop_ItemSubCategory</key><value /></variable><variable><key>loop_ItemPackageType</key><value>I</value></variable></variables></item><item><variables><variable><key>loop_SpaFolioId</key><value>564798</value></variable><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Tuesday, August 9, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Tuesday, August 9, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable><variable><key>loop_ActivatesPromo</key><value>N</value></variable><variable><key>loop_Salutation</key><value>Mr.</value></variable><variable><key>loop_FirstName</key><value>Nhan</value></variable><variable><key>loop_LastName</key><value>Le</value></variable><variable><key>loop_ClientInstructions</key><value /></variable><variable><key>loop_ItemCategory</key><value>Season Pass</value></variable><variable><key>loop_ItemSubCategory</key><value /></variable><variable><key>loop_ItemPackageType</key><value>I</value></variable></variables></item><item><variables><variable><key>loop_SpaFolioId</key><value>564798</value></variable><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Wednesday, August 10, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Wednesday, August 10, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable><variable><key>loop_ActivatesPromo</key><value>N</value></variable><variable><key>loop_Salutation</key><value>Mr.</value></variable><variable><key>loop_FirstName</key><value>Nhan</value></variable><variable><key>loop_LastName</key><value>Le</value></variable><variable><key>loop_ClientInstructions</key><value /></variable><variable><key>loop_ItemCategory</key><value>Season Pass</value></variable><variable><key>loop_ItemSubCategory</key><value /></variable><variable><key>loop_ItemPackageType</key><value>I</value></variable></variables></item><item><variables><variable><key>loop_SpaFolioId</key><value>564798</value></variable><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Thursday, August 11, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Thursday, August 11, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable><variable><key>loop_ActivatesPromo</key><value>N</value></variable><variable><key>loop_Salutation</key><value>Mr.</value></variable><variable><key>loop_FirstName</key><value>Nhan</value></variable><variable><key>loop_LastName</key><value>Le</value></variable><variable><key>loop_ClientInstructions</key><value /></variable><variable><key>loop_ItemCategory</key><value>Season Pass</value></variable><variable><key>loop_ItemSubCategory</key><value /></variable><variable><key>loop_ItemPackageType</key><value>I</value></variable></variables></item><item><variables><variable><key>loop_SpaFolioId</key><value>564798</value></variable><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Friday, August 12, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Friday, August 12, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable><variable><key>loop_ActivatesPromo</key><value>N</value></variable><variable><key>loop_Salutation</key><value>Mr.</value></variable><variable><key>loop_FirstName</key><value>Nhan</value></variable><variable><key>loop_LastName</key><value>Le</value></variable><variable><key>loop_ClientInstructions</key><value /></variable><variable><key>loop_ItemCategory</key><value>Season Pass</value></variable><variable><key>loop_ItemSubCategory</key><value /></variable><variable><key>loop_ItemPackageType</key><value>I</value></variable></variables></item></items></block><block name=\\\"SPAWaitLists\\\"><items /></block><block name=\\\"GLFFolios\\\"><items /></block><block name=\\\"RETFolios\\\"><items /></block><block name=\\\"SKIFolios\\\"><items><item><variables><variable><key>loop_SkiFolioId</key><value>705688</value></variable><variable><key>loop_Category</key><value>Ski</value></variable><variable><key>loop_Details</key><value>ZZTEST WINTER SEASON PASSZZ</value></variable><variable><key>loop_StartDate</key><value>Monday, August 8, 2022</value></variable><variable><key>loop_FinishDate</key><value>Tuesday, September 13, 2022</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>0.01</value></variable><variable><key>loop_Location</key><value>Winsport Canada</value></variable><variable><key>loop_LocationId</key><value>999</value></variable><variable><key>loop_ActivatesPromo</key><value>N</value></variable><variable><key>loop_Salutation</key><value>Mr.</value></variable><variable><key>loop_FirstName</key><value>Nhan</value></variable><variable><key>loop_LastName</key><value>Le</value></variable></variables></item></items></block><block name=\\\"Activities\\\"><items><item><variables><variable><key>loop_Category</key><value>Ski</value></variable><variable><key>loop_Details</key><value>ZZTEST WINTER SEASON PASSZZ</value></variable><variable><key>loop_StartDate</key><value>Monday, August 8, 2022</value></variable><variable><key>loop_StartTime</key><value>12:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Tuesday, September 13, 2022</value></variable><variable><key>loop_FinishTime</key><value>12:00 AM</value></variable><variable><key>loop_Room</key><value /></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>Winsport Canada</value></variable><variable><key>loop_LocationId</key><value>999</value></variable></variables></item><item><variables><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Monday, August 8, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Monday, August 8, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable></variables></item><item><variables><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Tuesday, August 9, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Tuesday, August 9, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable></variables></item><item><variables><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Wednesday, August 10, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Wednesday, August 10, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable></variables></item><item><variables><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Thursday, August 11, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Thursday, August 11, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable></variables></item><item><variables><variable><key>loop_Category</key><value>Spa</value></variable><variable><key>loop_Details</key><value>TEST SNOW SCHOOL PROGRAM</value></variable><variable><key>loop_StartDate</key><value>Friday, August 12, 2022</value></variable><variable><key>loop_StartTime</key><value>06:00 AM</value></variable><variable><key>loop_FinishDate</key><value>Friday, August 12, 2022</value></variable><variable><key>loop_FinishTime</key><value>06:00 AM</value></variable><variable><key>loop_Room</key><value>ZTRIP</value></variable><variable><key>loop_Staff</key><value /></variable><variable><key>loop_Amount</key><value>         0.01</value></variable><variable><key>loop_Location</key><value>WinSport</value></variable><variable><key>loop_LocationId</key><value>999</value></variable></variables></item></items></block><block name=\\\"DiningReservations\\\"><items /></block></blocks></mailing></feed>\"\r\n    },\r\n    \"create_contact\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var links = data.split(\"~!@#~\")",
+							"    var link_1 = links[1].replace(/\\s+/g, '')",
+							"    var link_2 = links[3].replace(/\\s+/g, '')",
+							"    pm.test(\"ASP 8720 With Transactional Send is working\", function () {",
+							"        pm.expect(link_1).to.equal(\"https://www.lipsum.com/?folio=SPA564798\");",
+							"    });",
+							"    pm.test(\"ASP 8720 With Transactional Send is working\", function () {",
+							"        pm.expect(link_2).to.equal(\"https://www.lipsum.com/?folio=SKI705688\");",
+							"    });",
+							"} else {",
+							"    pm.test(\"ASP 8720 With Transactional Send is working\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tcm_asp_8720_1{{connectionId}}@hoohem.com\",\n    \"subject\": \"ASP_8720_email-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = jsonData.html",
+							"    var links = data.split(\"~!@#~\")",
+							"    var link_1 = links[1].replace(/\\s+/g, '')",
+							"    pm.test(\"ASP 8720 With Transactional Send is working\", function () {",
+							"        pm.expect(link_1).to.equal(\"https://www.lipsum.com/?folio=SPA564798\");",
+							"    });",
+							"} else {",
+							"    pm.test(\"ASP 8720 With Transactional Send is working\", function () {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"tcm_asp_8720_2{{connectionId}}@hoohem.com\",\n    \"subject\": \"ASP_8720_email-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

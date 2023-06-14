@@ -1,0 +1,998 @@
+{
+	"info": {
+		"_postman_id": "d1800b30-7518-4e4f-9d98-798020d07f08",
+		"name": "All_Esps_RC_Send_Domain_Suppression_Email",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"rc_domain_suppression_list1@abc.com\",\n        \"rc_domain_suppression_list1@test.com\",\n        \"rc_domain_suppression_list1@ymail.com\",\n        \"rc_domain_suppression_list1@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"all_esps_suppression_domain_campaign_id\", jsonData.payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"RC MD5 Suppression\",\n    \"list_id\": {{list_id}},\n    \"email_message\": {{msg_id_rc_suppression}},\n    \"segments\": [\n        {{segment_id_suppression_domain}}\n    ],\n    \"check_global_and_list_suppression\": true,\n    \"suppression_list_excluded\": [\n        \"{{campaign_level_domain_suppression_list}}\"\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time_30}}\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test Regular Camapign Campaign, List and Global Level Domain Suppression List is working : ${jsonData.date}`, function() {",
+							"            pm.expect(jsonData.subject).to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}else{",
+							"        pm.test(`Test Regular Camapign Campaign, List and Global Level Domain Suppression List is working`, function() {",
+							"            pm.expect(\" \").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_domain_suppression_list1@hoohem.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":400000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"        pm.test(`Test Regular Camapign Campaign, List and Global Level Domain Suppression List is working`, function() {",
+							"            pm.expect(parseInt(jsonData.payload.excluded_suppression_count)).to.equal(3);",
+							"        }); "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{all_esps_suppression_domain_campaign_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{all_esps_suppression_domain_campaign_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail campaign level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test Regular Camapign \"Campaign Level\" Domain Suppression List is working`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_domain_suppression_list1@abc.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail List Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test Regular Camapign \"List Level\" Domain Suppression List is working`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_domain_suppression_list1@test.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail Global Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        pm.test(`Test Regular Camapign \"Global Level\" Domain Suppression List is working`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_domain_suppression_list1@ymail.com\",\n\t\"subject\":\"Test All Esps Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create  Export List Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"Domain_suppression_list_lvl_export_id\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"My Export Domain Suppression List Level\",\r\n    \"date_format\": \"mm/dd/yyyy\",\r\n    \"file_format\": \"csv\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_level_domain_suppression_list}}/api/export",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_level_domain_suppression_list}}",
+						"api",
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create  Export Global Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"Domain_suppression_global_lvl_export_id\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"My Export Domain Suppression Global Level\",\r\n    \"date_format\": \"mm/dd/yyyy\",\r\n    \"file_format\": \"csv\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{global_level_domain_suppression_list}}/api/export",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{global_level_domain_suppression_list}}",
+						"api",
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create  Export Campaign Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"Domain_suppression_campaign_lvl_export_id\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"My Export Domain Suppression Campaign Level\",\r\n    \"date_format\": \"mm/dd/yyyy\",\r\n    \"file_format\": \"csv\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{campaign_level_domain_suppression_list}}/api/export",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{campaign_level_domain_suppression_list}}",
+						"api",
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Export Result List Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = Object.entries(jsonData)",
+							"    var email = data[0][1]",
+							"    pm.test(`Test Export Domain Suppression List Level Working`, function () {",
+							"        pm.expect(email.Email).to.equal(\"*@test.com\");",
+							"    });",
+							"    pm.test(`Test Export Domain Suppression List Level Working`, function () {",
+							"        pm.expect(email.Time).to.not.equal(\"\");",
+							"    });",
+							"}else{",
+							"    pm.test(`Test Export Domain Suppression List Level Working`, function () {",
+							"        pm.expect(\" \").to.equal(\"Report result not found\");",
+							"    });",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listId\": {{list_level_domain_suppression_list}},\n    \"reportId\": {{Domain_suppression_list_lvl_export_id}},\n    \"userName\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"accountCode\": \"{{account_code}}\",\n    \"apiDomain\": \"{{api_domain}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/export_report",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"export_report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Export Result Global Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = Object.entries(jsonData)",
+							"    var email = data[0][1]",
+							"    pm.test(`Test Export Domain Suppression Global Level Working`, function () {",
+							"        pm.expect(email.Email).to.equal(\"*@ymail.com\");",
+							"    });",
+							"    pm.test(`Test Export Domain Suppression Global Level Working`, function () {",
+							"        pm.expect(email.Time).to.not.equal(\"\");",
+							"    });",
+							"}else{",
+							"    pm.test(`Test Export Domain Suppression Global Level Working`, function () {",
+							"        pm.expect(\" \").to.equal(\"Report result not found\");",
+							"    });",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listId\": {{global_level_domain_suppression_list}},\n    \"reportId\": {{Domain_suppression_global_lvl_export_id}},\n    \"userName\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"accountCode\": \"{{account_code}}\",\n    \"apiDomain\": \"{{api_domain}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/export_report",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"export_report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Export Result Campaign Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    var data = Object.entries(jsonData)",
+							"    var email = data[0][1]",
+							"    pm.test(`Test Export Domain Suppression Campaign Level Working`, function () {",
+							"        pm.expect(email.Email).to.equal(\"*@abc.com\");",
+							"    });",
+							"    pm.test(`Test Export Domain Suppression Campaign Level Working`, function () {",
+							"        pm.expect(email.Time).to.not.equal(\"\");",
+							"    });",
+							"}else{",
+							"    pm.test(`Test Export Domain Suppression Campaign Level Working`, function () {",
+							"        pm.expect(\" \").to.equal(\"Report result not found\");",
+							"    });",
+							"}",
+							"pm.globals.unset(\"Domain_suppression_campaign_lvl_export_id\")",
+							"pm.globals.unset(\"Domain_suppression_list_lvl_export_id\")",
+							"pm.globals.unset(\"Domain_suppression_global_lvl_export_id\") "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listId\": {{campaign_level_domain_suppression_list}},\n    \"reportId\": {{Domain_suppression_campaign_lvl_export_id}},\n    \"userName\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"accountCode\": \"{{account_code}}\",\n    \"apiDomain\": \"{{api_domain}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/export_report",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"export_report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

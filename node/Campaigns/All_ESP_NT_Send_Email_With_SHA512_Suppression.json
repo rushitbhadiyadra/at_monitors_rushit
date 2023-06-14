@@ -1,0 +1,607 @@
+{
+	"info": {
+		"_postman_id": "4afff510-1fac-4139-a1ea-48b8d5cbb805",
+		"name": "All_ESP_NT_Send_Email_With_SHA512_Suppression",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"rc_sha512_suppression_list1@hoohem.com\",\n        \"rc_sha512_suppression_list2@hoohem.com\",\n        \"rc_sha512_suppression_list3@hoohem.com\",\n        \"rc_sha512_suppression_list4@hoohem.com\",\n        \"rc_sha512_suppression_list5@hoohem.com\",\n        \"rc_sha512_suppression_list6@hoohem.com\",\n        \"rc_sha512_suppression_list7@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"   var jsonData = pm.response.json();",
+							"   pm.test(\"Test Notify Transactional Send Email Campaign Level With SHA512 Suppression\", function () {",
+							"      pm.expect(jsonData.payload.suppressed.includes(\"rc_sha512_suppression_list1@hoohem.com\")).to.eql(true);",
+							"      pm.expect(jsonData.payload.suppressed.includes(\"rc_sha512_suppression_list2@hoohem.com\")).to.eql(true);",
+							"   });",
+							"",
+							"  pm.test(\"Test Notify Transactional Send Email List Level With SHA512 Suppression\", function () {",
+							"      pm.expect(jsonData.payload.suppressed.includes(\"rc_sha512_suppression_list3@hoohem.com\")).to.eql(true);",
+							"      pm.expect(jsonData.payload.suppressed.includes(\"rc_sha512_suppression_list4@hoohem.com\")).to.eql(true);",
+							"  });",
+							"",
+							"  pm.test(\"Test Notify Transactional Send Email Global Level With SHA512 Suppression\", function () {",
+							"      pm.expect(jsonData.payload.suppressed.includes(\"rc_sha512_suppression_list5@hoohem.com\")).to.eql(true);",
+							"      pm.expect(jsonData.payload.suppressed.includes(\"rc_sha512_suppression_list6@hoohem.com\")).to.eql(true);",
+							"  });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\"rc_sha512_suppression_list1@hoohem.com\",\n        \"rc_sha512_suppression_list2@hoohem.com\",\n        \"rc_sha512_suppression_list3@hoohem.com\",\n        \"rc_sha512_suppression_list4@hoohem.com\",\n        \"rc_sha512_suppression_list5@hoohem.com\",\n        \"rc_sha512_suppression_list6@hoohem.com\",\n        \"rc_sha512_suppression_list7@hoohem.com\"],\n    \"email_message_id\": {{msg_id_nt_email_rc_suppression}},\n\t\"check_global_and_list_suppression\": true,\n    \"campaign_suppression_list_ids\": [\"{{campaign_level_sha512_suppression_list}}\"],\n\t\"distribution\": [{\n    \t\"esp_connection_id\": {{connectionId}},\n    \t\"domain\": \"default\"\n\t}]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"        pm.test(`Test Notify Transactional Send Email Campaign,List,Global Level With SHA512 Suppression`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"    }); ",
+							"} else {",
+							"    pm.test(`Test Notify Transactional Send Email Campaign Level With SHA512 Suppression`, function() {",
+							"        pm.expect(\"\").to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list7@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":400000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Notify Transactional Send Email Campaign Level With SHA512 Suppression`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list1@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Notify Transactional Send Email Campaign Level With SHA512 Suppression List`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list2@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Notify Transactional Send Email List Level With SHA512 Suppression`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list3@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Notify Transactional Send Email List Level With SHA512 Suppression`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list4@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"        var htmlText = jsonData.html;",
+							"        pm.test(`Test Notify Transactional Send Email Global Level With SHA512 Suppression`, function() {",
+							"            pm.expect(\"\").to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"        }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list5@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Suppression Mail7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    pm.test(`Test Notify Transactional Send Email Global Level With SHA512 Suppression`, function() {",
+							"        pm.expect(\"\").to.equal(\"Test All Esps Notify Transactional Suppression message-\"+ pm.globals.get(\"connectionId\"));",
+							"    }); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"rc_sha512_suppression_list6@hoohem.com\",\n\t\"subject\":\"Test All Esps Notify Transactional Suppression message-{{connectionId}}\",\n\t\"timeout\":30000\n}\n"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

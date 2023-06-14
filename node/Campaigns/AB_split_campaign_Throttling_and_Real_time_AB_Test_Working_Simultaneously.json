@@ -1,0 +1,942 @@
+{
+	"info": {
+		"_postman_id": "921f639f-5204-4b1b-8a72-acd8b78d529d",
+		"name": "AB_split_campaign_Throttling_and_Real_time_AB_Test_Working_Simultaneously",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Read_mail_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0\r",
+							"if (pm.response.code == 200) {\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB split campaign with real time ab option is successfully running\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Create_contacts\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_split_1@hoohem.com\",\r\n    \"subject\":\"Ab split with real time ab option email-{{phoenix_connection_id}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code == 200) {\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB split campaign with real time ab option is successfully running\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Create_contacts\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_split_2@hoohem.com\",\r\n    \"subject\":\"Ab split with real time ab option email-{{phoenix_connection_id}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code == 200) {\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB split campaign with real time ab option is successfully running\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Create_contacts\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_split_3hoohem.com\",\r\n    \"subject\":\"Ab split with real time ab option email-{{phoenix_connection_id}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code == 200) {\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB split campaign with real time ab option is successfully running\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Create_contacts\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_split_4@hoohem.com\",\r\n    \"subject\":\"Ab split with real time ab option email-{{phoenix_connection_id}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code == 200) {\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB split campaign with real time ab option is successfully running\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"AB split campaign with real time ab option is successfully running\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_split_5@hoohem.com\",\r\n    \"subject\":\"Ab split with real time ab option email-{{phoenix_connection_id}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_contacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"count\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"email\": \"ab_split_1@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"ab_split_2@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"ab_split_3@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"ab_split_4@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"ab_split_5@hoohem.com\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_ab_split}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_ab_split}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 100",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_old_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData= pm.response.json()\r",
+							"var segment=jsonData.payload\r",
+							"for(i=0; i < segment.length; i++)\r",
+							"{\r",
+							"     if(segment[i].name === \"AB split campaign with real time option-\" +pm.environment.get(\"phoenix_connection_id\") )\r",
+							"     {\r",
+							"        pm.globals.set(\"ab_split_campaign_with_real_time_segment\",segment[i].id)\r",
+							"        postman.setNextRequest(\"Create_send_ab_winner_campaign\")\r",
+							"     }\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_ab_split}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_ab_split}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json()\r",
+							"var segment=jsonData.payload.id\r",
+							"pm.globals.set(\"ab_split_campaign_with_real_time_segment\",segment)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"AB split campaign with real time option-{{phoenix_connection_id}}\",\r\n   \"type\":\"Active\",\r\n   \"description\":\"AB split campaign with real time option\",\r\n   \"criteria\":[\r\n      {\r\n         \"field_id\":{{list_field_email_id_ab_split}},\r\n         \"type\":\"email\",\r\n         \"position\":0,\r\n         \"operator\":\"=\",\r\n         \"operand\":[\r\n            \"ab_split_1@hoohem.com\",\r\n            \"ab_split_2@hoohem.com\",\r\n            \"ab_split_3@hoohem.com\",\r\n            \"ab_split_4@hoohem.com\",\r\n            \"ab_split_5@hoohem.com\"\r\n         ],\r\n         \"condition\":\"and\"\r\n      }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_ab_split}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_ab_split}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_send_ab_winner_campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30); "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"if (pm.response.code == 200) {\r",
+							"    var name = jsonData.payload.name\r",
+							"    pm.test(\"AB split campaign with real time ab option is successfully saved\", function () {\r",
+							"        pm.expect(name).to.equal(\"AB split campaign with real time AB option\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"AB split campaign with real time ab option is successfully saved\", function () {\r",
+							"        pm.expect(name).to.equal(\"AB split campaign with real time AB option\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"AB split campaign with real time AB option\",\r\n    \"type\": \"split\",\r\n    \"list_id\": {{list_id_ab_split}},\r\n    \"split_type\": \"email\",\r\n    \"email_message\": [\r\n        {{ab_split_with_real_time_ab_mail_id}},\r\n        {{ab_split_common_mail_id}}\r\n    ],\r\n    \"segments\": [\r\n        {{ab_split_campaign_with_real_time_segment}}\r\n    ],\r\n    \"distribution\": [\r\n        {\r\n            \"esp_connection_id\": {{phoenix_connection_id}},\r\n            \"percent\": \"100\"\r\n        }\r\n    ],\r\n    \"time_to_send_config\": {\r\n        \"delivery_timing_type\": \"schedule_date\"\r\n    },\r\n    \"schedule_date\": {{time_30}},\r\n    \"notify_onlaunch\": \"0\",\r\n    \"notify_oncomplete\": \"0\",\r\n    \"has_winner_settings\": true,\r\n    \"winner_is_quota_percent\": \"0\",\r\n    \"winner_quota_value\": \"2\",\r\n    \"winner_conversion_field\": \"unique_opens\",\r\n    \"winner_send_after_hours\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_ab_split}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_ab_split}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"if (jsonData.length > 0) {\r",
+							"    for (i = 0; jsonData.length > i; i++) {\r",
+							"        var link = jsonData[i].HTMLOpenLinks[0]\r",
+							"        var subject = jsonData[i].subject\r",
+							"    }\r",
+							"    pm.globals.set(\"email_link\", link)\r",
+							"    pm.test(\"Test ab split mail\", function () {\r",
+							"        pm.expect(subject).to.equal(\"Ab split with real time ab option email-\" + pm.environment.get(\"phoenix_connection_id\"));\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Test winner mail\", function () {\r",
+							"        pm.expect(subject).to.equal(\"Ab split with real time ab option email-\" + pm.environment.get(\"phoenix_connection_id\"));\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Ab split with real time ab option email-{{phoenix_connection_id}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Ab split with real time ab option email-{{phoenix_connection_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open_email_link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_phoenix}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_phoenix}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{email_link}}",
+					"host": [
+						"{{email_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ab_split_campaign_with_real_time_segment\")\r",
+							"pm.globals.unset(\"email_link\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Ab split with real time ab option email-{{phoenix_connection_id}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Ab split with real time ab option email-{{phoenix_connection_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

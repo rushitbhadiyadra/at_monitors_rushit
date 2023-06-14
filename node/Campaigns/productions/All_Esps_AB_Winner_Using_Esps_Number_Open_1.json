@@ -1,0 +1,906 @@
+{
+	"info": {
+		"_postman_id": "338b3d53-137f-484c-8846-6704b073be93",
+		"name": "All_Esps_AB_Winner_Using_Esps_Number_Open_1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"ae_ab_win_multi_esp1@hoohem.com\",\n        \"ae_ab_win_multi_esp2@hoohem.com\",\n        \"ae_ab_win_multi_esp3@hoohem.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get variable from webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_ab_winner_multiple_esp\", jsonData.campaign_id_ab_winner_multiple_esp);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-All_Esps_AB_Winner_Using_Esps_Number_Open_1-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-All_Esps_AB_Winner_Using_Esps_Number_Open_1-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campaign Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    if((jsonData.payload) instanceof Array)",
+							"    {",
+							"        postman.setNextRequest('Clear_webhook');",
+							"    }",
+							"    else",
+							"    {",
+							"        var tableHtml = \"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'></head><style type='text/css'>td{width:20% !important;}</style><body><div class='container'><h2>Campaing Test Cases Detail</h2><div style='font-size: 16px;'><span style='background-color: red;color: white;padding:5px;'><b>Message</b></span><b><span style='color: blue;'>&nbsp;&nbsp;&nbsp;&nbsp;\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</span></b></div><br><table border='1' style='width: 80%;'><tbody>\"",
+							"        if(jsonData.payload.account_id !== undefined && jsonData.payload.account_id !== null){",
+							"        tableHtml += \"<tr><td style='width: 20%;'>Account Id</td><td style='width: 50%;'>\"+jsonData.payload.account_id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.list_id !== undefined && jsonData.payload.list_id !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>List Id</td><td style='width: 50%;'>\"+jsonData.payload.list_id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.id !== undefined && jsonData.payload.id !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaign Id</td><td style='width: 50%;'>\"+jsonData.payload.id+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.name !== undefined && jsonData.payload.name !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Campaing Name</td><td style='width: 50%;'>\"+jsonData.payload.name+\"</td></tr>\"",
+							"        }",
+							"        if(jsonData.payload.schedule_date !== undefined && jsonData.payload.schedule_date !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Schedule Date</td><td style='width: 50%;'>\"+(new Date(jsonData.payload.schedule_date*1000)).toUTCString()+\"</td></tr>\"",
+							"        }",
+							"        var connectionName='';",
+							"        for(var i=0;i<jsonData.payload.distribution.length;i++)",
+							"        {",
+							"            if(jsonData.payload.distribution[i]['esp_id'] !== undefined && jsonData.payload.distribution[i]['esp_id'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_id']+\"</td></tr>\"",
+							"            }",
+							"            if(jsonData.payload.distribution[i]['name'] !== undefined && jsonData.payload.distribution[i]['name'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Name \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['name']+\"</td></tr>\"",
+							"            }",
+							"            connectionName += jsonData.payload.distribution[i]['name']+\",\";",
+							"            if(jsonData.payload.distribution[i]['esp_connection_id'] !== undefined && jsonData.payload.distribution[i]['esp_connection_id'] !== null){",
+							"            tableHtml +=\"<tr><td style='width: 20%;'>ESP Connection Id \"+ (i+1) +\"</td><td style='width: 50%;'>\"+jsonData.payload.distribution[i]['esp_connection_id']+\"</td></tr>\"",
+							"            }",
+							"        }",
+							"        if(jsonData.payload.status_desc !== undefined && jsonData.payload.status_desc !== null){",
+							"        tableHtml +=\"<tr><td style='width: 20%;'>Status</td><td style='width: 50%;'>\"+jsonData.payload.status_desc+\"</td></tr>\"",
+							"        }",
+							"        // if(jsonData.payload.comment !== undefined && jsonData.payload.comment !== null){",
+							"        // tableHtml +=\"<tr><td style='width: 20%;'>Message</td><td style='width: 50%;'>\"+jsonData.payload.comment.replace(/(<([^>]+)>)/gi, '')+\"</td></tr></tbody></table></div></body></html>\"",
+							"        // }",
+							"        tableHtml +=\"</tbody></table></div></body></html>\"",
+							"        pm.globals.set(\"html_code\", tableHtml);",
+							"        if(jsonData.payload.status_desc=='Completed with errors' || jsonData.payload.status_desc=='Error')",
+							"        {",
+							"            pm.globals.set(\"html_code\", tableHtml);",
+							"            connectionName =connectionName.slice(0, -1);",
+							"            pm.globals.set(\"esp_name\", connectionName);",
+							"        }",
+							"        else",
+							"        {",
+							"            postman.setNextRequest('Clear_webhook');",
+							"        }",
+							"    }",
+							"}else{",
+							"    postman.setNextRequest('Clear_webhook');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings/{{campaign_id_ab_winner_multiple_esp}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings",
+						"{{campaign_id_ab_winner_multiple_esp}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Error Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        {{campaign_error_recipients}}\n    ],\n    \"email_message\": {\n        \"subject\": \"Error-Campaign Test Cases Detail with {{esp_name}} on {{ongage_env}}\",\n        \"content_html\": \"{{html_code}}\",\n        \"addresses\": \n        [{\n            \"from_name\": \"{{system_field_from_name-mailgun}}\",\n            \"from_address\": \"{{system_field_from_address-mailgun}}\",\n            \"reply_address\": \"{{system_field_from_address-mailgun}}\",\n            \"esp_connection_id\": {{connectionId-mailgun}}\n        }]\n    },\n  \"distribution\": [\n   {\n    \"esp_connection_id\": \"{{connectionId-mailgun}}\",\n    \"domain\": \"default\",\n    \"percent\": 100\n   }\n  ]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-All_Esps_AB_Winner_Using_Esps_Number_Open_1-{{connectionId}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-All_Esps_AB_Winner_Using_Esps_Number_Open_1-{{connectionId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var count = 0;",
+							"if(pm.response.code === 200){",
+							"    count = count + 1;",
+							"     pm.test(\"Test All ESP AB-Winner Multiple ESP Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"AB-Split Multiple ESP Test-\"+pm.globals.get(\"connectionId\")+\"-\"+pm.globals.get(\"campaign_id_ab_winner_multiple_esp\"));",
+							"",
+							"    });",
+							"    postman.setNextRequest(\"Create-and-send-campaign\")",
+							"}",
+							"pm.globals.set(\"count\", count);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"AB-Split Multiple ESP Test-{{connectionId}}-{{campaign_id_ab_winner_multiple_esp}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var count = pm.globals.get(\"count\");",
+							"if(pm.response.code === 200){",
+							"    count = count + 1;",
+							"     pm.test(\"Test All ESP AB-Winner Multiple ESP Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"AB-Split Multiple ESP Test-\"+pm.globals.get(\"connectionId\")+\"-\"+pm.globals.get(\"campaign_id_ab_winner_multiple_esp\"));",
+							"",
+							"    });",
+							"}else{",
+							"    pm.test(\"Test All ESP AB-Winner Multiple ESP Test is working\", function() {",
+							"        pm.expect(\"\").to.eql(\"Mail not received\");",
+							"    });",
+							"}",
+							"pm.globals.set(\"count\", count);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"subject\": \"AB-Split Multiple ESP Test-{{connectionId}}-{{campaign_id_ab_winner_multiple_esp}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-and-send-campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_ab_winner_multiple_esp\", jsonData.payload.id);",
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"All Esp AB-Winner using Multipal Esp-{{connectionId}}\",\n\t\"type\": \"split\",\n\t\"list_id\": {{list_id}}, \n    \"split_type\": \"esp\",\n    \"esps\":[\n\t\"{{connectionId}}\",\n\t\"{{connectionId1}}\"\n\t],\n    \"email_message\": [ \"{{msg_id_ae_ab_split_multi_esp}}\" ],\n    \"segments\": [ \"{{all_esp_segment_id_ab_winner_multi_esp}}\" ],\n    \"distribution\": [\n    \t{\n            \"esp_connection_id\":{{connectionId}},\n            \"percent\":\"50\"\n    \t},\n    \t{\n            \"esp_connection_id\":{{connectionId1}},\n            \"percent\":\"50\"\n    \t}\n    ],\n    \"schedule_date\": {{time_30}},\n    \"notify_onlaunch\": \"0\",\n    \"notify_onfaile d\": \"0\",\n    \"notify_oncomplete\": \"0\",\n\t\"has_winner_settings\":true,\n\t\"winner_is_quota_percent\":\"0\",\n\t\"winner_quota_value\":\"1\",\n\t\"winner_conversion_field\":\"unique_opens\",\n\t\"winner_send_after_hours\":\"1\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var count = 0;",
+							"if(pm.response.code === 200){",
+							"    count = count + 1;",
+							"    pm.globals.set(\"ae_ab_win_esp_open_link\"+connectionId, jsonData.HTMLOpenLinks[0]);",
+							"     pm.test(\"Test All ESP AB-Winner Multiple ESP Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"AB-Split Multiple ESP Test-\"+pm.globals.get(\"connectionId\")+\"-\"+pm.globals.get(\"campaign_id_ab_winner_multiple_esp\"));",
+							"",
+							"    });",
+							"    postman.setNextRequest(\"Open-Mail\")",
+							"}",
+							"pm.globals.set(\"count\", count);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"AB-Split Multiple ESP Test-{{connectionId}}-{{campaign_id_ab_winner_multiple_esp}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var count = pm.globals.get(\"count\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    count = count + 1;",
+							"    pm.globals.set(\"ae_ab_win_esp_open_link\"+connectionId, jsonData.HTMLOpenLinks[0]);",
+							"     pm.test(\"Test All ESP AB-Winner Multiple ESP Test is working\", function() {",
+							"        pm.expect(jsonData.subject).to.eql(\"AB-Split Multiple ESP Test-\"+pm.globals.get(\"connectionId\")+\"-\"+pm.globals.get(\"campaign_id_ab_winner_multiple_esp\"));",
+							"",
+							"    });",
+							"}else{",
+							"    pm.test(\"Test All ESP AB-Winner Multiple ESP Test is working\", function() {",
+							"        pm.expect(\"\").to.eql(\"Mail not received\");",
+							"    });",
+							"}",
+							"pm.globals.set(\"count\", count);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"AB-Split Multiple ESP Test-{{connectionId}}-{{campaign_id_ab_winner_multiple_esp}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open-Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ae_ab_win_esp_open_link\"+pm.globals.get(\"connectionId\"));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ae_ab_win_esp_open_link{{connectionId}}}}",
+					"host": [
+						"{{ae_ab_win_esp_open_link{{connectionId}}}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set variable in webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"campaign_id_ab_winner_multiple_esp\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"campaign_id_ab_winner_multiple_esp\":\"{{campaign_id_ab_winner_multiple_esp}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-All_Esps_AB_Winner_Using_Esps_Number_Open_1-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"{{env}}-All_Esps_AB_Winner_Using_Esps_Number_Open_1-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

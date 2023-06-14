@@ -1,0 +1,1263 @@
+{
+	"info": {
+		"_postman_id": "1a69ec70-3b37-4b7f-8dcf-1af06e4523c5",
+		"name": "All_ESPs_AB_Split_Feed_Operator_OcxNow_1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Change contact status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"list_id\": {{list_id}},\n \"change_to\":\"resubscribe\",\n \"emails\": [\"all_esp_ab_split4@hoohem.com\",\"all_esp_ab_split5@hoohem.com\",\"all_esp_ab_split6@hoohem.com\"]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete mail by id and subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Dynamic Ocx Feed Html-{{connectionId}}-{{env}}\",\n    \"timeout\": 6000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete mail by id and subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Ocx Feed Html-{{connectionId}}-{{env}}\",\n    \"timeout\": 6000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete mail by id and subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Ocx Feed-{{connectionId}}-{{env}}\",\n    \"timeout\": 6000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"campaign_id_ab_split\", jsonData.payload.id);",
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"AB-Split FIeld, Function, Feed\",\n\t\"type\": \"split\",\n\t\"list_id\": {{list_id}}, \n    \"split_type\": \"email\",\n    \"email_message\": [ \n    \t\"{{msg_id_ab_split_send_dynamic_ocx_feed_html}}\",\n    \t\"{{msg_id_ab_split_send_ocx_feed_html}}\",\n    \t\"{{msg_id_ab_split_send_ocx_feed}}\" ],\n    \"segments\": [ \"{{all_esps_ab_split_segment_id_feed_operator_ocxnow}}\" ],\n    \"distribution\": [\n    \t{\n            \"esp_connection_id\":{{connectionId}},\n            \"percent\":\"100\"\n    \t}\n    ], \n    \"schedule_date\": {{time_30}},\n    \"notify_onlaunch\": \"0\",\n    \"notify_onfaile d\": \"0\",\n    \"notify_oncomplete\": \"0\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"ab_split_list_field_address\", jsonData.payload.address);",
+							"pm.globals.set(\"ab_split_list_field_first_name\", jsonData.payload.first_name);",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/all_esp_ab_split4@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"all_esp_ab_split4@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test-Cases-dynamic-ocx-feed-html-1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedDynamicHtml = xml2Json(fieldValue[1])",
+							"    ",
+							"    pm.test(`Test AB Split in ocx_feed_dynamic_html is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[0]).to.equal(\"Hotel name\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[1]).to.equal(\"Hotel location\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[2]).to.equal(\"First Name\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[3]).to.equal(\"address\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[0]).to.equal(\"BVN\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[1]).to.equal(\"10\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[2]).to.equal(pm.globals.get(\"ab_split_list_field_first_name\"));",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[3]).to.equal(pm.globals.get(\"ab_split_list_field_address\"));",
+							"    });",
+							"",
+							"        pm.globals.unset(\"ab_split_list_field_first_name\");",
+							"        pm.globals.unset(\"ab_split_list_field_address\");",
+							"    postman.setNextRequest(\"Test-Ocx-Feed-HTML-1\")",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Dynamic Ocx Feed Html-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test-Cases-dynamic-ocx-feed-html-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedDynamicHtml = xml2Json(fieldValue[1])",
+							"  ",
+							"    pm.test(`Test AB Split in ocx_feed_dynamic_html is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[0]).to.equal(\"Hotel name\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[1]).to.equal(\"Hotel location\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[2]).to.equal(\"First Name\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[0].td[3]).to.equal(\"address\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[0]).to.equal(\"BVN\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[1]).to.equal(\"10\");",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[2]).to.equal(pm.globals.get(\"ab_split_list_field_first_name\"));",
+							"        pm.expect(ocxFeedDynamicHtml.div.table.tr[1].td[3]).to.equal(pm.globals.get(\"ab_split_list_field_address\"));",
+							"        ",
+							"    });",
+							"        pm.globals.unset(\"ab_split_list_field_first_name\");",
+							"        pm.globals.unset(\"ab_split_list_field_address\");",
+							"}else {",
+							"    pm.test(\"Dynamic Ocx Feed HTML Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Dynamic Ocx Feed Html-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test-Ocx-Feed-HTML-1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedHtml = xml2Json(fieldValue[1])",
+							"",
+							"    pm.test(`Test AB Split in ocx_feed_html is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[0]).to.equal(\"Hotel name\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[1]).to.equal(\"Hotel location\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[2]).to.equal(\"First Name\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[3]).to.equal(\"address\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[0]).to.equal(\"BVN\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[1]).to.equal(\"Ahmedabad\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[2]).to.equal(\"Ongage\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[3]).to.equal(\"Ahmedabad\");",
+							"    });",
+							"    postman.setNextRequest(\"Test-Ocx-Feed-1\")",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Ocx Feed Html-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test-Ocx-Feed-HTML-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    const ocxFeedHtml = xml2Json(fieldValue[1])",
+							"    pm.test(`Test AB Split in ocx_feed_html is working Time : ${jsonData.date}`, function() {",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[0]).to.equal(\"Hotel name\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[1]).to.equal(\"Hotel location\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[2]).to.equal(\"First Name\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[0].td[3]).to.equal(\"address\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[0]).to.equal(\"BVN\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[1]).to.equal(\"Ahmedabad\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[2]).to.equal(\"Ongage\");",
+							"        pm.expect(ocxFeedHtml.div.table.tr[1].td[3]).to.equal(\"Ahmedabad\");",
+							"    });",
+							"}else {",
+							"    pm.test(\"Ocx Feed HTML Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Ocx Feed Html-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test-Ocx-Feed-1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    var ocxFeedData = xml2Json(fieldValue[1])",
+							"    pm.test(`Test AB Split in ocx_feed is working Time : ${jsonData.date}`, function () { ",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[0]).to.equal(\"Hotel Name\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[1]).to.equal(\"Location\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[2]).to.equal(\"Link\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[0]).to.equal(\"Regular\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[1]).to.equal(\"India\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[2]).to.equal(\"www.test.com\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[0]).to.equal(\"Suit\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[1]).to.equal(\"Rajasthan\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[2]).to.equal(\"www.google.com\");",
+							"    });",
+							"    postman.setNextRequest(null)",
+							"}",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Ocx Feed-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test-Ocx-Feed-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"",
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    var ocxFeedData = xml2Json(fieldValue[1])",
+							"    pm.test(`Test AB Split in ocx_feed is working Time : ${jsonData.date}`, function () { ",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[0]).to.equal(\"Hotel Name\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[1]).to.equal(\"Location\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[0].td[2]).to.equal(\"Link\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[0]).to.equal(\"Regular\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[1]).to.equal(\"India\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[1].td[2]).to.equal(\"www.test.com\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[0]).to.equal(\"Suit\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[1]).to.equal(\"Rajasthan\");",
+							"        pm.expect(ocxFeedData.table.tbody.tr[2].td[2]).to.equal(\"www.google.com\");",
+							"    });",
+							"}else {",
+							"    pm.test(\"Ocx Feed HTML Mail not received\", function () { ",
+							"        pm.expect(\"\").to.equal(\"Mail not received\");",
+							"    });",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\": \"Test AB-Split Send Message Id Ocx Feed-{{connectionId}}-{{env}}\",\n    \"timeout\": 60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLastMailBySubject",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLastMailBySubject"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

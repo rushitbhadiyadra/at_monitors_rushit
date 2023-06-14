@@ -1,0 +1,754 @@
+{
+	"info": {
+		"_postman_id": "632800ed-a3b5-4587-be8f-bf8d731c5e62",
+		"name": "Verify_API_call_for_export_csv_with_link",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Create_contacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"csv_link@hoohem.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_old_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if (jsonData.payload.length > 0) {",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name == \"Segment for API call for Export CSV with link\") {",
+							"            pm.globals.set(\"Api_call_for_export_csv_with_link_segment_id\", segment.id);",
+							"            postman.setNextRequest(\"Send_mail\")",
+							"        }",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=400",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "400"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json() \r",
+							"pm.globals.set(\"Api_call_for_export_csv_with_link_segment_id\",jsonData.payload.id) "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"Segment for API call for Export CSV with link\" ,\r\n   \"type\":\"regular\",\r\n   \"description\":\"segment for API call for Export CSV with link\",\r\n   \"criteria\":[\r\n      {\r\n         \"field_id\":{{list_field_email_id}},\r\n         \"type\":\"email\",\r\n         \"position\":0,\r\n         \"operator\":\"=\",\r\n         \"operand\":[\r\n            \"csv_link@hoohem.com\"\r\n         ],\r\n         \"condition\":\"and\"\r\n      }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send_mail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.globals.set(\"Api_call_for_export_csv_with_link_campaign_id\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"Campaign for API call for Export CSV with link\",\r\n   \"description\": \"Campaign for API call for Export CSV with link\",\r\n   \"email_message\": {{all_esp_ab_winner_common_message}},\r\n   \"segments\": [{{Api_call_for_export_csv_with_link_segment_id}}],\r\n   \"distribution\": [\r\n     {\r\n            \"esp_connection_id\": {{connectionId}} ,\r\n            \"percent\": 100\r\n     }\r\n   ],\r\n   \"schedule_date\": {{time_30}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=400",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "400"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"csv_link@hoohem.com\",\r\n    \"subject\": \"Test AB Winner all esp Common Message-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 1800000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get link for export csv",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const Ytime = Math.round((new Date()).getTime() / 1000) -24 * 3600 \r",
+							"const Ttime = Math.round((new Date()).getTime() / 1000) \r",
+							"if(Ytime === 0){\r",
+							"    pm.globals.set(\"yesterday_time\", 24);\r",
+							"}else{\r",
+							"    pm.globals.set(\"yesterday_time\", Ytime);\r",
+							"}\r",
+							"if(Ttime === 0){\r",
+							"    pm.globals.set(\"today_time\", 24);\r",
+							"}else{\r",
+							"    pm.globals.set(\"today_time\", Ttime);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.text()\r",
+							"    pm.test(\"API call for Export CSV with link is working\", function () {\r",
+							"        pm.expect(jsonData).to.include(pm.globals.get(\"Api_call_for_export_csv_with_link_campaign_id\"));\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"API call for Export CSV with link is working\", function () {\r",
+							"        pm.expect(jsonData).to.include(pm.globals.get(\"Api_call_for_export_csv_with_link_campaign_id\"));\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.unset(\"yesterday_time\")\r",
+							"pm.globals.unset(\"today_time\")\r",
+							"pm.globals.unset(\"Api_call_for_export_csv_with_link_segment_id\")\r",
+							"pm.globals.unset(\"Api_call_for_export_csv_with_link_campaign_id\")\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/reports/mailing_links_csv?format=csv&limit=40000&columns=[{\"fld\":\"mailing_name\",\"name\":\"Campaign Name\",\"type\":\"text\"},{\"fld\":\"mailing_id\",\"name\":\"CID\",\"type\":\"\"},{\"fld\":\"delivery_timestamp\",\"name\":\"Send Date\",\"type\":\"datetime\"},{\"fld\":\"stats_date\",\"name\":\"Stats Date\",\"type\":\"datetime\"},{\"fld\":\"schedule_date\",\"name\":\"Schedule Date\",\"type\":\"datetime\"},{\"fld\":\"targeted\",\"name\":\"Targeted\",\"type\":\"\"},{\"fld\":\"sent\",\"name\":\"Sent\",\"type\":\"\"},{\"fld\":\"success\",\"name\":\"Success\",\"type\":\"\"},{\"fld\":\"soft_bounces\",\"name\":\"Soft Bounces\",\"type\":\"\"},{\"fld\":\"hard_bounces\",\"name\":\"Hard Bounces\",\"type\":\"\"},{\"fld\":\"failed\",\"name\":\"Failed\",\"type\":\"\"},{\"fld\":\"opens\",\"name\":\"Opens\",\"type\":\"\"},{\"fld\":\"unique_opens\",\"name\":\"Unique Opens\",\"type\":\"\"},{\"fld\":\"clicks\",\"name\":\"Clicks\",\"type\":\"\"},{\"fld\":\"unique_clicks\",\"name\":\"Unique Clickers\",\"type\":\"\"},{\"fld\":\"unsubscribes\",\"name\":\"Unsubscribes\",\"type\":\"\"},{\"fld\":\"complaints\",\"name\":\"Complaints\",\"type\":\"\"},{\"fld\":\"ctr\",\"name\":\"CTR\",\"type\":\"float\"},{\"fld\":\"uctr\",\"name\":\"uCTR\",\"type\":\"float\"},{\"fld\":\"post_back_clicks\",\"name\":\"Post-backs\",\"type\":\"\"}]&csv_title=Aggregate - Campaign&select[]=ctr&select[]=uctr&select[]=mailing_name&select[]=mailing_type&select[]=split_type&select[]=mailing_name_id&select[6][]=MAX(`stats_date`)&select[6][]=stats_date&select[7][]=MAX(`delivery_timestamp`)&select[7][]=delivery_timestamp&select[8][]=schedule_date&select[8][]=schedule_date&select[]=sum(`targeted`)&select[]=sum(`sent`)&select[]=sum(`success`)&select[]=sum(`failed`)&select[]=sum(`opens`)&select[]=sum(`unique_opens`)&select[]=unique_opens_rate&select[]=sum(`unsubscribes`)&select[]=sum(`complaints`)&select[]=sum(`clicks`)&select[]=sum(`unique_clicks`)&select[]=sum(`soft_bounces`)&select[]=sum(`hard_bounces`)&select[]=mailing_id&select[]=sum(`post_back_clicks`)&group[]=mailing_id&order[0][]=delivery_timestamp&order[0][]=desc&filter[0][]=email_message_type&filter[0][]==&filter[0][]=email_message&filter[1][]=stats_date&filter[1][]=>=&filter[1][]={{yesterday_time}}&filter[2][]=stats_date&filter[2][]=<=&filter[2][]={{today_time}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"reports",
+						"mailing_links_csv"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "csv"
+						},
+						{
+							"key": "limit",
+							"value": "40000"
+						},
+						{
+							"key": "columns",
+							"value": "[{\"fld\":\"mailing_name\",\"name\":\"Campaign Name\",\"type\":\"text\"},{\"fld\":\"mailing_id\",\"name\":\"CID\",\"type\":\"\"},{\"fld\":\"delivery_timestamp\",\"name\":\"Send Date\",\"type\":\"datetime\"},{\"fld\":\"stats_date\",\"name\":\"Stats Date\",\"type\":\"datetime\"},{\"fld\":\"schedule_date\",\"name\":\"Schedule Date\",\"type\":\"datetime\"},{\"fld\":\"targeted\",\"name\":\"Targeted\",\"type\":\"\"},{\"fld\":\"sent\",\"name\":\"Sent\",\"type\":\"\"},{\"fld\":\"success\",\"name\":\"Success\",\"type\":\"\"},{\"fld\":\"soft_bounces\",\"name\":\"Soft Bounces\",\"type\":\"\"},{\"fld\":\"hard_bounces\",\"name\":\"Hard Bounces\",\"type\":\"\"},{\"fld\":\"failed\",\"name\":\"Failed\",\"type\":\"\"},{\"fld\":\"opens\",\"name\":\"Opens\",\"type\":\"\"},{\"fld\":\"unique_opens\",\"name\":\"Unique Opens\",\"type\":\"\"},{\"fld\":\"clicks\",\"name\":\"Clicks\",\"type\":\"\"},{\"fld\":\"unique_clicks\",\"name\":\"Unique Clickers\",\"type\":\"\"},{\"fld\":\"unsubscribes\",\"name\":\"Unsubscribes\",\"type\":\"\"},{\"fld\":\"complaints\",\"name\":\"Complaints\",\"type\":\"\"},{\"fld\":\"ctr\",\"name\":\"CTR\",\"type\":\"float\"},{\"fld\":\"uctr\",\"name\":\"uCTR\",\"type\":\"float\"},{\"fld\":\"post_back_clicks\",\"name\":\"Post-backs\",\"type\":\"\"}]"
+						},
+						{
+							"key": "csv_title",
+							"value": "Aggregate - Campaign"
+						},
+						{
+							"key": "select[]",
+							"value": "ctr"
+						},
+						{
+							"key": "select[]",
+							"value": "uctr"
+						},
+						{
+							"key": "select[]",
+							"value": "mailing_name"
+						},
+						{
+							"key": "select[]",
+							"value": "mailing_type"
+						},
+						{
+							"key": "select[]",
+							"value": "split_type"
+						},
+						{
+							"key": "select[]",
+							"value": "mailing_name_id"
+						},
+						{
+							"key": "select[6][]",
+							"value": "MAX(`stats_date`)"
+						},
+						{
+							"key": "select[6][]",
+							"value": "stats_date"
+						},
+						{
+							"key": "select[7][]",
+							"value": "MAX(`delivery_timestamp`)"
+						},
+						{
+							"key": "select[7][]",
+							"value": "delivery_timestamp"
+						},
+						{
+							"key": "select[8][]",
+							"value": "schedule_date"
+						},
+						{
+							"key": "select[8][]",
+							"value": "schedule_date"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`targeted`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`sent`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`success`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`failed`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`opens`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`unique_opens`)"
+						},
+						{
+							"key": "select[]",
+							"value": "unique_opens_rate"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`unsubscribes`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`complaints`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`clicks`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`unique_clicks`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`soft_bounces`)"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`hard_bounces`)"
+						},
+						{
+							"key": "select[]",
+							"value": "mailing_id"
+						},
+						{
+							"key": "select[]",
+							"value": "sum(`post_back_clicks`)"
+						},
+						{
+							"key": "group[]",
+							"value": "mailing_id"
+						},
+						{
+							"key": "order[0][]",
+							"value": "delivery_timestamp"
+						},
+						{
+							"key": "order[0][]",
+							"value": "desc"
+						},
+						{
+							"key": "filter[0][]",
+							"value": "email_message_type"
+						},
+						{
+							"key": "filter[0][]",
+							"value": "="
+						},
+						{
+							"key": "filter[0][]",
+							"value": "email_message"
+						},
+						{
+							"key": "filter[1][]",
+							"value": "stats_date"
+						},
+						{
+							"key": "filter[1][]",
+							"value": ">="
+						},
+						{
+							"key": "filter[1][]",
+							"value": "{{yesterday_time}}"
+						},
+						{
+							"key": "filter[2][]",
+							"value": "stats_date"
+						},
+						{
+							"key": "filter[2][]",
+							"value": "<="
+						},
+						{
+							"key": "filter[2][]",
+							"value": "{{today_time}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,1190 @@
+{
+	"info": {
+		"_postman_id": "5f2751c4-851e-45e4-926b-191d1015d749",
+		"name": "All_Esps_RC_Bounce_Reasons",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Campaigns~098fe162-394f-479e-bfb6-7d510c7daa84/collection/6765444-5f2751c4-851e-45e4-926b-191d1015d749?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"type": "text",
+						"value": "{{username_bounce_reason}}"
+					},
+					{
+						"key": "x_password",
+						"type": "text",
+						"value": "{{password_bounce_reason}}"
+					},
+					{
+						"key": "x_account_code",
+						"type": "text",
+						"value": "{{account_code_bounce_reason}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"pvyes_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"lm_{{connectionId}}@yahoo.com\"\n    },\n    {\n        \"email\": \"csv_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"de_{{connectionId}}@yahoo.com\"\n    },\n    {\n        \"email\": \"nve_{{connectionId}}@rediff.com\"\n    },\n    {\n        \"email\": \"vnkd_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"1bounc_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"emai_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"boune_{{connectionId}}@gmail.com\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change contact status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_bounce_reason}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id_bounce_reason}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"pvyes_{{connectionId}}@gmail.com\",\n        \"lm_{{connectionId}}@yahoo.com\",\n        \"csv_{{connectionId}}@gmail.com\",\n        \"de_{{connectionId}}@yahoo.com\",\n        \"nve_{{connectionId}}@rediff.com\",\n        \"vnkd_{{connectionId}}@gmail.com\",\n        \"1bounc_{{connectionId}}@gmail.com\",\n        \"emai_{{connectionId}}@gmail.com\",\n        \"boune_{{connectionId}}@gmail.com\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get old segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"RC Bounce Reason-\" + pm.globals.get(\"connectionId\")){",
+							"            count = 1",
+							"            pm.globals.set(\"segment_id_rc_bounce_reason\", segment.id);      ",
+							"        }      ",
+							"    }",
+							"}",
+							"if(count===1){",
+							"    console.log(\"Working\")",
+							"    postman.setNextRequest(\"ceate_and_send_campaign\")",
+							"",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_bounce_reason}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"segment_id_rc_bounce_reason\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if (jsonData.metadata.error === false) {",
+							"        pm.globals.set(\"segment_id_rc_bounce_reason\", jsonData.payload.id);",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_bounce_reason}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"RC Bounce Reason-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id_bounce_reason}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"pvyes_{{connectionId}}@gmail.com\",\n                \"lm_{{connectionId}}@yahoo.com\",\n                \"csv_{{connectionId}}@gmail.com\",\n                \"de_{{connectionId}}@yahoo.com\",\n                \"nve_{{connectionId}}@rediff.com\",\n                \"vnkd_{{connectionId}}@gmail.com\",\n                \"1bounc_{{connectionId}}@gmail.com\",\n                \"emai_{{connectionId}}@gmail.com\",\n                \"boune_{{connectionId}}@gmail.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ceate_and_send_campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.globals.unset(\"time_30\");\r",
+							"pm.globals.set(\"rc_maling_id_bounce_reason\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_bounce_reason}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test Regular Campaign Bounce Reason-{{connectionId}}\",\n    \"list_id\": {{list_id_bounce_reason}},\n    \"email_message\": {{all_esp_email_bounce_reason}},\n    \"segments\": [\n        {{segment_id_rc_bounce_reason}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time_30}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Hard Bounce contact activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)\r",
+							"var pre_date = Math.round(today - (24*60*60))\r",
+							"pm.globals.set(\"current_date\",today)\r",
+							"pm.globals.set(\"pre_date\",pre_date) "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"bounce_reason_contact_activity_id\" , jsonData.payload.id);",
+							"pm.globals.unset(\"pre_date\")",
+							"pm.globals.unset(\"current_date\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_bounce_reason}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"RC Hard Bounce Contact activity\",\n    \"include_behavior\": true,\n    \"filters\": {\n        \"type\": \"Active\",\n        \"criteria\": [\n            {\n                \"field_name\": \"sent\",\n                \"type\": \"behavioral\",\n                \"operator\": \"=\",\n                \"operand\": {\n                    \"mailing_ids\": [\n                        {{rc_maling_id_bounce_reason}}\n                    ]\n                },\n                \"condition\": \"and\"\n            }\n        ],\n        \"user_type\": \"Active\",\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    },\n    \"combined_as_and\": true,\n    \"selected_fields\": [\n        \"email\",\n        \"ocx_bounce_reason\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/contact_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"contact_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Activity Result",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if (jsonData.metadata.total != 0) {",
+							"    var reason_ary = [\"5.1.1 (bad destination mailbox address)\", \"5.0.0 (undefined status)\", \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser h3si7931877wrh.326 - gsmtpStatus: 5.1.1:550 5.1.1\", \"[3.0]smtp; 552 1 Requested mail action aborted, mailbox not foundStatus: 5.3.0:mailbox not found\", \"[3.0]smtp; 550 Requested action not taken: mailbox unavailableStatus: 5.3.0:mailbox unavailable\", \"550 [internal] [oob] The response text could not be identified.\", \"550-5.1.1 The email account that you tried to reach does not exist. Please try  550-5.1.1 double-checking the recipient's email address for typos or  550-5.1.1 unnecessary spaces. Learn more at  550 5.1.1  https://support.google.com/mail/?p=NoSuch... - gsmtp\", \"552 1 Requested mail action aborted, mailbox not found\", \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser c4si8994748wri.269 - gsmtpStatus: 5.1.1:550 5.1.1\", \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser b202si8836602wmb.74 - gsmtpStatus: 5.1.1:550 5.1.1\", \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser v5si3019765wrs.380 - gsmtpStatus: 5.1.1:550 5.1.1\", \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser j12si9979809wrd.370 - gsmtpStatus: 5.1.1:550 5.1.1\", \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser s9si8093369wmr.221 - gsmtpStatus: 5.1.1:550 5.1.1\",\"4.4.7 (delivery time expired)\"]",
+							"    var ary_data = reason_ary[2].split(\"https\");",
+							"    console.log(ary_data)",
+							"    if (jsonData.payload == null) {",
+							"        pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"            pm.expect(\" \").to.eql(\"Report not found\");",
+							"        });",
+							"    }",
+							"    if (jsonData.payload.length > 0) {",
+							"        for (var payload of jsonData.payload) {",
+							"            if (payload.ocx_bounce_reason == \"5.1.1 (bad destination mailbox address)\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[0]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"5.0.0 (undefined status)\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[1]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser h3si7931877wrh.326 - gsmtpStatus: 5.1.1:550 5.1.1\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[2]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"[3.0]smtp; 552 1 Requested mail action aborted, mailbox not foundStatus: 5.3.0:mailbox not found\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[3]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"[3.0]smtp; 550 Requested action not taken: mailbox unavailableStatus: 5.3.0:mailbox unavailable\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[4]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"550 [internal] [oob] The response text could not be identified.\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[5]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"550-5.1.1 The email account that you tried to reach does not exist. Please try  550-5.1.1 double-checking the recipient's email address for typos or  550-5.1.1 unnecessary spaces. Learn more at  550 5.1.1  https://support.google.com/mail/?p=NoSuch... - gsmtp\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[6]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"552 1 Requested mail action aborted, mailbox not found\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[7]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser c4si8994748wri.269 - gsmtpStatus: 5.1.1:550 5.1.1\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[8]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser b202si8836602wmb.74 - gsmtpStatus: 5.1.1:550 5.1.1\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[9]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser v5si3019765wrs.380 - gsmtpStatus: 5.1.1:550 5.1.1\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[10]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser j12si9979809wrd.370 - gsmtpStatus: 5.1.1:550 5.1.1\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[11]);",
+							"                });",
+							"            } else if (payload.ocx_bounce_reason == \"[1.1]smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try550-5.1.1 double-checking the recipient's email address for typos or550-5.1.1 unnecessary spaces. Learn more at550 5.1.1 https://support.google.com/mail/?p=NoSuchUser s9si8093369wmr.221 - gsmtpStatus: 5.1.1:550 5.1.1\") {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(payload.ocx_bounce_reason).to.eql(reason_ary[12]);",
+							"                });",
+							"            } else {",
+							"                pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"                    pm.expect(\"\").to.eql(\"Reason Not Found\");",
+							"                });",
+							"            }",
+							"        }",
+							"    }",
+							"} else {",
+							"    pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"        pm.expect(\"\").to.eql(\"Reason Not Found\");",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_bounce_reason}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/contact_activity/{{bounce_reason_contact_activity_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"contact_activity",
+						"{{bounce_reason_contact_activity_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact Activity Exported Result",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    var jsonData = pm.response.text();",
+							"    if (jsonData.includes(\"ocx_bounce_reason\")) {",
+							"        pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"            pm.expect(jsonData.includes(\"ocx_bounce_reason\")).to.eql(true);",
+							"        });",
+							"    } else {",
+							"        pm.test(\"Test Ocx Bounce Reason is working\", function () {",
+							"            pm.expect(\" \").to.eql(\"Field not found in export\");",
+							"        });",
+							"    }",
+							"}",
+							"pm.globals.unset(\"rc_maling_id_bounce_reason\")",
+							"pm.globals.unset(\"bounce_reason_contact_activity_id\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_bounce_reason}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/contact_activity/{{bounce_reason_contact_activity_id}}/export_detailed",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"contact_activity",
+						"{{bounce_reason_contact_activity_id}}",
+						"export_detailed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change contact status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password_bounce_reason}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code_bounce_reason}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": {{list_id_bounce_reason}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"pvyes_{{connectionId}}@gmail.com\",\n        \"lm_{{connectionId}}@yahoo.com\",\n        \"csv_{{connectionId}}@gmail.com\",\n        \"de_{{connectionId}}@yahoo.com\",\n        \"nve_{{connectionId}}@rediff.com\",\n        \"vnkd_{{connectionId}}@gmail.com\",\n        \"1bounc_{{connectionId}}@gmail.com\",\n        \"emai_{{connectionId}}@gmail.com\",\n        \"boune_{{connectionId}}@gmail.com\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_bounce_reason}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_bounce_reason}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

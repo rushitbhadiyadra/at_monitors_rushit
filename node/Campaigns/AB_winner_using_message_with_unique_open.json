@@ -1,0 +1,1139 @@
+{
+	"info": {
+		"_postman_id": "9842f721-60a9-4546-a17e-45be901412d0",
+		"name": "AB_winner_using_message_with_unique_open",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Get_variable_from_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"mail_time_befor_winner_email_decided\", jsonData.mail_time_befor_winner_email_decided);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/Test_ab_winner_campaign-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"Test_ab_winner_campaign-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0\r",
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    var unixtime_winnmail = jsonData.date\r",
+							"    var stdtime_winnmail = new Date(unixtime_winnmail)\r",
+							"    var utctime_winnmail = stdtime_winnmail.getUTCHours()\r",
+							"    var old_mail = pm.globals.get(\"mail_time_befor_winner_email_decided\")\r",
+							"    var total_time = utctime_winnmail - old_mail\r",
+							"    pm.test(\"Time between before winner mail decided and after winner mail receive\", function () {\r",
+							"        pm.expect(total_time).to.equal(1);\r",
+							"    });\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB winner split campaign is working\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Clear_webhook\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_winner_1@hoohem.com\",\r\n    \"subject\":\"Test AB Winner Message for unique open-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    var unixtime_winnmail = jsonData.date\r",
+							"    var stdtime_winnmail = new Date(unixtime_winnmail)\r",
+							"    var utctime_winnmail = stdtime_winnmail.getUTCHours()\r",
+							"    var old_mail = pm.globals.get(\"mail_time_befor_winner_email_decided\")\r",
+							"    var total_time = utctime_winnmail - old_mail\r",
+							"    pm.test(\"Time between before winner mail decided and after winner mail receive\", function () {\r",
+							"        pm.expect(total_time).to.equal(1);\r",
+							"    });\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB winner split campaign is working\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Clear_webhook\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_winner_2@hoohem.com\",\r\n    \"subject\":\"Test AB Winner Message for unique open-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    var unixtime_winnmail = jsonData.date\r",
+							"    var stdtime_winnmail = new Date(unixtime_winnmail)\r",
+							"    var utctime_winnmail = stdtime_winnmail.getUTCHours()\r",
+							"    var old_mail = pm.globals.get(\"mail_time_befor_winner_email_decided\")\r",
+							"    var total_time = utctime_winnmail - old_mail\r",
+							"    pm.test(\"Time between before winner mail decided and after winner mail receive\", function () {\r",
+							"        pm.expect(total_time).to.equal(1);\r",
+							"    });\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB winner split campaign is working\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Clear_webhook\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_winner_3@hoohem.com\",\r\n    \"subject\":\"Test AB Winner Message for unique open-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    var unixtime_winnmail = jsonData.date\r",
+							"    var stdtime_winnmail = new Date(unixtime_winnmail)\r",
+							"    var utctime_winnmail = stdtime_winnmail.getUTCHours()\r",
+							"    var old_mail = pm.globals.get(\"mail_time_befor_winner_email_decided\")\r",
+							"    var total_time = utctime_winnmail - old_mail\r",
+							"    pm.test(\"Time between before winner mail decided and after winner mail receive\", function () {\r",
+							"        pm.expect(total_time).to.equal(1);\r",
+							"    });\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB winner split campaign is working\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"    postman.setNextRequest(\"Clear_webhook\")\r",
+							"} else {\r",
+							"    pm.globals.set(\"count\", count)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_winner_4@hoohem.com\",\r\n    \"subject\":\"Test AB Winner Message for unique open-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail_5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\")\r",
+							"if (pm.response.code == 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    var unixtime_winnmail = jsonData.date\r",
+							"    var stdtime_winnmail = new Date(unixtime_winnmail)\r",
+							"    var utctime_winnmail = stdtime_winnmail.getUTCHours()\r",
+							"    var old_mail = pm.globals.get(\"mail_time_befor_winner_email_decided\")\r",
+							"    var total_time = utctime_winnmail - old_mail\r",
+							"    pm.test(\"Time between before winner mail decided and after winner mail receive\", function () {\r",
+							"        pm.expect(total_time).to.equal(1);\r",
+							"    });\r",
+							"    var count = count + 1\r",
+							"    pm.test(\"AB winner split campaign with unique open is working\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"} else {\r",
+							"        pm.test(\"AB winner split campaign is working\", function () {\r",
+							"        pm.expect(count).to.equal(1);\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ab_winner_5@hoohem.com\",\r\n    \"subject\":\"Test AB Winner Message for unique open-{{connectionId}}-{{env}}\",\r\n    \"timeout\": 240000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"Ab_winner_split_campaign_segment\")\r",
+							"pm.globals.unset(\"time_30\")\r",
+							"pm.globals.set(\"mail_time_befor_winner_email_decided\")\r",
+							"pm.globals.unset(\"email_link\")\r",
+							"pm.globals.unset(\"count\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/Test_ab_winner_campaign-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"Test_ab_winner_campaign-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_contacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"email\": \"ab_winner_1@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"ab_winner_2@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"ab_winner_3@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"ab_winner_4@hoohem.com\"\r\n    },\r\n    {\r\n        \"email\": \"ab_winner_5@hoohem.com\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_old_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData= pm.response.json()\r",
+							"var segment=jsonData.payload\r",
+							"for(i=0; i < segment.length; i++)\r",
+							"{\r",
+							"     if(segment[i].name === \"AB winner segment for open unique\" )\r",
+							"     {\r",
+							"        pm.globals.set(\"Ab_winner_split_campaign_segment\",segment[i].id)\r",
+							"        postman.setNextRequest(\"Create_send_ab_winner_campaign\")\r",
+							"     }\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json()\r",
+							"var segment=jsonData.payload.id\r",
+							"pm.globals.set(\"Ab_winner_split_campaign_segment\",segment)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"AB winner segment for open unique\",\r\n   \"type\":\"Active\",\r\n   \"description\":\"This is AB winner segment\",\r\n   \"criteria\":[\r\n      {\r\n         \"field_id\":{{list_field_email_id}},\r\n         \"type\":\"email\",\r\n         \"position\":0,\r\n         \"operator\":\"=\",\r\n         \"operand\":[\r\n            \"ab_winner_1@hoohem.com\",\r\n            \"ab_winner_2@hoohem.com\",\r\n            \"ab_winner_3@hoohem.com\",\r\n            \"ab_winner_4@hoohem.com\",\r\n            \"ab_winner_5@hoohem.com\"\r\n         ],\r\n         \"condition\":\"and\"\r\n      }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay_200 sec",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200 ",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200 "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_send_ab_winner_campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Ab winner split campaign with unique open\",\r\n\t\"type\": \"split\", \r\n\t\"list_id\": {{list_id}}, \r\n    \"split_type\": \"email\",\r\n    \"email_message\": [{{all_esp_ab_winner_message}},{{all_esp_ab_winner_common_message}}],\r\n    \"segments\": [ {{Ab_winner_split_campaign_segment}} ],\r\n    \"distribution\": [\r\n    \t{\r\n            \"esp_connection_id\":{{connectionId}},\r\n            \"percent\":\"100\"\r\n    \t}\r\n    ],\r\n    \"schedule_date\": {{time_30}},\r\n    \"notify_onlaunch\": \"0\",\r\n    \"notify_oncomplete\": \"0\",\r\n    \"has_winner_settings\":true,\r\n    \"winner_is_quota_percent\":\"0\",\r\n    \"winner_quota_value\":\"2\",\r\n    \"winner_conversion_field\":\"unique_opens\",\r\n    \"winner_send_after_hours\":\"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/mailings",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"mailings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay_400 sec",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=400",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "400"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"if (jsonData.length > 0) {\r",
+							"    for (i = 0; jsonData.length > i; i++) {\r",
+							"        var link = jsonData[i].HTMLOpenLinks[0]\r",
+							"        var subject = jsonData[i].subject\r",
+							"        var unixtimemail = jsonData[i].date\r",
+							"        var STDtimemail = new Date(unixtimemail)\r",
+							"       var utctimemail = STDtimemail.getUTCHours()\r",
+							"    }pm.globals.set(\"mail_time_befor_winner_email_decided\",utctimemail)\r",
+							"    pm.globals.set(\"email_link\", link)\r",
+							"    pm.test(\"Test winner mail\", function () {\r",
+							"        pm.expect(subject).to.equal(\"Test AB Winner Message for unique open-\" + pm.globals.get(\"connectionId\") + '-' + pm.environment.get(\"env\"));\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"Test winner mail\", function () {\r",
+							"        pm.expect(subject).to.equal(\"Test AB Winner Message for unique open-\" + pm.globals.get(\"connectionId\") + '-' + pm.environment.get(\"env\"));\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/get/Test AB Winner Message for unique open-{{connectionId}}-{{env}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"get",
+						"Test AB Winner Message for unique open-{{connectionId}}-{{env}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open_email_link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{email_link}}",
+					"host": [
+						"{{email_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/Test AB Winner Message for unique open-{{connectionId}}-{{env}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"Test AB Winner Message for unique open-{{connectionId}}-{{env}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set_variable_in_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mail_time_befor_winner_email_decided\": \"{{mail_time_befor_winner_email_decided}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/Test_ab_winner_campaign-{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"Test_ab_winner_campaign-{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

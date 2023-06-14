@@ -1,0 +1,901 @@
+{
+	"info": {
+		"_postman_id": "cc37ec4d-336a-4586-8c66-731f5ba9c2d1",
+		"name": "Segment_Delete_Welcome_Email_list",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Segmentation~97a2a379-2ebf-4617-8e2a-bda7b4141f63/collection/6765444-cc37ec4d-336a-4586-8c66-731f5ba9c2d1?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Get old  list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var list of jsonData.payload) {",
+							"        if (list.name === \"Test Delete Segment Welcome Email\"){",
+							"            count = 1",
+							"            pm.globals.set(\"list_id_welcome_mail_delete_segment\", list.id);",
+							"            pm.globals.set(\"all_esps_msg_id_welcome_mail_delete_segment\",list.welcome_email_id)",
+							"        }      ",
+							"    }",
+							"}",
+							"if(count === 1){",
+							"    postman.setNextRequest('Get_List_Field_id');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists?limit=500",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_List",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"welcome_msg_delete_segment_list_name\",\"Test Delete Segment Welcome Email\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    pm.test(\"List successfully Created list id : \" + jsonData.payload.id, function () {",
+							"        pm.response.to.have.status(200);",
+							"        pm.globals.set(\"list_id_welcome_mail_delete_segment\", jsonData.payload.id);",
+							"    });",
+							"} else {",
+							"    pm.test(\"list doesn't create\", function () {",
+							"        pm.response.to.have.status(200);",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{welcome_msg_delete_segment_list_name}}\",\n    \"type\": \"sending\",\n    \"description\": \"\",\n    \"create_segment\": true,\n    \"fields\": [\n    \t{\n            \"name\": \"email\",\n            \"title\": \"Email\",\n            \"type\": \"email\",\n            \"mandatory\": true,\n            \"position\": 0\n        }\n        ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Email Msg",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"all_esps_msg_id_welcome_mail_delete_segment\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"all_esps_msg_id_welcome_mail_delete_segment\", jsonData.payload.id);",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"email_message\",\n    \"name\" : \"Test Welcome Mail Delete Segment\",\n    \"subject\": \"Test Welcome Mail Delete Segment-{{ocx_connection_id}}\",\n        \"content_html\": \"<html><head><title></title><meta content='text/html; charset=utf-8' http-equiv='Content-Type' /></head><body>~!@#~Test Welcome Mail Delete Segment~!@#~</body></html>\",\n    \"addresses\": [\n      \n    ]\n  }  "
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome_mail_delete_segment}}/api/emails",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome_mail_delete_segment}}",
+						"api",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_List_Field_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"list_field_email_id\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        jsonData.payload.forEach(function(data, index) {",
+							"            if(data.name===\"email\"){",
+							"                pm.globals.set(\"wds_seg_list_field_email_id\",data.id);",
+							"            }",
+							"        });",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/list_fields?list_id={{list_id_welcome_mail_delete_segment}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"list_fields"
+					],
+					"query": [
+						{
+							"key": "list_id",
+							"value": "{{list_id_welcome_mail_delete_segment}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get old segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"All Esp  Welcome Mail Delete Segment-\" + pm.globals.get(\"connectionId\")){",
+							"            count = 1",
+							"            pm.globals.set(\"segment_id_welcome_message_delete_segment\", segment.id);",
+							"        }      ",
+							"    }",
+							"}",
+							"if(count != 1){",
+							"    postman.setNextRequest(\"Create_Segment\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome_mail_delete_segment}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome_mail_delete_segment}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete old segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code!==200){",
+							"    postman.setNextRequest('Create Segment');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome_mail_delete_segment}}/api/segment/{{segment_id_welcome_message_delete_segment}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome_mail_delete_segment}}",
+						"api",
+						"segment",
+						"{{segment_id_welcome_message_delete_segment}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"segment_id_welcome_message_delete_segment\", function() {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"segment_id_welcome_message_delete_segment\", jsonData.payload.id);",
+							"    }",
+							"});",
+							"pm.globals.unset(\"wds_seg_list_field_email_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"All Esp  Welcome Mail Delete Segment-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{wds_seg_list_field_email_id}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"we_delete_segment{{connectionId}}@hoohem.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome_mail_delete_segment}}/api/segments",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome_mail_delete_segment}}",
+						"api",
+						"segments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"welcome_message\": {\n        \"email\": {\n            \"welcome_message_active\": true,\n            \"welcome_connection_id\": \"{{connectionId}}\",\n            \"welcome_message_id\": \"{{all_esps_msg_id_welcome_mail_delete_segment}}\",\n            \"welcome_messages_per_segment\": {\n                \"2\": {\n                    \"segment_id\": \"{{segment_id_welcome_message_delete_segment}}\",\n                    \"message_id\": \"{{all_esps_msg_id_welcome_mail_delete_segment}}\",\n                    \"send_as_second_message\": true\n                }\n            }\n        }\n    },\n    \"welcome_email_esp_connection_id\": \"{{connectionId}}\",\n    \"welcome_email_active\": true,\n    \"welcome_email_id\": \"{{all_esps_msg_id_welcome_mail_delete_segment}}\",\n    \"segment_welcome_emails\": [\n        {\n            \"override\": false,\n            \"segment_id\": \"{{segment_id_welcome_message_delete_segment}}\",\n            \"email_id\": \"{{all_esps_msg_id_welcome_mail_delete_segment}}\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{list_id_welcome_mail_delete_segment}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{list_id_welcome_mail_delete_segment}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"we_delete_segment{{connectionId}}@hoohem.com\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome_mail_delete_segment}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome_mail_delete_segment}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Welcome Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(jsonData !==null && JSON.stringify(jsonData) !== '{}'){",
+							"   pm.test(`Test welcome email message delete segment  Time : ${jsonData.date}`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Welcome Mail Delete Segment-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							" else {",
+							"    pm.test(`Test welcome email message delete segment Time : ${jsonData.date}`, function() {",
+							"        pm.expect(\"\").to.equal(\"Test Welcome Mail Delete Segment\");",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"we_delete_segment{{connectionId}}@hoohem.com\",\n    \"subject\": \"Test Welcome Mail Delete Segment-{{connectionId}}\",\n    \"timeout\": 1200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete segment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome_mail_delete_segment}}/api/segment/{{segment_id_welcome_message_delete_segment}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome_mail_delete_segment}}",
+						"api",
+						"segment",
+						"{{segment_id_welcome_message_delete_segment}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.segment_welcome_emails){",
+							"    pm.test(`Test welcome email message delete segment  Time : ${jsonData.date}`, function() {",
+							"        pm.expect(\"\").to.equal(\"All_Esps_Test_Delete_Segment_Welcome_Email\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}else{",
+							"      pm.test(`Test welcome email message delete segment `, function() {",
+							"        pm.expect(jsonData.payload.name).to.equal(\"All_Esps_Test_Delete_Segment_Welcome_Email-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{list_id_welcome_mail_delete_segment}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{list_id_welcome_mail_delete_segment}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"segment_id_welcome_message_delete_segment\");\r",
+							"pm.globals.unset(\"wds_seg_list_field_email_id\");\r",
+							"pm.globals.unset(\"list_id_welcome_mail_delete_segment\");\r",
+							"pm.globals.unset(\"all_esps_msg_id_welcome_mail_delete_segment\");\r",
+							"pm.globals.unset(\"welcome_msg_delete_segment_list_name\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"change_to\":\"remove\",\n \"emails\": [\n  \"we_delete_segment{{connectionId}}@hoohem.com\"\n ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome_mail_delete_segment}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome_mail_delete_segment}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

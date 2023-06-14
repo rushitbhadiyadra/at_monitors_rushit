@@ -1,0 +1,766 @@
+{
+	"info": {
+		"_postman_id": "a3269b54-30d9-4a32-9314-d641c87e3c1e",
+		"name": "All_Esps_Welcome_Msg_With_Nested_If",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444"
+	},
+	"item": [
+		{
+			"name": "Create_List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"pm.environment.set(\"welcome_mail_nested_if_list_id\",jsonData.payload.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Welcome Msg With Nested Ocx If\",\n    \"type\": \"sending\",\n    \"description\": \"\",\n    \"create_segment\": true,\n    \"fields\": [\n    \t{\n            \"name\": \"email\",\n            \"title\": \"Email\",\n            \"type\": \"email\",\n            \"mandatory\": true,\n            \"position\": 0\n        },\n        {\n            \"name\": \"first_name\",\n            \"title\": \"First Name\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 1\n        },\n        {\n            \"name\": \"address\",\n            \"title\": \"Address\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 2\n        },\n        {\n            \"name\": \"country\",\n            \"title\": \"Country\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 3\n        }\n        ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Email Msg",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"msg_id_welcome_mail_nested_if\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        pm.globals.set(\"msg_id_welcome_mail_nested_if\", jsonData.payload.id);",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"email_message\",\n    \"name\" : \"Welcome Email With Nested If\",\n    \"subject\": \"Welcome Email With Nested If-{{ocx_connection_id}}\",\n        \"content_html\": \"<html><head><title></title><meta content='text/htmlcharset=utf-8'http-equiv='Content-Type'></head><body>{{ocx_if first_name = ongage}}~!@#~ongage-{{ocx_connection_id}}{{ocx_if address = keshod}}~!@#~keshod-{{ocx_connection_id}}{{ocx_if country = usa}}~!@#~usa-{{ocx_connection_id}}~!@#~{{ocx_endif}}{{ocx_endif}}{{ocx_else}}~!@#~other-{{ocx_connection_id}}{{ocx_endif}}</body></html>\",\n    \"addresses\": [\n      \n    ]\n  }  "
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{welcome_mail_nested_if_list_id}}/api/emails",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{welcome_mail_nested_if_list_id}}",
+						"api",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"welcome_email_active\": true,\n    \"welcome_email_esp_connection_id\": \"{{connectionId}}\",\n    \"welcome_email_id\": \"{{msg_id_welcome_mail_nested_if}}\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{welcome_mail_nested_if_list_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{welcome_mail_nested_if_list_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"change_to\":\"remove\",\n \"emails\": [\n  \"wc_nested_if4@hoohem.com\",\n  \"wc_nested_if3@hoohem.com\",\n  \"wc_nested_if2@hoohem.com\",\n  \"wc_nested_if1@hoohem.com\"\n ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{welcome_mail_nested_if_list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{welcome_mail_nested_if_list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"wc_nested_if1@hoohem.com\",\n        \"country\": \"usa\",\n        \"address\": \"keshod\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"wc_nested_if2@hoohem.com\",\n        \"country\": \"India\",\n        \"address\": \"keshod\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"wc_nested_if3@hoohem.com\",\n        \"country\": \"India\",\n        \"address\": \"Junagadh\",\n        \"first_name\": \"ongage\"\n    },\n    {\n        \"email\": \"wc_nested_if4@hoohem.com\",\n        \"country\": \"India\",\n        \"address\": \"Junagadh\",\n        \"first_name\": \"stepin\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{welcome_mail_nested_if_list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{welcome_mail_nested_if_list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_100",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=100",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Welcome Mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var data = jsonData.html",
+							"var body = data.split(\"~!@#~\")",
+							"if(pm.response.code==200){",
+							"    pm.test(\"Wc If Nested is working\", function() {",
+							"        pm.expect(body[1]).to.equal(\"ongage-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Wc If Nested is working\", function() {",
+							"        pm.expect(body[2]).to.equal(\"keshod-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Wc If Nested is working\", function() {",
+							"        pm.expect(body[3]).to.equal(\"usa-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}else{",
+							"    pm.test(\"Wc If is working\", function() {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"wc_nested_if1@hoohem.com\",\n    \"subject\": \"Welcome Email With Nested If-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Welcome Mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var data = jsonData.html",
+							"var body = data.split(\"~!@#~\")",
+							"var body_2 = body[2].split(\"\\n\")",
+							"if(pm.response.code==200){",
+							"    pm.test(\"Wc If Nested is working\", function() {",
+							"        pm.expect(body[1]).to.equal(\"ongage-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"    pm.test(\"Wc If Nested is working\", function() {",
+							"        pm.expect(body_2[0]).to.equal(\"keshod-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}else{",
+							"    pm.test(\"Wc If is working\", function() {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"wc_nested_if2@hoohem.com\",\n    \"subject\": \"Welcome Email With Nested If-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Welcome Mail 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var data = jsonData.html",
+							"var body = data.split(\"~!@#~\")",
+							"var body_2 = body[1].split(\"\\n\")",
+							"if(pm.response.code==200){",
+							"    pm.test(\"Wc If Nested is working\", function() {",
+							"        pm.expect(body_2[0]).to.equal(\"ongage-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}else{",
+							"    pm.test(\"Wc If is working\", function() {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"wc_nested_if3@hoohem.com\",\n    \"subject\": \"Welcome Email With Nested If-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Welcome Mail 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var data = jsonData.html",
+							"var body = data.split(\"~!@#~\")",
+							"var body_2 = body[1].split(\"\\n\")",
+							"if(pm.response.code==200){",
+							"    pm.test(\"Wc If Nested is working\", function() {",
+							"        pm.expect(body_2[0]).to.equal(\"other-\"+pm.globals.get(\"connectionId\"));",
+							"    });",
+							"}else{",
+							"    pm.test(\"Wc If is working\", function() {",
+							"        pm.expect(\"\").to.equal(\"Mail Not Received\");",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"wc_nested_if4@hoohem.com\",\n    \"subject\": \"Welcome Email With Nested If-{{connectionId}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset(\"welcome_mail_nested_if_list_id\")",
+							"pm.globals.unset(\"msg_id_welcome_mail_nested_if\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{welcome_mail_nested_if_list_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{welcome_mail_nested_if_list_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
