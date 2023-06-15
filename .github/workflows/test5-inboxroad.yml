@@ -30,7 +30,7 @@ jobs:
     
     - name: Run ${{ matrix.collection }}
       id: first_run
-      run: newman run ./node/Campaigns/${{ matrix.collection }}.json -e ./node/Campaigns/Env/all-esps-production-10998.json -g ./node/Campaigns/Env/prod-inboxroad-monitor-global-env.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/prod-mailgun-"${{ matrix.collection }}"-report.html      
+      run: newman run ./node/Campaigns/${{ matrix.collection }}.json -e ./node/Campaigns/Env/all-esps-production-10998.json -g ./node/Campaigns/Env/prod-inboxroad-monitor-global-env.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/prod-inboxroad-"${{ matrix.collection }}"-report.html      
       #continue-on-error: true
     
     # Upload the contents of test results directory to workspace

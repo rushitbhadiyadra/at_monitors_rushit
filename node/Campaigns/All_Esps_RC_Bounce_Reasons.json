@@ -41,7 +41,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\n    {\n        \"email\": \"pvyes_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"lm_{{connectionId}}@yahoo.com\"\n    },\n    {\n        \"email\": \"csv_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"de_{{connectionId}}@yahoo.com\"\n    },\n    {\n        \"email\": \"nve_{{connectionId}}@rediff.com\"\n    },\n    {\n        \"email\": \"vnkd_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"1bounc_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"emai_{{connectionId}}@gmail.com\"\n    },\n    {\n        \"email\": \"boune_{{connectionId}}@gmail.com\"\n    }\n]",
+					"raw": "[\n    {\n        \"email\": \"pvyes_{{connection_id_bounce_reason}}@gmail.com\"\n    },\n    {\n        \"email\": \"lm_{{connection_id_bounce_reason}}@yahoo.com\"\n    },\n    {\n        \"email\": \"csv_{{connection_id_bounce_reason}}@gmail.com\"\n    },\n    {\n        \"email\": \"de_{{connection_id_bounce_reason}}@yahoo.com\"\n    },\n    {\n        \"email\": \"nve_{{connection_id_bounce_reason}}@rediff.com\"\n    },\n    {\n        \"email\": \"vnkd_{{connection_id_bounce_reason}}@gmail.com\"\n    },\n    {\n        \"email\": \"1bounc_{{connection_id_bounce_reason}}@gmail.com\"\n    },\n    {\n        \"email\": \"emai_{{connection_id_bounce_reason}}@gmail.com\"\n    },\n    {\n        \"email\": \"boune_{{connection_id_bounce_reason}}@gmail.com\"\n    }\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,7 +106,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"list_id\": {{list_id_bounce_reason}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"pvyes_{{connectionId}}@gmail.com\",\n        \"lm_{{connectionId}}@yahoo.com\",\n        \"csv_{{connectionId}}@gmail.com\",\n        \"de_{{connectionId}}@yahoo.com\",\n        \"nve_{{connectionId}}@rediff.com\",\n        \"vnkd_{{connectionId}}@gmail.com\",\n        \"1bounc_{{connectionId}}@gmail.com\",\n        \"emai_{{connectionId}}@gmail.com\",\n        \"boune_{{connectionId}}@gmail.com\"\n    ]\n}",
+					"raw": "{\n    \"list_id\": {{list_id_bounce_reason}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"pvyes_{{connection_id_bounce_reason}}@gmail.com\",\n        \"lm_{{connection_id_bounce_reason}}@yahoo.com\",\n        \"csv_{{connection_id_bounce_reason}}@gmail.com\",\n        \"de_{{connection_id_bounce_reason}}@yahoo.com\",\n        \"nve_{{connection_id_bounce_reason}}@rediff.com\",\n        \"vnkd_{{connection_id_bounce_reason}}@gmail.com\",\n        \"1bounc_{{connection_id_bounce_reason}}@gmail.com\",\n        \"emai_{{connection_id_bounce_reason}}@gmail.com\",\n        \"boune_{{connection_id_bounce_reason}}@gmail.com\"\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -181,7 +181,7 @@
 							"count = 0",
 							"if(jsonData.payload.length > 0){",
 							"    for (var segment of jsonData.payload) {",
-							"        if (segment.name === \"RC Bounce Reason-\" + pm.globals.get(\"connectionId\")){",
+							"        if (segment.name === \"RC Bounce Reason-\" + pm.environment.get(\"connection_id_bounce_reason\")){",
 							"            count = 1",
 							"            pm.globals.set(\"segment_id_rc_bounce_reason\", segment.id);      ",
 							"        }      ",
@@ -289,7 +289,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"RC Bounce Reason-{{connectionId}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id_bounce_reason}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"pvyes_{{connectionId}}@gmail.com\",\n                \"lm_{{connectionId}}@yahoo.com\",\n                \"csv_{{connectionId}}@gmail.com\",\n                \"de_{{connectionId}}@yahoo.com\",\n                \"nve_{{connectionId}}@rediff.com\",\n                \"vnkd_{{connectionId}}@gmail.com\",\n                \"1bounc_{{connectionId}}@gmail.com\",\n                \"emai_{{connectionId}}@gmail.com\",\n                \"boune_{{connectionId}}@gmail.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}",
+					"raw": "{\n    \"name\": \"RC Bounce Reason-{{connection_id_bounce_reason}}\",\n    \"type\": \"Active\",\n    \"description\": \"\",\n    \"included_segment_cache\": null,\n    \"excluded_segment_cache\": null,\n    \"is_whitelist\": false,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email_id_bounce_reason}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"is_external_operand\": false,\n            \"operator\": \"=\",\n            \"operand\": [\n                \"pvyes_{{connection_id_bounce_reason}}@gmail.com\",\n                \"lm_{{connection_id_bounce_reason}}@yahoo.com\",\n                \"csv_{{connection_id_bounce_reason}}@gmail.com\",\n                \"de_{{connection_id_bounce_reason}}@yahoo.com\",\n                \"nve_{{connection_id_bounce_reason}}@rediff.com\",\n                \"vnkd_{{connection_id_bounce_reason}}@gmail.com\",\n                \"1bounc_{{connection_id_bounce_reason}}@gmail.com\",\n                \"emai_{{connection_id_bounce_reason}}@gmail.com\",\n                \"boune_{{connection_id_bounce_reason}}@gmail.com\"\n            ],\n            \"is_external_operand_exists\": \"0\",\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"default_whitelist_segment\": false,\n    \"default_exclude_segment\": 0,\n    \"default_include_segment\": 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -396,7 +396,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Test Regular Campaign Bounce Reason-{{connectionId}}\",\n    \"list_id\": {{list_id_bounce_reason}},\n    \"email_message\": {{all_esp_email_bounce_reason}},\n    \"segments\": [\n        {{segment_id_rc_bounce_reason}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connectionId}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time_30}}\n}",
+					"raw": "{\n    \"name\": \"Test Regular Campaign Bounce Reason-{{connection_id_bounce_reason}}\",\n    \"list_id\": {{list_id_bounce_reason}},\n    \"email_message\": {{all_esp_email_bounce_reason}},\n    \"segments\": [\n        {{segment_id_rc_bounce_reason}}\n    ],\n    \"distribution\": [\n        {\n            \"esp_connection_id\": {{connection_id_bounce_reason}},\n            \"percent\": 100\n        }\n    ],\n    \"schedule_date\": {{time_30}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1163,7 +1163,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"list_id\": {{list_id_bounce_reason}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"pvyes_{{connectionId}}@gmail.com\",\n        \"lm_{{connectionId}}@yahoo.com\",\n        \"csv_{{connectionId}}@gmail.com\",\n        \"de_{{connectionId}}@yahoo.com\",\n        \"nve_{{connectionId}}@rediff.com\",\n        \"vnkd_{{connectionId}}@gmail.com\",\n        \"1bounc_{{connectionId}}@gmail.com\",\n        \"emai_{{connectionId}}@gmail.com\",\n        \"boune_{{connectionId}}@gmail.com\"\n    ]\n}",
+					"raw": "{\n    \"list_id\": {{list_id_bounce_reason}},\n    \"change_to\": \"resubscribe\",\n    \"emails\": [\n        \"pvyes_{{connection_id_bounce_reason}}@gmail.com\",\n        \"lm_{{connection_id_bounce_reason}}@yahoo.com\",\n        \"csv_{{connection_id_bounce_reason}}@gmail.com\",\n        \"de_{{connection_id_bounce_reason}}@yahoo.com\",\n        \"nve_{{connection_id_bounce_reason}}@rediff.com\",\n        \"vnkd_{{connection_id_bounce_reason}}@gmail.com\",\n        \"1bounc_{{connection_id_bounce_reason}}@gmail.com\",\n        \"emai_{{connection_id_bounce_reason}}@gmail.com\",\n        \"boune_{{connection_id_bounce_reason}}@gmail.com\"\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
