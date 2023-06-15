@@ -373,8 +373,8 @@
 							"        }      ",
 							"    }",
 							"}",
-							"if(count === 1){",
-							"    postman.setNextRequest('Add_contact_suppression_campaign_level');",
+							"if(count === 0){",
+							"    postman.setNextRequest('Get_old_segmet');",
 							"}"
 						],
 						"type": "text/javascript"
