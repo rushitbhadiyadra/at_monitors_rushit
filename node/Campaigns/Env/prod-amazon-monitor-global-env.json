@@ -687,11 +687,6 @@
 			"enabled": true
 		},
 		{
-			"key": "ocx_mailing_id",
-			"value": "",
-			"enabled": true
-		},
-		{
 			"key": "throttling_with_timezone_segment_id",
 			"value": "",
 			"enabled": true
@@ -3003,12 +2998,6 @@
 			"key": "multiple_esps_transactionsl_send_content_html_behaviour_stats_campaign_id",
 			"value": "",
 			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "name",
-			"value": "Harsh(Default)",
-			"type": "default",
 			"enabled": true
 		},
 		{
