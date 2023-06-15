@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ All_Esps_Notify_Transactional_ContenAll_Esps_Notify_Transactional_Content_HTML_SystemField_DateFunction_OcxNow_Offsett_HTML_Dynamic_HTML_Feeds ]
+        collection: [ All_Esps_Notify_Transactional_Content_HTML_SystemField_DateFunction_OcxNow_Offset ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod inboxroad Monitor collections
@@ -30,7 +30,7 @@ jobs:
     
     - name: Run ${{ matrix.collection }}
       id: first_run
-      run: newman run ./node/Campaigns/${{ matrix.collection }}.json -e ./node/Campaigns/Env/all-esps-production-10998.json -g ./node/Campaigns/Env/prod-inboxroad-monitor-global-env.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/prod-mailgun-"${{ matrix.collection }}"-report.html      
+      run: newman run ./node/Campaigns/${{ matrix.collection }}.json -e ./node/Campaigns/Env/all-esps-production-10998.json -g ./node/Campaigns/Env/prod-inboxroad-monitor-global-env.json --reporters cli,htmlextra --reporter-htmlextra-export ./newman/prod-inboxroad-"${{ matrix.collection }}"-report.html      
       #continue-on-error: true
     
     # Upload the contents of test results directory to workspace
