@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ All_Esps_Notify_Transactional_Content_HTML_Dynamic_HTML_Feeds ]
+        collection: [ All_ESPs_AB_Split_Feed_Operator_OcxNow_1 ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod amazon Monitor collections
