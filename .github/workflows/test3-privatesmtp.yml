@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ All_ESPs_AB_Split_Feed_Operator_OcxNow_1 ]
+        collection: [ RC_list_field_update_on_clicked_multiple_link_ocxfa ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
