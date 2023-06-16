@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ All_ESP_NT_Send_Email_With_md5_Suppression ]
+        collection: [ Verify_notify_transactional_campaign_with_embeded_html_using_specific_message ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
