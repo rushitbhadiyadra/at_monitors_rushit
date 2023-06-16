@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Verify_login_generate_new_jwt_token ]
+        collection: [ Verify_md5_suppression_list_level_breakdown_functionality_using_list_scope_with_ab_split_campaign ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
