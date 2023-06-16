@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ All_ESP_NT_Send_Email_With_md5_Suppression ]
+        collection: [ Verify_the_decimal_values_with_grouping_separators ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
