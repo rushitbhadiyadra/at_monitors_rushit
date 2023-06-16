@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Verify_suppression_list_breakdown_functionality_with_regular_campaign_using_global_level_scope ]
+        collection: [ Verify_transactional_send_campaign_with_specific_message ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
