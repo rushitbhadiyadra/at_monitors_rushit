@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Verify_TC_send_If-Then-Else_Rules_is_working_in_dynamic_html_feed ]
+        collection: [ Verify_import_contact_with_default_value_of_list_field_empty_using_regular_list ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
