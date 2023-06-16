@@ -823,6 +823,7 @@
 							"    pm.test(`Test All Esp AB-Split \\\"subject Is equals to\\\" Time `, function () {",
 							"        pm.expect(jsonData.subject).to.equal(\"Test All Esp AB-Split with Subject B-\"+connectionId+\"-\"+ env+\"-\"+ pm.globals.get(\"campign_id_all_esp_ab_split_sub\"));",
 							"    });",
+							"    postman.setNextRequest(\"Get_Campaign_Information\")",
 							"}",
 							"",
 							"pm.globals.set(\"all_esp_ab_split_sub_a\", count_a);",
@@ -961,7 +962,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Campaign Information",
+			"name": "Get_Campaign_Information",
 			"event": [
 				{
 					"listen": "test",
