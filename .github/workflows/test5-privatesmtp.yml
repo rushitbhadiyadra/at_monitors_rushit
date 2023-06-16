@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Verify_RC_If-Then-Else_Rules_is_working_in_dynamic_html_feed ]
+        collection: [ Verify_regular_suppression_list_level_breakdown_functionality_using_list_scope_with_RC ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
