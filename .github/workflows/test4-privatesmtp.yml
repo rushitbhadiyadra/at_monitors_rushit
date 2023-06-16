@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Verify_RC_while_using_underscore_containing_string_contact_field ]
+        collection: [ Verify_sha_256_suppression_campaign_level_breakdown_functionality_using_campaign_scope_with_ab_winner_campaign ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
