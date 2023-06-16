@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ NT_message_id_list_field_update_on_clicked_multiple_link_ocxfa ]
+        collection: [ TC_send_embed_content_list_field_update_on_clicked_multiple_link_ocxfa ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
