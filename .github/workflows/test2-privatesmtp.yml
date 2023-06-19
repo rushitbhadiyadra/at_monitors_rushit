@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ TC_send_embed_content_unsubscribe_text_&_double_link_dynamic_ocx_feed ]
+        collection: [ Verify_sha512_suppression_breakdown_functionality_using_global_scope_with_ab_winner_campaign ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
