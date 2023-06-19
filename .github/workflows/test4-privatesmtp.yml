@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ NT_message_id_list_field_with_update_On_click ]
+        collection: [ Verify_Event_Campaign_and_contact_activity_report_with_one_link_included_in_the_email_content ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
