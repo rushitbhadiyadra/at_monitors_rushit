@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "110d1f23-be20-4234-a85c-0f9f3f09529c",
-		"name": "TC_send_embed_content_field_update_with(-)_On_click",
+		"name": "TC_send_embed_content_field_update_with_On_click",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6765444"
 	},
