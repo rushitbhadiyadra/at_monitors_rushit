@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "500f5641-0d8a-4ff3-b497-cdb0be2143da",
-		"name": "NT_message_id_list_field_with(-)_update_On_click",
+		"name": "NT_message_id_list_field_with_update_On_click",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6765444"
 	},
