@@ -455,6 +455,11 @@
 						"key": "x_account_code",
 						"type": "text",
 						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
 				"body": {
