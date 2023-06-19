@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "81e3cdc1-c71b-468e-a4b1-5ce36858da9a",
-		"name": "TC_send_unsubscribe_text_&_double_link_dynamic_ocx_feed",
+		"name": "TC_send_unsubscribe_text_double_link_dynamic_ocx_feed",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6765444"
 	},
