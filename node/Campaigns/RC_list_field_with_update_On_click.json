@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "a4764fb8-f86d-4c50-9ae0-801b13562a55",
-		"name": "RC_list_field_with(-)_update_On_click",
+		"name": "RC_list_field_with_update_On_click",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6765444"
 	},
