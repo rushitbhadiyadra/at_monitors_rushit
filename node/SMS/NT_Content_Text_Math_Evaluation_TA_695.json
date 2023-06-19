@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "0faa1465-a2fb-4d2d-bb76-705ebfae4159",
+		"name": "NT_Content_Text_Math_Evaluation_TA_695",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-0faa1465-a2fb-4d2d-bb76-705ebfae4159?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create and Send Campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"recipients\": [\n    \"at_sms_math_evaluation@hoohem.com\"\n  ],\n  \"mailing_id\": {{transactional_cid_sms}},\n  \"email_message\": {\n    \"content_text\": \"!#!nt_send_sms_content_with_math_evaluation_{{ocx_connection_id}}!#!-!$!{\\\"Room_total\\\":\\\"{{roomtotal}}\\\", \\\"Special_services\\\":\\\"{{specialservices}}\\\", \\\"Discount\\\":\\\"{{discount}}\\\", \\\"math\\\":\\\"{{ocx_math_eval[ ( {{roomtotal}} - {{specialservices}} ) / {{discount}} * 1.3, format=%01.2f]}}\\\"}!$!\",\n    \"addresses\": [\n      {\n        \"from_name\": \"{{from_name}}\",\n        \"esp_connection_id\": {{sms_connectionId}}\n      }\n    ]\n  },\n  \"distribution\": [\n    {\n      \"esp_connection_id\": {{sms_connectionId}},\n      \"domain\": \"default\",\n      \"percent\": 100\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"roomtotal\", jsonData.payload.roomtotal);",
+							"pm.globals.set(\"specialservices\", jsonData.payload.specialservices); ",
+							"pm.globals.set(\"discount\", jsonData.payload.discount);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/at_sms_math_evaluation@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"at_sms_math_evaluation@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"     var jsonData = pm.response.json()",
+							"     var smsText = jsonData.Body;",
+							"     smsText = smsText.split('!$!')",
+							"     var sms = smsText[1].replace(/\\\\\"/g,'\"')",
+							"     //sms = JSON.parse(sms)",
+							"     ",
+							"     pm.test(`Test Notify Transaction Send Content SMS with Math Evaluation \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains('6.50');",
+							"          pm.expect(sms).contains(String(pm.globals.get('roomtotal')));",
+							"          pm.expect(sms).contains(String(pm.globals.get('specialservices')));",
+							"          pm.expect(sms).contains(String(pm.globals.get('discount')));",
+							"     })",
+							"}else{",
+							"  pm.test(`Test NT SMS not received`, function () {",
+							"    pm.expect(\"\").to.equal(\"Test NT SMS not received\");",
+							"  })",
+							"}",
+							"pm.globals.unset(\"roomtotal\");",
+							"pm.globals.unset(\"specialservices\");",
+							"pm.globals.unset(\"discount\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"nt_send_sms_content_with_math_evaluation_{{sms_connectionId}}\",\n    \"timeout\": 600000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

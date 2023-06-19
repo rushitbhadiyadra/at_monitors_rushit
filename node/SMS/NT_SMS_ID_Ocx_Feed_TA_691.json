@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "c764b037-5d59-4730-a42e-ec4f78c7abee",
+		"name": "NT_SMS_ID_Ocx_Feed_TA_691",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-c764b037-5d59-4730-a42e-ec4f78c7abee?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create and Send Campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"recipients\": [\"at_sms@hoohem.com\"],\n  \"email_message_id\": \"{{sms_id_nt_ocx_feed}}\",\n  \"mailing_id\": \"{{transactional_cid_sms}}\",\n  \"distribution\": [\n   {\n    \"esp_connection_id\": {{sms_connectionId}},\n    \"domain\": \"default\"\n   }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/notify_transactions",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"notify_transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json()",
+							"    var smsText1 = jsonData.Body;",
+							"    if (pm.environment.get(\"env\") === \"dev\") {",
+							"        var smsText = smsText1.split(\"$!@#$\")",
+							"        pm.test(`Test Notify Transaction smsid ocx feed is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Regular\");",
+							"            pm.expect(smsText[3]).to.equal(\"suit\");",
+							"        })",
+							"    } else {",
+							"        var smsText = smsText1.split(\"ü!@#ü\")",
+							"        pm.test(`Test Notify Transaction smsid ocx feed is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Regular\");",
+							"            pm.expect(smsText[3]).to.equal(\"suit\");",
+							"        })",
+							"    }",
+							"} else {",
+							"    pm.test(`Test Notify Transaction smsid ocx feed is working`, function () {",
+							"        pm.expect(\"\").to.equal(\"Regular\");",
+							"        pm.expect(\"\").to.equal(\"suit\");",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"nt_sms_ocx_feed_{{sms_connectionId}}\",\n    \"timeout\": 600000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

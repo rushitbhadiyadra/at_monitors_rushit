@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "e164fd94-5aa0-4f67-8de6-3fe0b5d8df26",
+		"name": "RC_Static_Content_Diff_Lang_TA_645_724",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-e164fd94-5aa0-4f67-8de6-3fe0b5d8df26?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create and Send Campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"SMS RC Static Content Diff language\",\n   \"list_id\": {{list_id}} ,\n   \"email_message\": {{rc_sms_id_static_content}} ,\n   \"segments\": [{{rc_sms_id_segment}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{sms_connectionId}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json()",
+							"    var smsText = jsonData.Body;",
+							"    if (pm.environment.get(\"env\") === \"dev\") {",
+							"        smsText = smsText.split('!$!')",
+							"        var smsDiffLang = JSON.parse(smsText[2])",
+							"        pm.test(`Test Static content SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Static content sms\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Hebrew  is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.hebrew).to.equal(\"שלום סטפין\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Danish is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.danish).to.equal(\"Hej Stepin\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language English  is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.english).to.equal(\"Hello Stepin\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Greek is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.greek).to.equal(\"Γεια σου Στέπιν\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Japanese is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.japanese).to.equal(\"こんにちは、ステピン\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Russian  is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.russian).to.equal(\"Привет степин\");",
+							"        })",
+							"    }",
+							"    else {",
+							"        smsText = smsText.split('!~!')",
+							"        var smsDiffLang = JSON.parse(smsText[2])",
+							"        pm.test(`Test Static content SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Static content sms\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Hebrew  is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.hebrew).to.equal(\"שלום סטפין\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Danish is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.danish).to.equal(\"Hej Stepin\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language English  is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.english).to.equal(\"Hello Stepin\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Greek is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.greek).to.equal(\"Γεια σου Στέπιν\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Japanese is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.japanese).to.equal(\"こんにちは、ステピン\");",
+							"        })",
+							"        pm.test(`Test Static content SMS Diff language Russian  is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsDiffLang.russian).to.equal(\"Привет степин\");",
+							"        })",
+							"    }",
+							"} else {",
+							"    pm.test(`Test Static content SMS not received`, function () {",
+							"        pm.expect(\"\").to.equal(\"Static content sms\");",
+							"    })",
+							"",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"rc_static_cnt_{{sms_connectionId}}\",\n    \"timeout\": 600000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
