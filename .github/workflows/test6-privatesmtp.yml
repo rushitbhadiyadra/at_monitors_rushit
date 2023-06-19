@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ TC_send_unsubscribe_text_double_link_dynamic_ocx_feed ]
+        collection: [ NT_content_html_unsubscribe_text_double_link_dynamic_ocx_feed ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
