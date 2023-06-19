@@ -172,7 +172,7 @@
 			"response": []
 		},
 		{
-			"name": "Delay 300",
+			"name": "Delay 200",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -192,7 +192,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
 					"protocol": "https",
 					"host": [
 						"automated_tests-l2",
@@ -205,7 +205,7 @@
 					"query": [
 						{
 							"key": "seconds",
-							"value": "300"
+							"value": "200"
 						}
 					]
 				}
