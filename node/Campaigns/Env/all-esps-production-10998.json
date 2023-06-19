@@ -363,6 +363,11 @@
 			"enabled": true
 		},
 		{
+			"key": "msg_id_ab_winner_send_empty_content_flag_true",
+			"value": "13302332",
+			"enabled": true
+		},
+		{
 			"key": "all_esp_behavioural_stats",
 			"value": "7596258",
 			"enabled": true
