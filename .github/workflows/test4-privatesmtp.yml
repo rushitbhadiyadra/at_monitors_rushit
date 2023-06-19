@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Verify_maximum_allowed_decimal_value_for_numeric_in_segment ]
+        collection: [ NT_message_id_list_field_with_update_On_click ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
