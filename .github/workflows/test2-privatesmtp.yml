@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Verify_import_contact_with_default_value_of_list_field_empty_using_regular_list ]
+        collection: [ TC_send_embed_content_unsubscribe_text_&_double_link_dynamic_ocx_feed ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
