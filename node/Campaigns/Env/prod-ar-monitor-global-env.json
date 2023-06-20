@@ -1,0 +1,194 @@
+{
+	"id": "d321ab07-2303-4a31-828f-c112da58a0e5",
+	"values": [
+		{
+			"key": "campaign_id_ta44",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_click_click_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_behavioural_event_once_click_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "mail_open_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_click_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_update_fields_click_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_ocxbe_link_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_webhook_click_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "now_time",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_click_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_once_open_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_transational_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_webhook_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_open_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "monitor_date_tag",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_154_campaign_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_behaviour_criteria_click_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_behaviour_criteria_open_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ar_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_update_field_contact_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "prod_monitor_date_tag",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_571_1_count",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_571_1_contactid",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_571_2_count",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_571_2_contactid",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_571_3_count",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_571_3_contactid",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_contact_edit_url_click_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_56_click_link",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ta_56_contactid",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "count_value",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "count_41_498_1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "count_41_498_2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "automation_rule_id_ta_792",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "automation_rule_id_campaign",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_click_count",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2023-06-20T08:13:06.970Z",
+	"_postman_exported_using": "Postman/10.15.1-230614-0638"
+}
