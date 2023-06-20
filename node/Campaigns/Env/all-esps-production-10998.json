@@ -788,6 +788,11 @@
 			"enabled": true
 		},
 		{
+			"key": "list_field_product_id",
+			"value": "1001701918",
+			"enabled": true
+		},
+		{
 			"key": "all_esp_behavioural_stats1",
 			"value": "8389994",
 			"enabled": true

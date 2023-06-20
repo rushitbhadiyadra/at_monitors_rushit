@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Update_contact_with_expired_token_and_username_password ]
+        collection: [ Verify_the_decimal_values_with_grouping_separators ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections
