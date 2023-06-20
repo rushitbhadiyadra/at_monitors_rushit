@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "226ffe86-2348-43ff-bad0-3a82111c7a8c",
+		"name": "TS_Embed_Content_System_Date_list_Field_TA_689_680_681",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-226ffe86-2348-43ff-bad0-3a82111c7a8c?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "teansactional send",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"at_sms@hoohem.com\"\n    ],\n    \"sending_connection_id\": {{sms_connectionId}},\n    \"campaign_id\": {{transactional_cid_sms}},\n    \"message\": {\n        \"subject\": \"Tc_send_sms_content_sys_date_fld!\",\n        \"content_text\": \"!#!tc_send_sms_content_sys_date_fld_{{ocx_connection_id}}!#!-!$!{\\\"eid\\\":\\\"{{ocx_esp_id}}\\\",\\\"cid\\\":\\\"{{ocx_mailing_id}}\\\",\\\"conid\\\":\\\"{{ocx_contact_id}}\\\",\\\"cdate\\\":\\\"{{ocx_created_date}}\\\",\\\"lid\\\":\\\"{{ocx_list_id}}\\\",\\\"cname\\\":\\\"{{ocx_campaign_name}}\\\",\\\"sub\\\":\\\"{{ocx_subject}}\\\",\\\"mid\\\":\\\"{{ocx_message_id}}\\\",\\\"fname\\\":\\\"{{ocx_from_name}}\\\",\\\"year\\\":\\\"{{ocx_year}}\\\",\\\"yy\\\":\\\"{{ocx_yy}}\\\",\\\"smonth\\\":\\\"{{ocx_month_short}}\\\",\\\"mname\\\":\\\"{{ocx_month_name}}\\\",\\\"month\\\":\\\"{{ocx_month}}\\\",\\\"dlong\\\":\\\"{{ocx_dow_long}}\\\",\\\"dow\\\":\\\"{{ocx_dow}}\\\",\\\"day\\\":\\\"{{ocx_day}}\\\",\\\"now\\\":\\\"{{ocx_now[format=m/d/Y]}}\\\",\\\"tstamp\\\":\\\"{{ocx_timestamp}}\\\",\\\"email\\\":\\\"{{email}}\\\",\\\"phone\\\":\\\"{{phone}}\\\",\\\"product_id\\\":\\\"{{product_id}}\\\",\\\"dob\\\":\\\"{{dob}}\\\"}!$!\",\n        \"addresses\": \n        {\n            \"from_name\": \"{{from_name}}\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send_embed_content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"tc_sms_content_system_field_contact_id\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"tc_sms_content_list_field_ocx_created_date\", str.substring(0,8));",
+							"pm.globals.set(\"tc_sms_content_list_field_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"tc_sms_content_list_field_phone\", jsonData.payload.phone); ",
+							"pm.globals.set(\"tc_sms_content_list_field_email\", jsonData.payload.email);",
+							"// pm.globals.set(\"tc_sms_content_list_field_ocx_created_date\", jsonData.payload.ocx_created_date);",
+							"//dob,email,phone,product_id",
+							"const timestamp_to_date = (dob) => {",
+							"    var date = new Date(dob * 1000);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth() + 1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"pm.globals.set(\"tc_sms_content_list_field_dob\", timestamp_to_date(jsonData.payload.dob));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/at_sms@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"at_sms@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"     var jsonData = pm.response.json()",
+							"     var smsText = jsonData.Body;",
+							"     smsText = smsText.split('!$!')",
+							"     var sms = smsText[1].replace(/\\\\\"/g,'\"')",
+							"     //sms = JSON.parse(sms)",
+							"     var today = new Date();",
+							"     var day = String(today.getDate()).padStart(2, '0');",
+							"     var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"     var year = String(today.getFullYear());",
+							"     var yy = year.toString().substr(-2);",
+							"     var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"     var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"     var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"     var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"     pm.test(`Test Transaction Content  SMS  with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(parseInt(pm.globals.get('sms_espId')));",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with Campaign id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(parseInt(pm.environment.get('transactional_cid_sms')));",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with Contact id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get('tc_sms_content_system_field_contact_id'));",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with List Id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(parseInt(pm.environment.get('list_id')));",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with Campaign Name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(\"SMS transactional test\");",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with Contact create date is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          var str = Math.round(sms.cdate).toString();",
+							"        pm.expect(sms).contains(pm.globals.get(\"tc_sms_content_list_field_ocx_created_date\"));",
+							"          // pm.expect(sms.cdate).to.equal(pm.globals.get('sms_list_field_ocx_created_date'));",
+							"     })",
+							"         pm.test(`Test Transaction Content  SMS  with Subject is working \"Time : ${jsonData.timestamp}`, function () {",
+							"              pm.expect(sms).contains(\"Tc_send_sms_content_sys_date_fld!\");",
+							"         })",
+							"     // pm.test(`Test Transaction Content  SMS  with Sms id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"     //      pm.expect(parseInt(sms.mid)).to.equal(pm.environment.get('tc_sms_id_system_date_field'));",
+							"     // })",
+							"          pm.test(`Test Transaction Content  SMS  with ocx_from_name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get('from_name'));",
+							"     })",
+							"          pm.test(`Test Transaction Content  SMS  with Date field Year is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(year);",
+							"     })",
+							"          pm.test(`Test Transaction Content  SMS  with Date field Month Name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(monthName);",
+							"     })",
+							"          pm.test(`Test Transaction Content  SMS  with Date field Year short is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(yy);",
+							"     })",
+							"          pm.test(`Test Transaction Content  SMS  with Date field month short is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(monthShort);",
+							"     })",
+							"          pm.test(`Test Transaction Content  SMS  with Date field month is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(month);",
+							"     })",
+							"          pm.test(`Test Transaction Content  SMS  with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(dowLong);",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(dow);",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(day);",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with Date field ocx_now is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(month+\"/\"+day+\"/\"+year);",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with Date field timestamp is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(year+\"-\"+month+\"-\"+day);",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with List Field DOB is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get(\"tc_sms_content_list_field_dob\"));",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with List Field Phone is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get(\"tc_sms_content_list_field_phone\"));",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with List Field Email is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get(\"tc_sms_content_list_field_email\"));",
+							"     })",
+							"     pm.test(`Test Transaction Content  SMS  with List Field Product Id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(parseInt(pm.globals.get(\"tc_sms_content_list_field_product_id\")));",
+							"     })",
+							"}else{",
+							"  pm.test(`Test Embed Content SMS not received`, function () {",
+							"    pm.expect(\"\").to.equal(\"Embed Content SMS not received\");",
+							"  })",
+							"}",
+							"pm.globals.unset(\"tc_sms_content_system_field_contact_id\");",
+							"pm.globals.unset(\"tc_sms_content_list_field_ocx_created_date\");",
+							"pm.globals.unset(\"tc_sms_content_list_field_product_id\");",
+							"pm.globals.unset(\"tc_sms_content_list_field_phone\");",
+							"pm.globals.unset(\"tc_sms_content_list_field_email\");",
+							"pm.globals.unset(\"tc_sms_content_list_field_dob\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"tc_send_sms_content_sys_date_fld_{{sms_connectionId}}\",\n    \"timeout\": 600000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

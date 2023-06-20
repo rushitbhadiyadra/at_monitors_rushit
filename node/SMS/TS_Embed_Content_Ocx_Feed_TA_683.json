@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "73843568-84e7-40b5-a1c8-0de3119d1acb",
+		"name": "TS_Embed_Content_Ocx_Feed_TA_683",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-73843568-84e7-40b5-a1c8-0de3119d1acb?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "teansactional send embed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipients\": [\n        \"at_sms@hoohem.com\"\n    ],\n    \"sending_connection_id\": {{sms_connectionId}},\n    \"campaign_id\": {{transactional_cid_sms}},\n    \"message\": {\n        \"subject\": \"tc_embed_ocx_feed\",\n        \"content_text\": \"!#!tc_embed_ocx_feed_{{ocx_connection_id}}!#!-!$!{{ocx_feed{url=http://demo.projects.stepinsolutions.in/campaign_qa_test/dynamic_feed_creator/get_dynamic_feed.php?key=surat&feed_type=json}}} {{ocx_loop{block=jobs}}}Hotel Name link$!@#${{name}}$!@#${{ocx_loop_end}}!$!\",\n        \"addresses\": \n        {\n            \"from_name\": \"{{from_name}}\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send_embed_content",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send_embed_content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"  var jsonData = pm.response.json()",
+							"  var smsText1 = jsonData.Body;",
+							"  var smsText = smsText1.split(\"$!@#$\")",
+							"  pm.test(`Test Transactional Send Embed Content ocx feed is working \"Time : ${jsonData.timestamp}`, function () {",
+							"    pm.expect(smsText[1]).to.equal(\"Regular\");",
+							"    pm.expect(smsText[3]).to.equal(\"suit\");",
+							"  })",
+							"}else{",
+							"  pm.test(`Test Transactional Send Embed Content ocx feed is working`, function () {",
+							"   pm.expect(\"\").to.equal(\"Regular\");",
+							"   pm.expect(\"\").to.equal(\"suit\");",
+							"  })",
+							" }",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"tc_embed_ocx_feed_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

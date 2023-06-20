@@ -1,0 +1,843 @@
+{
+	"info": {
+		"_postman_id": "7ead6b9b-dc83-4acf-9bc3-7980adf25bc1",
+		"name": "AB_Split_System_Date_List_Field_Static_Content_With_Shedule_time_709_710_711_712_718_725_721",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-7ead6b9b-dc83-4acf-9bc3-7980adf25bc1?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create and Send Campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"pm.globals.set(\"ab_split_sms_campaign_id\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 300);",
+							"pm.globals.set(\"time_300\", Math.round((new Date()).getTime() / 1000));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"SMS RC AB-Split Test\",\n   \"list_id\": {{list_id}},\n   \"type\": \"split\",\n   \"split_type\": \"email\",\n   \"email_message\": [{{ab_split_sms_id_system_date_field}},{{ab_split_sms_id_st_cnt_dy_ocx_feed_lan}} ],\n   \"segments\": [{{ab_split_sms_segment_id}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{sms_connectionId}},\n            \"percent\": 100\n     }\n   ],\n    \n    \"schedule_date\": {{time_30}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 300",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"sms_system_field_contact_id\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"sms_list_field_ocx_created_date\", str.substring(0,8));",
+							"pm.globals.set(\"sms_list_field_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"sms_list_field_phone\", jsonData.payload.phone); ",
+							"pm.globals.set(\"sms_list_field_email\", jsonData.payload.email);",
+							"const timestamp_to_date = (dob) => {",
+							"    var date = new Date(dob * 1000);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth() + 1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"pm.globals.set(\"sms_list_field_dob\", timestamp_to_date(jsonData.payload.dob));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ab_split_sms1@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ab_split_sms1@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms system field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0;",
+							"if(pm.response.code === 200){",
+							"     count = count + 1;",
+							"     var jsonData = pm.response.json()",
+							"     var smsText = jsonData.Body;",
+							"     smsText = smsText.replace(\"ñ\", \"}\");",
+							"     smsText = smsText.split('!$!')",
+							"     var sms = smsText[1].replace(/\\\\\"/g,'\"')",
+							"     sms = JSON.parse(sms)",
+							"     var today = new Date();",
+							"     var day = String(today.getDate()).padStart(2, '0');",
+							"     var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"     var year = String(today.getFullYear());",
+							"     var yy = year.toString().substr(-2);",
+							"     var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"     var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"     var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"     var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"     pm.test(`Test AB-Split SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(parseInt(sms.eid)).to.equal(parseInt(pm.globals.get('sms_espId')));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Campaign id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(parseInt(sms.cid)).to.equal(parseInt(pm.globals.get('ab_split_sms_campaign_id')));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Contact id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.conid).to.equal(pm.globals.get('sms_system_field_contact_id'));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(parseInt(sms.lid)).to.equal(parseInt(pm.environment.get('list_id')));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Campaign Name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.cname).to.equal(\"SMS RC AB-Split Test\");",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Contact create date is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          var str = Math.round(sms.cdate).toString();",
+							"        pm.expect(str.substring(0, 8)).to.equal(pm.globals.get(\"sms_list_field_ocx_created_date\"));",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with ocx_from_name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.fname).to.equal(pm.globals.get('from_name'));",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field Year is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.year).to.equal(year);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field Month Name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.mname).to.equal(monthName);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field Year short is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.yy).to.equal(yy);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field month short is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.smonth).to.equal(monthShort);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field month is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.month).to.equal(month);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.dlong).to.equal(dowLong);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.dow).to.equal(dow);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.day).to.equal(day);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Date field ocx_now is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.now).to.equal(month+\"/\"+day+\"/\"+year);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Date field timestamp is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.tstamp.split(' ')[0]).to.equal(year+\"-\"+month+\"-\"+day);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Fielud DOB is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.dob).to.equal(pm.globals.get(\"sms_list_field_dob\"));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Field Phone is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.phone).to.equal(pm.globals.get(\"sms_list_field_phone\"));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Field Email is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.email).to.equal(pm.globals.get(\"sms_list_field_email\"));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Field Product Id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"        pm.expect(parseInt(sms.product_id)).to.equal(parseInt(pm.globals.get(\"sms_list_field_product_id\")));",
+							"     })",
+							"    pm.test(`Test AB-Split SMS with Schedule date is working \"Time : ${jsonData.timestamp}`, function () {",
+							"        var time = Math.round(Date.parse(jsonData.timestamp)/1000);",
+							"        pm.expect(time - pm.globals.get(\"time_300\")).to.be.above(299);",
+							"    })",
+							"}",
+							"pm.globals.unset(\"sms_system_field_contact_id\");",
+							"pm.globals.unset(\"sms_list_field_ocx_created_date\");",
+							"pm.globals.unset(\"sms_list_field_product_id\");",
+							"pm.globals.unset(\"sms_list_field_phone\");",
+							"pm.globals.unset(\"sms_list_field_email\");",
+							"pm.globals.unset(\"sms_list_field_dob\");",
+							"pm.globals.set(\"count\", count);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "chirag@stepin-solutions.com"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "Chirag@123"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "si3"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"ab_split_sms_sys_date_fld_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms static content",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\");",
+							"if (pm.response.code === 200) {",
+							"    count = count + 1;",
+							"    var jsonData = pm.response.json()",
+							"    var smsText = jsonData.Body;",
+							"    if (pm.environment.get(\"env\") === \"dev\") {",
+							"        smsText = smsText.split('!$!')",
+							"        lang = JSON.parse(smsText[7])",
+							"        pm.test(`Test AB-Split Static Content SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Static content sms\");",
+							"        })",
+							"        pm.test(`Test AB-Split Dynamic Ocx Feed SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[3]).to.equal(\"Regular\");",
+							"            pm.expect(smsText[5]).to.equal(\"suit\");",
+							"        })",
+							"        pm.test(`Test AB-Split language SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(lang.hebrew).to.equal(\"שלום סטפין\");",
+							"            pm.expect(lang.danish).to.equal(\"Hej Stepin\");",
+							"            pm.expect(lang.english).to.equal(\"Hello Stepin\");",
+							"            pm.expect(lang.greek).to.equal(\"Γεια σου Στέπιν\");",
+							"            pm.expect(lang.japanese).to.equal(\"こんにちは、ステピン\");",
+							"            pm.expect(lang.russian).to.equal(\"Привет степин\");",
+							"        })",
+							"    }",
+							"    else {",
+							"        smsText = smsText.split('!~!')",
+							"        lang = JSON.parse(smsText[7])",
+							"        pm.test(`Test AB-Split Static Content SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Static content sms\");",
+							"        })",
+							"        pm.test(`Test AB-Split Dynamic Ocx Feed SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[3]).to.equal(\"Regular\");",
+							"            pm.expect(smsText[5]).to.equal(\"suit\");",
+							"        })",
+							"        pm.test(`Test AB-Split language SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(lang.hebrew).to.equal(\"שלום סטפין\");",
+							"            pm.expect(lang.danish).to.equal(\"Hej Stepin\");",
+							"            pm.expect(lang.english).to.equal(\"Hello Stepin\");",
+							"            pm.expect(lang.greek).to.equal(\"Γεια σου Στέπιν\");",
+							"            pm.expect(lang.japanese).to.equal(\"こんにちは、ステピン\");",
+							"            pm.expect(lang.russian).to.equal(\"Привет степин\");",
+							"        })",
+							"    }",
+							"}",
+							"if (count !== 1) {",
+							"    pm.test(\"mail not received\", function () {",
+							"        pm.expect(\"\").to.equal('AB-Split mail not received');",
+							"    });",
+							"}",
+							"pm.globals.unset(\"count\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "chirag@stepin-solutions.com"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "Chirag@123"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "si3"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"ab_split_with_static_content_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"sms_system_field_contact_id\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"sms_list_field_ocx_created_date\", str.substring(0,8));",
+							"pm.globals.set(\"sms_list_field_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"sms_list_field_phone\", jsonData.payload.phone); ",
+							"pm.globals.set(\"sms_list_field_email\", jsonData.payload.email);",
+							"const timestamp_to_date = (dob) => {",
+							"    var date = new Date(dob * 1000);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth() + 1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"pm.globals.set(\"sms_list_field_dob\", timestamp_to_date(jsonData.payload.dob));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ab_split_sms2@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ab_split_sms2@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms system field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0;",
+							"if(pm.response.code === 200){",
+							"     count = count + 1;",
+							"     var jsonData = pm.response.json()",
+							"     var smsText = jsonData.Body;",
+							"     smsText = smsText.replace(\"ñ\", \"}\");",
+							"     smsText = smsText.split('!ü!')",
+							"     ",
+							"     var sms = smsText[1].replace(/\\\\\"/g,'\"')",
+							"     sms = JSON.parse(sms)",
+							"     var today = new Date();",
+							"     var day = String(today.getDate()).padStart(2, '0');",
+							"     var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"     var year = String(today.getFullYear());",
+							"     var yy = year.toString().substr(-2);",
+							"     var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"     var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"     var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"     var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"     pm.test(`Test AB-Split SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(parseInt(sms.eid)).to.equal(parseInt(pm.globals.get('sms_espId')));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Campaign id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(parseInt(sms.cid)).to.equal(parseInt(pm.globals.get('ab_split_sms_campaign_id')));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Contact id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.conid).to.equal(pm.globals.get('sms_system_field_contact_id'));",
+							"     })",
+							"      pm.test(`Test AB-Split SMS with List Id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(parseInt(sms.lid)).to.equal(pm.environment.get('list_id'));",
+							"          ",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Campaign Name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.cname).to.equal(\"SMS RC AB-Split Test\");",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Contact create date is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          var str = Math.round(sms.cdate).toString();",
+							"        pm.expect(str.substring(0, 8)).to.equal(pm.globals.get(\"sms_list_field_ocx_created_date\"));",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with ocx_from_name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.fname).to.equal(pm.globals.get('from_name'));",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field Year is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.year).to.equal(year);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field Month Name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.mname).to.equal(monthName);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field Year short is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.yy).to.equal(yy);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field month short is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.smonth).to.equal(monthShort);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field month is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.month).to.equal(month);",
+							"     })",
+							"          pm.test(`Test AB-Split SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.dlong).to.equal(dowLong);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.dow).to.equal(dow);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.day).to.equal(day);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Date field ocx_now is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.now).to.equal(month+\"/\"+day+\"/\"+year);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with Date field timestamp is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.tstamp.split(' ')[0]).to.equal(year+\"-\"+month+\"-\"+day);",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Field DOB is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.dob).to.equal(pm.globals.get(\"sms_list_field_dob\"));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Field Phone is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.phone).to.equal(pm.globals.get(\"sms_list_field_phone\"));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Field Email is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms.email).to.equal(pm.globals.get(\"sms_list_field_email\"));",
+							"     })",
+							"     pm.test(`Test AB-Split SMS with List Field Product Id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(parseInt(sms.product_id)).to.equal(parseInt(pm.globals.get(\"sms_list_field_product_id\")));",
+							"     })",
+							"      pm.test(`Test AB-Split SMS with Schedule date is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            var time = Math.round(Date.parse(jsonData.timestamp)/1000);",
+							"            pm.expect(time - pm.globals.get(\"time_300\")).to.be.above(299);",
+							"     })",
+							"}",
+							"pm.globals.unset(\"sms_system_field_contact_id\");",
+							"pm.globals.unset(\"sms_list_field_ocx_created_date\");",
+							"pm.globals.unset(\"sms_list_field_product_id\");",
+							"pm.globals.unset(\"sms_list_field_phone\");",
+							"pm.globals.unset(\"sms_list_field_email\");",
+							"pm.globals.unset(\"sms_list_field_dob\");",
+							"pm.globals.set(\"count\", count);",
+							"pm.globals.unset(\"time_300\");",
+							"pm.globals.unset(\"time_30\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "chirag@stepin-solutions.com"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "Chirag@123"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "si3"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_2}}\",\n    \"unique_id\": \"ab_split_sms_sys_date_fld_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms static content",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = pm.globals.get(\"count\");",
+							"if (pm.response.code === 200) {",
+							"    count = count + 1;",
+							"    var jsonData = pm.response.json()",
+							"    var smsText = jsonData.Body;",
+							"    if (pm.environment.get(\"env\") === \"dev\") {",
+							"        smsText = smsText.split('!$!')",
+							"        lang = JSON.parse(smsText[7])",
+							"        pm.test(`Test AB-Split Static Content SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Static content sms\");",
+							"        })",
+							"        pm.test(`Test AB-Split Dynamic Ocx Feed SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[3]).to.equal(\"Regular\");",
+							"            pm.expect(smsText[5]).to.equal(\"suit\");",
+							"        })",
+							"        pm.test(`Test AB-Split language SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(lang.hebrew).to.equal(\"שלום סטפין\");",
+							"            pm.expect(lang.danish).to.equal(\"Hej Stepin\");",
+							"            pm.expect(lang.english).to.equal(\"Hello Stepin\");",
+							"            pm.expect(lang.greek).to.equal(\"Γεια σου Στέπιν\");",
+							"            pm.expect(lang.japanese).to.equal(\"こんにちは、ステピン\");",
+							"            pm.expect(lang.russian).to.equal(\"Привет степин\");",
+							"        })",
+							"    }",
+							"    else {",
+							"        smsText = smsText.split('!~!')",
+							"        lang = JSON.parse(smsText[7])",
+							"        pm.test(`Test AB-Split Static Content SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Static content sms\");",
+							"        })",
+							"        pm.test(`Test AB-Split Dynamic Ocx Feed SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[3]).to.equal(\"Regular\");",
+							"            pm.expect(smsText[5]).to.equal(\"suit\");",
+							"        })",
+							"        pm.test(`Test AB-Split language SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(lang.hebrew).to.equal(\"שלום סטפין\");",
+							"            pm.expect(lang.danish).to.equal(\"Hej Stepin\");",
+							"            pm.expect(lang.english).to.equal(\"Hello Stepin\");",
+							"            pm.expect(lang.greek).to.equal(\"Γεια σου Στέπιν\");",
+							"            pm.expect(lang.japanese).to.equal(\"こんにちは、ステピン\");",
+							"            pm.expect(lang.russian).to.equal(\"Привет степин\");",
+							"        })",
+							"    }",
+							"}",
+							"if (count !== 1) {",
+							"    pm.test(\"mail not received\", function () {",
+							"        pm.expect(\"\").to.equal('AB-Split mail not received');",
+							"    });",
+							"}",
+							"pm.globals.unset(\"count\");",
+							"pm.globals.get(\"ab_split_sms_campaign_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "chirag@stepin-solutions.com"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "Chirag@123"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "si3"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_2}}\",\n    \"unique_id\": \"ab_split_with_static_content_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
