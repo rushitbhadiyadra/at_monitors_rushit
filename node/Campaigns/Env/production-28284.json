@@ -1,0 +1,414 @@
+{
+	"id": "f3b0b57b-6ecd-4c66-aac6-2952ea2522be",
+	"name": "production-28284",
+	"values": [
+		{
+			"key": "username",
+			"value": "kinjal@stepin-solutions.com",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "Kinjal@stepin",
+			"enabled": true
+		},
+		{
+			"key": "account_code",
+			"value": "stepin_solutions17",
+			"enabled": true
+		},
+		{
+			"key": "account_id",
+			"value": "28284",
+			"enabled": true
+		},
+		{
+			"key": "api_domain",
+			"value": "https://api.ongage.net",
+			"enabled": true
+		},
+		{
+			"key": "env",
+			"value": "production-28284",
+			"enabled": true
+		},
+		{
+			"key": "ar_list_name",
+			"value": "QA Automation Rule Test List-production-28284",
+			"enabled": true
+		},
+		{
+			"key": "list_id",
+			"value": "86289",
+			"enabled": true
+		},
+		{
+			"key": "list_field_",
+			"value": "1001690470",
+			"enabled": true
+		},
+		{
+			"key": "list_field_address",
+			"value": "1001690457",
+			"enabled": true
+		},
+		{
+			"key": "list_field_birth_date",
+			"value": "1001690460",
+			"enabled": true
+		},
+		{
+			"key": "list_field_browsers",
+			"value": "1001690501",
+			"enabled": true
+		},
+		{
+			"key": "list_field_connection_ids",
+			"value": "1001690493",
+			"enabled": true
+		},
+		{
+			"key": "list_field_count",
+			"value": "1001690478",
+			"enabled": true
+		},
+		{
+			"key": "list_field_country",
+			"value": "1001690458",
+			"enabled": true
+		},
+		{
+			"key": "list_field_country_code",
+			"value": "1001690500",
+			"enabled": true
+		},
+		{
+			"key": "list_field_date1",
+			"value": "1001690507",
+			"enabled": true
+		},
+		{
+			"key": "list_field_date2",
+			"value": "1001690508",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email",
+			"value": "1001690456",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email_message_ids",
+			"value": "1001690497",
+			"enabled": true
+		},
+		{
+			"key": "list_field_esp_ids",
+			"value": "1001690492",
+			"enabled": true
+		},
+		{
+			"key": "list_field_first_name",
+			"value": "1001690461",
+			"enabled": true
+		},
+		{
+			"key": "list_field_fud",
+			"value": "1001690473",
+			"enabled": true
+		},
+		{
+			"key": "list_field_fue",
+			"value": "1001690474",
+			"enabled": true
+		},
+		{
+			"key": "list_field_fulsp",
+			"value": "1001690481",
+			"enabled": true
+		},
+		{
+			"key": "list_field_funi",
+			"value": "1001690475",
+			"enabled": true
+		},
+		{
+			"key": "list_field_funs",
+			"value": "1001690476",
+			"enabled": true
+		},
+		{
+			"key": "list_field_fusa",
+			"value": "1001690472",
+			"enabled": true
+		},
+		{
+			"key": "list_field_fuso",
+			"value": "1001690471",
+			"enabled": true
+		},
+		{
+			"key": "list_field_fusp",
+			"value": "1001690480",
+			"enabled": true
+		},
+		{
+			"key": "list_field_gender_id",
+			"value": "1001690463",
+			"enabled": true
+		},
+		{
+			"key": "list_field_ips",
+			"value": "1001690499",
+			"enabled": true
+		},
+		{
+			"key": "list_field_last_name",
+			"value": "1001690462",
+			"enabled": true
+		},
+		{
+			"key": "list_field_link_id",
+			"value": "1001690495",
+			"enabled": true
+		},
+		{
+			"key": "list_field_malling_ids",
+			"value": "1001690494",
+			"enabled": true
+		},
+		{
+			"key": "list_field_os",
+			"value": "1001690467",
+			"enabled": true
+		},
+		{
+			"key": "list_field_product_id",
+			"value": "1001690469",
+			"enabled": true
+		},
+		{
+			"key": "list_field_segment_ids",
+			"value": "1001690498",
+			"enabled": true
+		},
+		{
+			"key": "list_field_test_ocx_now_date_field",
+			"value": "1001690511",
+			"enabled": true
+		},
+		{
+			"key": "list_field_test_ocxar_event_timestamp_date_field",
+			"value": "1001690510",
+			"enabled": true
+		},
+		{
+			"key": "list_field_test_ocxar_event_timestamp_string_field",
+			"value": "1001690509",
+			"enabled": true
+		},
+		{
+			"key": "list_field_timestamps",
+			"value": "1001690496",
+			"enabled": true
+		},
+		{
+			"key": "list_field_type",
+			"value": "1001690486",
+			"enabled": true
+		},
+		{
+			"key": "esp_id",
+			"value": "41318",
+			"enabled": true
+		},
+		{
+			"key": "smtpespid",
+			"value": "59",
+			"enabled": true
+		},
+		{
+			"key": "ta_44_segment_id",
+			"value": "1018813780",
+			"enabled": true
+		},
+		{
+			"key": "email_message_id",
+			"value": "7387219",
+			"enabled": true
+		},
+		{
+			"key": "email_message_id_ta_44_transactional_mail",
+			"value": "7387214",
+			"enabled": true
+		},
+		{
+			"key": "email_message_bh",
+			"value": "7387215",
+			"enabled": true
+		},
+		{
+			"key": "ta_51_email_message_id",
+			"value": "7387216",
+			"enabled": true
+		},
+		{
+			"key": "ta_contact_create_once",
+			"value": "7387217",
+			"enabled": true
+		},
+		{
+			"key": "ta11email_message_id",
+			"value": "7387218",
+			"enabled": true
+		},
+		{
+			"key": "ta_474_email_message_id",
+			"value": "7387220",
+			"enabled": true
+		},
+		{
+			"key": "ta_contact_delete_once",
+			"value": "7387221",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_check_birthdate",
+			"value": "7387222",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ta_520",
+			"value": "7387223",
+			"enabled": true
+		},
+		{
+			"key": "email_message_id_ta_515_system_field",
+			"value": "7387224",
+			"enabled": true
+		},
+		{
+			"key": "system_field_test_msg_id",
+			"value": "7387235",
+			"enabled": true
+		},
+		{
+			"key": "check_birth_date_campaign_id",
+			"value": "1083396771",
+			"enabled": true
+		},
+		{
+			"key": "ta_51_mailing_id",
+			"value": "1083396772",
+			"enabled": true
+		},
+		{
+			"key": "tmailing_id",
+			"value": "1083396773",
+			"enabled": true
+		},
+		{
+			"key": "ta56clicklinkemail_message_id",
+			"value": "7387229",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_ta56",
+			"value": "1018813789",
+			"enabled": true
+		},
+		{
+			"key": "ta44clickopenlinkemail_message_id",
+			"value": "7387230",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_ta44",
+			"value": "1018813791",
+			"enabled": true
+		},
+		{
+			"key": "ta_154_email_msg_id",
+			"value": "7387231",
+			"enabled": true
+		},
+		{
+			"key": "ta_154event_email_msg_id",
+			"value": "7387232",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_both_uncheck_status",
+			"value": "7387233",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_both_check_status",
+			"value": "7387234",
+			"enabled": true
+		},
+		{
+			"key": "ta_154_segment_id",
+			"value": "1018813802",
+			"enabled": true
+		},
+		{
+			"key": "ta_154_event_id",
+			"value": "279042",
+			"enabled": true
+		},
+		{
+			"key": "ta_154_trriger_id",
+			"value": "1622946844",
+			"enabled": true
+		},
+		{
+			"key": "ta791email_message_id",
+			"value": "8374354",
+			"enabled": true
+		},
+		{
+			"key": "segment_id_ta791",
+			"value": "1037926670",
+			"enabled": true
+		},
+		{
+			"key": "list_field_student_loan",
+			"value": "1002356657",
+			"enabled": true
+		},
+		{
+			"key": "list_field_personal_loan",
+			"value": "1002356658",
+			"enabled": true
+		},
+		{
+			"key": "asp7602_email_message_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ong_13688_email_id",
+			"value": "9726236",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ONG_13760_1",
+			"value": "9726242",
+			"enabled": true
+		},
+		{
+			"key": "msg_id_ONG_13760_2",
+			"value": "9726243",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email_id",
+			"value": "1001690456",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-06-20T08:17:02.252Z",
+	"_postman_exported_using": "Postman/10.15.1-230614-0638"
+}
