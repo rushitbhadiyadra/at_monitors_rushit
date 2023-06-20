@@ -1,0 +1,1285 @@
+{
+	"info": {
+		"_postman_id": "217275cf-4bce-4626-bf3e-a7c68f3e5827",
+		"name": "TA-54",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-217275cf-4bce-4626-bf3e-a7c68f3e5827?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "general validation",
+			"item": [
+				{
+					"name": "Get automation rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"count = 0",
+									"jsonData.payload.forEach(function(data, index) {",
+									"    if(data.name===\"TA-54\"){",
+									"         count += 1",
+									"        pm.globals.set(\"automation_rule_id_ta-54\", data.id);",
+									"        if(data.active === false){",
+									"\t        postman.setNextRequest(\"delete_AR\");",
+									"        }",
+									"    }",
+									"})",
+									"if(count === 0 ){",
+									"\tpostman.setNextRequest(\"General validation on behavioral event\");",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate automation rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"active\": false}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id_ta-54}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								"{{automation_rule_id_ta-54}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_AR",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"automation_rule_id_ta-54\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id_ta-54}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								"{{automation_rule_id_ta-54}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "General validation on behavioral event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"Once Per Campaign\\\" is only valid when AR is based on \\\"Behavioral Event\\\"\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"contact_created\",\n    \"trigger_frequency\": \"once_per_campaign\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": null,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-51@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n       {\n       \t\"name\": \"TA-54 Transactional Action\",\n\t\t\"action_number\":1,\n\t\t\"type\":\"transactional\",\n\t\t\"data\":{\n\t\t\t\"message_id\":{{email_message_id}},\n\t\t\t\"campaign_id\":{{tmailing_id}},\n\t\t\t\"sending_connection_id\":{{esp_id}}\n\t\t},\n\t\t\"active\":true,\n\t\t\"position\":0\n\t\t}\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "General validation on changed by",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"Changed By\\\" is not supported on \\\"behavioural event\\\"\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"trigger_sources\": [\n        \"ui\"\n    ],\n    \"btn_save\": \"\",\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-54@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": []\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Criteria validations",
+			"item": [
+				{
+					"name": "Criteria validations with system fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test behavioral event system fields criteria rules are only supported when AR is based on  \\\"behavioural event\\\"\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"contact_create\",\n    \"trigger_frequency\": \"always\",\n    \"trigger_sources\": [\n        \"ui\"\n    ],\n    \"btn_save\": \"\",\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"field_name\": \"ocxbe_type\",\n            \"type\": \"enum\",\n            \"operator\": \"=\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operand\": [\n                \"clicked\"\n            ],\n            \"group\": null,\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": []\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criteria validations with correct value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"Behavioral Type\\\" system field is only excepting the correct value\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"behavioral_event\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": null,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"field_name\": \"ocxbe_type\",\n            \"type\": \"enum\",\n            \"operator\": \"=\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operand\": [\n                \"Open\"\n            ],\n            \"group\": null,\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "actions validations",
+			"item": [
+				{
+					"name": "create automation rule for transactional mandatory fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"mandatory fields\\\" for \\\"transactional action\\\" are enforced\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": null,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-54@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n         {\n         \t\"name\": \"TA-54 Transactional Action\",\n            \"action_number\": 1,\n            \"type\": \"transactional\",\n            \"data\": {\n                \"mailing_id\": \"\",\n                \"distribution\": [\n                    {\n                        \"domain\": \"default\",\n                        \"esp_id\": 19,\n                        \"isp_id\": 0,\n                        \"percent\": 100,\n                        \"esp_connection_id\": {{esp_id}}\n                    }\n                ],\n                \"email_message_id\": \"\"\n            },\n            \"active\": true,\n            \"position\": 0\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create automation rule for webhook mandatory fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"mandatory fields\\\" for \\\"webhook action\\\" are enforced\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": null,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-54@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n        \t\"name\": \"TA-54 Webhook Action\",\n            \"action_number\": 1,\n            \"type\": \"webhook\",\n            \"data\": {\n                \"http_method\": \"\",\n                \"url\": \"\",\n                \"selected_fields\": [\n                ]\n            },\n            \"active\": true,\n            \"position\": 0\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create automation rule for update mandatory fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"mandatory fields\\\" for \\\"update fields\\\" action are enforced\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": null,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-54@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n        \t\"name\": \"TA-54 Update Field Action\",\n            \"action_number\": 1,\n            \"type\": \"update_field\",\n            \"data\": {\n                \"field_id\": \"\",\n                \"operator\": \"overwrite\",\n                \"value\": \"{{name_frist}}\"\n            },\n            \"active\": true,\n            \"position\": 0\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transactional action",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"transaction action\\\" do not except \\\"recipients\\\"\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": null,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-54@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n        \t\"name\": \"TA-54 Transactional Action\",\n            \"action_number\": 1,\n            \"type\": \"transactional\",\n            \"data\": {\n                \"mailing_id\": {{tmailing_id}},\n                \"recipients\": [\n        \t\t\t\"ta-@hoohem.com\"\n        \t\t],\n                \"distribution\": [\n                    {\n                        \"domain\": \"default\",\n                        \"esp_id\": 19,\n                        \"isp_id\": 0,\n                        \"percent\": 100,\n                        \"esp_connection_id\": {{esp_id}}\n                    }\n                ],\n                \"email_message_id\": {{email_message_id}}\n             },\n            \"active\": true,\n            \"position\": 0\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update field  except only list and system field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"update field\\\" except only existing \\\"list field & system fields\\\"\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": null,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-54@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n        \t\"name\": \"TA-54 Update Field Action\",\n            \"action_number\": 1,\n            \"type\": \"update_field\",\n            \"data\": {\n                \"field_id\": \"\",\n                \"operator\": \"overwrite\",\n                \"value\": \"{{name_first}}\"\n            },\n            \"active\": true,\n            \"position\": 0\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "webhook except only list and system field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									"pm.test(\"Test \\\"webhook\\\" except only existing \\\"list field & system fields\\\"\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": null,\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-54@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n        \t\"name\": \"TA-54 Webhook Action\",\n            \"action_number\": 1,\n            \"type\": \"webhook\",\n            \"data\": {\n                \"http_method\": \"post\",\n                \"url\": \"https://automated_tests-l2.ongage.net/webhook_testing/get/ta44\",\n                \"selected_fields\": [\n                    \"name_first\",\n                    \"address\",\n                    \"country\"\n                ]\n            },\n            \"active\": true,\n            \"position\": 0\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete automation rule",
+			"item": [
+				{
+					"name": "create_AR",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TA-54\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta-54@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n        \t\"name\": \"TA-54 Update Field Action\",\n            \"action_number\": 1,\n            \"type\": \"update_field\",\n            \"data\": {\n                \"field_id\": {{list_field_last_name}},\n                \"operator\": \"overwrite\",\n                \"value\": \"{{first_name}}\"\n            },\n            \"active\": true,\n            \"position\": 0\n        }\n       \n    ]\n}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "active automation rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"active\": true}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								"{{automation_rule_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete active automation rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Test delete \\\"active automation rule\\\"\", function() {",
+									"    pm.expect(jsonData.payload.code).to.eql(parseInt(412));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								"{{automation_rule_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate automation rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"active\": false}"
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								"{{automation_rule_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete inactive automation rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.unset(\"automation_rule_id\");",
+									"pm.test(\"Test delete inactive automation rule\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X_USERNAME",
+								"type": "text",
+								"value": "{{username}}"
+							},
+							{
+								"key": "X_PASSWORD",
+								"type": "text",
+								"value": "{{password}}"
+							},
+							{
+								"key": "X_ACCOUNT_CODE",
+								"type": "text",
+								"value": "{{account_code}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+							"host": [
+								"{{api_domain}}"
+							],
+							"path": [
+								"{{list_id}}",
+								"api",
+								"automation_rule",
+								"{{automation_rule_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

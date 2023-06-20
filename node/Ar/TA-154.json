@@ -1,0 +1,4026 @@
+{
+	"info": {
+		"_postman_id": "58a86870-303e-46da-8ae1-3a5028a8c0c2",
+		"name": "TA-154",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-58a86870-303e-46da-8ae1-3a5028a8c0c2?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"ta_154_{{env}}@hoohem.com\", \"count\":\"0\"}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_webhook_value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(Math.round((new Date()).getTime() / 1000) - parseInt(jsonData.time_30) <= 604800){",
+							"    pm.globals.set(\"ta_154_campaign_id\", jsonData.ta_154_campaign_id);",
+							"    pm.globals.set(\"ta_behaviour_criteria_click_link\", jsonData.ta_behaviour_criteria_click_link);",
+							"    pm.globals.set(\"ta_behaviour_criteria_open_link\", jsonData.ta_behaviour_criteria_open_link);",
+							"    pm.globals.set(\"automation_rule_id_campaign\", jsonData.automation_rule_id_campaign);",
+							"    postman.setNextRequest(\"Create_automation_criteria_open_and_email_message_id\");",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-154-variable-value",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-154-variable-value"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create And Send Campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"ta_154_campaign_id\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"TA-154 Click Open Link\",\n   \"list_id\": {{list_id}} ,\n   \"email_message\": {{ta_154_email_msg_id}} ,\n   \"segments\": [{{ta_154_segment_id}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{esp_id}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n}\n"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TA-154 Click Open Link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseText = pm.response.json();",
+							"pm.globals.set(\"ta_behaviour_criteria_click_link\", responseText.HTMLTextLinks[0]);",
+							"pm.globals.set(\"ta_behaviour_criteria_open_link\", responseText.HTMLOpenLinks[0]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_154_{{env}}@hoohem.com\",\n\t\"subject\":\"TA-154 Click Open Link{{env}}\",\n\t\"timeout\":400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get old ar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"var count = 0",
+							"if(jsonData.payload.length > 0){",
+							"    for (var ar of jsonData.payload) {",
+							"            if(ar.name === \"TA-Brhaviour-Criteria-Open-And-Campaign\"){",
+							"                count += 1",
+							"                pm.globals.set(\"ar_id\", ar.id);",
+							"                if(ar.active === true ){",
+							"                    postman.setNextRequest(\"Deactivate_automation_rule\")",
+							"                }else{",
+							"                    postman.setNextRequest(\"Delete_automation_rule\")",
+							"                }",
+							"            } ",
+							"        }",
+							"}",
+							"if(count !== 1){",
+							"    postman.setNextRequest(\"Create_automation_criteria_open_and_campaign_id\")",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate_automation_rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"active\": false\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{ar_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{ar_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_automation_rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"automation_rule_id_campaign\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{ar_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{ar_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_automation_criteria_open_and_campaign_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id_campaign\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Campaign\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n\t\"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        {\n        \t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_mailing_id\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\t{{ta_154_campaign_id}}\n\t\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n        },\n        {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_campain_id\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_mailing_id\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean_webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-154-variable-value",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-154-variable-value"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Value_Set_in_Webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ta_154_campaign_id\": \"{{ta_154_campaign_id}}\",\n    \"ta_behaviour_criteria_click_link\": \"{{ta_behaviour_criteria_click_link}}\",\n    \"ta_behaviour_criteria_open_link\": \"{{ta_behaviour_criteria_open_link}}\",\n    \"time_30\": \"{{time_30}}\"\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-154-variable-value",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"{{env}}-154-variable-value"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_automation_criteria_open_and_email_message_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id1\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Email-Msg-Id\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\":[\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        \n        {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_email_message_id\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\t{{ta_154_email_msg_id}}\n\t\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_email_msg_id\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_email_message_id\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation criteria open and esp id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id2\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Esp-Id\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_esp_id\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t{{smtpespid}}\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_esp_id\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_esp_id\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation criteria open and connection id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id3\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Connection-Id\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        {\n        \t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_connection_id\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t{{esp_id}}\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_connection_id\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_connection_id\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation criteria open and timestamp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id5\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Timestamp\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n       {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"position\":0,\n\t\t\t\"field_name\":\"ocxbe_timestamp\",\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\">\",\n\t\t\t\"type\":\"timestamp\",\n\t\t\t\"case_sensitive\":\"0\",\n\t\t\t\"operand\":[\n\t\t\t\t1571250600,\n\t\t\t\t943900200\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_timestamp\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_link_id\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation criteria open and browser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id10\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "User-Agent",
+						"type": "text",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Browser\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_browser\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"Chrome\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_browser\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_browser\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation criteria open and segment id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id7\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Segment-Id\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\":[\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_segment_id\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t{{ta_154_segment_id}}\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_segment_id\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_segment_id\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation criteria open and country code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id8\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Country-Code\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\":[\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_country_code\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"IN\",\n\t\t\t\"IE\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_country_code\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_country_code\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation criteria open and os",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id9\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-OS\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\":[\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_os\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"Linux\",\"Win10\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_os\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_os\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation criteria open and trigger id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id11\", jsonData.payload.id);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"now_time\",pm.globals.get(\"$timestamp\")); ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "User-Agent",
+						"type": "text",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-Brhaviour-Criteria-Open-And-Trigger-Id\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"always\",\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"active\": true,\n    \"criteria\": [\n        {\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"\",\n\t\t\t\"field_name\":\"ocxbe_trigger_id\",\n\t\t\t\"type\":\"entity\",\n\t\t\t\"position\":0,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\t{{ta_154_trriger_id}}\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t},\n\t\t{\n\t\t\t\"condition\":\"and\",\n\t\t\t\"group\":\"\",\n\t\t\t\"field_id\":\"{{list_field_email}}\",\n\t\t\t\"field_name\":\"\",\n\t\t\t\"type\":\"email\",\n\t\t\t\"position\":1,\n\t\t\t\"changed\":\"\",\n\t\t\t\"operator\":\"=\",\n\t\t\t\"operand\":[\n\t\t\t\"ta_154_{{env}}@hoohem.com\"\n\t\t\t],\n\t\t\t\"left_parenthesis\":0,\n\t\t\t\"right_parenthesis\":0\n\t\t}\n    ],\n    \"actions\": [\n        {\n        \t\"action_number\":1,\n\t\t\t\"type\":\"webhook\",\n\t\t\t\"data\":{\n\t\t\t\t\"http_method\":\"post\",\n\t\t\t\t\"url\":\"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-open_and_trigger_id\",\n\t\t\t\t\"selected_fields\":[\n\t\t\t\t\"email\",\n\t\t\t\t\"ocxbe_trigger_id\"\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"name\":\"behavioural campaign id criteria\",\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id_campaign}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id_campaign}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id1}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id2}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id3}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id5}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id5}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id7}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id7}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id8}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id8}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id9}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id9}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id10}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id10}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id11}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id11}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ta_behaviour_criteria_open_link}}",
+					"host": [
+						"{{ta_behaviour_criteria_open_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Click Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ta_behaviour_criteria_click_link}}",
+					"host": [
+						"{{ta_behaviour_criteria_click_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TA-154 Event Link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseText = pm.response.json();",
+							"if(pm.response.code ===200){",
+							"    pm.globals.set(\"ta_154_trigger_open\", responseText.HTMLOpenLinks[0]);",
+							"    postman.setNextRequest(\"Clean_webhook_trigger_link\");",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_154_{{env}}@hoohem.com\",\n\t\"subject\":\"TA-154 Event Click Open Link{{env}}\",\n\t\"timeout\":60000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook Trigger link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set(\"ta_154_trigger_open\",jsonData.ta_154_trigger_open);",
+							"    postman.setNextRequest(\"Trigger_Open_Mail\");",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta154_trigger_link",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta154_trigger_link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean_webhook_trigger_link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ta154_trigger_link",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ta154_trigger_link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trigger_Link_Set",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"ta_154_trigger_open\":\"{{ta_154_trigger_open}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-ta154_trigger_link",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"{{env}}-ta154_trigger_link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trigger_Open_Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ta_154_trigger_open\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "User-Agent",
+						"type": "text",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{ta_154_trigger_open}}",
+					"host": [
+						"{{ta_154_trigger_open}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and campaign id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Open and Campaigm Id working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect(jsonData.events[0].ocxbe_mailing_id).to.equal(parseInt(pm.globals.get(\"ta_154_campaign_id\")));",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect('').to.equal(parseInt(pm.globals.get(\"ta_154_campaign_id\")));",
+							"    }",
+							"});",
+							"    ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_campain_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_campain_id"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and email msg id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Open and Email Message Id working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect(parseInt(jsonData.events[0].ocxbe_email_message_id)).to.equal(parseInt(pm.environment.get(\"ta_154_email_msg_id\")));",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect('').to.equal(pm.environment.get(\"ta_154_email_msg_id\"));",
+							"    }",
+							"});",
+							"",
+							"    ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_email_msg_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_email_msg_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and esp id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Open and ESP Id working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect(jsonData.events[0].ocxbe_esp_id).to.equal(parseInt(pm.variables.get(\"smtpespid\")));",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect('').to.equal(parseInt(pm.variables.get(\"smtpespid\")));",
+							"    }",
+							"});",
+							"",
+							"    ",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_esp_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_esp_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and connection id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Open and Connection Id working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect(jsonData.events[0].ocxbe_connection_id).to.equal(parseInt(pm.environment.get(\"esp_id\")));",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect('').to.equal(parseInt(pm.environment.get(\"esp_id\")));",
+							"    }",
+							"});",
+							"    "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_connection_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_connection_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and timestamp criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Open and Timestamp working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_timestamp",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_timestamp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and segment id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Click and Segment Id working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect(jsonData.events[0].ocxbe_segment_id).to.equal(parseInt(pm.environment.get(\"ta_154_segment_id\")));",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect('').to.equal(parseInt(pm.environment.get(\"ta_154_segment_id\")));",
+							"    }",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_segment_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_segment_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and country code criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Click and Country Code working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_country_code",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_country_code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and os criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Click and OS working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect(jsonData.events[0].ocxbe_os).to.equal(\"Win10\");    ",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect('').to.equal(\"Win10\");",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_os",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_os"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and browser criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Click and Browser working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect(jsonData.events[0].ocxbe_browser).to.equal(\"Chrome\");    ",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect('').to.equal(\"Chrome\");",
+							"    }",
+							"});",
+							"if(pm.environment.get(\"ta_154_trigger_open\")=== null){",
+							"    pm.test(\"Trigger Link Not Populate\", function () {",
+							"postman.setNextRequest(\"Clean up open and campaign id criteria\");",
+							"})}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_browser",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_browser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook open and trigger id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test AR Behaviour Criteria Click and Trigger Id working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    if(Date.now() - jsonData.rtimestamp < 3600000){",
+							"        pm.expect(jsonData.events[0].email).to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect(jsonData.events[0].ocxbe_trigger_id).to.equal(parseInt(pm.environment.get(\"ta_154_trriger_id\")));   ",
+							"    }else{",
+							"        pm.expect('').to.equal(\"ta_154_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"        pm.expect('').to.equal(parseInt(pm.environment.get(\"ta_154_trriger_id\")));",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-open_and_trigger_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-open_and_trigger_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and campaign id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"automation_rule_id\")",
+							"pm.globals.unset(\"automation_rule_id1\")",
+							"pm.globals.unset(\"automation_rule_id2\");",
+							"pm.globals.unset(\"automation_rule_id3\");",
+							"pm.globals.unset(\"automation_rule_id4\");",
+							"pm.globals.unset(\"automation_rule_id5\")",
+							"pm.globals.unset(\"automation_rule_id6\");",
+							"pm.globals.unset(\"automation_rule_id7\");",
+							"pm.globals.unset(\"automation_rule_id8\");",
+							"pm.globals.unset(\"automation_rule_id9\");",
+							"pm.globals.unset(\"automation_rule_id10\");",
+							"pm.globals.unset(\"automation_rule_id11\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_campain_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_campain_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and email msg id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_email_msg_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_email_msg_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and esp id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_esp_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_esp_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and connection id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_connection_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_connection_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and timestamp criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_timestamp",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_timestamp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and segment id criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_segment_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_segment_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and country code criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_country_code",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_country_code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and os criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_os",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_os"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and browser criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_browser",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_browser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up open and browser trigger id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-open_and_trigger_id",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-open_and_trigger_id"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
