@@ -1,0 +1,571 @@
+{
+	"info": {
+		"_postman_id": "17e6e93e-28d3-4a8b-b42d-abaf9335e7b8",
+		"name": "RC_link_Size_Test_TA_722_TA_723",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-17e6e93e-28d3-4a8b-b42d-abaf9335e7b8?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create and Send Campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"if(jsonData.metadata.error === false) {",
+							"pm.globals.set(\"rc_sms_link_size_campaign_id\", jsonData.payload.id);",
+							"}",
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"SMS RC link size test\",\n   \"list_id\": {{list_id}} ,\n   \"email_message\": {{sms_id_test_link_length}} ,\n   \"segments\": [{{rc_sms_id_segment}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{sms_connectionId}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200)",
+							"{",
+							"    var jsonData = pm.response.json()",
+							"    var smsText = jsonData.Body;",
+							"    smsText = smsText.split('!#!')",
+							"    console.log(smsText)",
+							"    pm.globals.set(\"test_camp_sms_open_link\", smsText[2]);",
+							"    var size = Object.keys(smsText[2]).length;",
+							"    console.log(size)",
+							"    pm.test(`Test Regular Campaign Link length SMS \"Time : ${jsonData.timestamp}`, function () {",
+							"        pm.expect(size).to.be.below(parseInt(pm.environment.get(\"sms_link_length\")));",
+							"    })",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"test_sms_link_size_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"test_camp_sms_open_link\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{test_camp_sms_open_link}}",
+					"host": [
+						"{{test_camp_sms_open_link}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RC-generate aggregate report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Test SMS Regular Campaign Behavioural Open stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].unique_opens)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test SMS Regular Campaign Behavioural Sent stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].sent)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test SMS Regular Campaign Behavioural Click stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].clicks)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test SMS Regular Campaign Behavioural Success stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].success)).to.be.above(0);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"select\": [\n        \"mailing_name\",\n        \"mailing_type\",\n        \"split_type\",\n        \"mailing_name_id\",\n        [\n            \"MAX(`stats_date`)\",\n            \"stats_date\"\n        ],\n        [\n            \"MAX(`delivery_timestamp`)\",\n            \"delivery_timestamp\"\n        ],\n        [\n            \"schedule_date\",\n            \"schedule_date\"\n        ],\n        \"sum(`targeted`)\",\n        \"sum(`sent`)\",\n        \"sum(`success`)\",\n        \"sum(`failed`)\",\n        \"sum(`opens`)\",\n        \"sum(`unique_opens`)\",\n        \"sum(`unsubscribes`)\",\n        \"sum(`complaints`)\",\n        \"sum(`clicks`)\",\n        \"sum(`unique_clicks`)\",\n        \"sum(`soft_bounces`)\",\n        \"sum(`hard_bounces`)\",\n        \"mailing_id\",\n        \"sum(`post_back_clicks`)\"\n    ],\n    \"from\": \"mailing\",\n    \"group\": [\n        \"mailing_id\"\n    ],\n    \"order\": [\n        [\n            \"delivery_timestamp\",\n            \"desc\"\n        ]\n    ],\n    \"filter\": [\n        [\n            \"mailing_id\",\n            \"IN\",\n            [\n                \"{{rc_sms_link_size_campaign_id}}\"\n            ]\n        ]\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/reports/query",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"reports",
+						"query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RC-generate Contact Activity report",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var today = Math.round(Date.now()/1000)",
+							"var pre_date = Math.round(today - (24*60*60))",
+							"pm.globals.set(\"current_date\",today)",
+							"pm.globals.set(\"pre_date\",pre_date)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"sms_regular_campaign_behaviour_report_id\" , jsonData.payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Active gmail contacts\",\n    \"selected_fields\": [\n        \"email\",\n\t\t\"ocx_created_date\",\n\t\t\"ocx_status\",\n\t\t\"sent\",\n\t\t\"opens\",\n\t\t\"clicks\",\n\t\t\"ocx_unsubscribe_date\",\n\t\t\"ocx_resubscribe_date\",\n\t\t\"ocx_bounce_date\",\n\t\t\"ocx_complaint_date\",\n\t\t\"last_sent_date\",\n\t\t\"last_open_date\"\n    ],\n    \"filters\": {\n        \"criteria\": [\n            {\n                \"field_name\": \"sent\",\n                \"type\": \"behavioral\",\n                \"operator\": \"=\",\n                \"operand\": {\n                    \"mailing_ids\": [\n                        \"{{rc_sms_link_size_campaign_id}}\"\n                    ]\n                },\n                \"case_sensitive\": 0,\n                \"condition\": \"and\"\n            }\n        ],\n        \"from_date\": {{pre_date}},\n        \"to_date\": {{current_date}}\n    }\n}\n\n\n\n"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RC-Contact Activity report result",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.test(\"Test SMS Regular Campaign Behavioural Open stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].opens)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test SMS Regular Campaign Behavioural Sent stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].sent)).to.be.above(0);",
+							"});",
+							"pm.test(\"Test SMS Regular Campaign Behavioural Click stats\", function() {",
+							"    pm.expect(parseInt(jsonData.payload[0].clicks)).to.be.above(0);",
+							"});",
+							"",
+							"pm.globals.unset(\"rc_sms_link_size_campaign_id\");",
+							"pm.globals.unset(\"sms_regular_campaign_behaviour_report_id\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contact_activity/{{sms_regular_campaign_behaviour_report_id}}/result",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contact_activity",
+						"{{sms_regular_campaign_behaviour_report_id}}",
+						"result"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

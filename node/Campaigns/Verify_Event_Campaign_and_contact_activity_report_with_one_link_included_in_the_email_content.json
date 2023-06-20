@@ -426,6 +426,46 @@
 				}
 			},
 			"response": []
+		},{
+			"name": "Delay 200sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
 		},
 		{
 			"name": "Read Mail",

@@ -1,0 +1,789 @@
+{
+	"info": {
+		"_postman_id": "5601d727-7f7d-41ea-8d3f-622b01272ccd",
+		"name": "AR-480-Hard bounce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-5601d727-7f7d-41ea-8d3f-622b01272ccd?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Delete contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"change_to\": \"remove\",\r\n    \"emails\": [\r\n        \"ar_480_hard_bounce@gmail.com\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"count = 0",
+							"jsonData.payload.forEach(function(data, index) {",
+							"    if(data.name===\"AR-480_hard_bounce\"){",
+							"        count += 1",
+							"        pm.globals.set(\"ar_480_hard_bounce\", data.id);",
+							"        if(data.active === false){",
+							"        \tpostman.setNextRequest(\"delete_AR_1\");",
+							"        }",
+							"    }",
+							"})",
+							"if(count === 0 ){",
+							"\tpostman.setNextRequest(\"create_AR_1\");",
+							"}",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": false}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{ar_480_hard_bounce}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{ar_480_hard_bounce}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_AR_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ar_480_hard_bounce\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{ar_480_hard_bounce}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{ar_480_hard_bounce}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_AR_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"automation_rule_id_ar_480_hard_bounce\", pm.response.json().payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"AR-480_hard_bounce\",\n    \"description\": \"\",\n    \"trigger\": \"contact_created\",\n    \"trigger_frequency\": \"once\",\n    \"trigger_sources\": [\n        \"ui\",\n        \"api\"\n    ],\n    \"btn_save\": \"\",\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ar_480_hard_bounce@gmail.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n            \"type\": \"update_field\",\n            \"data\": {\n                \"operator\": \"overwrite\",\n                \"value\": \"hard_bounce\",\n                \"system_field_name\": \"ocx_status\"\n            },\n            \"active\": true,\n            \"name\": \"update field action\",\n            \"position\": 0\n        },\n        {\n            \"name\": \"AR-480\",\n            \"type\": \"webhook\",\n            \"data\": {\n                \"http_method\": \"post\",\n                \"url\": \"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-ar480_hard_bounce\",\n                \"selected_fields\": [\n                    \"email\",\"ocx_status\"\n                ]\n            },\n            \"active\": true,\n            \"position\": 1\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule for contact create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id_ar_480_hard_bounce}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id_ar_480_hard_bounce}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ar_480_hard_bounce@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Update Field Action for contact create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" var jsonData = pm.response.json();",
+							"pm.globals.set(\"contact_create_once_contact_id\",jsonData.payload.id);",
+							"",
+							"pm.test(\"Check Contact Create with Once stats Hard Bounce Update Field Action is Working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.ocx_status).to.equal(\"Hard Bounce\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ar_480_hard_bounce@gmail.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ar_480_hard_bounce@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook Action for contact create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Contact hard_bounce status Webhook Action is Working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.events[0].email).to.equal(\"ar_480_hard_bounce@gmail.com\");",
+							"    pm.expect(jsonData.events[0].ocx_status).to.equal(\"hard_bounce\");",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ar480_hard_bounce",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ar480_hard_bounce"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ar480_hard_bounce",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ar480_hard_bounce"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"change_to\": \"remove\",\r\n    \"emails\": [\r\n        \"ar_480_hard_bounce@gmail.com\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": false}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id_ar_480_hard_bounce}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id_ar_480_hard_bounce}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete automation rule contact delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"automation_rule_id_ar_480_hard_bounce\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id_ar_480_hard_bounce}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id_ar_480_hard_bounce}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

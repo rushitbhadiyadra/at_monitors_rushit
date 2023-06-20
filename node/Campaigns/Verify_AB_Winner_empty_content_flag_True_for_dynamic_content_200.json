@@ -246,7 +246,7 @@
 					"script": {
 						"exec": [
 							"var jsonData = pm.response.json();\r",
-							"pm.environment.set(\"segment_ab_winner_empty_content_true\", jsonData.payload.id);"
+							"pm.globals.set(\"segment_ab_winner_empty_content_true\", jsonData.payload.id);"
 						],
 						"type": "text/javascript"
 					}

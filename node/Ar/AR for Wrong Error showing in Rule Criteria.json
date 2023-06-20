@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "ef7eb8ab-4293-4038-a608-fa9c0aeafb04",
+		"name": "AR for Wrong Error showing in Rule Criteria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-ef7eb8ab-4293-4038-a608-fa9c0aeafb04?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create AR without expression",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.globals.set(\"without_expression_ar_id\",jsonData.payload.id)\r",
+							"pm.test(\"AR-without any expression\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"AR-without expression in Rule Ciretia\",\r\n    \"description\": \"\",\r\n    \"active\": false,\r\n    \"trigger\": \"contact_created_and_updated\",\r\n    \"trigger_frequency\": \"always\",\r\n    \"trigger_sources\": [\r\n        \"ui\",\r\n        \"api\"\r\n    ],\r\n    \"btn_save\": \"\",\r\n    \"criteria\": [\r\n        {\r\n            \"condition\": \"and\",\r\n            \"group\": \"\",\r\n            \"field_id\": {{list_field_email}},\r\n            \"field_name\": \"email\",\r\n            \"type\": \"email\",\r\n            \"position\": 0,\r\n            \"changed\": \"to\",\r\n            \"operator\": \"any_value\",\r\n            \"case_sensitive\": \"0\",\r\n            \"operand\": [],\r\n            \"left_parenthesis\": 0,\r\n            \"right_parenthesis\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_10_sec",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=10",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete AR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"without_expression_ar_id\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{without_expression_ar_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{without_expression_ar_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create AR with expression",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"var errormessage = jsonData.payload.message\r",
+							"pm.test(\"AR-with expression\",function(){\r",
+							"  pm.expect(errormessage).to.eql(\"You must provide operand for \\\"email\\\" type criterion\");\r",
+							"    pm.expect(pm.response.code).to.eql(412);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"AR-with expression in Rule Ciretia 1\",\r\n    \"description\": \"\",\r\n    \"active\": false,\r\n    \"trigger\": \"contact_created_and_updated\",\r\n    \"trigger_frequency\": \"always\",\r\n    \"trigger_sources\": [\r\n        \"ui\",\r\n        \"api\"\r\n    ],\r\n    \"btn_save\": \"\",\r\n    \"criteria\": [\r\n        {\r\n            \"condition\": \"and\",\r\n            \"group\": \"\",\r\n            \"field_id\": {{list_field_email}},\r\n            \"field_name\": \"email\",\r\n            \"type\": \"email\",\r\n            \"position\": 0,\r\n            \"changed\": \"is\",\r\n            \"operator\": \"=\",\r\n            \"case_sensitive\": \"0\",\r\n            \"operand\": [],\r\n            \"left_parenthesis\": 0,\r\n            \"right_parenthesis\": 0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

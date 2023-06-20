@@ -1,0 +1,634 @@
+{
+	"info": {
+		"_postman_id": "da3d6ccf-e381-45fe-813e-1a15925c4208",
+		"name": "TA-8",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-da3d6ccf-e381-45fe-813e-1a15925c4208?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ta_8_{{env}}@hoohem.com\",\n    \"fusa\": \"ap\",\n    \"fusp\": \"pr\",\n    \"fulsp\": \"pr\",\n    \"fuhsp\": \"pr\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 40 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=40 ",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "40 "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code != '200' ){",
+							"    postman.setNextRequest('Get contact info');",
+							"}else{",
+							"    pm.globals.set(\"automation_rule_id\", pm.response.json().payload.id);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-8\",\n    \"description\": \"Check if Trigger contact working\\nCheck if update field working \\nCheck if update field working with value overwrite\\nCheck if update field working with value append\\nCheck if update field working with value prepend\\nCheck if update field working with value Subtract \\nCheck if update field working with value increment \\nVerify \\\"String\\\" data type in field value\\nVerify \\\"Numeric\\\" data type in field value\\nVerify \\\"Date\\\" data type in field value\\nVerify \\\"Email address\\\" data type in field value\",\n    \"trigger\": \"contact_created_and_updated\",\n    \"trigger_frequency\": \"always\",\n    \"trigger_sources\": [\n        \"ui\",\n        \"api\",\n        \"url\"\n    ],\n    \"btn_save\": \"\",\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 1,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta_8_{{env}}@hoohem.com\"\n                \n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n        \t\"name\": \"TA-8 Update Field Action 1\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 0,\n            \"data\": {\n                \"value\": \"now\",\n                \"field_id\": {{list_field_fuso}},\n                \"operator\": \"overwrite\",\n                \"field_name\": \"fuso\"\n            }\n        },\n        {\n        \t\"name\": \"TA-8 Update Field Action 2\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 1,\n            \"data\": {\n                \"value\": \"Append\",\n                \"field_id\": {{list_field_fusa}},\n                \"operator\": \"append\",\n                \"field_name\": \"fusa\"\n            }\n        },\n        {\n        \t\"name\": \"TA-8 Update Field Action 3\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 2,\n            \"data\": {\n                \"value\": \"Prepend\",\n                \"field_id\": {{list_field_fusp}},\n                \"operator\": \"prepend\",\n                \"field_name\": \"fusp\"\n            }\n        },\n        {\n        \t\"name\": \"TA-8 Update Field Action 4\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 3,\n            \"data\": {\n                \"value\": \"1556098913\",\n                \"field_id\": {{list_field_fud}},\n                \"operator\": \"overwrite\",\n                \"field_name\": \"fud\"\n            }\n        },\n        {\n\t\t\t\"name\": \"TA-8 Update Field Action 5\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 4,\n            \"data\": {\n                \"value\": \"darsh@hoohem.com\",\n                \"field_id\": {{list_field_fue}},\n                \"operator\": \"overwrite\",\n                \"field_name\": \"fue\"\n            }\n        },\n        {\n        \t\"name\": \"TA-8 Update Field Action 6\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 5,\n            \"data\": {\n                \"value\": \"2\",\n                \"field_id\": {{list_field_funi}},\n                \"operator\": \"increment\",\n                \"field_name\": \"funi\"\n            }\n        },\n        {\n        \t\"name\": \"TA-8 Update Field Action 7\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 6,\n            \"data\": {\n                \"value\": \"2\",\n                \"field_id\": {{list_field_funs}},\n                \"operator\": \"subtract\",\n                \"field_name\": \"funs\"\n            }\n        }, \n        {\n        \t\"name\": \"TA-8 Update Field Action 8\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 7,\n            \"data\": {\n                \"value\": \"Prepend\",\n                \"field_id\": {{list_field_fulsp}},\n                \"operator\": \"prepend\",\n                \"field_name\": \"fulsp\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"active\": true\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"ta_8_contact_id\", jsonData.payload.id);",
+							"pm.globals.set(\"fusa\", jsonData.payload.fusa);",
+							"pm.globals.set(\"fusp\", jsonData.payload.fusp);",
+							"pm.globals.set(\"funi\", jsonData.payload.funi);",
+							"pm.globals.set(\"funs\", jsonData.payload.funs);",
+							"pm.globals.set(\"fulsp\",jsonData.payload.fulsp);",
+							"pm.globals.set(\"fuhsp\",jsonData.payload.fuhsp);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_8_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_8_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ta_8_{{env}}@hoohem.com\",\n    \"update_time\": \"{{$timestamp}}\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay  60 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60 ",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60 "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if update field working with value string overwrite\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.fuso).to.equal(\"now\");",
+							"});",
+							"pm.test(\"Check if update field working with value append\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.fusa).to.equal(pm.globals.get(\"fusa\")+\"Append\");",
+							"});",
+							"pm.test(\"Check if update field working with value prepend\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.fusp).to.equal(\"Prepend\"+pm.globals.get(\"fusp\"));",
+							"});",
+							"pm.test(\"Check if update field working with value prepend on long string field\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.fulsp).to.equal(\"Prepend\"+pm.globals.get(\"fulsp\"));",
+							"});",
+							"pm.test(\"Check if update field working with value prepend on huge string field\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.fulsp).to.equal(\"PrependPrepend\"+pm.globals.get(\"fuhsp\"));",
+							"});",
+							"pm.test(\"Check if update field working with value numeric increment \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.funi).to.equal(parseInt(pm.globals.get(\"funi\")+2));",
+							"});",
+							"pm.test(\"Check if update field working with value Subtract \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.funs).to.equal(parseInt(pm.globals.get(\"funs\")-2));",
+							"});",
+							"pm.test(\"Verify Date data type in field value \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.fud).to.equal(1556098913);",
+							"});",
+							"pm.test(\"Verify Email address data type in field value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.payload.fue).to.equal(\"darsh@hoohem.com\");",
+							"});",
+							"",
+							"pm.globals.unset(\"fusa\");",
+							"pm.globals.unset(\"fusp\");",
+							"pm.globals.unset(\"fulsp\");",
+							"pm.globals.unset(\"funi\");",
+							"pm.globals.unset(\"funs\");",
+							"pm.globals.unset(\"fuhsp\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_8_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_8_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ta_8_contact_id\");",
+							"postman.setNextRequest(null);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"change_to\":\"remove\",\r\n \"emails\": [\r\n  \"ta_8_{{env}}@hoohem.com\"\r\n ]\r\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"active\": false\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"automation_rule_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

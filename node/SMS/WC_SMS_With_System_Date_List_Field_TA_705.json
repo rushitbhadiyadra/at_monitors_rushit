@@ -1,0 +1,688 @@
+{
+	"info": {
+		"_postman_id": "cad73ef3-4b35-4a2e-be3b-b994a7b79d2b",
+		"name": "WC_SMS_With_System_Date_List_Field_TA_705",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-cad73ef3-4b35-4a2e-be3b-b994a7b79d2b?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"list_id_welcome sms_system_date_list_field\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Welcome sms system date list field-{{sms_connectionId}}\",\n    \"type\": \"sending\",\n    \"description\": \"\",\n    \"create_segment\": true,\n    \"fields\": [\n        {\n            \"name\": \"email\",\n            \"title\": \"Email\",\n            \"type\": \"email\",\n            \"mandatory\": true,\n            \"position\": 0\n        },\n        {\n            \"name\": \"address\",\n            \"title\": \"Address\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 1\n        },\n        {\n            \"name\": \"country\",\n            \"title\": \"Country\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 2\n        },\n        {\n            \"name\": \"first_name\",\n            \"title\": \"First Name\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 3\n        },\n        {\n            \"name\": \"last_name\",\n            \"title\": \"Last Name\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 4\n        },\n        {\n            \"name\": \"gender\",\n            \"title\": \"Gender\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 5\n        },\n        {\n            \"name\": \"ip\",\n            \"title\": \"IP\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 6\n        },\n        {\n            \"name\": \"language\",\n            \"title\": \"Language\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 7\n        },\n        {\n            \"name\": \"phone\",\n            \"title\": \"Phone\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 8\n        },\n        {\n            \"name\": \"os\",\n            \"title\": \"OS\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 9\n        },\n        {\n            \"name\": \"product_id\",\n            \"title\": \"Product ID\",\n            \"type\": \"numeric\",\n            \"mandatory\": false,\n            \"position\": 10\n        },\n        {\n            \"name\": \"mxyz\",\n            \"title\": \"mxyz\",\n            \"type\": \"date\",\n            \"format\": \"mm/dd/yyyy\",\n            \"mandatory\": false,\n            \"position\": 11\n        },\n        {\n            \"name\": \"city\",\n            \"title\": \"City\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 12\n        },\n        {\n            \"name\": \"street_name\",\n            \"title\": \"Street Name\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 13\n        },\n        {\n            \"name\": \"society_name\",\n            \"title\": \"Society Name\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 14\n        },\n        {\n            \"name\": \"news\",\n            \"title\": \"news\",\n            \"type\": \"long_string\",\n            \"mandatory\": false,\n            \"position\": 15\n        },\n        {\n            \"name\": \"middle_name\",\n            \"title\": \"Middle Name\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 16\n        },\n        {\n            \"name\": \"query\",\n            \"title\": \"query\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 17\n        },\n        {\n            \"name\": \"location\",\n            \"title\": \"location\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 18\n        },\n        {\n            \"name\": \"industry\",\n            \"title\": \"industry\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 19\n        },\n        {\n            \"name\": \"state\",\n            \"title\": \"state\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 20\n        },\n        {\n            \"name\": \"keyword\",\n            \"title\": \"keyword\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 21\n        },\n        {\n            \"name\": \"zip\",\n            \"title\": \"Zip\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 22\n        },\n        {\n            \"name\": \"search\",\n            \"title\": \"search\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 23\n        },\n        {\n            \"name\": \"userip\",\n            \"title\": \"userip\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 24\n        },\n        {\n            \"name\": \"job_title\",\n            \"title\": \"Job Title\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 25\n        },\n        {\n            \"name\": \"s1\",\n            \"title\": \"s1\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 26\n        },\n        {\n            \"name\": \"useragent\",\n            \"title\": \"useragent\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 27\n        },\n        {\n            \"name\": \"zip1\",\n            \"title\": \"zip1\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 28\n        },\n        {\n            \"name\": \"birth_date\",\n            \"title\": \"Birth_date\",\n            \"type\": \"date\",\n            \"format\": \"mm/dd/yyyy\",\n            \"mandatory\": false,\n            \"position\": 29\n        },\n        {\n            \"name\": \"dob\",\n            \"title\": \"DOB\",\n            \"type\": \"date\",\n            \"format\": \"mm/dd/yyyy\",\n            \"mandatory\": false,\n            \"position\": 30\n        },\n        {\n            \"name\": \"sr_no\",\n            \"title\": \"SR No\",\n            \"type\": \"numeric\",\n            \"mandatory\": false,\n            \"position\": 31\n        },\n        {\n            \"name\": \"dynamic_field_caching_verification\",\n            \"title\": \"Dynamic Field Caching Verification\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 32\n        },\n        {\n            \"name\": \"subject\",\n            \"title\": \"subject\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 33\n        },\n        {\n            \"name\": \"timezone1\",\n            \"title\": \"timezone1\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 34\n        },\n        {\n            \"name\": \"airport_code\",\n            \"title\": \"airport_code\",\n            \"type\": \"string\",\n            \"mandatory\": false,\n            \"position\": 35\n        },\n        {\n            \"name\": \"roomtotal\",\n            \"title\": \"roomtotal\",\n            \"type\": \"numeric\",\n            \"mandatory\": false,\n            \"position\": 36\n        },\n        {\n            \"name\": \"specialservices\",\n            \"title\": \"specialservices\",\n            \"type\": \"numeric\",\n            \"mandatory\": false,\n            \"position\": 37\n        },\n        {\n            \"name\": \"discount\",\n            \"title\": \"discount\",\n            \"type\": \"numeric\",\n            \"mandatory\": false,\n            \"position\": 38\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get list field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"wc_sys_date_list_field_phone\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.metadata.error === false){",
+							"        jsonData.payload.forEach(function(data, index) {",
+							"            if(data.name===\"phone\"){",
+							"                pm.globals.set(\"wc_sys_date_list_field_phone\",data.id);",
+							"            }",
+							"        });",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/list_fields?list_id={{list_id_welcome sms_system_date_list_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"list_fields"
+					],
+					"query": [
+						{
+							"key": "list_id",
+							"value": "{{list_id_welcome sms_system_date_list_field}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create sms field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"sms_field_id\":\"{{wc_sys_date_list_field_phone}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{list_id_welcome sms_system_date_list_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{list_id_welcome sms_system_date_list_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Welcome sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"if(jsonData.metadata.error === false) {",
+							"    pm.globals.set(\"wc_sms_id_system_date_list_field\", jsonData.payload.id);",
+							"} "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"WC System Date List Field\",\n    \"description\": \"\",\n    \"prefix\": \"0\",\n    \"content_text\": \"!#!wc_sys_dt_list_field_{{sms_connectionId}}!#!-!$!{\\\"eid\\\":\\\"{{ocx_esp_id}}\\\",\\\"cid\\\":\\\"{{ocx_mailing_id}}\\\",\\\"conid\\\":\\\"{{ocx_contact_id}}\\\",\\\"cdate\\\":\\\"{{ocx_created_date}}\\\",\\\"lid\\\":\\\"{{ocx_list_id}}\\\",\\\"cname\\\":\\\"{{ocx_campaign_name}}\\\",\\\"sub\\\":\\\"{{ocx_subject}}\\\",\\\"mid\\\":\\\"{{ocx_message_id}}\\\",\\\"fname\\\":\\\"{{ocx_from_name}}\\\",\\\"year\\\":\\\"{{ocx_year}}\\\",\\\"yy\\\":\\\"{{ocx_yy}}\\\",\\\"smonth\\\":\\\"{{ocx_month_short}}\\\",\\\"mname\\\":\\\"{{ocx_month_name}}\\\",\\\"month\\\":\\\"{{ocx_month}}\\\",\\\"dlong\\\":\\\"{{ocx_dow_long}}\\\",\\\"dow\\\":\\\"{{ocx_dow}}\\\",\\\"day\\\":\\\"{{ocx_day}}\\\",\\\"now\\\":\\\"{{ocx_now[format=m/d/Y]}}\\\",\\\"tstamp\\\":\\\"{{ocx_timestamp}}\\\",\\\"email\\\":\\\"{{email}}\\\",\\\"phone\\\":\\\"{{phone}}\\\",\\\"product_id\\\":\\\"{{product_id}}\\\",\\\"dob\\\":\\\"{{dob}}\\\"}!$!\",\n    \"addresses\": {}\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome sms_system_date_list_field}}/api/smses",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome sms_system_date_list_field}}",
+						"api",
+						"smses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update list",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"welcome_sms_active\": true,\n    \"welcome_sms_connection_id\": \"{{sms_connectionId}}\",\n    \"welcome_sms_id\": \"{{wc_sms_id_system_date_list_field}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{list_id_welcome sms_system_date_list_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{list_id_welcome sms_system_date_list_field}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"wc_sms_with_system_field@hoohem.com\",\n        \"phone\": \"{{twillio_number_1}}\",\n        \"product_id\": 123,\n        \"dob\": \"03/10/2020\"\n    }\n    \n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome sms_system_date_list_field}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome sms_system_date_list_field}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"sms_system_field_contact_id\", jsonData.payload.id);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"sms_list_field_ocx_created_date\", str.substring(0,8));",
+							"pm.globals.set(\"sms_list_field_product_id\", jsonData.payload.product_id);",
+							"pm.globals.set(\"sms_list_field_phone\", jsonData.payload.phone); ",
+							"pm.globals.set(\"sms_list_field_email\", jsonData.payload.email);",
+							"// pm.globals.set(\"sms_list_field_ocx_created_date\", jsonData.payload.ocx_created_date);",
+							"//dob,email,phone,product_id",
+							"",
+							"",
+							"pm.globals.set(\"sms_list_field_dob\", jsonData.payload.dob);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id_welcome sms_system_date_list_field}}/api/contacts/by_email/wc_sms_with_system_field@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id_welcome sms_system_date_list_field}}",
+						"api",
+						"contacts",
+						"by_email",
+						"wc_sms_with_system_field@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"  const timestamp_to_date = (dob) => {",
+							"    var date = new Date(dob * 1000);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth() + 1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return mm + '/' + dd + '/' + yy",
+							"}",
+							"     var jsonData = pm.response.json()",
+							"    ",
+							"     var smsText = jsonData.Body;",
+							"     smsText = smsText.split('!$!')",
+							"     var sms = smsText[1].replace(/\\\\\"/g,'\"')",
+							"    //  sms = JSON.parse(sms)",
+							"     var today = new Date();",
+							"     var day = String(today.getDate()).padStart(2, '0');",
+							"     var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!",
+							"     var year = String(today.getFullYear());",
+							"     var yy = year.toString().substr(-2);",
+							"     var dowLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];",
+							"     var dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][today.getDay().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })];",
+							"     var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][today.getMonth()];",
+							"     var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()];",
+							"     pm.test(`Test Welcome  SMS with esp id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(parseInt(pm.globals.get('sms_espId')));",
+							"     })",
+							"    // pm.test(`Test Welcome  SMS with Campaign id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"    //       pm.expect(parseInt(sms.cid)).to.equal(parseInt(pm.globals.get('rc_sms_campaign_id')));",
+							"    //  })",
+							"     pm.test(`Test Welcome  SMS with Contact id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get('sms_system_field_contact_id'));",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with List Id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(parseInt(pm.globals.get('list_id_welcome sms_system_date_list_field')));",
+							"     })",
+							"    //  pm.test(`Test Welcome  SMS with Campaign Name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"    //       pm.expect(sms.cname).to.equal(\"SMS RC SYS,Date Field\");",
+							"    //  })",
+							"     pm.test(`Test Welcome  SMS with Contact create date is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          var str = Math.round(sms.cdate).toString();",
+							"        pm.expect(sms).contains(pm.globals.get(\"sms_list_field_ocx_created_date\"));",
+							"          // pm.expect(sms.cdate).to.equal(pm.globals.get('sms_list_field_ocx_created_date'));",
+							"     })",
+							"     //     pm.test(`Test Welcome  SMS with Subject is working \"Time : ${jsonData.timestamp}`, function () {",
+							"     //          pm.expect(sms.sub).to.equal(pm.globals.get('sms_system_field_contact_id'));",
+							"     //     })",
+							"     pm.test(`Test Welcome  SMS with Sms id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get('wc_sms_id_system_date_list_field'));",
+							"     })",
+							"          pm.test(`Test Welcome  SMS with ocx_from_name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get('from_name'));",
+							"     })",
+							"          pm.test(`Test Welcome  SMS with Date field Year is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(year);",
+							"     })",
+							"          pm.test(`Test Welcome  SMS with Date field Month Name is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(monthName);",
+							"     })",
+							"          pm.test(`Test Welcome  SMS with Date field Year short is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(yy);",
+							"     })",
+							"          pm.test(`Test Welcome  SMS with Date field month short is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(monthShort);",
+							"     })",
+							"          pm.test(`Test Welcome  SMS with Date field month is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(month);",
+							"     })",
+							"          pm.test(`Test Welcome  SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(dowLong);",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(dow);",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with Date field Day is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(day);",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with Date field ocx_now is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(month+\"/\"+day+\"/\"+year);",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with Date field timestamp is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(year+\"-\"+month+\"-\"+day);",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with List Field DOB is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get(\"sms_list_field_dob\"));",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with List Field Phone is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get(\"sms_list_field_phone\"));",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with List Field Email is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(pm.globals.get(\"sms_list_field_email\"));",
+							"     })",
+							"     pm.test(`Test Welcome  SMS with List Field Product Id is working \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(sms).contains(parseInt(pm.globals.get(\"sms_list_field_product_id\")));",
+							"     })",
+							"}else{",
+							"    pm.test(`Test Welcome  SMS Mail not received \"Time : ${jsonData.timestamp}`, function () {",
+							"          pm.expect(\"\").to.equal(\"Welcome  SMS Mail not received\");",
+							"     })",
+							"}",
+							"pm.globals.unset(\"wc_sms_system_field_contact_id\");",
+							"pm.globals.unset(\"wc_sms_list_field_ocx_created_date\");",
+							"pm.globals.unset(\"wc_sms_list_field_product_id\");",
+							"pm.globals.unset(\"wc_sms_list_field_phone\");",
+							"pm.globals.unset(\"wc_sms_list_field_email\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"to_number\": \"{{twillio_number_1}}\",\r\n    \"unique_id\": \"wc_sys_dt_list_field_{{sms_connectionId}}\",\r\n    \"timeout\": 600000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"wc_sys_date_list_field_phone\");",
+							"pm.globals.unset(\"list_id_welcome sms_system_date_list_field\");",
+							"pm.globals.unset(\"wc_sms_id_system_date_list_field\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/lists/{{list_id_welcome sms_system_date_list_field}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"lists",
+						"{{list_id_welcome sms_system_date_list_field}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

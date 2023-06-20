@@ -1,0 +1,715 @@
+{
+	"info": {
+		"_postman_id": "89135a7b-720d-46f7-be7e-9fb1b0e68b3d",
+		"name": "TA-474",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-89135a7b-720d-46f7-be7e-9fb1b0e68b3d?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Delete Mail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/mbox/subject/delete/TA-474 ocx Now with Offset-{{env}}",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"mbox",
+						"subject",
+						"delete",
+						"TA-474 ocx Now with Offset-{{env}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"ta_474_{{env}}@hoohem.com\"}\n"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code != '200' ){",
+							"    postman.setNextRequest('Update_contact');",
+							"}else{",
+							"    pm.globals.set(\"automation_rule_id\", pm.response.json().payload.id);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-474\",\n    \"description\": \"\",\n    \"trigger\": \"contact_created_and_updated\",\n    \"trigger_frequency\": \"always\",\n    \"trigger_sources\": [\n        \"ui\",\n        \"api\"\n    ],\n    \"btn_save\": \"\",\n    \"btn_activate\": \"\",\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": {{list_field_email}},\n            \"field_name\": \"email\",\n            \"type\": \"email\",\n            \"position\": 0,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta_474_{{env}}@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n    \"actions\": [\n        {\n        \t\"name\": \"TA-474 Transactional Action\",\n\t\t\t\"action_number\":1,\n\t\t\t\"type\":\"transactional\",\n\t\t\t\"data\":{\n\t\t\t\"message_id\":{{ta_474_email_message_id}},\n\t\t\t\"campaign_id\":{{tmailing_id}},\n\t\t\t\"sending_connection_id\":{{esp_id}}\n\t\t\t},\n\t\t\t\"active\":true,\n\t\t\t\"position\":0\n\t\t}\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active Automation Rule",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update_contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ta_474_trigger_time\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var time = Math.floor((new Date()).getTime() / 1000)",
+							"pm.globals.set(\"ta_474_trigger_time\", time);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ta_474_{{env}}@hoohem.com\",\n    \"update_time\": \"{{ta_474_trigger_time}}\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test ocx_now",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const after_1_month_before_3_day = () => {",
+							"    var date = new Date();",
+							"    date.setMonth(date.getMonth() + 1);",
+							"    date.setDate(date.getDate() - 3);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const after_1_day = () => {",
+							"    var date = new Date();",
+							"    date.setDate(date.getDate() + 1);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const before_week = () => {",
+							"    var date = new Date();",
+							"    date.setDate(date.getDate() - 7);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"const next_sunday = () => {",
+							"    var date = new Date()//mm-dd-yyyy",
+							"    var day = date.getDay()",
+							"    var diff = (day == 0) ? (7 + day ) : (7 - day)",
+							"    date.setDate(date.getDate() + diff);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const today_date = () => {",
+							"    var dayOfWeek = 0;",
+							"    var date = new Date();",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const last_tuesday = () => {",
+							"    var date = new Date()",
+							"    var day = date.getDay()",
+							"    var diff = (day <= 2) ? (7 - 2 + day ) : (day - 2)",
+							"    date.setDate(date.getDate() - diff);",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return ({dd,mm,yy})",
+							"}",
+							"",
+							"const timestamp_to_date = (timeStamp_value) => {",
+							"    var date = new Date(timeStamp_value * 1000); ",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    return yy + '/' + dd + '/' + mm",
+							"}",
+							"",
+							"var jsonData = pm.response.json();",
+							"var afterOneday = after_1_day()",
+							"var nextSunday = next_sunday()",
+							"var beforeWeek = before_week()",
+							"var lastTuesday = last_tuesday()",
+							"var after1MonthBefore3Day = after_1_month_before_3_day()",
+							"var todayDate = today_date()",
+							"",
+							"if(pm.response.code === 200){",
+							"    var htmlText = jsonData.html;",
+							"    var fieldValue = htmlText.split(\"~!@#~\");",
+							"    var jsonFields = JSON.parse(fieldValue[1]);",
+							"    ",
+							"    // TODO : date Format = m/d/Y and different offset",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 day and format m/d/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_mdy.plus_one_day).to.equal(afterOneday.mm+'/'+afterOneday.dd+'/'+afterOneday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= next sunday and format m/d/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_mdy.next_sunday).to.equal(nextSunday.mm+'/'+nextSunday.dd+'/'+nextSunday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= -1 week and format m/d/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_mdy.before_one_week).to.equal(beforeWeek.mm+'/'+beforeWeek.dd+'/'+beforeWeek.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= last tuesday and format m/d/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_mdy.last_tuesday).to.equal(lastTuesday.mm+'/'+lastTuesday.dd+'/'+lastTuesday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 month -3 days and format m/d/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_mdy.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.yy);",
+							"    });",
+							"    ",
+							"    ",
+							"    // TODO : date Format = m/Y/d and different offset",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 day and format m/Y/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_myd.plus_one_day).to.equal(afterOneday.mm+'/'+afterOneday.yy+'/'+afterOneday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= next sunday and format m/Y/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_myd.next_sunday).to.equal(nextSunday.mm+'/'+nextSunday.yy+'/'+nextSunday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= -1 week and format m/Y/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_myd.before_one_week).to.equal(beforeWeek.mm+'/'+beforeWeek.yy+'/'+beforeWeek.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= last tuesday and format m/Y/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_myd.last_tuesday).to.equal(lastTuesday.mm+'/'+lastTuesday.yy+'/'+lastTuesday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 month -3 days and format m/Y/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_myd.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.dd);",
+							"    });",
+							"    ",
+							"    ",
+							"    // TODO : date Format = d/m/Y and different offset",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 day and format d/m/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_dmy.plus_one_day).to.equal(afterOneday.dd+'/'+afterOneday.mm+'/'+afterOneday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= next sunday and format d/m/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_dmy.next_sunday).to.equal(nextSunday.dd+'/'+nextSunday.mm+'/'+nextSunday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= -1 week and format d/m/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_dmy.before_one_week).to.equal(beforeWeek.dd+'/'+beforeWeek.mm+'/'+beforeWeek.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= last tuesday and format d/m/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_dmy.last_tuesday).to.equal(lastTuesday.dd+'/'+lastTuesday.mm+'/'+lastTuesday.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 month -3 days and format d/m/Y`, function() {",
+							"        pm.expect(jsonFields.offset_format_dmy.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.yy);",
+							"    });",
+							"    ",
+							"    // TODO : date Format = d/Y/m and different offset",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 day and format d/Y/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_dym.plus_one_day).to.equal(afterOneday.dd+'/'+afterOneday.yy+'/'+afterOneday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= next sunday and format d/Y/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_dym.next_sunday).to.equal(nextSunday.dd+'/'+nextSunday.yy+'/'+nextSunday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= -1 week and format d/Y/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_dym.before_one_week).to.equal(beforeWeek.dd+'/'+beforeWeek.yy+'/'+beforeWeek.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= last tuesday and format d/Y/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_dym.last_tuesday).to.equal(lastTuesday.dd+'/'+lastTuesday.yy+'/'+lastTuesday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 month -3 days and format d/Y/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_dym.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.mm);",
+							"    });",
+							"    ",
+							"    ",
+							"    // TODO : date Format = Y/m/d and different offset",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 day and format Y/m/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_ymd.plus_one_day).to.equal(afterOneday.yy+'/'+afterOneday.mm+'/'+afterOneday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= next sunday and format Y/m/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_ymd.next_sunday).to.equal(nextSunday.yy+'/'+nextSunday.mm+'/'+nextSunday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= -1 week and format Y/m/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_ymd.before_one_week).to.equal(beforeWeek.yy+'/'+beforeWeek.mm+'/'+beforeWeek.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= last tuesday and format Y/m/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_ymd.last_tuesday).to.equal(lastTuesday.yy+'/'+lastTuesday.mm+'/'+lastTuesday.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 month -3 days and format Y/m/d`, function() {",
+							"        pm.expect(jsonFields.offset_format_ymd.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.mm+'/'+after1MonthBefore3Day.dd);",
+							"    });",
+							"    ",
+							"    // TODO : date Format = Y/d/m and different offset",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 day and format Y/d/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_ydm.plus_one_day).to.equal(afterOneday.yy+'/'+afterOneday.dd+'/'+afterOneday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= next sunday and format Y/d/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_ydm.next_sunday).to.equal(nextSunday.yy+'/'+nextSunday.dd+'/'+nextSunday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= -1 week and format Y/d/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_ydm.before_one_week).to.equal(beforeWeek.yy+'/'+beforeWeek.dd+'/'+beforeWeek.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= last tuesday and format Y/d/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_ydm.last_tuesday).to.equal(lastTuesday.yy+'/'+lastTuesday.dd+'/'+lastTuesday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 month -3 days and format Y/d/m`, function() {",
+							"        pm.expect(jsonFields.offset_format_ydm.after_one_month_subtract_three_day).to.equal(after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.mm);",
+							"    });",
+							"    ",
+							"    ",
+							"    // TODO : no date Format and different offset",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 day and no date format`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(jsonFields.offset_no_format.plus_one_day))).to.equal(afterOneday.yy+'/'+afterOneday.dd+'/'+afterOneday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= next sunday and no date format`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(jsonFields.offset_no_format.next_sunday))).to.equal(nextSunday.yy+'/'+nextSunday.dd+'/'+nextSunday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= -1 week and no date format`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(jsonFields.offset_no_format.before_one_week))).to.equal(beforeWeek.yy+'/'+beforeWeek.dd+'/'+beforeWeek.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= last tuesday and no date format`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(jsonFields.offset_no_format.last_tuesday))).to.equal(lastTuesday.yy+'/'+lastTuesday.dd+'/'+lastTuesday.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with offset= +1 month -3 days and no date format`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(jsonFields.offset_no_format.after_one_month_subtract_three_day))).to.equal(after1MonthBefore3Day.yy+'/'+after1MonthBefore3Day.dd+'/'+after1MonthBefore3Day.mm);",
+							"    });",
+							"    ",
+							"    ",
+							"    // TODO : different date Format and no offset",
+							"    ",
+							"    pm.test(`Test ocx_now with no offset and date format = Y/d/m`, function() {",
+							"        pm.expect(jsonFields.no_offset_different_format.ydm).to.equal(todayDate.yy+'/'+todayDate.dd+'/'+todayDate.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with no offset and date format = Y/m/d`, function() {",
+							"        pm.expect(jsonFields.no_offset_different_format.ymd).to.equal(todayDate.yy+'/'+todayDate.mm+'/'+todayDate.dd);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with no offset and date format = d/m/Y`, function() {",
+							"        pm.expect(jsonFields.no_offset_different_format.dmy).to.equal(todayDate.dd+'/'+todayDate.mm+'/'+todayDate.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with no offset and date format = d/Y/m`, function() {",
+							"        pm.expect(jsonFields.no_offset_different_format.dym).to.equal(todayDate.dd+'/'+todayDate.yy +'/'+todayDate.mm);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with no offset and date format = m/d/Y`, function() {",
+							"        pm.expect(jsonFields.no_offset_different_format.mdy).to.equal(todayDate.mm+'/'+todayDate.dd+'/'+todayDate.yy);",
+							"    });",
+							"    ",
+							"    pm.test(`Test ocx_now with no offset and date format = m/Y/d`, function() {",
+							"        pm.expect(jsonFields.no_offset_different_format.myd).to.equal(todayDate.mm+'/'+todayDate.yy+'/'+todayDate.dd);",
+							"    });",
+							"    ",
+							"    // TODO : no date Format and no offset",
+							"    ",
+							"    pm.test(`Test ocx_now with no offset and no date format`, function() {",
+							"        pm.expect(timestamp_to_date(parseInt(jsonFields.no_offset_no_format.ocx_now))).to.equal(todayDate.yy+'/'+todayDate.dd+'/'+todayDate.mm);",
+							"    });",
+							"    ",
+							"} else {",
+							"    pm.test(`Mail not received\"`, function() {",
+							"        pm.expect(\"\").to.equal(pm.environment.get(\"mail not received\"));",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_474_{{env}}@hoohem.com\",\n\t\"subject\":\"TA-474 ocx Now with Offset-{{env}}\",\n\t\"timeout\":400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

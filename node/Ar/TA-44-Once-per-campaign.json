@@ -1,0 +1,1213 @@
+{
+	"info": {
+		"_postman_id": "23d020b0-b3b1-4d07-9a38-1e8a17219718",
+		"name": "TA-44-Once-per-campaign",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-23d020b0-b3b1-4d07-9a38-1e8a17219718?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create Contact",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"ta_44_once_per_campaign_{{env}}@hoohem.com\",\"country\":\"india\", \"count\":\"0\"}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Automation Rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"automation_rule_id\", jsonData.payload.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TA-44-Once-per-campaign-1\",\n    \"description\": \"\",\n    \"trigger\": \"opened\",\n    \"trigger_frequency\": \"once_per_campaign\",\n    \"btn_save\": \"\",\n    \"trigger_sources\": [\n        \"recipient_action\"\n    ],\n    \"criteria\": [\n        {\n            \"condition\": \"and\",\n            \"group\": \"\",\n            \"field_id\": \"{{list_field_email}}\",\n            \"field_name\": \"\",\n            \"type\": \"email\",\n            \"position\": 1,\n            \"changed\": \"\",\n            \"operator\": \"=\",\n            \"operand\": [\n                \"ta_44_once_per_campaign_{{env}}@hoohem.com\"\n            ],\n            \"left_parenthesis\": 0,\n            \"right_parenthesis\": 0\n        }\n    ],\n   \n    \"actions\": [\n    \t{\n    \t\t\"name\":\"Ta-44-Once-per-campaign Update Field Action\",\n            \"type\": \"update_field\",\n            \"active\": true,\n            \"position\": 0,\n            \"data\": {\n                \"value\": \"2\",\n                \"field_id\": {{list_field_count}},\n                \"operator\": \"increment\",\n                \"field_name\": \"count\"\n            }\n        },\n        {\n\t      \"name\": \"Ta-44-Once-per-campaign Webhook Action\",\n\t      \"action_number\": 2,\n\t      \"type\": \"webhook\",\n\t      \"data\": {\n\t        \"http_method\": \"post\",\n\t        \"url\": \"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-ta_44_once_per_campaign\",\n\t        \"selected_fields\": [\n\t          \"email\"\n\t        ]\n\t      },\n\t      \"active\": true,\n\t      \"position\": 1\n\t    },\n\t    {\n\t    \t\"name\": \"Ta-44-Once-per-campaign Transactional Action\",\n\t\t\t\"action_number\":3,\n\t\t\t\"type\":\"transactional\",\n\t\t\t\"data\":{\n\t\t\t\"message_id\":{{ta_contact_create_once}},\n\t\t\t\"campaign_id\":{{tmailing_id}},\n\t\t\t\"sending_connection_id\":{{esp_id}}\n\t\t\t},\n\t\t\t\"active\":true,\n\t\t\t\"position\":2\n\t\t}\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active Automation Rule",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create and Run Campaign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"TA-44-Once-per-campaign\",\n   \"description\": \"TA-44-Once-per-campaign\",\n   \"list_id\": {{list_id}} ,\n   \"email_message\": {{email_message_bh}} ,\n   \"segments\": [{{ta_44_segment_id}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{esp_id}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"ta_44_once_per_campaign_count\", jsonData.payload.count);",
+							"pm.globals.set(\"ta_44_once_per_campaign_contact_id\", jsonData.payload.id)",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_44_once_per_campaign_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_44_once_per_campaign_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseText = pm.response.json();",
+							"pm.environment.set(\"mail_open_links\", responseText.HTMLOpenLinks[0]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ta_44_once_per_campaign_{{env}}@hoohem.com\",\n    \"subject\": \"TA-44{{env}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test open",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{mail_open_links}}",
+					"host": [
+						"{{mail_open_links}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.environment.get(\"env\") === \"production-28284\"){",
+							"    postman.setNextRequest(\"Test Update Field Action\"); ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Update Field Action",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check Behavioural Event-Once Per Campaign in update field action is working\", function () {",
+							"    pm.expect(jsonData.payload.count).to.equal(parseInt(pm.globals.get(\"ta_44_once_per_campaign_count\")+2));",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_44_once_per_campaign_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_44_once_per_campaign_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook Action",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Behavioural Event-Once Per Campaign in webhook action is working\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.events[0].email).to.equal(\"ta_44_once_per_campaign_\"+pm.environment.get(\"env\")+\"@hoohem.com\");",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta_44_once_per_campaign",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta_44_once_per_campaign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ta_44_once_per_campaign",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ta_44_once_per_campaign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Transactional Action",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"if(pm.response.code === 200){\r",
+							"    pm.test(\"Check Behavioural Event-Once Per Campaign in transactional action is working\", function () {\r",
+							"        pm.expect(jsonData.subject).to.equal(\"Test AR-Contact_Create-Once-\" + pm.environment.get(\"esp_id\"))\r",
+							"    });\r",
+							"}else{\r",
+							"    pm.test(\"Mail Not Received\", function () {\r",
+							"        pm.expect('').to.equal(\"Mail Not Received\");\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ta_44_once_per_campaign_{{env}}@hoohem.com\",\n    \"subject\": \"Test AR-Contact_Create-Once-{{esp_id}}\",\n    \"timeout\": 200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test open",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{mail_open_links}}",
+					"host": [
+						"{{mail_open_links}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook Action",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Behavioural Event-Once Per Campaign in webhook action is working\", function () {",
+							"    var jsonData = pm.response.text();",
+							"    pm.expect(jsonData).to.equal(\"File not found!\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta_44_once_per_campaign",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta_44_once_per_campaign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Cases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check Behavioural Event-Once Per Campaign in update field action is working\", function () {",
+							"    pm.expect(jsonData.payload.count).to.equal(parseInt(pm.globals.get(\"ta_44_once_per_campaign_count\")+2));",
+							"})",
+							"pm.globals.unset(\"mail_open_links\");",
+							"pm.globals.unset(\"ta_44_once_per_campaign_\");",
+							"postman.setNextRequest(null);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_44_once_per_campaign_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_44_once_per_campaign_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": false}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"automation_rule_id\");",
+							"pm.globals.unset(\"mail_open_links\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

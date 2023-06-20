@@ -1,0 +1,2020 @@
+{
+	"info": {
+		"_postman_id": "2012d561-99b0-4eb7-9b15-e6f65cd81ffa",
+		"name": "TA-75",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-2012d561-99b0-4eb7-9b15-e6f65cd81ffa?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"ta_75_{{env}}@hoohem.com\"}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"automation_rule_id\", pm.response.json().payload.id);",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"TA-75\",\n  \"description\": \"\",\n  \"trigger\": \"contact_created_and_updated\",\n  \"trigger_frequency\": \"always\",\n  \"btn_save\": \"\",\n  \"trigger_sources\": [\n    \"ui\",\n    \"api\"\n  ],\n  \"criteria\": [\n    {\n      \"condition\": \"and\",\n      \"group\": \"\",\n      \"field_id\": {{list_field_email}},\n      \"type\": \"email\",\n      \"position\": 0,\n      \"operator\": \"=\",\n      \"operand\": [\n        \"ta_75_{{env}}@hoohem.com\"\n      ],\n      \"left_parenthesis\": 0,\n      \"right_parenthesis\": 0\n    }\n  ],\n  \"actions\": [\n    {\n      \"name\": \"TA-75 Webhook Action\",\n      \"action_number\": 1,\n      \"type\": \"webhook\",\n      \"data\": {\n        \"http_method\": \"post\",\n        \"url\": \"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-ta75\",\n        \"selected_fields\": [\n\t        \"ocx_complaint_date\",\n\t\t\t\"ocx_bounce_date\",\n\t\t\t\"ocx_status\",\n\t\t\t\"ocx_resubscribe_date\",\n\t\t\t\"ocx_unsubscribe_date\",\n\t\t\t\"ocx_contact_id\",\n\t\t\t\"ocx_created_date\",\n\t\t\t\"ocx_import_id\"\n        ]\n      },\n      \"active\": true,\n      \"position\": 0\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"contact_id_ta_75\", jsonData.payload.id);",
+							"pm.globals.set(\"contact_status_ta_75\", jsonData.payload.ocx_status);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"ocx_created_date_ta_75\", str.substring(0,8));",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_75_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_75_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"ta_75_{{env}}@hoohem.com\", \"update_time\": \"{{$timestamp}}\" }"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Test Contact ID working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_contact_id).to.equal(pm.globals.get(\"contact_id_ta_75\"));\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Status working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_status).to.equal(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Create Date working with Webhook\", function () {\r",
+							"    var str = jsonData.events[0].ocx_created_date.toString()\r",
+							"    pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_created_date_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Last Import ID working with Webhook\", function () {\r",
+							"    pm.expect(parseInt(jsonData.events[0].ocx_import_id)).to.equal(-1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Status Unsubscribe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"list_id\": {{list_id}},\n \"change_to\":\"unsubscribe\",\n \"emails\": [\"ta_75_{{env}}@hoohem.com\"]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"contact_id_ta_75\", jsonData.payload.id);",
+							"pm.globals.set(\"contact_status_ta_75\", jsonData.payload.ocx_status);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"ocx_created_date_ta_75\", str.substring(0,8));",
+							"var strUnsub = jsonData.payload.ocx_unsubscribe_date.toString()",
+							"pm.globals.set(\"ocx_unsubscribe_date_ta_75\", strUnsub.substring(0,8));",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_75_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_75_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"ta_75_{{env}}@hoohem.com\", \"update_time\": \"{{$timestamp}}\" }"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Test Contact ID working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_contact_id).to.equal(pm.globals.get(\"contact_id_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Status working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_status).to.equal(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Create Date working with Webhook\", function () {\r",
+							"    var str = jsonData.events[0].ocx_created_date.toString()\r",
+							"    pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_created_date_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Unsubscribe Date working with Webhook\", function () {\r",
+							"    var str = jsonData.events[0].ocx_unsubscribe_date.toString()\r",
+							"    pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_unsubscribe_date_ta_75\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Status Complaint",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"list_id\": {{list_id}},\n \"change_to\":\"complaint\",\n \"emails\": [\"ta_75_{{env}}@hoohem.com\"]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60 ",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60 "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"contact_id_ta_75\", jsonData.payload.id);",
+							"pm.globals.set(\"contact_status_ta_75\", jsonData.payload.ocx_status);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"ocx_created_date_ta_75\", str.substring(0,8));",
+							"var strUnsub = jsonData.payload.ocx_unsubscribe_date.toString()",
+							"pm.globals.set(\"ocx_unsubscribe_date_ta_75\", strUnsub.substring(0,8));",
+							"var strComplained = jsonData.payload.ocx_complaint_date.toString()",
+							"pm.globals.set(\"ocx_complaint_date_ta_75\", strComplained.substring(0,8));",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_75_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_75_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ta_75_{{env}}@hoohem.com\",\n    \"update_time\": \"{{$timestamp}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60  Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Test Contact ID working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_contact_id).to.equal(pm.globals.get(\"contact_id_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Status working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_status).to.equal(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Create Date working with Webhook\", function () {\r",
+							"    var str = jsonData.events[0].ocx_created_date.toString()\r",
+							"    pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_created_date_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Complained Date working with Webhook\", function () {\r",
+							"    var str = jsonData.events[0].ocx_complaint_date.toString()\r",
+							"    pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_complaint_date_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Test Last Import ID working with Webhook\", function () {\r",
+							"    pm.expect(parseInt(jsonData.events[0].ocx_import_id)).to.equal(-1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Status Bounce",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"list_id\": {{list_id}},\n \"change_to\":\"bounce\",\n \"emails\": [\"ta_75_{{env}}@hoohem.com\"]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60  Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"contact_id_ta_75\", jsonData.payload.id);",
+							"pm.globals.set(\"contact_status_ta_75\", jsonData.payload.ocx_status);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"ocx_created_date_ta_75\", str.substring(0,8));",
+							"var strUnsub = jsonData.payload.ocx_unsubscribe_date.toString()",
+							"pm.globals.set(\"ocx_unsubscribe_date_ta_75\", strUnsub.substring(0,8));",
+							"var strComplained = jsonData.payload.ocx_complaint_date.toString()",
+							"pm.globals.set(\"ocx_complaint_date_ta_75\", strComplained.substring(0,8));",
+							"var strBounce = jsonData.payload.ocx_bounce_date.toString()",
+							"pm.globals.set(\"ocx_bounce_date_ta_75\", strBounce.substring(0,8));",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_75_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_75_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ta_75_{{env}}@hoohem.com\",\n    \"update_time\": \"{{$timestamp}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60  Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60 ",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60 "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Test Contact ID working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_contact_id).to.equal(pm.globals.get(\"contact_id_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Status working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_status).to.equal(3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Create Date working with Webhook\", function () {\r",
+							"    var str = jsonData.events[0].ocx_created_date.toString()\r",
+							"    pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_created_date_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Bounce Date working with Webhook\", function () {\r",
+							"    var str = jsonData.events[0].ocx_bounce_date.toString()\r",
+							"    pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_bounce_date_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Status Resubscribe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"list_id\": {{list_id}},\n \"change_to\":\"resubscribe\",\n \"emails\": [\"ta_75_{{env}}@hoohem.com\"]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60  Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"contact_id_ta_75\", jsonData.payload.id);",
+							"pm.globals.set(\"contact_status_ta_75\", jsonData.payload.ocx_status);",
+							"var str = jsonData.payload.ocx_created_date.toString()",
+							"pm.globals.set(\"ocx_created_date_ta_75\", str.substring(0,8));",
+							"var strUnsub = jsonData.payload.ocx_unsubscribe_date.toString()",
+							"pm.globals.set(\"ocx_unsubscribe_date_ta_75\", strUnsub.substring(0,8));",
+							"var strComplained = jsonData.payload.ocx_complaint_date.toString()",
+							"pm.globals.set(\"ocx_complaint_date_ta_75\", strComplained.substring(0,8));",
+							"var strResub = jsonData.payload.ocx_resubscribe_date.toString()",
+							"pm.globals.set(\"ocx_resubscribe_date_ta_75\", strResub.substring(0,8));",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_75_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_75_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"ta_75_{{env}}@hoohem.com\", \"update_time\": \"{{$timestamp}}\" }"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60 ",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60 "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Test Contact ID working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_contact_id).to.equal(pm.globals.get(\"contact_id_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Status working with Webhook\", function () {\r",
+							"    pm.expect(jsonData.events[0].ocx_status).to.equal(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Create Date working with Webhook\", function () {\r",
+							"    var str = jsonData.events[0].ocx_created_date.toString()\r",
+							"    pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_created_date_ta_75\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test Contact Resubscribe Date working with Webhook\", function () {\r",
+							"    if(jsonData.events[0].ocx_resubscribe_date !== null){\r",
+							"        var str = jsonData.events[0].ocx_resubscribe_date.toString()\r",
+							"        pm.expect(str.substring(0,8)).to.equal(pm.globals.get(\"ocx_resubscribe_date_ta_75\"));\r",
+							"    }else{\r",
+							"        pm.expect(jsonData.events[0].ocx_resubscribe_date).to.equal(pm.globals.get(\"ocx_resubscribe_date_ta_75\"));\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ta75",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ta75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_id_ta_75\");",
+							"pm.globals.unset(\"contact_status_ta_75\");",
+							"pm.globals.unset(\"ocx_created_date_ta_75\");",
+							"pm.globals.unset(\"ocx_unsubscribe_date_ta_75\");",
+							"pm.globals.unset(\"ocx_complaint_date_ta_75\");",
+							"pm.globals.unset(\"ocx_resubscribe_date_ta_75\");",
+							"pm.globals.unset(\"ocx_bounce_date_ta_75\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"change_to\":\"remove\",\r\n \"emails\": [\r\n  \"ta_75_{{env}}@hoohem.com\"\r\n ]\r\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

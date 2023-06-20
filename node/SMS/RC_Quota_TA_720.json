@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "6a1d949f-94e5-4b8e-89e0-c21720993940",
+		"name": "RC_Quota_TA_720",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-6a1d949f-94e5-4b8e-89e0-c21720993940?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create and send campaign",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"time_30\", Math.round((new Date()).getTime() / 1000) + 30);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"time_30\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Quota Campaign\",\n  \"list_id\": {{list_id}},\n  \"email_message\": {{rc_sms_id_quota}},\n  \"segments\": [\n    {{ab_split_sms_segment_id}}\n  ],\n  \"distribution\": [\n    {\n      \"esp_connection_id\": {{sms_connectionId}},\n      \"percent\": 100\n    }\n  ],\n  \"schedule_date\": {{time_30}},\n  \"emails_limit_active\": true,\n  \"emails_limit_global_active\": true,\n  \"emails_limit\": \"1\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/api/mailings/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"api",
+						"mailings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var count = 0;",
+							"if(pm.response.code === 200){",
+							"    count = count + 1;",
+							"}",
+							"pm.globals.set(\"count_quota_cmapaign\", count);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"rc_quota_{{sms_connectionId}}\",\n    \"timeout\": 600000\n}"
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// var jsonData = pm.response.json();",
+							"var count = pm.globals.get(\"count_quota_cmapaign\");",
+							"if(pm.response.code === 200){",
+							"    count = count + 1;",
+							"}",
+							"pm.test(\"Test  Regular  Campaign Quota SMS\", function() {",
+							"        pm.expect(parseInt(count)).to.equal(1);",
+							"});",
+							"pm.globals.unset(\"count_quota_cmapaign\", count);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_2}}\",\n    \"unique_id\": \"rc_quota_{{sms_connectionId}}\",\n    \"timeout\": 100000\n}"
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

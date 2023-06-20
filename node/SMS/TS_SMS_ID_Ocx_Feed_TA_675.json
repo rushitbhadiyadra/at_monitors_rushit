@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "08adfa28-02cc-4449-8cbe-af88657abb78",
+		"name": "TS_SMS_ID_Ocx_Feed_TA_675",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/AT-SMS~91e83416-2269-42d0-be32-66c40d50eb55/collection/6765444-08adfa28-02cc-4449-8cbe-af88657abb78?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "teansactional send static",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"recipients\": [ \"at_sms@hoohem.com\" ],\n    \"message_id\": {{sms_id_tc_ocx_feed}},\n\t\"sending_connection_id\": {{sms_connectionId}},\n    \"campaign_id\": {{transactional_cid_sms}}\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/transactional/send",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"transactional",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json()",
+							"    var smsText1 = jsonData.Body;",
+							"    if (pm.environment.get(\"env\") === \"dev\") {",
+							"        var smsText = smsText1.split(\"$!@#$\")",
+							"        pm.test(`Test Transactional Send SmsId ocx feed is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Regular\");",
+							"            pm.expect(smsText[3]).to.equal(\"suit\");",
+							"        })",
+							"    }",
+							"    else {",
+							"        var smsText = smsText1.split(\"ü!@#ü\")",
+							"        pm.test(`Test Transactional Send SmsId ocx feed is working \"Time : ${jsonData.timestamp}`, function () {",
+							"            pm.expect(smsText[1]).to.equal(\"Regular\");",
+							"            pm.expect(smsText[3]).to.equal(\"suit\");",
+							"        })",
+							"    }",
+							"} else {",
+							"    pm.test(`Test Transactional Send SmsId ocx feed is working`, function () {",
+							"        pm.expect(\"\").to.equal(\"Regular\");",
+							"        pm.expect(\"\").to.equal(\"suit\");",
+							"    })",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"tc_sms_ocx_feed_{{sms_connectionId}}\",\n    \"timeout\": 600000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app.ongageqa.site/sms_db/get_last",
+					"protocol": "http",
+					"host": [
+						"app",
+						"ongageqa",
+						"site"
+					],
+					"path": [
+						"sms_db",
+						"get_last"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
