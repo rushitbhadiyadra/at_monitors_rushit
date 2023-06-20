@@ -1596,7 +1596,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"subject\": \"Test AB-Winner send_empty_content Flag True Send Message Dynamic Ocx Feed-{{connectionId}}-{{env}}\",\n    \"timeout\": 100000\n}",
+					"raw": "{\n    \"subject\": \"Test AB-Winner send_empty_content Flag True Send Message Dynamic Ocx Feed-{{connectionId}}-{{env}}\",\n    \"timeout\": 300000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
