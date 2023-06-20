@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ vr_ab_winner_error_content_flag_True_for_dynamic_content ]
+        collection: [ Verify_send_empty_content_flag_true_for_dynamic_content_with_ab_split_campaign ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections

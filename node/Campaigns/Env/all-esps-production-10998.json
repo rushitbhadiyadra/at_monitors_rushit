@@ -373,6 +373,11 @@
 			"enabled": true
 		},
 		{
+			"key": "msg_id_ab_split_send_empty_content_flag_true",
+			"value": "13302047",
+			"enabled": true
+		},
+		{
 			"key": "msg_id_ab_winner_send_empty_content_flag_true",
 			"value": "13302332",
 			"enabled": true
