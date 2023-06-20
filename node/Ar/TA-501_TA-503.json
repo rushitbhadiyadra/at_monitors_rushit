@@ -1,0 +1,1129 @@
+{
+	"info": {
+		"_postman_id": "75ae4d23-4bd4-47a8-bd17-504aebebf4da",
+		"name": "TA-501_TA-503",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-75ae4d23-4bd4-47a8-bd17-504aebebf4da?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"ta_501_503_active_{{env}}@hoohem.com\",\n        \"count\": \"0\"\n    },\n    {\n        \"email\": \"ta_501_503_unsubscribe_{{env}}@hoohem.com\",\n        \"count\": \"0\"\n    },\n    {\n        \"email\": \"ta_501_503_bounce_{{env}}@hoohem.com\",\n        \"count\": \"0\"\n    },\n    {\n        \"email\": \"ta_501_503_g_suppressed_{{env}}@hoohem.com\",\n        \"count\": \"0\"\n    },\n    {\n        \"email\": \"ta_501_503_l_suppressed_{{env}}@hoohem.com\",\n        \"count\": \"0\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Automation Rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code != '200' ){",
+							"    postman.setNextRequest('Contact Update');",
+							"}else{",
+							"    pm.globals.set(\"all_contact_status_automation_rule_id\", pm.response.json().payload.id);",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Test All Type Contact Status\",\n\"description\": \"\",\n\"trigger\": \"contact_created_and_updated\",\n\"trigger_frequency\": \"always\",\n\"btn_save\": \"\",\n\"trigger_sources\": [\"ui\", \"api\"],\n\"active\": true,\n\"criteria\": [\n\t{\n        \"condition\": \"and\",\n        \"group\": \"\",\n        \"field_id\": {{list_field_email}},\n        \"field_name\": \"email\",\n        \"type\": \"email\",\n        \"position\": 0,\n        \"changed\": \"\",\n        \"operator\": \"=\",\n        \"operand\": [\n            \"ta_501_503_active_{{env}}@hoohem.com\",\n            \"ta_501_503_unsubscribe_{{env}}@hoohem.com\",\n            \"ta_501_503_bounce_{{env}}@hoohem.com\",\n            \"ta_501_503_g_suppressed_{{env}}@hoohem.com\", \n            \"ta_501_503_l_suppressed_{{env}}@hoohem.com\"\n        ],\n        \"left_parenthesis\": 0,\n        \"right_parenthesis\": 0\n    }\n],\n\"actions\": [\n\t{\n\t\t\"name\":\"Without Check Contact Status\",\n        \"type\": \"transactional\",\n        \"active\": true,\n        \"position\": 0,\n        \"data\": {\n            \"message_id\": {{msg_id_both_uncheck_status}},\n            \"campaign_id\": {{tmailing_id}},\n            \"sending_connection_id\": {{esp_id}}\n\t\t }\n    },{\n\t\t\"name\":\"Both Check Contact Status\",\n        \"type\": \"transactional\",\n        \"active\": true,\n        \"position\": 1,\n        \"data\": {\n            \"message_id\": {{msg_id_both_check_status}},\n            \"campaign_id\": {{tmailing_id}},\n            \"sending_connection_id\": {{esp_id}},\n            \"check_status\": true,\n            \"check_global_and_list_suppression\":true\n\t\t }\n}\n]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active Automation Rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"active\": true}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{all_contact_status_automation_rule_id}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{all_contact_status_automation_rule_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contact Update",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"current_time\", Date.now());"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"current_time\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email\": \"ta_501_503_active_{{env}}@hoohem.com\",\n        \"address\": {{current_time}}\n    },\n    {\n        \"email\": \"ta_501_503_unsubscribe_{{env}}@hoohem.com\",\n        \"address\": {{current_time}}\n    },\n    {\n        \"email\": \"ta_501_503_bounce_{{env}}@hoohem.com\",\n        \"address\": {{current_time}}\n    },\n    {\n        \"email\": \"ta_501_503_g_suppressed_{{env}}@hoohem.com\",\n        \"address\": {{current_time}}\n    },\n    {\n        \"email\": \"ta_501_503_l_suppressed_{{env}}@hoohem.com\",\n        \"address\": {{current_time}}\n    }\n]\n"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 200 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Active Status Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.test(`Test Check Active Contact Status Subject \"Is Working\"`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Test Check Active Contact Status Subject \\\"Is Working\\\"\", function() {",
+							"        pm.expect(\"\").to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_active_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Uncheck Status-{{esp_id}}\",\n\t\"timeout\":400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Unsubscribe Status Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.test(`Test Check Contact Unsubscribe Status Subject \"Is Working\"`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Test Check Contact Unsubscribe Status Subject \\\"Is Working\\\"\", function() {",
+							"        pm.expect(\"\").to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_unsubscribe_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Uncheck Status-{{esp_id}}\",\n\t\"timeout\":400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Hard Bounce Status Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.test(`Test Check Contact Hard Bounce Status Subject \"Is Working\"`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Test Check Contact Hard Bounce Status Subject \\\"Is Working\\\"\", function() {",
+							"        pm.expect(\"\").to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_bounce_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Uncheck Status-{{esp_id}}\",\n\t\"timeout\":400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Global Suppressed Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.test(`Test Check Contact Global Suppression Status Subject \"Is Working\"`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Test Check Contact Global Suppression Status Subject \\\"Is Working\\\"\", function() {",
+							"        pm.expect(\"\").to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_g_suppressed_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Uncheck Status-{{esp_id}}\",\n\t\"timeout\":400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open List Suppressed Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.test(`Test Check Contact List Suppression Status Subject \"Is Working\"`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Test Check Contact List Suppression Status Subject \\\"Is Working\\\"\", function() {",
+							"        pm.expect(\"\").to.equal(\"Test Both Check Box Is Uncheck Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_l_suppressed_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Uncheck Status-{{esp_id}}\",\n\t\"timeout\":400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Active Status Mail(check status)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const espId = pm.globals.get(\"espId\");",
+							"var connectionId = pm.globals.get(\"connectionId\");",
+							"var jsonData = pm.response.json();",
+							"if(pm.response.code === 200){",
+							"    pm.test(`Test Check ON Contact Active Status Subject \"Is Working\"`, function() {",
+							"        pm.expect(jsonData.subject).to.equal(\"Test Both Check Box Is Check Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"} else {",
+							"    pm.test(\"Test Check ON Contact Active Status Subject \\\"Is Working\\\"\", function() {",
+							"        pm.expect(\"\").to.equal(\"Test Both Check Box Is Check Status-\"+pm.environment.get(\"esp_id\"));",
+							"    });",
+							"}",
+							"-pm.environment.get(\"esp_id\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_active_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Check Status-{{esp_id}}\",\n\t\"timeout\": 200000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Unsubscribe Status Mail(Check Status)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(`Test Check ON Contact Status Unsbscribe \"Is Working\"`, function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_unsubscribe_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Check Status-{{esp_id}}\",\n\t\"timeout\":30000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Hard Bounce Status Mail(Check Status)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(`Test Check ON Contact Status Hard Bounce \"Is Working\"`, function() {",
+							"pm.response.to.have.status(500);",
+							"    });",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_bounce_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Check Status-{{esp_id}}\",\n\t\"timeout\":30000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Global Suppressed Mail(Check Status)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(`Test Check ON Contact Status Global Suppressed Mail \"Is Working\"`, function() {",
+							"pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_g_suppressed_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Check Status-{{esp_id}}\",\n\t\"timeout\":30000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open List Suppressed Mail(Check Status)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(`Test Check ON Contact Status List Suppressed \"Is Working\"`, function() {",
+							"pm.response.to.have.status(500);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_501_503_l_suppressed_{{env}}@hoohem.com\",\n\t\"subject\":\"Test Both Check Box Is Check Status-{{esp_id}}\",\n\t\"timeout\":30000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

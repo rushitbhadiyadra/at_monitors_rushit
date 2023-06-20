@@ -1,0 +1,773 @@
+{
+	"info": {
+		"_postman_id": "9b025535-828a-4908-a8b2-3b56adb67fe1",
+		"name": "TA-520",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-9b025535-828a-4908-a8b2-3b56adb67fe1?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ta_520_{{env}}@hoohem.com\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get contact info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"contact_id_ta_520\", jsonData.payload.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_520_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_520_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code != '200' ){",
+							"    postman.setNextRequest('Delay 40 Seconds');",
+							"}else{",
+							"    pm.globals.set(\"automation_rule_id_ta_520\", pm.response.json().payload.id);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"TA-520\",\n  \"description\": \"\",\n  \"trigger\": \"contact_created_and_updated\",\n  \"trigger_frequency\": \"always\",\n  \"trigger_sources\": [\n    \"ui\",\n    \"api\"\n  ],\n  \"btn_save\": \"\",\n  \"criteria\": [\n    {\n        \"condition\": \"and\",\n        \"group\": \"\",\n        \"field_id\": {{list_field_email}},\n        \"field_name\": \"\",\n        \"type\": \"email\",\n        \"position\": 0,\n        \"changed\": \"\",\n        \"operator\": \"=\",\n        \"operand\": [\n            \"ta_520_{{env}}@hoohem.com\"\n        ],\n        \"left_parenthesis\": 0,\n        \"right_parenthesis\": 0\n    }\n  ],\n  \"actions\": [\n    {\n      \"name\": \"TA-Contact_Create_or_Edit Webhook Action\",\n      \"action_number\": 1,\n      \"type\": \"webhook\",\n      \"data\": {\n        \"http_method\": \"post\",\n        \"url\": \"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-ta_520\",\n        \"selected_fields\": [\n          \"email\"\n        ]\n      },\n      \"active\": true,\n      \"position\": 0\n    },\n    {\n    \t\"name\": \"TA-520 Transactional Action\",\n\t\t\"action_number\":2,\n\t\t\"type\":\"transactional\",\n\t\t\"data\":{\n\t\t\"message_id\":{{msg_id_ta_520}},\n\t\t\"campaign_id\":{{tmailing_id}},\n\t\t\"sending_connection_id\":{{esp_id}}\n\t\t},\n\t\t\"active\":true,\n\t\t\"position\":1\n\t},\n\t{\n        \"name\": \"TA-520 Update Field Action email\",\n        \"action_number\":3,\n        \"type\": \"update_field\",\n        \"active\": true,\n        \"position\": 2,\n        \"data\": {\n            \"value\": \"{{email}}\",\n            \"field_id\": {{list_field_address}},\n            \"operator\": \"overwrite\",\n            \"field_name\": \"address\"\n        }\n    },\n\t{\n        \"name\": \"TA-520 Update Field Action ocxar_event_timestamp\",\n        \"action_number\":3,\n        \"type\": \"update_field\",\n        \"active\": true,\n        \"position\": 2,\n        \"data\": {\n            \"value\": \"{{ocxar_event_timestamp}}\",\n            \"field_id\": {{list_field_date2}},\n            \"operator\": \"overwrite\",\n            \"field_name\": \"date2\"\n        }\n    },\n\t{\n        \"name\": \"TA-520 Update Field Action ocxar_trigger_source\",\n        \"action_number\":3,\n        \"type\": \"update_field\",\n        \"active\": true,\n        \"position\": 2,\n        \"data\": {\n            \"value\": \"{{ocxar_trigger_source}}\",\n            \"field_id\": {{list_field_first_name}},\n            \"operator\": \"overwrite\",\n            \"field_name\": \"first_name\"\n        }\n    },\n\t{\n        \"name\": \"TA-520 Update Field Action ocxar_trigger\",\n        \"action_number\":3,\n        \"type\": \"update_field\",\n        \"active\": true,\n        \"position\": 2,\n        \"data\": {\n            \"value\": \"{{ocxar_trigger}}\",\n            \"field_id\": {{list_field_}},\n            \"operator\": \"overwrite\",\n            \"field_name\": \"_\"\n        }\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active automation rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"active\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{automation_rule_id_ta_520}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{automation_rule_id_ta_520}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 40 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=40",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ta_520_{{env}}@hoohem.com\",\n    \"update_time\": \"{{$timestamp}}\"\n}"
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay 60 Seconds",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=60",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Update Field Action",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var date = new Date();",
+							"var dd = ('0' + date.getDate()).slice(-2)",
+							"var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"var yy = date.getFullYear();",
+							"",
+							"pm.test(\"Test ocxar_trigger_source with Update Field Action\", function () {",
+							"    pm.expect(jsonData.payload.first_name).to.eql(\"api\");",
+							"});",
+							"",
+							"pm.test(\"Test ocxar_trigger with Update Field Action\", function () {",
+							"    if(jsonData.payload._ === \"update\"){",
+							"        pm.expect(jsonData.payload._).to.eql(\"update\");",
+							"    }else{",
+							"        pm.expect(jsonData.payload._).to.eql(\"create\");",
+							"    }",
+							"});",
+							"",
+							"pm.test(\"Test ocxar_event_timestamp with Update Field Action\", function () {",
+							"    var d = new Date(jsonData.payload.date2 * 1000);",
+							"    var day = ('0' + d.getDate()).slice(-2)",
+							"    var month = ('0' + (d.getMonth()+1)).slice(-2)",
+							"    var year = d.getFullYear();",
+							"    pm.expect(day+'-'+month+'-'+year).to.eql(dd+'-'+mm+'-'+yy);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ta_520_{{env}}@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ta_520_{{env}}@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Webhook Action",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){",
+							"    var jsonData = pm.response.json();",
+							"    var jsonFields = jsonData.events[0]",
+							"    var date = new Date();",
+							"    var dd = ('0' + date.getDate()).slice(-2)",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)",
+							"    var yy = date.getFullYear();",
+							"    ",
+							"    pm.test(\"Test ocxar_trigger_source with Webhook Action\", function () {",
+							"        pm.expect(jsonFields.ocxar_trigger_source).to.eql(\"api\");",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxar_trigger with Webhook Action\", function () {",
+							"        if(jsonFields.ocxar_trigger === \"update\"){",
+							"            pm.expect(jsonFields.ocxar_trigger).to.eql(\"update\");",
+							"        }else{",
+							"            pm.expect(jsonFields.ocxar_trigger).to.eql(\"create\");",
+							"        }",
+							"    });",
+							"    ",
+							"    pm.test(\"Test ocxar_event_timestamp with Webhook Action\", function () {",
+							"        var timestamp = jsonFields.ocxar_event_timestamp.split(\" \")",
+							"        pm.expect(timestamp[0]).to.eql(yy+'-'+mm+'-'+dd);",
+							"    });",
+							"    ",
+							"}else{",
+							"    pm.test(\"Webhook didn't received\", function () {",
+							"        pm.expect(\"\").to.eql(`Webhook didn't received`);",
+							"    });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ta_520",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ta_520"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Transactional Action",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code === 200){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var jsonFields = JSON.parse(jsonData.html.split(\"~!@#~\")[1])\r",
+							"    var date = new Date();\r",
+							"    var dd = ('0' + date.getDate()).slice(-2)\r",
+							"    var mm = ('0' + (date.getMonth()+1)).slice(-2)\r",
+							"    var yy = date.getFullYear();\r",
+							"    \r",
+							"    pm.test(\"Test ocxar_trigger_source with Transactional Action\", function () {\r",
+							"        pm.expect(jsonFields.ocxar_trigger_source).to.eql(\"api\");\r",
+							"    });\r",
+							"    \r",
+							"    pm.test(\"Test ocxar_trigger with Transactional Action\", function () {\r",
+							"        if(jsonFields.ocxar_trigger === \"update\"){\r",
+							"            pm.expect(jsonFields.ocxar_trigger).to.eql(\"update\");\r",
+							"        }else{\r",
+							"            pm.expect(jsonFields.ocxar_trigger).to.eql(\"create\");\r",
+							"        }\r",
+							"    });\r",
+							"    \r",
+							"    pm.test(\"Test ocxar_event_timestamp with Transactional Action\", function () {\r",
+							"        var timestamp = jsonFields.ocxar_event_timestamp.split(\" \")\r",
+							"        var d = new Date(jsonFields.ocxar_event_timestamp * 1000);\r",
+							"        var day = ('0' + d.getDate()).slice(-2)\r",
+							"        var month = ('0' + (d.getMonth()+1)).slice(-2)\r",
+							"        var year = d.getFullYear();\r",
+							"        pm.expect(timestamp[0]).to.eql(yy+'-'+mm+'-'+dd);\r",
+							"    });\r",
+							"    \r",
+							"}else{\r",
+							"    pm.test(\"Mail not received\", function () {\r",
+							"        pm.expect('').to.eql(\"Mail not received\");\r",
+							"    });\r",
+							"    \r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"ta_520_{{env}}@hoohem.com\",\n\t\"subject\":\"TA-520-{{esp_id}}\",\n\t\"timeout\":400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ta_520",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ta_520"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"contact_id_ta_520\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"type": "text",
+						"value": "{{username}}"
+					},
+					{
+						"key": "X_PASSWORD",
+						"type": "text",
+						"value": "{{password}}"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"type": "text",
+						"value": "{{account_code}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"change_to\":\"remove\",\r\n \"emails\": [\r\n  \"ta_520_{{env}}@hoohem.com\"\r\n ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

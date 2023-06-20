@@ -1,0 +1,1085 @@
+{
+	"info": {
+		"_postman_id": "c335080c-5694-4b88-b584-8573ebd8c0fc",
+		"name": "AR With Multiple Actions ONG-13760",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6765444",
+		"_collection_link": "https://ongageqa.postman.co/workspace/Automation-Rules~787500f5-12b4-4a1c-8876-ef4ee137a15d/collection/6765444-c335080c-5694-4b88-b584-8573ebd8c0fc?action=share&creator=6765444&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "get old AR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"if(jsonData.payload.length > 0){",
+							"    for (var segment of jsonData.payload) {",
+							"        if (segment.name === \"ONG-13760\"){",
+							"            pm.globals.set(\"ar_id_ong_13760\", segment.id);",
+							"        }      ",
+							"    }",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X_USERNAME",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "X_PASSWORD",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "X_ACCOUNT_CODE",
+						"value": "{{account_code}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete old AR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.unset(\"ar_id_ong_13760\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"active\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{ar_id_ong_13760}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{ar_id_ong_13760}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ong_13760@hoohem.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_200",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=200",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create AR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.globals.set(\"ar_id_ong_13760\",jsonData.payload.id)"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"ONG-13760\",\r\n    \"description\": \"\",\r\n    \"trigger\": \"contact_created_and_updated\",\r\n    \"trigger_frequency\": \"always\",\r\n    \"trigger_sources\": [\r\n        \"ui\",\r\n        \"api\"\r\n    ],\r\n    \"btn_save\": \"\",\r\n    \"criteria\": [\r\n        {\r\n            \"condition\": \"and\",\r\n            \"group\": \"\",\r\n            \"field_id\": {{list_field_email_id}},\r\n            \"field_name\": \"email\",\r\n            \"type\": \"email\",\r\n            \"position\": 0,\r\n            \"changed\": \"\",\r\n            \"operator\": \"=\",\r\n            \"case_sensitive\": \"0\",\r\n            \"operand\": [\r\n                \"ONG_13760@hoohem.com\"\r\n            ],\r\n            \"left_parenthesis\": 0,\r\n            \"right_parenthesis\": 0\r\n        }\r\n    ],\r\n    \"actions\": [\r\n        {\r\n            \"name\": \"ONG-13760 webhook action 1\",\r\n            \"action_number\": 1,\r\n            \"type\": \"webhook\",\r\n            \"data\": {\r\n                \"http_method\": \"post\",\r\n                \"url\": \"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-ONG-13760-1\",\r\n                \"selected_fields\": [\r\n                    \"email\"\r\n                ]\r\n            },\r\n            \"active\": true,\r\n            \"position\": 0\r\n        },\r\n         {\r\n            \"name\": \"ONG-13760 webhook action 2\",\r\n            \"action_number\": 2,\r\n            \"type\": \"webhook\",\r\n            \"data\": {\r\n                \"http_method\": \"post\",\r\n                \"url\": \"https://automated_tests-l2.ongage.net/webhook_testing/{{env}}-ONG-13760-2\",\r\n                \"selected_fields\": [\r\n                    \"email\"\r\n                ]\r\n            },\r\n            \"active\": true,\r\n            \"position\": 1\r\n        },\r\n        {\r\n            \"type\": \"transactional\",\r\n            \"data\": {\r\n                \"message_id\": {{msg_id_ONG_13760_1}},\r\n                \"campaign_id\": {{tmailing_id}},\r\n                \"sending_connection_id\": {{esp_id}}\r\n            },\r\n            \"active\": true,\r\n            \"name\": \"ONG-13760 Transactional Action 1\",\r\n            \"position\": 2\r\n        },\r\n        {\r\n            \"type\": \"transactional\",\r\n            \"data\": {\r\n                \"message_id\": {{msg_id_ONG_13760_2}},\r\n                \"campaign_id\": {{tmailing_id}},\r\n                \"sending_connection_id\": {{esp_id}}\r\n            },\r\n            \"active\": true,\r\n            \"name\": \"ONG-13760 Transactional Action 2\",\r\n            \"position\": 3\r\n        },\r\n        {\r\n        \t\"name\": \"ONG-13760 Update Field Action\",\r\n            \"type\": \"update_field\",\r\n            \"active\": true,\r\n            \"position\": 4,\r\n            \"data\": {\r\n                \"value\": \"2\",\r\n                \"field_id\": {{list_field_count}},\r\n                \"operator\": \"increment\",\r\n                \"field_name\": \"count\"\r\n            }\r\n        },\r\n        {\r\n        \t\"name\": \"ONG-13760 Update Field Action\",\r\n            \"type\": \"update_field\",\r\n            \"active\": true,\r\n            \"position\": 5,\r\n            \"data\": {\r\n                \"value\": \"Stepin\",\r\n                \"field_id\": {{list_field_first_name}},\r\n                \"operator\": \"overwrite\",\r\n                \"field_name\": \"first_name\"\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active AR",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{ar_id_ong_13760}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{ar_id_ong_13760}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_300",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ong_13760@hoohem.com\",\r\n    \"first_name\": \"India\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delay_300",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/delay?seconds=300",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"delay"
+					],
+					"query": [
+						{
+							"key": "seconds",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get webhook 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"AR With Multiple Actions is working\", function () {\r",
+							"        pm.expect(jsonData.events[0].ocxar_trigger).to.equal(\"update\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"AR With Multiple Actions is working\", function () {\r",
+							"        pm.expect(\" \").to.equal(\"Webhook Data Found\");\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ONG-13760-1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ONG-13760-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear webhook 1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ONG-13760-1",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ONG-13760-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get webhook 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"AR With Multiple Actions is working\", function () {\r",
+							"        pm.expect(jsonData.events[0].ocxar_trigger).to.equal(\"update\");\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(\"AR With Multiple Actions is working\", function () {\r",
+							"        pm.expect(\" \").to.equal(\"Webhook Data Found\");\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/get/{{env}}-ONG-13760-2",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"get",
+						"{{env}}-ONG-13760-2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear webhook 2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/webhook_testing/clean/{{env}}-ONG-13760-2",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"webhook_testing",
+						"clean",
+						"{{env}}-ONG-13760-2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"Check Mail Found\", function () {\r",
+							"        pm.expect(pm.response.code).to.equal(200);\r",
+							"    });\r",
+							"}else{\r",
+							"    pm.test(\"Check Mail Found\", function () {\r",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");\r",
+							"    });\r",
+							"}\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ong_13760@hoohem.com\",\n    \"subject\": \"ONG-13760 First Msg-{{esp_id}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read mail 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json()\r",
+							"    pm.test(\"Check Mail Found\", function () {\r",
+							"        pm.expect(pm.response.code).to.equal(200);\r",
+							"    });\r",
+							"}else{\r",
+							"    pm.test(\"Check Mail Found\", function () {\r",
+							"        pm.expect(\" \").to.equal(\"Mail Not Received\");\r",
+							"    });\r",
+							"}\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "proxy",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "ongageqa86",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ong_13760@hoohem.com\",\n    \"subject\": \"ONG-13760 Second Msg-{{esp_id}}\",\n    \"timeout\": 400000\n}"
+				},
+				"url": {
+					"raw": "https://automated_tests-l2.ongage.net/app/mail_db/getLast",
+					"protocol": "https",
+					"host": [
+						"automated_tests-l2",
+						"ongage",
+						"net"
+					],
+					"path": [
+						"app",
+						"mail_db",
+						"getLast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get  updated fields",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"pm.test(\"Check count updated\", function () {\r",
+							"    pm.expect(jsonData.payload.count).to.equal(2);\r",
+							"});\r",
+							"pm.test(\"Check First Name updated\", function () {\r",
+							"    pm.expect(jsonData.payload.first_name).to.equal(\"Stepin\");\r",
+							"});"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/contacts/by_email/ong_13760@hoohem.com",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"contacts",
+						"by_email",
+						"ong_13760@hoohem.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate AR",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"active\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{ar_id_ong_13760}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{ar_id_ong_13760}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete AR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.globals.unset(\"ar_id_ong_13760\")"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"active\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/automation_rule/{{ar_id_ong_13760}}",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"automation_rule",
+						"{{ar_id_ong_13760}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x_username",
+						"value": "{{username}}",
+						"type": "text"
+					},
+					{
+						"key": "x_password",
+						"value": "{{password}}",
+						"type": "text"
+					},
+					{
+						"key": "x_account_code",
+						"value": "{{account_code}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"change_to\": \"remove\",\r\n    \"emails\": [\r\n        \"ong_13760@hoohem.com\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_domain}}/{{list_id}}/api/v2/contacts/change_status",
+					"host": [
+						"{{api_domain}}"
+					],
+					"path": [
+						"{{list_id}}",
+						"api",
+						"v2",
+						"contacts",
+						"change_status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
