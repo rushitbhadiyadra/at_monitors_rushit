@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14.x]
-        collection: [ Verify_Event_Campaign_and_contact_activity_report_with_one_link_included_in_the_email_content ]
+        collection: [ Verify_md5_suppression_breakdown_functionality_using_campaign_level_with_ab_winner_campaign ]
     steps:
     - uses: actions/checkout@v3.3.0
     - name: Prod privatesmtp Monitor collections

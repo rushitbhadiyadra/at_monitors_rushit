@@ -1,0 +1,380 @@
+{
+	"id": "4bd7bae7-12e0-4973-bb1e-73e38373a126",
+	"name": "prod_sms",
+	"values": [
+		{
+			"key": "username",
+			"value": "bhushan.stepin@gmail.com",
+			"enabled": true
+		},
+		{
+			"key": "env",
+			"value": "prod_sms",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "Bhushan@123",
+			"enabled": true
+		},
+		{
+			"key": "account_code",
+			"value": "stepin76",
+			"enabled": true
+		},
+		{
+			"key": "api_domain",
+			"value": "https://api.ongage.net",
+			"enabled": true
+		},
+		{
+			"key": "api_proxy_url",
+			"value": "https://automated_tests-l2.ongage.net",
+			"enabled": true
+		},
+		{
+			"key": "sms_list_name",
+			"value": "QA Automation AT SMS List-prod_sms",
+			"enabled": true
+		},
+		{
+			"key": "list_id",
+			"value": 130795,
+			"enabled": true
+		},
+		{
+			"key": "at_site",
+			"value": "http://ongageqa.site",
+			"enabled": true
+		},
+		{
+			"key": "list_field_email_id",
+			"value": 1002382700,
+			"enabled": true
+		},
+		{
+			"key": "list_field_phone",
+			"value": 1002382708,
+			"enabled": true
+		},
+		{
+			"key": "rc_sms_id_system_date_field",
+			"value": 9075555,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_test_campaign_sms",
+			"value": 9075556,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_test_link_length",
+			"value": 9075557,
+			"enabled": true
+		},
+		{
+			"key": "sms_link_length",
+			"value": 22,
+			"enabled": true
+		},
+		{
+			"key": "nt_sms_id_system_date_field",
+			"value": 9075558,
+			"enabled": true
+		},
+		{
+			"key": "nt_sms_id_dynamic_ocx_feed",
+			"value": 9075559,
+			"enabled": true
+		},
+		{
+			"key": "rc_sms_id_html_feed",
+			"value": 9075560,
+			"enabled": true
+		},
+		{
+			"key": "tc_sms_id_system_date_field",
+			"value": 9075561,
+			"enabled": true
+		},
+		{
+			"key": "rc_sms_id_cp_math_evaluation",
+			"value": 9075562,
+			"enabled": true
+		},
+		{
+			"key": "nt_sms_id_cp_math_evaluation",
+			"value": 9075563,
+			"enabled": true
+		},
+		{
+			"key": "tc_sms_id_cp_math_evaluation",
+			"value": 9075564,
+			"enabled": true
+		},
+		{
+			"key": "transl_send_static_sms_id ",
+			"value": 9075565,
+			"enabled": true
+		},
+		{
+			"key": "transl_send_dynamic_ocx_feed_sms_id ",
+			"value": 9075566,
+			"enabled": true
+		},
+		{
+			"key": "rc_sms_id_static_content",
+			"value": 9075567,
+			"enabled": true
+		},
+		{
+			"key": "rc_sms_id_quota",
+			"value": 9075568,
+			"enabled": true
+		},
+		{
+			"key": "event_sms_id_cp_math_evaluation",
+			"value": 9075569,
+			"enabled": true
+		},
+		{
+			"key": "nt_sms_id_cnt_send_static_cnt",
+			"value": 9075570,
+			"enabled": true
+		},
+		{
+			"key": "event_sms_id_system_date_field",
+			"value": 9075571,
+			"enabled": true
+		},
+		{
+			"key": "event_sms_id_static_content",
+			"value": 9075572,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_rc_ocx_feed",
+			"value": 9157747,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_rc_dynamic_ocx_feed",
+			"value": 9075574,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_nt_ocx_feed",
+			"value": 9075575,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_tc_ocx_feed",
+			"value": 9158783,
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sms_id_system_date_field",
+			"value": "12844397",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sms_id_cp_math_evaluation",
+			"value": 9075578,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_ab_split_ocx_feed",
+			"value": 9075579,
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sms_id_st_cnt_dy_ocx_feed_lan",
+			"value": 9075580,
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sms_id_static_content",
+			"value": 9075581,
+			"enabled": true
+		},
+		{
+			"key": "rc_sms_id_segment",
+			"value": "1046650737",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_dynamic_ocx_feed",
+			"value": "1046650738",
+			"enabled": true
+		},
+		{
+			"key": "rc_math_evaluation_segment_id",
+			"value": "1046650739",
+			"enabled": true
+		},
+		{
+			"key": "event_sms_segment_id",
+			"value": "1046650740",
+			"enabled": true
+		},
+		{
+			"key": "ab_split_sms_segment_id",
+			"value": "1046650741",
+			"enabled": true
+		},
+		{
+			"key": "transactional_cid_sms",
+			"value": 1254354837,
+			"enabled": true
+		},
+		{
+			"key": "disable_short_link_sms_link_length",
+			"value": 22,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_test_disable_short_link",
+			"value": 9075582,
+			"enabled": true
+		},
+		{
+			"key": "disabel_short_link_id_segment",
+			"value": "1046650742",
+			"enabled": true
+		},
+		{
+			"key": "disable_short_link_tracking_length",
+			"value": 22,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_test_disable_short_link_tracking",
+			"value": 9075583,
+			"enabled": true
+		},
+		{
+			"key": "disable_short_link_tracking_id_segment",
+			"value": "1046650743",
+			"enabled": true
+		},
+		{
+			"key": "prod_sms-sms-sinch-connection_id",
+			"value": "70389",
+			"enabled": true
+		},
+		{
+			"key": "prod_sms-sms-sinch-esp_id",
+			"value": "122",
+			"enabled": true
+		},
+		{
+			"key": "prod_sms-fromname_sinch",
+			"value": "+12077687155",
+			"enabled": true
+		},
+		{
+			"key": "twillio_number_1",
+			"value": "+15735382737",
+			"enabled": true
+		},
+		{
+			"key": "prod_sms-sms-sinch-disable_short_link_and_tracking_connection_id",
+			"value": "55400",
+			"enabled": true
+		},
+		{
+			"key": "prod_sms-sms-sinch-disable_short_link_connection_id",
+			"value": "55401",
+			"enabled": true
+		},
+		{
+			"key": "tracking_domain",
+			"value": "tracking.on-gage.org",
+			"enabled": true
+		},
+		{
+			"key": "twillio_number_2",
+			"value": "+17472366342",
+			"enabled": true
+		},
+		{
+			"key": "nt_sms_id_dynamic_html_feed",
+			"value": 9157799,
+			"enabled": true
+		},
+		{
+			"key": "sms_id_event_ocx_feed",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_event_dynamic_html_feed",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "event_cmp_sms_segment_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_test_event_msg",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_tc_ocx_html_feed",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "twillio_number_3",
+			"value": "+13854025536",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_test_unique_open_click",
+			"value": "10167534",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_transactional_unique_open_click",
+			"value": "10167544",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_nt_unique_open_click",
+			"value": "10167545",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_link_url_params",
+			"value": "10168438",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_tc_link_url_params",
+			"value": "10168442",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_nt_link_url_params",
+			"value": "10168444",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_event_link_url_params",
+			"value": "10168446",
+			"enabled": true
+		},
+		{
+			"key": "sms_id_rc_dynamic_html_feed",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-06-20T09:49:57.339Z",
+	"_postman_exported_using": "Postman/10.15.1-230614-0638"
+}
