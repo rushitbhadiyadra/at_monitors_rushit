@@ -2084,6 +2084,12 @@
 			"value": "1108968994",
 			"type": "any",
 			"enabled": true
+		},
+		{
+			"key": "Verify_Event_campaign_with_one_link_included_msg_id",
+			"value": "13297415",
+			"type": "any",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
