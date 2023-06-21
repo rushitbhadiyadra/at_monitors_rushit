@@ -780,7 +780,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"AB winner campaign md5 Suppression campaign level functionality-{{connectionId}}\",\n\t\"type\": \"split\",\n\t\"list_id\": {{list_id}}, \n    \"split_type\": \"email\",\n    \"email_message\": [ \"{{suppression_list_breakdown_functionality_mail_id}}\",\"{{all_esp_ab_winner_common_message}}\" ],\n    \"segments\": [ \"{{ab_winner_md5_suppression_camp_level_functionality_segment_id}}\" ],\n    \"suppression_list_excluded\": [{{ab_winner_md5_suppression_campaign_level_functionality_id}}],\n    \"distribution\": [\n    \t{\n            \"esp_connection_id\":{{connectionId}},\n            \"percent\":\"100\"\n    \t}\n    ],\n    \"schedule_date\": {{time_30}},\n    \"winner_quota_value\":\"1\",\n\t\"winner_conversion_field\":\"unique_clicks\",\n\t\"winner_send_after_hours\":\"1\"\n}"
+					"raw": "{\n\t\"name\": \"AB winner campaign md5 Suppression campaign level functionality-{{connectionId}}\",\n\t\"type\": \"split\",\n\t\"list_id\": {{list_id}}, \n    \"split_type\": \"email\",\n    \"email_message\": [ \"{{suppression_list_breakdown_functionality_mail_id}}\",\"{{all_esp_ab_winner_common_message}}\" ],\n    \"segments\": [ \"{{ab_winner_md5_suppression_camp_level_functionality_segment_id}}\" ],\n    \"suppression_list_excluded\": [{{ab_winner_md5_suppression_campaign_level_functionality_id}}],\n    \"distribution\": [\n    \t{\n            \"esp_connection_id\":{{connectionId}},\n            \"percent\":\"100\"\n    \t}\n    ],\n    \"schedule_date\": {{time_30}},\n    \"winner_quota_value\":\"1\",\n\t\"winner_conversion_field\":\"unique_opens\",\n\t\"winner_send_after_hours\":\"1\"\n}"
 				},
 				"url": {
 					"raw": "{{api_domain}}/api/mailings/",
@@ -1017,6 +1017,7 @@
 							"if (pm.response.code === 200) {\r",
 							"    count = +1\r",
 							"    var jsonData = pm.response.json()\r",
+							"    pm.globals.set(\"open_mail_for_md5_abw_suppression_using_campaign_scope\", jsonData.HTMLOpenLinks[0]);\r",
 							"    pm.test(\"Successfully mail received\", function () {\r",
 							"        pm.expect(count).to.eql(1);\r",
 							"    });\r",
