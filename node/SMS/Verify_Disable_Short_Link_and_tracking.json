@@ -59,7 +59,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n   \"name\": \"Verify disable short link and tracking\",\n   \"list_id\": {{list_id}} ,\n   \"email_message\": {{sms_id_test_disable_short_link_tracking}} ,\n   \"segments\": [{{disable_short_link_tracking_id_segment}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{sms_connectionId}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n} ",
+					"raw": "{\n   \"name\": \"Verify disable short link and tracking\",\n   \"list_id\": {{list_id}} ,\n   \"email_message\": {{sms_id_test_disable_short_link_tracking}} ,\n   \"segments\": [{{disable_short_link_tracking_id_segment}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{prod_sms-sms-sinch-disable_short_link_and_tracking_connection_id}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n} ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -136,7 +136,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"disable_slink_and_tracking_{{sms_connectionId}}\",\n    \"timeout\": 600000\n}",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"disable_slink_and_tracking_{{prod_sms-sms-sinch-disable_short_link_and_tracking_connection_id}}\",\n    \"timeout\": 600000\n}",
 					"options": {
 						"raw": {
 							"language": "json"

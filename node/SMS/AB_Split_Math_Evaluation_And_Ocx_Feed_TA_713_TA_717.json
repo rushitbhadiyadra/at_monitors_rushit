@@ -55,7 +55,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n   \"name\": \"SMS AB-Split Math evaluation and ocx feed\",\n   \"list_id\": {{list_id}} ,\n   \"type\": \"split\",\n   \"split_type\": \"email\",\n   \"email_message\": [{{ab_split_sms_id_cp_math_evaluation}},{{sms_id_ab_split_ocx_feed}} ],\n   \"segments\": [{{ab_split_sms_segment_id}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{sms_connectionId}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n} ",
+					"raw": "{\n   \"name\": \"SMS AB-Split Math evaluation and ocx feed\",\n   \"list_id\": {{list_id}} ,\n   \"type\": \"split\",\n   \"split_type\": \"email\",\n   \"email_message\": [{{ab_split_sms_id_cp_math_evaluation}},{{sms_id_ab_split_ocx_feed}} ],\n   \"segments\": [{{ab_split_sms_segment_id}}],\n   \"distribution\": [\n     {\n            \"esp_connection_id\": {{prod_sms-sms-sinch-disable_short_link_and_tracking_connection_id}},\n            \"percent\": 100\n     }\n   ],\n    \"schedule_date\": {{time_30}}\n} ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -283,7 +283,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"ab_split_with_math_evaluation_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}\n",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"ab_split_with_math_evaluation_{{prod_sms-sms-sinch-disable_short_link_and_tracking_connection_id}}\",\n    \"timeout\": 300000\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -372,7 +372,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"ab_split_sms_ocx_feed_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_1}}\",\n    \"unique_id\": \"ab_split_sms_ocx_feed_{{prod_sms-sms-sinch-disable_short_link_and_tracking_connection_id}}\",\n    \"timeout\": 300000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -535,7 +535,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"to_number\": \"{{twillio_number_2}}\",\n    \"unique_id\": \"ab_split_with_math_evaluation_{{sms_connectionId}}\",\n    \"timeout\": 300000\n}",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_2}}\",\n    \"unique_id\": \"ab_split_with_math_evaluation_{{prod_sms-sms-sinch-disable_short_link_and_tracking_connection_id}}\",\n    \"timeout\": 300000\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -624,7 +624,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"to_number\": \"{{twillio_number_2}}\",\n    \"unique_id\": \"ab_split_sms_ocx_feed_{{sms_connectionId}}\",\n    \"timeout\": 3\n}",
+					"raw": "{\n    \"to_number\": \"{{twillio_number_2}}\",\n    \"unique_id\": \"ab_split_sms_ocx_feed_{{prod_sms-sms-sinch-disable_short_link_and_tracking_connection_id}}\",\n    \"timeout\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
